@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Playas de Acapulco</title>
+<meta name="description" content="Mapa interactivo de las unidades de playa de Acapulco con sus fichas de diagnóstico. SECTUR 2026.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+:root{
+  --guinda:#9F2241; --guinda-o:#691C32; --verde:#235B4E; --verde-o:#10312B;
+  --dorado:#BC955C; --dorado-c:#DDC9A3; --gris:#6F7271; --gris-c:#98989A;
+  --bg:#ffffff; --bg2:#F6F4F0; --tx:#1F2423; --tx2:#5B605F; --line:#E4E0D8;
+  --azul:#2E4A8C; --delim:#F26B00;
+  --atender:#97B89D; --mejorar:#CDE5C6;
+  --panel-w:460px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:"Noto Sans",system-ui,sans-serif;color:var(--tx);background:var(--bg)}
+#map{position:fixed;inset:0;background:#cfd8d6}
+.leaflet-container{font-family:inherit}
+
+/* Encabezado */
+.brand{position:fixed;top:14px;left:14px;z-index:1000;background:var(--bg);border-radius:12px;width:380px;
+  box-shadow:0 4px 18px rgba(16,49,43,.18);padding:14px 16px 12px;max-width:calc(100vw - 28px);border-top:4px solid var(--guinda)}
+.brand small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dorado);font-weight:600}
+.brand h1{margin:2px 0 6px;font-size:19px;line-height:1.2;color:var(--guinda-o)}
+.brand p{margin:0;font-size:12.5px;color:var(--tx2);line-height:1.45}
+.filtros{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.filtros label{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--verde)}
+.filtros select{margin-top:4px!important;font-size:12.5px!important;padding:6px 7px!important;background:#fff!important;border-color:var(--dorado-c)!important}
+.fmsg{font-size:12px;color:var(--tx2);margin-top:7px;min-height:0}
+.fmsg:empty{display:none}
+.fmsg.vacio{color:var(--guinda);font-weight:600}
+.brand select{margin-top:10px;width:100%;font:inherit;font-size:13px;padding:7px 9px;border:1px solid var(--line);border-radius:8px;background:var(--bg2);color:var(--tx)}
+
+/* Leyenda */
+.legend{position:fixed;left:14px;bottom:22px;z-index:1000;max-width:calc(100vw - 28px);max-height:calc(100vh - 230px);overflow-y:auto;background:var(--bg);border-radius:12px;
+  box-shadow:0 4px 18px rgba(16,49,43,.18);padding:11px 14px 10px;font-size:11px}
+.legend h2{margin:0 0 8px;font-size:13px;color:var(--guinda-o);letter-spacing:.02em}
+.legend h3{margin:0 0 5px;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--verde)}
+.legend .lgrid{display:grid;grid-template-columns:auto auto;gap:4px 18px;align-items:start}
+.legend .lnota{margin:7px 0 0;font-size:10px;color:var(--tx2)}
+.legend .row{display:flex;align-items:center;gap:6px;margin:3px 0;color:var(--tx2);font-size:11px;line-height:1.25}
+.legend .sw{width:12px;height:12px;border-radius:3px;flex:none;border:1.5px solid rgba(0,0,0,.15)}
+.legend .dot{width:13px;height:13px;border-radius:50%;flex:none;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
+.legend details.lg{margin:0 0 6px}
+.legend summary{cursor:pointer;list-style:none;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--verde);padding:4px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.legend summary::-webkit-details-marker{display:none}
+.legend summary::after{content:"";width:7px;height:7px;border-right:2px solid var(--verde);border-bottom:2px solid var(--verde);transform:rotate(45deg);margin-right:3px;transition:transform .2s}
+.legend details[open] summary::after{transform:rotate(-135deg)}
+.legend details.lg>div,.legend details.lg>.row{margin-left:2px}
+.legend .lgr{margin-top:8px;color:var(--tx)}
+.legend hr{border:0;border-top:1px solid var(--line);margin:8px 0}
+.legend button{all:unset;cursor:pointer;font-size:11px;color:var(--verde);font-weight:600}
+
+/* Marcadores */
+.pin{position:relative;display:flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700;
+  font-size:10.5px;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.45);transition:transform .15s}
+.pin:hover{transform:scale(1.18)}
+.pin.n-sin{background:var(--gris-c)}
+.pin.n-recuperar{background:var(--guinda)}
+.pin.n-consolidar{background:var(--azul)}
+.pin.n-ordenar{background:var(--dorado)}
+.pin.n-fortalecer{background:var(--verde)}
+.pin.con{font-size:12px}
+
+.pin.activa{outline:3px solid #fff;outline-offset:2px;transform:scale(1.25)}
+@keyframes pulse{0%{opacity:.9;transform:scale(.8)}100%{opacity:0;transform:scale(1.5)}}
+.zlabel{background:none;border:0;box-shadow:none;font-size:11px;font-weight:700;color:#fff;text-shadow:0 0 3px #000,0 0 6px rgba(0,0,0,.6);white-space:nowrap}
+.zlabel::before{display:none}
+
+/* Popup */
+.leaflet-popup-content-wrapper{border-radius:10px}
+.leaflet-popup-content{margin:12px 14px;font-size:12.5px;line-height:1.45;min-width:220px}
+.pop h4{margin:0 0 6px;font-size:14px;color:var(--guinda-o)}
+.pop dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 8px}
+.pop dt{color:var(--tx2)} .pop dd{margin:0;font-weight:500}
+.pop .tag{display:inline-block;margin-top:8px;font-size:11px;padding:3px 8px;border-radius:20px;background:var(--bg2);color:var(--gris)}
+.pop .btn{display:inline-block;margin-top:9px;background:var(--guinda);color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-weight:600;font-size:12px;border:0;font-family:inherit}
+
+/* Panel de ficha */
+#panel{position:fixed;top:0;right:0;bottom:0;width:var(--panel-w);max-width:100%;z-index:1100;background:var(--bg);
+  box-shadow:-6px 0 24px rgba(16,49,43,.22);transform:translateX(105%);transition:transform .3s ease;display:flex;flex-direction:column}
+#panel.open{transform:none}
+@media (min-width:761px){#panel{transform:none} #panel .close{display:none}}
+.p-scroll{overflow-y:auto;flex:1;overscroll-behavior:contain}
+.hero{position:relative;height:230px;background:var(--verde-o) center/cover no-repeat;flex:none}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,49,43,.1) 30%,rgba(16,49,43,.88))}
+.hero .t{position:absolute;left:20px;right:20px;bottom:16px;z-index:1;color:#fff}
+.hero .num{display:inline-block;background:var(--guinda);font-weight:700;font-size:13px;padding:2px 9px;border-radius:6px;margin-bottom:6px}
+.hero h2{margin:0;font-size:25px;line-height:1.15}
+.hero .z{font-size:13px;opacity:.9;margin-top:3px}
+.hero .ug{display:inline-block;margin-top:7px;font-size:11.5px;font-weight:600;letter-spacing:.02em;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:3px 8px;border-radius:6px}
+.close{position:absolute;top:12px;right:12px;z-index:2;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.92);
+  font-size:20px;line-height:1;cursor:pointer;color:var(--verde-o)}
+.score{display:flex;align-items:center;gap:14px;padding:16px 20px;background:var(--bg2);border-bottom:1px solid var(--line)}
+.score .val{font-size:30px;font-weight:700;color:var(--guinda-o);line-height:1}
+.score .val span{font-size:14px;color:var(--tx2);font-weight:500}
+.score .bar{flex:1}
+.score .bar i{display:block;height:8px;border-radius:4px;background:var(--line);overflow:hidden}
+.score .bar i b{display:block;height:100%;background:linear-gradient(90deg,var(--guinda),var(--dorado))}
+.score .bar small{display:block;font-size:11px;color:var(--tx2);margin-top:5px}
+.badge{font-size:12px;font-weight:700;padding:5px 11px;border-radius:20px;background:var(--guinda);color:#fff;white-space:nowrap}
+.badge.ordenar{background:var(--dorado)}
+.badge.fortalecer{background:var(--verde)}
+.badge.consolidar{background:var(--azul)}
+.cc{padding:12px 20px 14px;border-bottom:1px solid var(--line)}
+.cct{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--verde);margin-bottom:8px}
+.cct span{font-weight:500;text-transform:none;letter-spacing:0;color:var(--tx2);margin-left:4px}
+.ccv{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.ccv div{background:var(--bg2);border-radius:10px;padding:9px 12px;border-left:4px solid var(--dorado)}
+.ccv div:last-child{border-left-color:var(--verde)}
+.ccv small{display:block;font-size:11px;color:var(--tx2);font-weight:600}
+.ccv b{font-size:22px;color:var(--verde-o);line-height:1.25}
+.ccpop{margin-top:9px;padding-top:8px;border-top:1px solid var(--line);font-size:12px}
+.ccpop span{color:var(--tx2)}
+.ccpop div{display:flex;justify-content:space-between;gap:10px;margin-top:3px}
+.ccpop i{font-style:normal;color:var(--tx2)}
+nav.tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:3;overflow-x:auto}
+nav.tabs button{all:unset;cursor:pointer;font-size:12.5px;font-weight:600;padding:8px 8px 9px;color:var(--tx2);border-bottom:3px solid transparent;white-space:nowrap}
+nav.tabs button.on{color:var(--guinda-o);border-color:var(--guinda)}
+section.sec{padding:18px 20px 6px}
+section.sec h3{margin:0 0 12px;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
+.kv{display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:row dense;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
+.kv div{padding:9px 11px;font-size:13px;line-height:1.4;background:var(--bg)}
+.kv div.full{grid-column:1/-1}
+.kv b{display:block;font-size:11px;font-weight:600;color:var(--tx2);margin-bottom:2px}
+.kv.one{grid-template-columns:1fr}
+figure{margin:0 0 14px}
+figure img{width:100%;display:block;border-radius:10px;cursor:zoom-in;border:1px solid var(--line)}
+figcaption{font-size:11.5px;color:var(--tx2);margin-top:5px}
+.nota{font-size:11.5px;color:var(--tx2);line-height:1.5;background:var(--bg2);border-radius:10px;padding:10px 12px;margin-bottom:14px}
+.amb{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
+.amb img{width:100%;height:190px;object-fit:cover;display:block;cursor:zoom-in}
+.amb .b{padding:12px 13px 13px}
+.amb .h{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px}
+.amb h4{margin:0;font-size:14.5px;color:var(--verde-o)}
+.est{font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;color:var(--verde-o);white-space:nowrap}
+.est.atender{background:var(--atender)} .est.mejorar{background:var(--mejorar)}
+.amb p{margin:0;font-size:13px;line-height:1.55;color:var(--tx)}
+ul.acc{list-style:none;padding:0;margin:0 0 14px}
+ul.acc li{position:relative;padding:9px 10px 9px 34px;font-size:13px;line-height:1.45;border-bottom:1px solid var(--line)}
+ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;height:14px;border-radius:4px;background:var(--dorado-c);border:2px solid var(--dorado)}
+.fuente{font-size:11px;color:var(--tx2);padding:10px 20px 24px}
+[hidden]{display:none!important}
+
+/* Visor de imagen */
+#lb{position:fixed;inset:0;z-index:2000;background:rgba(10,20,18,.92);display:none;align-items:center;justify-content:center;padding:20px;cursor:zoom-out}
+#lb.on{display:flex}
+.fotos-btn{position:absolute;right:16px;bottom:16px;z-index:2;display:inline-flex;align-items:center;gap:7px;border:0;cursor:pointer;
+  background:#fff;color:var(--guinda-o);font:700 13px "Noto Sans",sans-serif;padding:8px 13px;border-radius:22px;box-shadow:0 3px 12px rgba(0,0,0,.3)}
+.fotos-btn svg{width:18px;height:18px}
+.fotos-btn span{background:var(--guinda);color:#fff;border-radius:10px;padding:1px 7px;font-size:11px}
+.fotos-btn:hover{background:var(--dorado-c)}
+#gal{position:fixed;inset:0;z-index:1900;background:var(--bg);display:none;flex-direction:column}
+#gal.on{display:flex}
+#gal .gh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 20px;border-bottom:3px solid var(--guinda);background:var(--bg)}
+#gal .gh small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--dorado);font-weight:700}
+#gal .gh h3{margin:2px 0 0;font-size:18px;color:var(--guinda-o)}
+#gal .gx,#vw .vx{width:40px;height:40px;border-radius:50%;border:0;background:var(--bg2);font-size:24px;line-height:1;cursor:pointer;color:var(--verde-o);flex:none}
+#gal .gg{flex:1;overflow-y:auto;padding:18px 20px 30px;display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;align-content:start;grid-auto-rows:max-content}
+#gal .gi{all:unset;box-sizing:border-box;cursor:zoom-in;display:flex;flex-direction:column;height:auto;border-radius:10px;overflow:hidden;background:var(--bg2);border:1px solid var(--line);transition:transform .15s,box-shadow .15s}
+#gal .gi:hover,#gal .gi:focus-visible{transform:translateY(-2px);box-shadow:0 6px 16px rgba(16,49,43,.18)}
+#gal .gi img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;flex:none}
+#gal .gi span{display:block;padding:8px 10px 10px;font-size:12px;line-height:1.35;color:var(--tx)}
+#vw{position:fixed;inset:0;z-index:2100;background:rgba(10,20,18,.95);display:none;align-items:center;justify-content:center}
+#vw.on{display:flex}
+#vw figure{margin:0;max-width:calc(100vw - 150px);max-height:100vh;display:flex;flex-direction:column;align-items:center}
+#vw img{max-width:100%;max-height:calc(100vh - 110px);border-radius:6px;display:block}
+#vw figcaption{color:#fff;font-size:14px;margin-top:12px;display:flex;gap:14px;align-items:baseline;text-align:center}
+#vw figcaption b{font-size:12px;font-weight:600;color:var(--dorado-c);white-space:nowrap}
+#vw .vx{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.92)}
+#vw .va{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:0;background:rgba(255,255,255,.14);cursor:pointer}
+#vw .va:hover{background:rgba(255,255,255,.28)}
+#vw .va span{display:block;width:12px;height:12px;border-top:3px solid #fff;border-right:3px solid #fff;margin:auto}
+#vw .prev{left:18px} #vw .prev span{transform:rotate(-135deg);margin-left:19px}
+#vw .next{right:18px} #vw .next span{transform:rotate(45deg);margin-left:14px}
+@media (max-width:760px){
+  #gal .gg{grid-template-columns:repeat(2,1fr);gap:10px;padding:12px}
+  #gal .gi span{font-size:11px;padding:6px 8px 8px}
+  #vw figure{max-width:100vw} #vw img{max-height:calc(100vh - 140px);border-radius:0}
+  #vw figcaption{padding:0 14px;flex-direction:column;gap:4px;font-size:13px}
+  #vw .va{top:auto;bottom:18px;transform:none} 
+}
+#lb img{max-width:100%;max-height:100%;border-radius:6px}
+
+@media (max-width:760px){
+  .brand{right:14px;max-width:none;width:auto;padding:11px 13px 10px}
+  .brand h1{font-size:16px} .brand p{display:none}
+  .legend{display:none}
+  .legend.on{display:block;bottom:14px}
+  #panel{top:auto;width:100%;height:82vh;border-radius:16px 16px 0 0;transform:translateY(105%)}
+  #panel.open{transform:none}
+  .hero{height:170px;border-radius:16px 16px 0 0}
+  .kv{grid-template-columns:1fr}
+  .brand{right:62px}
+  body.ficha .brand{display:none}
+  #panel{height:75vh}
+}
+.leg-btn{display:none}
+@media (max-width:760px){.leg-btn{display:block;position:fixed;left:14px;bottom:14px;z-index:999;background:var(--bg);border:0;border-radius:20px;
+  padding:8px 14px;font:600 12px "Noto Sans",sans-serif;color:var(--verde);box-shadow:0 3px 12px rgba(0,0,0,.2)}}
+</style>
+</head>
+<body>
+<div id="map" role="region" aria-label="Mapa de playas de Acapulco"></div>
+
+<div class="brand">
+  <small>SECTUR · Unidades de playa</small>
+  <h1>Playas de Acapulco</h1>
+  <p>Elige una zona o un nivel para filtrar, o selecciona una playa en el mapa para consultar su ficha.</p>
+  <div class="filtros">
+    <label>Zona<select id="fZona"><option value="">Todas las zonas</option></select></label>
+    <label>Nivel de playas<select id="fNivel"><option value="">Todos los niveles</option>
+      <option value="consolidar">Consolidar</option><option value="fortalecer">Fortalecer</option>
+      <option value="ordenar">Ordenar</option><option value="recuperar">Recuperar</option></select></label>
+  </div>
+  <div class="fmsg" id="fmsg"></div>
+  <select id="buscar" aria-label="Ir a una playa"><option value="">Ir a una playa…</option></select>
+</div>
+
+<div class="legend" id="legend">
+  <h2>Simbología</h2>
+  <div class="lgrid">
+    <div>
+      <h3>Nivel de playas</h3>
+      <div class="row"><span class="dot" style="background:var(--azul)"></span>Consolidar</div>
+      <div class="row"><span class="dot" style="background:var(--verde)"></span>Fortalecer</div>
+      <div class="row"><span class="dot" style="background:var(--dorado)"></span>Ordenar</div>
+      <div class="row"><span class="dot" style="background:var(--guinda)"></span>Recuperar</div>
+    </div>
+    <div>
+      <h3>Zonificación</h3>
+      <div class="row"><span class="sw" style="background:rgba(242,107,0,.6);border:2px solid var(--delim)"></span>Delimitación de playa</div>
+      <div class="row"><span class="sw" style="background:rgba(255,230,0,.25);border:2px solid #FFE600"></span>Zona de playa libre</div>
+      <div class="row"><span class="sw" style="background:rgba(227,0,27,.55);border-color:#E3001B"></span>Ocupaciones</div>
+      <div class="row"><span class="sw" style="background:rgba(176,0,224,.6);border-color:#B000E0"></span>Ocupaciones que no deberían estar</div>
+    </div>
+  </div>
+  <p class="lnota">La zonificación se muestra al acercarse a una playa.</p>
+</div>
+</div>
+<button class="leg-btn" id="legBtn">Simbología</button>
+
+<aside id="panel" aria-label="Ficha de playa">
+  <button class="close" id="cerrar" aria-label="Cerrar ficha">×</button>
+  <div class="p-scroll" id="pscroll"></div>
+</aside>
+<div id="lb"><img alt=""></div>
+<div id="gal" role="dialog" aria-modal="true" aria-label="Fotos de la playa">
+  <div class="gh"><div><small>Evidencia fotográfica</small><h3 id="galt"></h3></div><button class="gx" id="galx" aria-label="Cerrar fotos">×</button></div>
+  <div class="gg" id="galg"></div>
+</div>
+<div id="vw" role="dialog" aria-modal="true" aria-label="Foto ampliada">
+  <button class="vx" id="vwx" aria-label="Cerrar">×</button>
+  <button class="va prev" id="vwp" aria-label="Foto anterior"><span></span></button>
+  <figure><img id="vwi" alt=""><figcaption><span id="vwc"></span><b id="vwn"></b></figcaption></figure>
+  <button class="va next" id="vwn2" aria-label="Foto siguiente"><span></span></button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="datos/datos.js"></script>
+<script src="datos/fichas.js"></script>
+<script>
+const ZONAS = window.ZONAS, PLAYAS = window.PLAYAS, FICHAS = window.FICHAS, DELIM = window.DELIM, ZONIF = window.ZONIF;
+
+const map = L.map('map',{zoomControl:false,attributionControl:true}).setView([16.82,-99.8],11);
+L.control.zoom({position:'topright'}).addTo(map);
+const sat = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+  {maxZoom:19,attribution:'Imagen: Esri, Maxar, Earthstar Geographics'}).addTo(map);
+const lbl = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',{maxZoom:19,opacity:.85});
+const calles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+  {maxZoom:19,subdomains:'abcd',attribution:'© OpenStreetMap · © CARTO'});
+
+/* Zonas */
+const zonasLayer = L.geoJSON(ZONAS,{
+  style:f=>({color:f.properties.color,weight:2,fillColor:f.properties.color,fillOpacity:.22}),
+  onEachFeature:(f,l)=>{
+    l.bindTooltip(f.properties.nombre,{sticky:true});
+    l.on('mouseover',()=>l.setStyle({fillOpacity:.38})); l.on('mouseout',()=>l.setStyle({fillOpacity:.22}));
+  }
+}).addTo(map);
+
+/* Delimitación de playas */
+const PL = {}; /* se llena abajo */
+/* Zonificación interna de playas (visible al acercarse) */
+const ZMIN = 15;
+map.createPane('zonif'); map.getPane('zonif').style.zIndex = 450;
+const ZCOL = {libre:{c:'#FFE600',f:.14,w:2},ocupacion:{c:'#E3001B',f:.5,w:1},indebida:{c:'#B000E0',f:.55,w:1}};
+const ZLAB = {libre:'Zona de playa libre',ocupacion:'Ocupaciones',indebida:'Ocupaciones que no deberían estar'};
+const zonifLayer = L.geoJSON(ZONIF,{pane:'zonif',
+  filter:f=>ZCOL[f.properties.cat],
+  style:f=>{const s=ZCOL[f.properties.cat];return {color:s.c,weight:s.w,fillColor:s.c,fillOpacity:s.f};},
+  onEachFeature:(f,l)=>{const n=f.properties.num;
+    l.bindTooltip(()=>`${f.properties.nombre} · ${n}. ${PL[n].nombre}`,{sticky:true});
+    l.on('click',e=>{L.DomEvent.stopPropagation(e); if(FICHAS[n]) abrirFicha(n); else markers[n].openPopup();});}
+});
+let zonifOn = true;
+function syncZonif(){
+  const want = zonifOn && map.getZoom()>=ZMIN;
+  if(want && !map.hasLayer(zonifLayer)) zonifLayer.addTo(map);
+  if(!want && map.hasLayer(zonifLayer)) map.removeLayer(zonifLayer);
+  delimLayer.eachLayer(l=>delimLayer.resetStyle(l));
+}
+const zonifCtl = L.layerGroup();  /* casilla en el control de capas */
+const DCOL = '#F26B00';
+const delimLayer = L.geoJSON(DELIM,{
+  style:f=>{const c=DCOL;
+    const z = map.getZoom()>=ZMIN && map.hasLayer(zonifLayer);
+    return {color:z?c:'#ffffff',weight:z?2.5:1.6,fillColor:c,fillOpacity:z?.06:.6};},
+  onEachFeature:(f,l)=>{const n=f.properties.num;
+    l.on('click',e=>{L.DomEvent.stopPropagation(e); if(FICHAS[n]) abrirFicha(n); else markers[n].openPopup();});
+    l.on('mouseover',()=>l.setStyle({weight:3,fillOpacity:.8})); l.on('mouseout',()=>delimLayer.resetStyle(l));
+    l.bindTooltip(()=>{const p=PL[n];return `${n}. ${p.nombre}`},{sticky:true});}
+});
+const delimBy = {}; delimLayer.eachLayer(l=>delimBy[l.feature.properties.num]=l);
+
+/* Playas */
+const markers = {}; const playasLayer = L.layerGroup().addTo(map);
+const sel = document.getElementById('buscar');
+PLAYAS.forEach(p=>PL[p.num]=p);
+delimLayer.eachLayer(l=>delimLayer.resetStyle(l));
+delimLayer.addTo(map);
+PLAYAS.sort((a,b)=>a.num-b.num).forEach(p=>{
+  const con = !!FICHAS[p.num]; const s = con?26:(p.unidad?24:20);
+  const nv = p.unidad ? 'n-'+p.nivel.toLowerCase() : 'n-sin';
+  const icon = L.divIcon({className:'',html:`<div class="pin ${nv} ${con?'con':''}" style="width:${s}px;height:${s}px">${p.num}</div>`,iconSize:[s,s],iconAnchor:[s/2,s/2]});
+  const m = L.marker([p.lat,p.lon],{icon,zIndexOffset:con?1000:(p.unidad?500:0),title:`${p.num}. ${p.nombre}`}).addTo(playasLayer);
+  if(!con) m.bindPopup(()=>popupHTML(p,con),{maxWidth:320});
+  m.on('click',()=>{ if(con) abrirFicha(p.num); });
+  markers[p.num]=m;
+});
+function popupHTML(p,con){
+  return `<div class="pop"><h4>${p.num}. ${p.nombre}</h4><dl>
+  ${p.unidad?`<dt>Unidad de Gestión</dt><dd>${p.unidad}</dd><dt>Evaluación</dt><dd>${p.evaluacion}</dd>
+  <dt>Lugar</dt><dd>${p.lugar}</dd><dt>Nivel</dt><dd>${p.nivel}</dd><dt>Zona</dt><dd>${p.zona}</dd>
+  <dt>Referencia</dt><dd>${p.referencia}</dd>`
+  :`<dt>Zona</dt><dd>${p.zona}</dd><dt>Codificación</dt><dd>${p.codigo}</dd><dt>Tipo</dt><dd>${p.tipo}</dd>`}</dl>
+  <div class="ccpop"><b>Capacidad de carga</b> <span>(visitantes/día)</span>
+  <div><i>Botero</i><strong>${p.cc_botero}</strong></div><div><i>NOM-189 (CCE)</i><strong>${p.cc_nom}</strong></div></div>
+  ${con?`<button class="btn" onclick="abrirFicha(${p.num})">Ver ficha completa</button>`:(p.unidad?'<span class="tag">Ficha completa en preparación</span>':'<span class="tag">Sin evaluación</span>')}</div>`;
+}
+
+zonifCtl.addTo(map);
+L.control.layers({'Satélite':sat,'Calles':calles},{'Nombres de lugares':lbl,'Zonas':zonasLayer,'Delimitación de playas':delimLayer,'Zonificación de playa (al acercarse)':zonifCtl,'Puntos de playa':playasLayer},{position:'topright',collapsed:true}).addTo(map);
+map.on('overlayadd',e=>{if(e.layer===zonifCtl){zonifOn=true;syncZonif();}});
+map.on('overlayremove',e=>{if(e.layer===zonifCtl){zonifOn=false;syncZonif();}});
+map.on('zoomend',syncZonif);
+function padTodo(){return innerWidth>760?{paddingTopLeft:[30,30],paddingBottomRight:[document.getElementById('panel').getBoundingClientRect().width+30,30]}:{padding:[30,30]}}
+map.fitBounds(zonasLayer.getBounds(),padTodo());
+
+/* Filtros: zona y nivel de playas */
+const fZona=document.getElementById('fZona'), fNivel=document.getElementById('fNivel'), fmsg=document.getElementById('fmsg');
+const zNum=s=>parseInt(String(s),10);
+const nivelKey=p=>p.unidad?p.nivel.toLowerCase():'sin';
+const NIVLAB={consolidar:'Consolidar',fortalecer:'Fortalecer',ordenar:'Ordenar',recuperar:'Recuperar',sin:'Sin evaluación ni ficha'};
+window.ZONASLISTA
+  .forEach(([n,z])=>fZona.insertAdjacentHTML('beforeend',`<option value="${n}" data-n="${z}">${z}</option>`));
+const zonifBy={}; zonifLayer.eachLayer(l=>(zonifBy[l.feature.properties.num]=zonifBy[l.feature.properties.num]||[]).push(l));
+const zonaLays=[]; zonasLayer.eachLayer(l=>zonaLays.push(l));
+function fillSel(vis){
+  sel.length=1;
+  vis.forEach(p=>sel.insertAdjacentHTML('beforeend',`<option value="${p.num}">${p.num}. ${p.nombre}</option>`));
+}
+function padFiltro(){
+  const br=document.querySelector('.brand').getBoundingClientRect();
+  return innerWidth<=760 ? {paddingTopLeft:[30,br.bottom+20],paddingBottomRight:[30,60],maxZoom:16,duration:.8}
+                         : {paddingTopLeft:[br.right+20,40],paddingBottomRight:[60,40],maxZoom:16,duration:.8};
+}
+function contarOpciones(){
+  const fz=+fZona.value||0, fn=fNivel.value;
+  [...fNivel.options].forEach(o=>{ if(!o.value){o.textContent='Todos los niveles';return;}
+    const c=PLAYAS.filter(p=>(!fz||zNum(p.zona)===fz)&&nivelKey(p)===o.value).length;
+    o.textContent=`${NIVLAB[o.value]} (${c})`; o.disabled=c===0; });
+  [...fZona.options].forEach(o=>{ if(!o.value) return;
+    const c=PLAYAS.filter(p=>zNum(p.zona)===+o.value&&(!fn||nivelKey(p)===fn)).length;
+    o.textContent=`${o.dataset.n} (${c})`; o.disabled=c===0; });
+}
+function aplicarFiltros(){
+  contarOpciones();
+  const fz=+fZona.value||0, fn=fNivel.value;
+  const vis=PLAYAS.filter(p=>(!fz||zNum(p.zona)===fz)&&(!fn||nivelKey(p)===fn));
+  const on=new Set(vis.map(p=>p.num));
+  PLAYAS.forEach(p=>{const n=p.num, v=on.has(n);
+    v?playasLayer.addLayer(markers[n]):playasLayer.removeLayer(markers[n]);
+    if(delimBy[n]) v?delimLayer.addLayer(delimBy[n]):delimLayer.removeLayer(delimBy[n]);
+    (zonifBy[n]||[]).forEach(l=>v?zonifLayer.addLayer(l):zonifLayer.removeLayer(l));
+  });
+  zonaLays.forEach(l=>{const v=!fz||zNum(l.feature.properties.nombre)===fz; v?zonasLayer.addLayer(l):zonasLayer.removeLayer(l);});
+  delimLayer.eachLayer(l=>delimLayer.resetStyle(l));
+  fillSel(vis);
+  const actual=fichaActual;
+  if(actual && !on.has(actual)){ if(esEscritorio() && vis.length) abrirFicha(vis[0].num,{volar:false}); else cerrarFicha(); }
+  map.closePopup();
+  if(!fz && !fn){ fmsg.textContent=''; map.flyToBounds(zonasLayer.getBounds(),Object.assign(padTodo(),{duration:.8})); return; }
+  const etiqueta=(fn?'nivel '+NIVLAB[fn]:'')+(fn&&fz?' en ':'')+(fz?fZona.options[fZona.selectedIndex].dataset.n:'');
+  if(!vis.length){ fmsg.textContent='No hay playas '+(fn?'con ':'en ')+etiqueta+'.'; fmsg.classList.add('vacio');
+    if(fz) map.flyToBounds(zonasLayer.getBounds(),{padding:[40,40],duration:.8}); return; }
+  fmsg.classList.remove('vacio');
+  fmsg.textContent=vis.length+(vis.length===1?' playa':' playas')+' · '+etiqueta;
+  const g=L.featureGroup(vis.map(p=>delimBy[p.num]||markers[p.num]));
+  map.flyToBounds(g.getBounds(),padFiltro());
+}
+fZona.addEventListener('change',aplicarFiltros); fNivel.addEventListener('change',aplicarFiltros);
+fillSel(PLAYAS); contarOpciones();
+
+sel.addEventListener('change',e=>{
+  const n=+e.target.value; if(!n) return;
+  const p=PLAYAS.find(x=>x.num===n);
+  if(FICHAS[n]) { abrirFicha(n); return; }
+  cerrarFicha();
+  if(delimBy[n]) map.flyToBounds(delimBy[n].getBounds(),{duration:1.2,maxZoom:17,padding:[60,60]}); else map.flyTo([p.lat,p.lon],15,{duration:1.2});
+  map.once('moveend',()=>markers[n].openPopup());
+});
+
+/* Ficha */
+const panel=document.getElementById('panel'), ps=document.getElementById('pscroll');
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function kv(rows,one){
+  return `<div class="kv${one?' one':''}">`+rows.map(([k,v])=>`<div class="${(!one&&String(v).length>60)?'full':''}"><b>${esc(k)}</b>${esc(v)}</div>`).join('')+`</div>`;
+}
+let fichaActual=null;
+function abrirFicha(n,opts={}){
+  fichaActual=n;
+  const f=FICHAS[n], p=PLAYAS.find(x=>x.num===n);
+  Object.values(markers).forEach(m=>m.getElement()&&m.getElement().firstChild.classList.remove('activa'));
+  markers[n].getElement()&&markers[n].getElement().firstChild.classList.add('activa');
+  map.closePopup();
+  const pct = (parseFloat(f.calificacion)/5*100);
+  ps.innerHTML = `
+  <div class="hero" style="background-image:url(${f.img.general})"><div class="t">
+    <span class="num">${n}</span><h2>${esc(f.nombre)}</h2><div class="z">${esc(f.zona)} · Acapulco de Juárez, Guerrero</div><div class="ug">${esc(f.unidad)}</div></div>
+    ${f.fotos&&f.fotos.length?`<button class="fotos-btn" id="fotosBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h3l2-2h6l2 2h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Fotos <span>${f.fotos.length}</span></button>`:''}</div>
+  <div class="score"><div class="val">${esc(f.calificacion)} <span>de 5</span></div>
+    <div class="bar"><i><b style="width:${pct}%"></b></i><small>Calificación · Lugar ${esc(f.lugar)}</small></div>
+    <span class="badge ${f.nivel.toLowerCase()}">Nivel: ${esc(f.nivel)}</span></div>
+  <div class="cc"><div class="cct">Capacidad de carga <span>visitantes/día</span></div>
+    <div class="ccv"><div><small>Botero</small><b>${esc(p.cc_botero)}</b></div><div><small>NOM-189 (CCE)</small><b>${esc(p.cc_nom)}</b></div></div></div>
+  <nav class="tabs" role="tablist">
+    <button class="on" data-t="t1">Identificación</button><button data-t="t5">Requerimientos</button>
+    <button data-t="t4">Ámbitos</button><button data-t="t2">Territorio</button></nav>
+  <section class="sec" id="t1"><h3>Datos de identificación</h3>
+    <figure><img src="${f.img.plano}" alt="Ubicación de servicios y accesos de ${esc(f.nombre)}"><figcaption>Ubicación de servicios y accesos</figcaption></figure>
+    ${kv(f.identificacion)}</section>
+  <section class="sec" id="t5" hidden><h3>Requerimientos</h3>
+    <ul class="acc">${f.acciones.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
+    <figure><img src="${f.img.general}" alt="Fotografía general de ${esc(f.nombre)}"><figcaption>Fotografía general</figcaption></figure></section>
+  <section class="sec" id="t4" hidden><h3>Ámbitos</h3><div class="nota">${esc(f.nota_ambitos)}</div>
+    ${f.ambitos.map(a=>`<div class="amb"><img src="${f.img[a.img]}" alt="${esc(a.titulo)}"><div class="b">
+      <div class="h"><h4>${esc(a.titulo)}</h4><span class="est ${a.estado==='Por atender'?'atender':'mejorar'}">${esc(a.estado)}</span></div>
+      <p>${esc(a.texto)}</p></div></div>`).join('')}</section>
+  <section class="sec" id="t2" hidden><h3>Datos territoriales y de uso</h3>${kv(f.territorio)}</section>
+  <div class="fuente">${esc(f.fuente)} · Unidad de Gestión de Playa ${esc(f.unidad)}</div>`;
+  ps.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{
+    ps.querySelectorAll('nav.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+    ps.querySelectorAll('section.sec').forEach(s=>s.hidden=s.id!==b.dataset.t);
+    ps.querySelector('nav.tabs').scrollIntoView({block:'nearest'});
+  });
+  ps.querySelectorAll('img').forEach(i=>i.onclick=()=>{lb.querySelector('img').src=i.src;lb.classList.add('on')});
+  const fb=document.getElementById('fotosBtn'); if(fb) fb.onclick=()=>abrirGaleria(n);
+  ps.scrollTop=0; panel.classList.add('open'); document.body.classList.add('ficha');
+  const mobile = innerWidth<=760;
+  const lay = delimBy[n];
+  if(opts.volar===false){}
+  else if(lay){ map.flyToBounds(lay.getBounds(),{duration:1,maxZoom:17,
+      paddingTopLeft:mobile?[30,30]:[30,30], paddingBottomRight:mobile?[30,innerHeight*0.75+20]:[panelW()+30,30]}); }
+  else { map.flyTo([p.lat,p.lon],15,{duration:1}); setTimeout(()=>map.panBy(mobile?[0,innerHeight*0.375]:[panelW()/2,0],{animate:true}),1050); }
+  history.replaceState(null,'','#playa-'+n);
+  sel.value=n;
+}
+function panelW(){return panel.getBoundingClientRect().width}
+function esEscritorio(){return innerWidth>760}
+function cerrarFicha(){if(esEscritorio()) return; fichaActual=null; panel.classList.remove('open');document.body.classList.remove('ficha');Object.values(markers).forEach(m=>m.getElement()&&m.getElement().firstChild.classList.remove('activa'));history.replaceState(null,'',location.pathname)}
+document.getElementById('cerrar').onclick=cerrarFicha;
+/* Galería de fotos */
+const gal=document.getElementById('gal'), galg=document.getElementById('galg'), vw=document.getElementById('vw');
+let gFotos=[], gi=0;
+function abrirGaleria(n){
+  const f=FICHAS[n]; gFotos=f.fotos||[];
+  document.getElementById('galt').textContent=`${n}. ${f.nombre} · ${gFotos.length} fotos`;
+  galg.innerHTML=gFotos.map((x,i)=>`<button class="gi" data-i="${i}"><img loading="lazy" src="${x.t}" alt="${esc(x.c)}"><span>${esc(x.c)}</span></button>`).join('');
+  galg.querySelectorAll('.gi').forEach(b=>b.onclick=()=>verFoto(+b.dataset.i));
+  galg.scrollTop=0; gal.classList.add('on');
+}
+function verFoto(i){
+  gi=(i+gFotos.length)%gFotos.length; const x=gFotos[gi];
+  const im=document.getElementById('vwi'); im.src=x.f; im.alt=x.c;
+  document.getElementById('vwc').textContent=x.c; document.getElementById('vwn').textContent=`${gi+1} / ${gFotos.length}`;
+  vw.classList.add('on');
+  [gi+1,gi-1].forEach(k=>{const y=gFotos[(k+gFotos.length)%gFotos.length]; if(y){const p=new Image(); p.src=y.f;}});
+}
+document.getElementById('galx').onclick=()=>gal.classList.remove('on');
+document.getElementById('vwx').onclick=()=>vw.classList.remove('on');
+document.getElementById('vwp').onclick=e=>{e.stopPropagation();verFoto(gi-1)};
+document.getElementById('vwn2').onclick=e=>{e.stopPropagation();verFoto(gi+1)};
+vw.addEventListener('click',e=>{if(e.target===vw) vw.classList.remove('on')});
+let tx=null; vw.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+vw.addEventListener('touchend',e=>{if(tx===null)return; const d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>40) verFoto(gi+(d<0?1:-1)); tx=null;});
+document.addEventListener('keydown',e=>{
+  if(vw.classList.contains('on')){ if(e.key==='ArrowRight') verFoto(gi+1); else if(e.key==='ArrowLeft') verFoto(gi-1); else if(e.key==='Escape') vw.classList.remove('on'); return; }
+  if(e.key!=='Escape') return;
+  if(gal.classList.contains('on')) gal.classList.remove('on');
+  else if(lb.classList.contains('on')) lb.classList.remove('on');
+  else cerrarFicha();
+});
+const lb=document.getElementById('lb'); lb.onclick=()=>lb.classList.remove('on');
+document.getElementById('legBtn').onclick=()=>document.getElementById('legend').classList.toggle('on');
+
+/* Enlace directo: …/#playa-49 */
+const h=location.hash.match(/playa-(\d+)/);
+if(h&&FICHAS[+h[1]]) setTimeout(()=>abrirFicha(+h[1]),300);
+else if(esEscritorio()){ const primera=PLAYAS.map(p=>p.num).sort((a,b)=>a-b)[0]; abrirFicha(primera,{volar:false}); history.replaceState(null,'',location.pathname); }
+</script>
+</body>
+</html>
