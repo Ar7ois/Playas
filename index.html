@@ -144,6 +144,15 @@ figcaption{font-size:11.5px;color:var(--tx2);margin-top:5px}
 .est.atender{background:var(--atender)} .est.mejorar{background:var(--mejorar)}
 .amb p{margin:0;font-size:13px;line-height:1.55;color:var(--tx)}
 ul.acc{list-style:none;padding:0;margin:0 0 14px}
+.descarga{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:-2px 0 12px}
+.dbtn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:8px;background:var(--guinda);color:#fff;font-size:13px;font-weight:600}
+.dbtn:hover{background:var(--guinda-o)}
+.dbtn:focus-visible{outline:2px solid var(--dorado);outline-offset:2px}
+.dbtn[aria-busy=true]{opacity:.7;cursor:progress}
+.dbtn svg{width:16px;height:16px;flex:none}
+.dmsg{font-size:12px;color:var(--tx2)}
+.dmsg.err{color:var(--guinda)}
+
 ul.acc li{position:relative;padding:9px 10px 9px 34px;font-size:13px;line-height:1.45;border-bottom:1px solid var(--line)}
 ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;height:14px;border-radius:4px;background:var(--dorado-c);border:2px solid var(--dorado)}
 .fuente{font-size:11px;color:var(--tx2);padding:10px 20px 24px}
@@ -439,8 +448,6 @@ function popupHTML(p,con){
   <dt>Lugar</dt><dd>${p.lugar}</dd><dt>Nivel</dt><dd>${p.nivel}</dd><dt>Zona</dt><dd>${p.zona}</dd>
   <dt>Referencia</dt><dd>${p.referencia}</dd>`
   :`<dt>Zona</dt><dd>${p.zona}</dd><dt>Codificación</dt><dd>${p.codigo}</dd><dt>Tipo</dt><dd>${p.tipo}</dd>`}</dl>
-  <div class="ccpop"><b>Capacidad de carga</b> <span>(visitantes/día)</span>
-  <div><i>Botero</i><strong>${p.cc_botero}</strong></div><div><i>NOM-189 (CCE)</i><strong>${p.cc_nom}</strong></div></div>
   ${con?`<button class="btn" onclick="abrirFicha(${p.num})">Ver ficha completa</button>`:(p.unidad?'<span class="tag">Ficha completa en preparación</span>':'<span class="tag">Sin evaluación</span>')}</div>`;
 }
 
@@ -552,20 +559,16 @@ function abrirFicha(n,opts={}){
     </form></div>
   <nav class="tabs" role="tablist">
     <button class="on" data-t="t1">Identificación</button><button data-t="t5">Requerimientos</button>
-    <button data-t="t4">Ámbitos</button><button data-t="t2">Territorio</button></nav>
+    <button data-t="t2">Territorio</button></nav>
   <section class="sec" id="t1"><h3>Datos de identificación</h3>
     <figure><img src="${f.img.plano}" alt="Ubicación de servicios y accesos de ${esc(f.nombre)}"><figcaption>Ubicación de servicios y accesos</figcaption></figure>
     ${kv(f.identificacion)}</section>
-  <section class="sec" id="t5" hidden><h3>Requerimientos</h3>
-    <ul class="acc">${f.acciones.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
+  <section class="sec" id="t5" hidden><h3>${esc(f.items_titulo)}</h3>
+    <div class="descarga"><button class="dbtn" type="button" id="dbtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Descargar ficha (PDF)</button><span class="dmsg" id="dmsg" role="status" aria-live="polite"></span></div>
+    <ul class="acc">${f.items.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
     <button class="ruta-link" type="button" data-ruta><svg class="ri" viewBox="0 0 30 22" aria-hidden="true"><rect x="0" y="1" width="4" height="8" rx="1" fill="#9F2241"/><rect x="0" y="12" width="4" height="9" rx="1" fill="#235B4E"/><rect x="13" y="4" width="4" height="14" rx="1" fill="#BC955C"/><rect x="26" y="2" width="4" height="7" rx="1" fill="#54575A"/><rect x="26" y="12" width="4" height="8" rx="1" fill="#54575A"/><path d="M4 5C9 5 8 8 13 8M4 16C9 16 8 14 13 14M17 7C22 7 21 5 26 5M17 15C22 15 21 16 26 16" fill="none" stroke="#BC955C" stroke-width="2.2" opacity=".55"/></svg><span>Ruta de intervención: desatenciones, niveles del modelo y mobiliario</span><span aria-hidden="true">→</span></button>
     <figure><img src="${f.img.general}" alt="Fotografía general de ${esc(f.nombre)}"><figcaption>Fotografía general</figcaption></figure></section>
-  <section class="sec" id="t4" hidden><h3>Ámbitos</h3><div class="nota">${esc(f.nota_ambitos)}</div>
-    ${f.ambitos.map(a=>`<div class="amb"><img src="${f.img[a.img]}" alt="${esc(a.titulo)}"><div class="b">
-      <div class="h"><h4>${esc(a.titulo)}</h4><span class="est ${a.estado==='Por atender'?'atender':'mejorar'}">${esc(a.estado)}</span></div>
-      <p>${esc(a.texto)}</p></div></div>`).join('')}</section>
-  <section class="sec" id="t2" hidden><h3>Datos territoriales y de uso</h3>${kv(f.territorio)}
-    ${kv([["Capacidad de carga · Botero (visitantes/día)",p.cc_botero],["Capacidad de carga · NOM-189 (CCE) (visitantes/día)",p.cc_nom]])}</section>
+  <section class="sec" id="t2" hidden><h3>Datos territoriales y de uso</h3>${kv(f.territorio)}</section>
   <div class="fuente">${esc(f.fuente)} · Unidad de Gestión de Playa ${esc(f.unidad)}</div>`;
   ps.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{
     ps.querySelectorAll('nav.tabs button').forEach(x=>x.classList.toggle('on',x===b));
@@ -575,6 +578,7 @@ function abrirFicha(n,opts={}){
   ps.querySelectorAll('img').forEach(i=>i.onclick=()=>{lb.querySelector('img').src=i.src;lb.classList.add('on')});
   const fb=document.getElementById('fotosBtn'); if(fb) fb.onclick=()=>abrirGaleria(n);
   ps.querySelectorAll('[data-ruta]').forEach(b=>b.onclick=()=>abrirRuta());
+  const db=document.getElementById('dbtn'); if(db) db.onclick=()=>descargarFicha(n);
   prepararComentario(n);
   ps.scrollTop=0; panel.classList.add('open'); document.body.classList.add('ficha');
   const mobile = innerWidth<=760;
@@ -791,6 +795,73 @@ function abrirRuta(){rutaEl.classList.add('on');dibujarRuta();detalleRuta();ruta
 function cerrarRuta(){rutaEl.classList.remove('on');tip(null)}
 document.getElementById('rutaBtn').onclick=abrirRuta;
 document.getElementById('rutax').onclick=cerrarRuta;
+
+
+/* Ficha descargable (PDF): imagen de Identificación + ítems con calificación inferior a 2.5 */
+const JSPDF_URL='https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+const cargados={};
+function cargarScript(src){
+  if(!cargados[src]) cargados[src]=new Promise((ok,ko)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=()=>{delete cargados[src];ko(new Error(src))};document.head.appendChild(s)});
+  return cargados[src];
+}
+function imagenDatos(url){
+  return new Promise((ok,ko)=>{const im=new Image();im.onload=()=>{try{const c=document.createElement('canvas');c.width=im.naturalWidth;c.height=im.naturalHeight;
+    c.getContext('2d').drawImage(im,0,0);ok({src:c.toDataURL('image/jpeg',.9),w:im.naturalWidth,h:im.naturalHeight})}catch(e){ko(e)}};im.onerror=ko;im.src=url;});
+}
+const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+async function descargarFicha(n){
+  const f=FICHAS[n], b=document.getElementById('dbtn'), m=document.getElementById('dmsg');
+  if(!f||!b||b.getAttribute('aria-busy')==='true') return;
+  b.setAttribute('aria-busy','true'); m.className='dmsg'; m.textContent='Preparando la ficha…';
+  try{
+    await Promise.all([cargarScript(JSPDF_URL),cargarScript('datos/fuentes.js')]);
+    const img=await imagenDatos(f.img.plano);
+    const {jsPDF}=window.jspdf, doc=new jsPDF({unit:'mm',format:'a4'});
+    doc.addFileToVFS('NotoSans-Regular.ttf',FUENTES['400Regular']); doc.addFont('NotoSans-Regular.ttf','Noto','normal');
+    doc.addFileToVFS('NotoSans-Bold.ttf',FUENTES['700Bold']); doc.addFont('NotoSans-Bold.ttf','Noto','bold');
+    const W=210,H=297,M=16,CW=W-2*M, col=c=>doc.setTextColor(...hex2rgb(c)), fill=c=>doc.setFillColor(...hex2rgb(c)), draw=c=>doc.setDrawColor(...hex2rgb(c));
+    const NCOL={consolidar:'#54575A',fortalecer:'#BC955C',ordenar:'#235B4E',recuperar:'#9F2241'};
+    fill('#9F2241'); doc.rect(0,0,W,3,'F');
+    let y=M+2;
+    doc.setFont('Noto','bold'); doc.setFontSize(8); col('#BC955C'); doc.setCharSpace(.4); doc.text('SECTUR · UNIDADES DE PLAYA',M,y); doc.setCharSpace(0);
+    y+=8; doc.setFontSize(19); col('#691C32'); doc.text(`${n}. ${f.nombre}`,M,y);
+    y+=6; doc.setFont('Noto','normal'); doc.setFontSize(9.5); col('#6F7271'); doc.text(`${f.zona} · Acapulco de Juárez, Guerrero`,M,y);
+    y+=5.5; doc.setFont('Noto','bold'); doc.setFontSize(9); col('#235B4E'); doc.text(`Unidad de Gestión de Playa: ${f.unidad}`,M,y);
+    /* calificación, lugar y nivel */
+    y+=5; fill('#F6F3EE'); doc.roundedRect(M,y,CW,13,2,2,'F');
+    doc.setFont('Noto','bold'); doc.setFontSize(16); col('#691C32'); doc.text(String(f.calificacion),M+5,y+9);
+    const cw=doc.getTextWidth(String(f.calificacion));
+    doc.setFont('Noto','normal'); doc.setFontSize(9); col('#6F7271'); doc.text(`de 5   ·   Calificación · Lugar ${f.lugar}`,M+5+cw+2,y+8.6);
+    const nt=`Nivel: ${f.nivel}`; doc.setFont('Noto','bold'); doc.setFontSize(9); const nw=doc.getTextWidth(nt)+8;
+    fill(NCOL[f.nivel.toLowerCase()]||'#6F7271'); doc.roundedRect(W-M-4-nw,y+3,nw,7,3.5,3.5,'F'); doc.setTextColor(255,255,255); doc.text(nt,W-M-4-nw/2,y+7.9,{align:'center'});
+    y+=19;
+    /* imagen de Identificación */
+    let iw=CW, ih=CW*img.h/img.w; const IMAX=112; if(ih>IMAX){ih=IMAX;iw=IMAX*img.w/img.h}
+    doc.addImage(img.src,'JPEG',M+(CW-iw)/2,y,iw,ih); draw('#E4E1DA'); doc.setLineWidth(.2); doc.rect(M+(CW-iw)/2,y,iw,ih);
+    y+=ih+4.5; doc.setFont('Noto','normal'); doc.setFontSize(8); col('#6F7271'); doc.text('Ubicación de servicios y accesos',M,y);
+    /* listado */
+    y+=9; doc.setFont('Noto','bold'); doc.setFontSize(11); col('#235B4E');
+    const tl=doc.splitTextToSize(f.items_titulo,CW); doc.text(tl,M,y); y+=tl.length*5+1.5;
+    draw('#9F2241'); doc.setLineWidth(.5); doc.line(M,y,W-M,y); y+=2;
+    doc.setFont('Noto','normal'); doc.setFontSize(10);
+    f.items.forEach(it=>{
+      const ls=doc.splitTextToSize(it,CW-10), h=ls.length*4.6+4.4;
+      if(y+h>H-20){doc.addPage(); fill('#9F2241'); doc.rect(0,0,W,3,'F'); y=M; doc.setFont('Noto','normal'); doc.setFontSize(10);}
+      fill('#DDC9A3'); draw('#BC955C'); doc.setLineWidth(.4); doc.roundedRect(M+1,y+2.3,3.6,3.6,.8,.8,'FD');
+      col('#1F1F1F'); doc.text(ls,M+8,y+5.4);
+      y+=h; draw('#E4E1DA'); doc.setLineWidth(.2); doc.line(M,y,W-M,y);
+    });
+    /* pie de página */
+    const tp=doc.getNumberOfPages(), enlace=location.origin.startsWith('http')?`${location.origin}${location.pathname}#playa-${n}`:'';
+    for(let i=1;i<=tp;i++){doc.setPage(i); doc.setFont('Noto','normal'); doc.setFontSize(7.5); col('#98989A');
+      doc.text([f.fuente,enlace].filter(Boolean).join(' · '),M,H-9); doc.text(`Página ${i} de ${tp}`,W-M,H-9,{align:'right'});}
+    const limpio=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^A-Za-z0-9]+/g,'_').replace(/^_|_$/g,'');
+    doc.save(`Ficha_${String(n).padStart(2,'0')}_${limpio(f.nombre)}.pdf`);
+    m.textContent='Ficha descargada.';
+  }catch(e){
+    console.error(e); m.className='dmsg err'; m.textContent='No se pudo generar la ficha. Revisa tu conexión e inténtalo de nuevo.';
+  }finally{b.removeAttribute('aria-busy');}
+}
 
 /* Enlace directo: …/#playa-49 */
 const h=location.hash.match(/playa-(\d+)/);
