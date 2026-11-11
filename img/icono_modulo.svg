@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Módulo de información en playa</title>
+  <desc id="desc">Ícono relleno de un módulo de atención con techo, símbolo de información, sol, bandera y olas. Paleta guinda #942A49, vino #561B32 y blanco. Fondo transparente.</desc>
+  <g id="sol" fill="#942A49">
+    <circle cx="112" cy="99" r="29"/>
+    <rect x="106" y="40" width="12" height="20" rx="6"/>
+    <rect x="106" y="138" width="12" height="20" rx="6"/>
+    <rect x="53" y="93" width="20" height="12" rx="6"/>
+    <rect x="151" y="93" width="20" height="12" rx="6"/>
+    <rect x="106" y="40" width="12" height="20" rx="6" transform="rotate(45 112 99)"/>
+    <rect x="106" y="40" width="12" height="20" rx="6" transform="rotate(135 112 99)"/>
+    <rect x="106" y="40" width="12" height="20" rx="6" transform="rotate(225 112 99)"/>
+    <rect x="106" y="40" width="12" height="20" rx="6" transform="rotate(315 112 99)"/>
+  </g>
+  <g id="bandera">
+    <rect x="364" y="61" width="12" height="122" rx="6" fill="#561B32"/>
+    <path d="M376 65H427Q435 65 430 72L416 89L430 106Q435 113 427 113H376Z" fill="#942A49"/>
+  </g>
+  <g id="modulo">
+    <rect x="115" y="207" width="258" height="192" rx="9" fill="#942A49"/>
+    <rect x="115" y="207" width="16" height="192" rx="5" fill="#561B32"/>
+    <rect x="357" y="207" width="16" height="192" rx="5" fill="#561B32"/>
+    <path d="M79 204L238 108Q244 104 250 108L409 204Q419 214 405 218H83Q69 214 79 204Z" fill="#561B32"/>
+    <rect x="143" y="234" width="202" height="75" rx="8" fill="#FFFFFF"/>
+    <rect x="100" y="317" width="288" height="20" rx="8" fill="#561B32"/>
+    <rect x="153" y="352" width="182" height="10" rx="5" fill="#FFFFFF"/>
+    <rect x="153" y="375" width="182" height="10" rx="5" fill="#FFFFFF"/>
+    <rect x="115" y="392" width="258" height="12" rx="6" fill="#561B32"/>
+  </g>
+  <g id="informacion">
+    <circle cx="244" cy="271.5" r="29" fill="#942A49"/>
+    <circle cx="244" cy="257" r="5" fill="#FFFFFF"/>
+    <rect x="239" y="268" width="10" height="22" rx="4" fill="#FFFFFF"/>
+  </g>
+  <g id="olas" fill="#561B32">
+    <path d="M64 423C88 423 88 411 112 411S136 423 160 423S184 411 208 411S232 423 256 423S280 411 304 411S328 423 352 423S376 411 400 411S424 423 448 423A6 6 0 0 1 448 435C424 435 424 423 400 423S376 435 352 435S328 423 304 423S280 435 256 435S232 423 208 423S184 435 160 435S136 423 112 423S88 435 64 435A6 6 0 0 1 64 423Z"/>
+    <path d="M112 455C136 455 136 443 160 443S184 455 208 455S232 443 256 443S280 455 304 455S328 443 352 443S376 455 400 455A6 6 0 0 1 400 467C376 467 376 455 352 455S328 467 304 467S280 455 256 455S232 467 208 467S184 455 160 455S136 467 112 467A6 6 0 0 1 112 455Z"/>
+  </g>
+</svg>

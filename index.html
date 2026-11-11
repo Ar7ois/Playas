@@ -45,6 +45,18 @@ html,body{margin:0;height:100%;font-family:"Noto Sans",system-ui,sans-serif;colo
 .legend h3{margin:0 0 5px;font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:var(--verde)}
 .legend .lgrid{display:grid;grid-template-columns:auto auto;gap:4px 18px;align-items:start}
 .legend .lnota{margin:7px 0 0;font-size:10px;color:var(--tx2)}
+.legend .lcapas{margin-top:9px;padding-top:8px;border-top:1px solid var(--line)}
+.legend .lchk{display:flex;align-items:center;gap:7px;margin:4px 0;color:var(--tx);font-size:11.5px;cursor:pointer;line-height:1.25}
+.legend .lchk input{margin:0;width:14px;height:14px;accent-color:var(--guinda);cursor:pointer;flex:none}
+.legend .ln{display:inline-flex;flex-direction:column;gap:3px;width:16px;flex:none}
+.legend .ln i,.legend .lsub i{display:block;width:16px;height:0}
+.legend .lsub{display:flex;flex-wrap:wrap;gap:3px 12px;margin:0 0 4px 21px;font-size:10px;color:var(--tx2)}
+.legend .lsub span{display:inline-flex;align-items:center;gap:5px}
+.legend .pt{width:11px;height:11px;border-radius:50%;background:#00C26E;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.35);flex:none;margin:0 2px}
+.capa-pop dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:12px}
+.capa-pop dt{color:var(--tx2);font-weight:600}
+.capa-pop dd{margin:0}
+.capa-pop h4{margin:0 0 6px;font-size:13px;color:var(--guinda-o)}
 .legend .row{display:flex;align-items:center;gap:6px;margin:3px 0;color:var(--tx2);font-size:11px;line-height:1.25}
 .legend .sw{width:12px;height:12px;border-radius:3px;flex:none;border:1.5px solid rgba(0,0,0,.15)}
 .legend .dot{width:13px;height:13px;border-radius:50%;flex:none;border:2px solid #fff;box-shadow:0 0 0 1px rgba(0,0,0,.25)}
@@ -121,10 +133,20 @@ html,body{margin:0;height:100%;font-family:"Noto Sans",system-ui,sans-serif;colo
 .ccpop span{color:var(--tx2)}
 .ccpop div{display:flex;justify-content:space-between;gap:10px;margin-top:3px}
 .ccpop i{font-style:normal;color:var(--tx2)}
-nav.tabs{display:flex;gap:4px;padding:10px 14px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:3;overflow-x:auto}
+nav.tabs{display:flex;align-items:flex-end;gap:2px;padding:10px 10px 0;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:3;overflow-x:auto}
 nav.tabs button{all:unset;cursor:pointer;font-size:12.5px;font-weight:600;padding:8px 7px 9px;color:var(--tx2);border-bottom:3px solid transparent;white-space:nowrap}
 nav.tabs button.on{color:var(--guinda-o);border-color:var(--guinda)}
 section.sec{padding:18px 20px 6px}
+nav.tabs button.t2l{text-align:center;line-height:1.15}
+nav.tabs button.t2l small{display:block;font-size:10px;font-weight:500;color:var(--tx2)}
+.acla{display:inline-block;font-size:15px;font-weight:700;color:var(--guinda-o);background:#F6EEF0;border-left:4px solid var(--guinda);padding:9px 14px;border-radius:0 8px 8px 0;margin:0 0 14px}
+.acfig{margin:0 0 12px;border-radius:10px;overflow:hidden;border:1px solid var(--line);background:var(--bg2)}
+.acfig img{display:block;width:100%;height:auto;cursor:zoom-in}
+.acdesc{margin:0 0 16px;font-size:13.5px;line-height:1.55;color:var(--tx)}
+.mod-ic{width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center}
+.mod-ic img{width:20px;height:20px;display:block}
+.legend .mi{width:16px;height:16px;flex:none;background:#fff;border-radius:50%;box-shadow:0 0 0 1px rgba(0,0,0,.25);display:inline-flex;align-items:center;justify-content:center}
+.legend .mi img{width:12px;height:12px}
 section.sec h3{margin:0 0 12px;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--verde)}
 .kv{display:grid;grid-template-columns:1fr 1fr;grid-auto-flow:row dense;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-bottom:14px}
 .kv div{padding:9px 11px;font-size:13px;line-height:1.4;background:var(--bg)}
@@ -153,7 +175,7 @@ ul.acc{list-style:none;padding:0;margin:0 0 14px}
 .dmsg{font-size:12px;color:var(--tx2)}
 .dmsg.err{color:var(--guinda)}
 
-ul.acc li{position:relative;padding:9px 10px 9px 34px;font-size:13px;line-height:1.45;border-bottom:1px solid var(--line)}
+ul.acc li{position:relative;padding:9px 10px 9px 34px;font-size:13px;line-height:1.45;font-weight:700;color:var(--tx);border-bottom:1px solid var(--line)}
 ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;height:14px;border-radius:4px;background:var(--dorado-c);border:2px solid var(--dorado)}
 .fuente{font-size:11px;color:var(--tx2);padding:10px 20px 24px}
 [hidden]{display:none!important}
@@ -175,6 +197,18 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
 .cform .cnt{align-self:flex-end;font-weight:400;color:var(--tx2);font-size:11px}
 .cform .cdos{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .cform .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cacc{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.cacc .cbtn{align-self:auto}
+.cfile{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden}
+.cfbtn{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex!important;flex-direction:row!important;align-items:center;gap:8px!important;padding:8.5px 14px;border:1.5px dashed var(--dorado);border-radius:10px;font-size:12.5px;font-weight:600;color:var(--verde-o)}
+.cfbtn:hover{background:var(--bg2)}
+.cfile:focus-visible+.cfbtn{outline:2px solid var(--dorado);outline-offset:2px}
+.cfbtn svg{width:18px;height:18px}
+.cprev{display:flex;align-items:center;gap:10px;padding:6px;border:1px solid var(--line);border-radius:10px}
+.cprev[hidden]{display:none}
+.cprev img{width:54px;height:54px;object-fit:cover;border-radius:7px;flex:none}
+.cprev .cfn{flex:1;min-width:0;font-size:12px;color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cprev .cfq{all:unset;cursor:pointer;font-size:12px;font-weight:600;color:var(--guinda);padding:4px 8px}
 .cbtn{align-self:flex-start;border:0;cursor:pointer;background:var(--guinda);color:#fff;font:700 13px "Noto Sans",sans-serif;padding:10px 18px;border-radius:10px}
 .cbtn:hover{background:var(--guinda-o)} .cbtn:disabled{opacity:.6;cursor:wait}
 .cmsg{font-size:13px;min-height:0} .cmsg:empty{display:none}
@@ -331,13 +365,18 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
     </div>
     <div>
       <h3>Zonificación</h3>
-      <div class="row"><span class="sw" style="background:rgba(242,107,0,.6);border:2px solid var(--delim)"></span>Delimitación de playa</div>
-      <div class="row"><span class="sw" style="background:rgba(255,230,0,.25);border:2px solid #FFE600"></span>Zona de playa libre</div>
-      <div class="row"><span class="sw" style="background:rgba(227,0,27,.55);border-color:#E3001B"></span>Ocupaciones</div>
-      <div class="row"><span class="sw" style="background:rgba(176,0,224,.6);border-color:#B000E0"></span>Ocupaciones que no deberían estar</div>
+      <label class="lchk"><input type="checkbox" data-capa="zonas" checked><span class="sw" style="background:linear-gradient(135deg,#86c5cc 0 25%,#f6cf71 25% 50%,#f89c74 50% 75%,#9eb9f3 75%);opacity:.85"></span>Zona</label>
+      <label class="lchk"><input type="checkbox" data-capa="delim" checked><span class="sw" style="background:rgba(242,107,0,.6);border:2px solid var(--delim)"></span>Delimitación de playa</label>
     </div>
   </div>
-  <p class="lnota">La zonificación se muestra al acercarse a una playa.</p>
+  <div class="lcapas">
+    <h3>Capas</h3>
+    <label class="lchk"><input type="checkbox" data-capa="concesiones"><span class="sw" style="background:rgba(0,163,224,.3);border:2px solid #00A3E0"></span>Concesiones</label>
+    <label class="lchk"><input type="checkbox" data-capa="zofemat"><span class="ln"><i style="border-top:2.5px solid #1E6FD9"></i><i style="border-top:2.5px dashed #FF4FA3"></i></span>ZOFEMAT</label>
+    <div class="lsub"><span><i style="border-top:2.5px solid #1E6FD9"></i>Pleamar máxima</span><span><i style="border-top:2.5px dashed #FF4FA3"></i>Zona federal</span></div>
+    <label class="lchk"><input type="checkbox" data-capa="accesos"><span class="pt"></span>Accesos preliminar</label>
+    <label class="lchk"><input type="checkbox" data-capa="modulos"><span class="mi"><img src="img/icono_modulo.svg" alt=""></span>Módulos</label>
+  </div>
 </div>
 </div>
 <button class="leg-btn" id="legBtn">Simbología</button>
@@ -372,6 +411,7 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <script src="datos/datos.js"></script>
 <script src="datos/fichas.js"></script>
+<script src="datos/capas.js"></script>
 <script src="datos/ruta.js"></script>
 <script>
 const ZONAS = window.ZONAS, PLAYAS = window.PLAYAS, FICHAS = window.FICHAS, DELIM = window.DELIM, ZONIF = window.ZONIF;
@@ -398,8 +438,8 @@ const PL = {}; /* se llena abajo */
 /* Zonificación interna de playas (visible al acercarse) */
 const ZMIN = 15;
 map.createPane('zonif'); map.getPane('zonif').style.zIndex = 450;
-const ZCOL = {libre:{c:'#FFE600',f:.14,w:2},ocupacion:{c:'#E3001B',f:.5,w:1},indebida:{c:'#B000E0',f:.55,w:1}};
-const ZLAB = {libre:'Zona de playa libre',ocupacion:'Ocupaciones',indebida:'Ocupaciones que no deberían estar'};
+const ZCOL = {libre:{c:'#FFE600',f:.14,w:2}};
+const ZLAB = {libre:'Zona de playa libre'};
 const zonifLayer = L.geoJSON(ZONIF,{pane:'zonif',
   filter:f=>ZCOL[f.properties.cat],
   style:f=>{const s=ZCOL[f.properties.cat];return {color:s.c,weight:s.w,fillColor:s.c,fillOpacity:s.f};},
@@ -418,7 +458,7 @@ const zonifCtl = L.layerGroup();  /* casilla en el control de capas */
 const DCOL = '#F26B00';
 const delimLayer = L.geoJSON(DELIM,{
   style:f=>{const c=DCOL;
-    const z = map.getZoom()>=ZMIN && map.hasLayer(zonifLayer);
+    const z = map.getZoom()>=ZMIN;
     return {color:z?c:'#ffffff',weight:z?2.5:1.6,fillColor:c,fillOpacity:z?.06:.6};},
   onEachFeature:(f,l)=>{const n=f.properties.num;
     l.on('click',e=>{L.DomEvent.stopPropagation(e); if(FICHAS[n]) abrirFicha(n); else markers[n].openPopup();});
@@ -451,8 +491,52 @@ function popupHTML(p,con){
   ${con?`<button class="btn" onclick="abrirFicha(${p.num})">Ver ficha completa</button>`:(p.unidad?'<span class="tag">Ficha completa en preparación</span>':'<span class="tag">Sin evaluación</span>')}</div>`;
 }
 
+/* Capas activables: Concesiones, ZOFEMAT y Accesos preliminar */
+const CAPAS=window.CAPAS;
+const escC=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+map.createPane('capas'); map.getPane('capas').style.zIndex=440;
+map.createPane('accesos'); map.getPane('accesos').style.zIndex=590;
+const dl=(f)=>`<dl>${f.filter(([k,v])=>v!==''&&v!=='.'&&v!=null).map(([k,v])=>`<dt>${escC(k)}</dt><dd>${escC(String(v))}</dd>`).join('')}</dl>`;
+const concLayer=L.geoJSON(CAPAS.concesiones,{pane:'capas',
+  style:()=>({color:'#00A3E0',weight:1.6,fillColor:'#00A3E0',fillOpacity:.28}),
+  onEachFeature:(f,l)=>{const p=f.properties;
+    l.bindTooltip(`Concesión · ${escC(p.EXPEDIENTE)}`,{sticky:true});
+    l.bindPopup(`<div class="capa-pop"><h4>Concesión</h4>${dl([['Expediente',p.EXPEDIENTE],['Bitácora',p.BITACORA],['Resolutivo',p.RESOLUTIVO],['Zona',p.Zona],['Área',p.Area]])}</div>`,{maxWidth:300});
+    l.on('mouseover',()=>l.setStyle({fillOpacity:.5})); l.on('mouseout',()=>concLayer.resetStyle(l));}});
+const ZFEST={'PLEAMAR MAXIMA':{color:'#1E6FD9',weight:2.6},'ZONA FEDERAL':{color:'#FF4FA3',weight:2.4,dashArray:'7 5'}};
+const ZFLAB={'PLEAMAR MAXIMA':'Pleamar máxima','ZONA FEDERAL':'Zona federal'};
+const zofLayer=L.geoJSON(CAPAS.zofemat,{pane:'capas',
+  style:f=>Object.assign({opacity:.95},ZFEST[f.properties.capa]||{color:'#fff',weight:2}),
+  onEachFeature:(f,l)=>{const p=f.properties;
+    l.bindTooltip(`ZOFEMAT · ${escC(ZFLAB[p.capa]||p.capa)}`,{sticky:true});
+    l.bindPopup(`<div class="capa-pop"><h4>ZOFEMAT · ${escC(ZFLAB[p.capa]||p.capa)}</h4>${dl([['Plano',p.plano],['Proyecto',p.proyecto],['Escala',p.escala],['Fecha',p.fecha]])}</div>`,{maxWidth:300});}});
+const accLayer=L.geoJSON(CAPAS.accesos,{
+  pointToLayer:(f,ll)=>L.circleMarker(ll,{pane:'accesos',radius:6,color:'#fff',weight:2,fillColor:'#00C26E',fillOpacity:1}),
+  onEachFeature:(f,l)=>{const p=f.properties;
+    l.bindTooltip(escC(p.nombre),{direction:'top',offset:[0,-6]});
+    l.bindPopup(()=>`<div class="capa-pop"><h4>Acceso preliminar</h4>${dl([['Nombre',p.nombre],['Playa',`${p.num}. ${PL[p.num]?PL[p.num].nombre:''}`]])}</div>`,{maxWidth:300});}});
+const accBy={}; accLayer.eachLayer(l=>(accBy[l.feature.properties.num]=accBy[l.feature.properties.num]||[]).push(l));
+/* Módulos (propuestas de ubicación) */
+const modLayer=L.layerGroup(); const modBy={};
+const modIcon=L.divIcon({className:'',html:'<div class="mod-ic"><img src="img/icono_modulo.svg" alt=""></div>',iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-12]});
+(window.MODULOS||[]).forEach(m=>{
+  const grupos={}; m.propuestas.forEach(p=>{const k=p.lat+','+p.lon;(grupos[k]=grupos[k]||[]).push(p);});
+  Object.values(grupos).forEach(ps=>{
+    const mk=L.marker([ps[0].lat,ps[0].lon],{icon:modIcon,title:`Módulo ${m.modulo} · ${m.playa}`,zIndexOffset:1500});
+    mk.bindTooltip(`Módulo ${escC(m.modulo)} · ${ps.map(p=>'Propuesta '+p.propuesta).join(' y ')}`,{direction:'top',offset:[0,-12]});
+    mk.bindPopup(`<div class="capa-pop"><h4>Módulo ${escC(m.modulo)}</h4>${dl([['Unidad de Gestión de Playa',m.playa]])}${ps.map(p=>`<h4 style="margin:9px 0 5px;font-size:12px;color:var(--verde)">Propuesta ${p.propuesta}</h4>${dl([['Coordenada',p.coordenada],['Referencia',p.referencia],['Condiciones del terreno',p.condiciones]])}`).join('')}</div>`,{maxWidth:320});
+    mk.addTo(modLayer); (modBy[m.num]=modBy[m.num]||[]).push(mk);
+  });
+});
+const CAPAL={concesiones:concLayer,zofemat:zofLayer,accesos:accLayer,modulos:modLayer,delim:delimLayer,zonas:zonasLayer};
+const chks=[...document.querySelectorAll('.lchk input[data-capa]')];
+chks.forEach(c=>c.addEventListener('change',()=>{const ly=CAPAL[c.dataset.capa]; c.checked?ly.addTo(map):map.removeLayer(ly);
+  if(c.dataset.capa==='libre'){zonifOn=c.checked;syncZonif();}}));
+function syncChks(){chks.forEach(c=>c.checked=map.hasLayer(CAPAL[c.dataset.capa]));}
+
 zonifCtl.addTo(map);
-L.control.layers({'Satélite':sat,'Calles':calles},{'Nombres de lugares':lbl,'Zonas':zonasLayer,'Delimitación de playas':delimLayer,'Zonificación de playa (al acercarse)':zonifCtl,'Puntos de playa':playasLayer},{position:'topright',collapsed:true}).addTo(map);
+L.control.layers({'Satélite':sat,'Calles':calles},{'Nombres de lugares':lbl,'Zonas':zonasLayer,'Delimitación de playas':delimLayer,'Puntos de playa':playasLayer,'Concesiones':concLayer,'ZOFEMAT':zofLayer,'Accesos preliminar':accLayer,'Módulos':modLayer},{position:'topright',collapsed:true}).addTo(map);
+map.on('overlayadd overlayremove',syncChks);
 map.on('overlayadd',e=>{if(e.layer===zonifCtl){zonifOn=true;syncZonif();}});
 map.on('overlayremove',e=>{if(e.layer===zonifCtl){zonifOn=false;syncZonif();}});
 map.on('zoomend',syncZonif);
@@ -495,6 +579,8 @@ function aplicarFiltros(){
     v?playasLayer.addLayer(markers[n]):playasLayer.removeLayer(markers[n]);
     if(delimBy[n]) v?delimLayer.addLayer(delimBy[n]):delimLayer.removeLayer(delimBy[n]);
     (zonifBy[n]||[]).forEach(l=>v?zonifLayer.addLayer(l):zonifLayer.removeLayer(l));
+    (accBy[n]||[]).forEach(l=>v?accLayer.addLayer(l):accLayer.removeLayer(l));
+    (modBy[n]||[]).forEach(l=>v?modLayer.addLayer(l):modLayer.removeLayer(l));
   });
   zonaLays.forEach(l=>{const v=!fz||zNum(l.feature.properties.nombre)===fz; v?zonasLayer.addLayer(l):zonasLayer.removeLayer(l);});
   delimLayer.eachLayer(l=>delimLayer.resetStyle(l));
@@ -550,16 +636,19 @@ function abrirFicha(n,opts={}){
       <textarea id="cmsgta" name="message" rows="2" maxlength="2000" required placeholder="Escribe tu comentario…"></textarea>
       <div class="cmas">
         <small class="cnt">0 / 2000</small>
-        <div class="cdos"><label><span class="lt">Nombre <span class="opc">(opcional)</span></span><input name="name" type="text" maxlength="120" autocomplete="name"></label>
-        <label><span class="lt">Correo <span class="opc">(opcional)</span></span><input name="email" type="email" maxlength="160" autocomplete="email"></label></div>
-        <button type="submit" class="cbtn">Enviar comentario</button>
+        <div class="cacc">
+          <input type="file" id="cfile" accept="image/*" class="cfile">
+          <label for="cfile" class="cfbtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.6" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>Adjuntar foto</label>
+          <button type="submit" class="cbtn">Enviar comentario</button>
+        </div>
+        <div class="cprev" hidden><img alt="Vista previa de la foto"><span class="cfn"></span><button type="button" class="cfq">Quitar</button></div>
       </div>
       <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
       <div class="cmsg" role="status" aria-live="polite"></div>
     </form></div>
   <nav class="tabs" role="tablist">
     <button class="on" data-t="t1">Identificación</button><button data-t="t5">Requerimientos</button>
-    <button data-t="t2">Territorio</button></nav>
+    <button data-t="t6" class="t2l">Condición de accesos<small>(preliminar)</small></button><button data-t="t2">Territorio</button></nav>
   <section class="sec" id="t1"><h3>Datos de identificación</h3>
     <figure><img src="${f.img.plano}" alt="Ubicación de servicios y accesos de ${esc(f.nombre)}"><figcaption>Ubicación de servicios y accesos</figcaption></figure>
     ${kv(f.identificacion)}</section>
@@ -568,6 +657,10 @@ function abrirFicha(n,opts={}){
     <ul class="acc">${f.items.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
     <button class="ruta-link" type="button" data-ruta><svg class="ri" viewBox="0 0 30 22" aria-hidden="true"><rect x="0" y="1" width="4" height="8" rx="1" fill="#9F2241"/><rect x="0" y="12" width="4" height="9" rx="1" fill="#235B4E"/><rect x="13" y="4" width="4" height="14" rx="1" fill="#BC955C"/><rect x="26" y="2" width="4" height="7" rx="1" fill="#54575A"/><rect x="26" y="12" width="4" height="8" rx="1" fill="#54575A"/><path d="M4 5C9 5 8 8 13 8M4 16C9 16 8 14 13 14M17 7C22 7 21 5 26 5M17 15C22 15 21 16 26 16" fill="none" stroke="#BC955C" stroke-width="2.2" opacity=".55"/></svg><span>Ruta de intervención: desatenciones, niveles del modelo y mobiliario</span><span aria-hidden="true">→</span></button>
     <figure><img src="${f.img.general}" alt="Fotografía general de ${esc(f.nombre)}"><figcaption>Fotografía general</figcaption></figure></section>
+  <section class="sec" id="t6" hidden><h3>Condición de accesos (preliminar)</h3>
+    <div class="acla">${esc(f.acceso.clase)}</div>
+    <figure class="acfig"><img src="${f.acceso.img}" alt="Acceso de ${esc(f.nombre)}" loading="lazy"></figure>
+    <p class="acdesc">${esc(f.acceso.desc)}</p></section>
   <section class="sec" id="t2" hidden><h3>Datos territoriales y de uso</h3>${kv(f.territorio)}</section>
   <div class="fuente">${esc(f.fuente)} · Unidad de Gestión de Playa ${esc(f.unidad)}</div>`;
   ps.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{
@@ -596,26 +689,75 @@ function cerrarFicha(){if(esEscritorio()) return; fichaActual=null; panel.classL
 document.getElementById('cerrar').onclick=cerrarFicha;
 /* Comentarios (Web3Forms) */
 const W3F_KEY='e8c0837a-76ba-4134-9031-949ba66554ee';
+/* Comentarios con foto: FormSubmit (adjunto por correo) */
+const FS_DEST='playastur30@gmail.com';
+function reducirFoto(file){
+  return new Promise(ok=>{
+    if(!/^image\/(jpeg|png|webp)$/i.test(file.type)||file.size<1.5e6) return ok(file);
+    const url=URL.createObjectURL(file), im=new Image();
+    im.onload=()=>{const s=Math.min(1,2000/Math.max(im.naturalWidth,im.naturalHeight)), c=document.createElement('canvas');
+      c.width=Math.round(im.naturalWidth*s); c.height=Math.round(im.naturalHeight*s); c.getContext('2d').drawImage(im,0,0,c.width,c.height);
+      c.toBlob(b=>{URL.revokeObjectURL(url); ok(b&&b.size<file.size?new File([b],file.name.replace(/\.\w+$/,'')+'.jpg',{type:'image/jpeg'}):file)},'image/jpeg',.85);};
+    im.onerror=()=>{URL.revokeObjectURL(url); ok(file)}; im.src=url;
+  });
+}
+function enviarConFoto(campos,file){
+  return new Promise((ok,ko)=>{
+    const nombre='fs'+Date.now(), ifr=document.createElement('iframe'); ifr.name=nombre; ifr.hidden=true; ifr.title='envío';
+    const fm=document.createElement('form'); fm.method='POST'; fm.enctype='multipart/form-data'; fm.target=nombre; fm.hidden=true;
+    fm.action='https://formsubmit.co/'+FS_DEST;
+    Object.entries(campos).forEach(([k,v])=>{if(v==null||v==='')return; const i=document.createElement('input'); i.type='hidden'; i.name=k; i.value=v; fm.appendChild(i);});
+    const fi=document.createElement('input'); fi.type='file'; fi.name='Foto';
+    const dt=new DataTransfer(); dt.items.add(file); fi.files=dt.files; fm.appendChild(fi);
+    document.body.append(ifr,fm);
+    let listo=false; const fin=e=>{if(listo)return; listo=true; setTimeout(()=>{ifr.remove();fm.remove();},1000); e?ko(e):ok();};
+    ifr.addEventListener('load',()=>fin());
+    setTimeout(()=>fin(new Error('tiempo')),90000);
+    fm.submit();
+  });
+}
 function prepararComentario(n){
   const fm=document.getElementById('cform'); if(!fm) return;
   const f=FICHAS[n], ta=fm.message, cnt=fm.querySelector('.cnt'), msg=fm.querySelector('.cmsg'), btn=fm.querySelector('.cbtn');
+  const fin=fm.querySelector('#cfile'), prev=fm.querySelector('.cprev'), pimg=prev.querySelector('img'), pfn=prev.querySelector('.cfn');
+  let foto=null;
+  const quitarFoto=()=>{foto=null; fin.value=''; prev.hidden=true; if(pimg.src.startsWith('blob:')) URL.revokeObjectURL(pimg.src); pimg.removeAttribute('src');};
   ta.addEventListener('input',()=>{cnt.textContent=ta.value.length+' / 2000'});
   ta.addEventListener('focus',()=>{fm.classList.add('abierto'); ta.rows=4;});
+  fin.addEventListener('change',()=>{
+    msg.className='cmsg'; msg.textContent='';
+    const fl=fin.files[0]; if(!fl){quitarFoto();return;}
+    if(!fl.type.startsWith('image/')){quitarFoto(); msg.textContent='El archivo debe ser una imagen.'; msg.classList.add('err'); return;}
+    foto=fl; pimg.src=URL.createObjectURL(fl); pfn.textContent=fl.name; prev.hidden=false;
+  });
+  prev.querySelector('.cfq').onclick=quitarFoto;
   fm.addEventListener('submit',async e=>{
     e.preventDefault(); msg.className='cmsg';
-    if(!ta.value.trim()){ msg.textContent='Escribe tu comentario antes de enviarlo.'; msg.classList.add('err'); ta.focus(); return; }
-    if(fm.email.value && !fm.email.checkValidity()){ msg.textContent='Revisa el correo: no parece válido.'; msg.classList.add('err'); fm.email.focus(); return; }
+    if(!ta.value.trim() && !foto){ msg.textContent='Escribe tu comentario o adjunta una foto antes de enviarlo.'; msg.classList.add('err'); ta.focus(); return; }
     if(fm.botcheck.checked) return;
     btn.disabled=true; btn.textContent='Enviando…';
-    const datos={access_key:W3F_KEY, subject:`Comentario — ${n}. ${f.nombre}`, from_name:'Mapa Playas de Acapulco',
-      Playa:`${n}. ${f.nombre}`, 'Unidad de Gestión de Playa':f.unidad, Zona:f.zona,
-      name:fm.name.value.trim()||'Sin nombre', email:fm.email.value.trim()||undefined, message:ta.value.trim(), Enlace:location.origin+location.pathname+'#playa-'+n};
+    const enlace=location.origin+location.pathname+'#playa-'+n;
     try{
-      const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(datos)});
-      const j=await r.json().catch(()=>({}));
-      if(r.ok && j.success!==false){ fm.reset(); cnt.textContent='0 / 2000'; fm.classList.remove('abierto'); ta.rows=2; msg.textContent='¡Gracias! Tu comentario fue enviado.'; msg.classList.add('ok'); }
-      else throw new Error(j.message||r.status);
-    }catch(err){ msg.textContent='No se pudo enviar el comentario. Revisa tu conexión e inténtalo de nuevo.'; msg.classList.add('err'); }
+      if(foto){
+        const archivo=await reducirFoto(foto);
+        if(archivo.size>9.5e6) throw Object.assign(new Error('grande'),{grande:true});
+        await enviarConFoto({_subject:`Foto y comentario — ${n}. ${f.nombre}`, _template:'table', _captcha:'false',
+          Playa:`${n}. ${f.nombre}`, 'Unidad de Gestión de Playa':f.unidad, Zona:f.zona,
+          Comentario:ta.value.trim()||'(sin comentario)', Enlace:enlace},archivo);
+      }else{
+        const datos={access_key:W3F_KEY, subject:`Comentario — ${n}. ${f.nombre}`, from_name:'Mapa Playas de Acapulco',
+          Playa:`${n}. ${f.nombre}`, 'Unidad de Gestión de Playa':f.unidad, Zona:f.zona,
+          name:'Mapa Playas de Acapulco', message:ta.value.trim(), Enlace:enlace};
+        const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(datos)});
+        const j=await r.json().catch(()=>({}));
+        if(!(r.ok && j.success!==false)) throw new Error(j.message||r.status);
+      }
+      const conFoto=!!foto;
+      fm.reset(); quitarFoto(); cnt.textContent='0 / 2000'; fm.classList.remove('abierto'); ta.rows=2;
+      msg.textContent=conFoto?'¡Gracias! Tu comentario y tu foto fueron enviados.':'¡Gracias! Tu comentario fue enviado.'; msg.classList.add('ok');
+    }catch(err){
+      msg.textContent=err&&err.grande?'La foto es demasiado pesada (máximo 10 MB). Prueba con otra imagen.':'No se pudo enviar. Revisa tu conexión e inténtalo de nuevo.'; msg.classList.add('err');
+    }
     btn.disabled=false; btn.textContent='Enviar comentario';
   });
 }
@@ -815,19 +957,29 @@ async function descargarFicha(n){
   b.setAttribute('aria-busy','true'); m.className='dmsg'; m.textContent='Preparando la ficha…';
   try{
     await Promise.all([cargarScript(JSPDF_URL),cargarScript('datos/fuentes.js')]);
-    const img=await imagenDatos(f.img.plano);
+    const [img,imgAcc]=await Promise.all([imagenDatos(f.img.plano),imagenDatos(f.acceso.img)]);
     const {jsPDF}=window.jspdf, doc=new jsPDF({unit:'mm',format:'a4'});
     doc.addFileToVFS('NotoSans-Regular.ttf',FUENTES['400Regular']); doc.addFont('NotoSans-Regular.ttf','Noto','normal');
     doc.addFileToVFS('NotoSans-Bold.ttf',FUENTES['700Bold']); doc.addFont('NotoSans-Bold.ttf','Noto','bold');
-    const W=210,H=297,M=16,CW=W-2*M, col=c=>doc.setTextColor(...hex2rgb(c)), fill=c=>doc.setFillColor(...hex2rgb(c)), draw=c=>doc.setDrawColor(...hex2rgb(c));
+    const W=210,H=297,M=16,CW=W-2*M,BOT=H-20, col=c=>doc.setTextColor(...hex2rgb(c)), fill=c=>doc.setFillColor(...hex2rgb(c)), draw=c=>doc.setDrawColor(...hex2rgb(c));
     const NCOL={consolidar:'#54575A',fortalecer:'#BC955C',ordenar:'#235B4E',recuperar:'#9F2241'};
-    fill('#9F2241'); doc.rect(0,0,W,3,'F');
-    let y=M+2;
+    const banda=()=>{fill('#9F2241'); doc.rect(0,0,W,3,'F');};
+    let y;
+    const nuevaPag=()=>{doc.addPage(); banda(); y=M;};
+    const espacio=h=>{if(y+h>BOT) nuevaPag();};
+    const titulo=(txt)=>{espacio(16); doc.setFont('Noto','bold'); doc.setFontSize(11); col('#235B4E');
+      const tl=doc.splitTextToSize(txt,CW); doc.text(tl,M,y); y+=tl.length*5+1.5;
+      draw('#9F2241'); doc.setLineWidth(.5); doc.line(M,y,W-M,y); y+=4;};
+    const imagen=(im,maxH)=>{let iw=CW, ih=CW*im.h/im.w; if(ih>maxH){ih=maxH;iw=maxH*im.w/im.h}
+      espacio(ih+2); doc.addImage(im.src,'JPEG',M+(CW-iw)/2,y,iw,ih); draw('#E4E1DA'); doc.setLineWidth(.2); doc.rect(M+(CW-iw)/2,y,iw,ih); y+=ih;};
+    const parrafo=(txt,size=10,bold=false,color='#1F1F1F',x=M,w=CW,lh=4.7)=>{doc.setFont('Noto',bold?'bold':'normal'); doc.setFontSize(size); col(color);
+      const ls=doc.splitTextToSize(txt,w); espacio(ls.length*lh+1); doc.text(ls,x,y+3.6); y+=ls.length*lh;};
+    /* encabezado */
+    banda(); y=M+2;
     doc.setFont('Noto','bold'); doc.setFontSize(8); col('#BC955C'); doc.setCharSpace(.4); doc.text('SECTUR · UNIDADES DE PLAYA',M,y); doc.setCharSpace(0);
     y+=8; doc.setFontSize(19); col('#691C32'); doc.text(`${n}. ${f.nombre}`,M,y);
     y+=6; doc.setFont('Noto','normal'); doc.setFontSize(9.5); col('#6F7271'); doc.text(`${f.zona} · Acapulco de Juárez, Guerrero`,M,y);
     y+=5.5; doc.setFont('Noto','bold'); doc.setFontSize(9); col('#235B4E'); doc.text(`Unidad de Gestión de Playa: ${f.unidad}`,M,y);
-    /* calificación, lugar y nivel */
     y+=5; fill('#F6F3EE'); doc.roundedRect(M,y,CW,13,2,2,'F');
     doc.setFont('Noto','bold'); doc.setFontSize(16); col('#691C32'); doc.text(String(f.calificacion),M+5,y+9);
     const cw=doc.getTextWidth(String(f.calificacion));
@@ -836,20 +988,42 @@ async function descargarFicha(n){
     fill(NCOL[f.nivel.toLowerCase()]||'#6F7271'); doc.roundedRect(W-M-4-nw,y+3,nw,7,3.5,3.5,'F'); doc.setTextColor(255,255,255); doc.text(nt,W-M-4-nw/2,y+7.9,{align:'center'});
     y+=19;
     /* imagen de Identificación */
-    let iw=CW, ih=CW*img.h/img.w; const IMAX=112; if(ih>IMAX){ih=IMAX;iw=IMAX*img.w/img.h}
-    doc.addImage(img.src,'JPEG',M+(CW-iw)/2,y,iw,ih); draw('#E4E1DA'); doc.setLineWidth(.2); doc.rect(M+(CW-iw)/2,y,iw,ih);
-    y+=ih+4.5; doc.setFont('Noto','normal'); doc.setFontSize(8); col('#6F7271'); doc.text('Ubicación de servicios y accesos',M,y);
-    /* listado */
-    y+=9; doc.setFont('Noto','bold'); doc.setFontSize(11); col('#235B4E');
-    const tl=doc.splitTextToSize(f.items_titulo,CW); doc.text(tl,M,y); y+=tl.length*5+1.5;
-    draw('#9F2241'); doc.setLineWidth(.5); doc.line(M,y,W-M,y); y+=2;
-    doc.setFont('Noto','normal'); doc.setFontSize(10);
+    imagen(img,112);
+    y+=4.5; doc.setFont('Noto','normal'); doc.setFontSize(8); col('#6F7271'); doc.text('Ubicación de servicios y accesos',M,y); y+=9;
+    /* ítems */
+    titulo(f.items_titulo);
     f.items.forEach(it=>{
+      doc.setFont('Noto','bold'); doc.setFontSize(10);
       const ls=doc.splitTextToSize(it,CW-10), h=ls.length*4.6+4.4;
-      if(y+h>H-20){doc.addPage(); fill('#9F2241'); doc.rect(0,0,W,3,'F'); y=M; doc.setFont('Noto','normal'); doc.setFontSize(10);}
+      espacio(h); doc.setFont('Noto','bold'); doc.setFontSize(10);
       fill('#DDC9A3'); draw('#BC955C'); doc.setLineWidth(.4); doc.roundedRect(M+1,y+2.3,3.6,3.6,.8,.8,'FD');
       col('#1F1F1F'); doc.text(ls,M+8,y+5.4);
       y+=h; draw('#E4E1DA'); doc.setLineWidth(.2); doc.line(M,y,W-M,y);
+    });
+    y+=10;
+    /* condición de accesos (preliminar) */
+    espacio(16+10+60); titulo('Condición de accesos (preliminar)');
+    doc.setFont('Noto','bold'); doc.setFontSize(12); const cl=doc.splitTextToSize(f.acceso.clase,CW-12);
+    fill('#F6EEF0'); doc.rect(M,y,CW,cl.length*5.4+5,'F'); fill('#9F2241'); doc.rect(M,y,1.4,cl.length*5.4+5,'F');
+    col('#691C32'); doc.text(cl,M+5,y+6.2); y+=cl.length*5.4+9;
+    imagen(imgAcc,100); y+=4;
+    parrafo(f.acceso.desc,10,false,'#1F1F1F'); y+=10;
+    /* módulos */
+    const mods=(window.MODULOS||[]).filter(x=>x.num===n);
+    espacio(30); titulo('Módulos');
+    if(!mods.length){ parrafo('No hay módulos registrados para esta playa.',10,false,'#6F7271'); }
+    mods.forEach(md=>{
+      parrafo(`Módulo ${md.modulo}`,11,true,'#691C32'); y+=1.5;
+      md.propuestas.forEach(p=>{
+        espacio(26);
+        parrafo(`Propuesta ${p.propuesta}`,9.5,true,'#235B4E'); y+=1;
+        [['Coordenada',p.coordenada],['Referencia',p.referencia],['Condiciones del terreno',p.condiciones]].forEach(([k,v])=>{
+          doc.setFont('Noto','normal'); doc.setFontSize(9.5); const ls=doc.splitTextToSize(v,CW-48); espacio(ls.length*4.5+1.5);
+          doc.setFont('Noto','bold'); doc.setFontSize(9); col('#6F7271'); doc.text(k,M+3,y+3.5);
+          doc.setFont('Noto','normal'); doc.setFontSize(9.5); col('#1F1F1F'); doc.text(ls,M+46,y+3.5); y+=ls.length*4.5+1.5;});
+        y+=2.5;
+      });
+      y+=2;
     });
     /* pie de página */
     const tp=doc.getNumberOfPages(), enlace=location.origin.startsWith('http')?`${location.origin}${location.pathname}#playa-${n}`:'';
@@ -862,7 +1036,6 @@ async function descargarFicha(n){
     console.error(e); m.className='dmsg err'; m.textContent='No se pudo generar la ficha. Revisa tu conexión e inténtalo de nuevo.';
   }finally{b.removeAttribute('aria-busy');}
 }
-
 /* Enlace directo: …/#playa-49 */
 const h=location.hash.match(/playa-(\d+)/);
 if(h&&FICHAS[+h[1]]) setTimeout(()=>abrirFicha(+h[1]),300);
