@@ -322,17 +322,56 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
   .brand h1{font-size:16px} .brand p{display:none}
   .legend{display:none}
   .legend.on{display:block;bottom:14px}
-  #panel{top:auto;width:100%;height:82vh;border-radius:16px 16px 0 0;transform:translateY(105%)}
-  #panel.open{transform:none}
-  .hero{height:170px;border-radius:16px 16px 0 0}
+
   .kv{grid-template-columns:1fr}
-  .brand{right:62px}
   body.ficha .brand{display:none}
-  #panel{height:75vh}
 }
 .leg-btn{display:none}
 @media (max-width:760px){.leg-btn{display:block;position:fixed;left:14px;bottom:14px;z-index:999;background:var(--bg);border:0;border-radius:20px;
   padding:8px 14px;font:600 12px "Noto Sans",sans-serif;color:var(--verde);box-shadow:0 3px 12px rgba(0,0,0,.2)}}
+
+/* ===== Celular: hoja inferior, pestañas en cuadrícula y capas dentro de la simbología ===== */
+.grab,.lcerrar,.lbase{display:none}
+@media (max-width:760px){
+  .leaflet-control-layers{display:none!important}
+  .leaflet-top.leaflet-right{top:auto;bottom:calc(var(--vh,1vh)*52 + 10px)}
+  body:not(.ficha) .leaflet-top.leaflet-right{bottom:26px}
+  #panel{top:auto;bottom:0;width:100%;height:calc(var(--vh,1vh)*52);border-radius:18px 18px 0 0;transform:translateY(105%);
+    transition:transform .3s ease,height .28s ease;box-shadow:0 -6px 24px rgba(16,49,43,.25)}
+  #panel.open{transform:none}
+  #panel.full{height:calc(var(--vh,1vh)*92)}
+  .grab{display:flex;position:absolute;top:0;left:50%;transform:translateX(-50%);z-index:3;width:120px;height:26px;border:0;background:transparent;cursor:pointer;align-items:center;justify-content:center;touch-action:none}
+  .grab span{display:block;width:44px;height:5px;border-radius:3px;background:rgba(255,255,255,.95);box-shadow:0 1px 4px rgba(0,0,0,.4)}
+  #panel .close{top:10px;right:10px;width:32px;height:32px}
+  .hero{height:118px;border-radius:18px 18px 0 0;touch-action:none}
+  .hero .t{left:16px;right:16px;bottom:10px}
+  .hero .num{font-size:11.5px;padding:1px 7px;margin-bottom:3px}
+  .hero h2{font-size:19px;padding-right:96px}
+  .hero .z{font-size:11.5px}
+  .hero .ug{font-size:10.5px;margin-top:5px;padding:2px 6px}
+  .fotos-btn{right:12px;bottom:10px;padding:6px 10px!important;font-size:12px!important}
+  .score{padding:10px 16px;gap:10px;flex-wrap:wrap}
+  .score .val{font-size:24px}
+  .coment{padding:10px 16px 12px}
+  nav.tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:10px 12px;overflow:visible;align-items:stretch;position:static}
+  nav.tabs button{border:1px solid var(--line);border-radius:9px;padding:8px 6px;text-align:center;white-space:normal;font-size:12.5px;line-height:1.2;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  nav.tabs button.on{background:#F6EEF0;border-color:var(--guinda);color:var(--guinda-o)}
+  nav.tabs button.t2l small{display:inline}
+  section.sec{padding:14px 16px 6px}
+  .brand{left:10px;right:10px;top:10px;padding:10px 12px}
+  .ruta-btn{padding:7px 10px}
+  .leg-btn{left:10px;bottom:26px}
+  body.hojafull .leg-btn{display:none}
+  .leaflet-control-attribution{font-size:9px!important;max-width:60vw}
+  body.ficha .leg-btn{bottom:auto;top:10px}
+  .legend.on{display:block;left:10px;right:10px;bottom:auto;top:10px;max-width:none;max-height:calc(var(--vh,1vh)*80);z-index:1300;padding:12px 14px 12px}
+  .legend .lcerrar{display:flex;align-items:center;justify-content:center;position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;border:0;background:var(--bg2);font-size:20px;line-height:1;color:var(--verde-o);cursor:pointer}
+  .legend .lbase{display:block;margin-top:9px;padding-top:8px;border-top:1px solid var(--line)}
+  .legend .lbase .rb{display:flex;gap:14px;flex-wrap:wrap}
+  .legend .lchk{font-size:13px;margin:7px 0}
+  .legend .lchk input{width:18px;height:18px}
+  .legend .row{font-size:12px}
+}
 </style>
 </head>
 <body>
@@ -354,6 +393,7 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
 </div>
 
 <div class="legend" id="legend">
+  <button class="lcerrar" id="lcerrar" aria-label="Cerrar simbología">×</button>
   <h2>Simbología</h2>
   <div class="lgrid">
     <div>
@@ -377,11 +417,18 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
     <label class="lchk"><input type="checkbox" data-capa="accesos"><span class="pt"></span>Accesos preliminar</label>
     <label class="lchk"><input type="checkbox" data-capa="modulos"><span class="mi"><img src="img/icono_modulo.svg" alt=""></span>Módulos</label>
   </div>
+  <div class="lbase">
+    <h3>Mapa base</h3>
+    <div class="rb"><label class="lchk"><input type="radio" name="base" value="sat" checked>Satélite</label>
+    <label class="lchk"><input type="radio" name="base" value="calles">Calles</label></div>
+    <label class="lchk"><input type="checkbox" data-capa="lbl">Nombres de lugares</label>
+  </div>
 </div>
 </div>
-<button class="leg-btn" id="legBtn">Simbología</button>
+<button class="leg-btn" id="legBtn">Capas y simbología</button>
 
 <aside id="panel" aria-label="Ficha de playa">
+  <button class="grab" id="grab" aria-label="Expandir o reducir la ficha"><span></span></button>
   <button class="close" id="cerrar" aria-label="Cerrar ficha">×</button>
   <div class="p-scroll" id="pscroll"></div>
 </aside>
@@ -528,7 +575,7 @@ const modIcon=L.divIcon({className:'',html:'<div class="mod-ic"><img src="img/ic
     mk.addTo(modLayer); (modBy[m.num]=modBy[m.num]||[]).push(mk);
   });
 });
-const CAPAL={concesiones:concLayer,zofemat:zofLayer,accesos:accLayer,modulos:modLayer,delim:delimLayer,zonas:zonasLayer};
+const CAPAL={concesiones:concLayer,zofemat:zofLayer,accesos:accLayer,modulos:modLayer,delim:delimLayer,zonas:zonasLayer,lbl:lbl};
 const chks=[...document.querySelectorAll('.lchk input[data-capa]')];
 chks.forEach(c=>c.addEventListener('change',()=>{const ly=CAPAL[c.dataset.capa]; c.checked?ly.addTo(map):map.removeLayer(ly);
   if(c.dataset.capa==='libre'){zonifOn=c.checked;syncZonif();}}));
@@ -537,6 +584,12 @@ function syncChks(){chks.forEach(c=>c.checked=map.hasLayer(CAPAL[c.dataset.capa]
 zonifCtl.addTo(map);
 L.control.layers({'Satélite':sat,'Calles':calles},{'Nombres de lugares':lbl,'Zonas':zonasLayer,'Delimitación de playas':delimLayer,'Puntos de playa':playasLayer,'Concesiones':concLayer,'ZOFEMAT':zofLayer,'Accesos preliminar':accLayer,'Módulos':modLayer},{position:'topright',collapsed:true}).addTo(map);
 map.on('overlayadd overlayremove',syncChks);
+/* Mapa base desde la simbología (celular) */
+const BASES={sat:sat,calles:calles};
+document.querySelectorAll('input[name=base]').forEach(r=>r.addEventListener('change',()=>{
+  Object.entries(BASES).forEach(([k,l])=>{ if(k===r.value){ if(!map.hasLayer(l)) l.addTo(map); } else if(map.hasLayer(l)) map.removeLayer(l); });
+  BASES[r.value].bringToBack();}));
+map.on('baselayerchange',e=>document.querySelectorAll('input[name=base]').forEach(r=>r.checked=BASES[r.value]===e.layer));
 map.on('overlayadd',e=>{if(e.layer===zonifCtl){zonifOn=true;syncZonif();}});
 map.on('overlayremove',e=>{if(e.layer===zonifCtl){zonifOn=false;syncZonif();}});
 map.on('zoomend',syncZonif);
@@ -655,7 +708,6 @@ function abrirFicha(n,opts={}){
   <section class="sec" id="t5" hidden><h3>${esc(f.items_titulo)}</h3>
     <div class="descarga"><button class="dbtn" type="button" id="dbtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Descargar ficha (PDF)</button><span class="dmsg" id="dmsg" role="status" aria-live="polite"></span></div>
     <ul class="acc">${f.items.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
-    <button class="ruta-link" type="button" data-ruta><svg class="ri" viewBox="0 0 30 22" aria-hidden="true"><rect x="0" y="1" width="4" height="8" rx="1" fill="#9F2241"/><rect x="0" y="12" width="4" height="9" rx="1" fill="#235B4E"/><rect x="13" y="4" width="4" height="14" rx="1" fill="#BC955C"/><rect x="26" y="2" width="4" height="7" rx="1" fill="#54575A"/><rect x="26" y="12" width="4" height="8" rx="1" fill="#54575A"/><path d="M4 5C9 5 8 8 13 8M4 16C9 16 8 14 13 14M17 7C22 7 21 5 26 5M17 15C22 15 21 16 26 16" fill="none" stroke="#BC955C" stroke-width="2.2" opacity=".55"/></svg><span>Ruta de intervención: desatenciones, niveles del modelo y mobiliario</span><span aria-hidden="true">→</span></button>
     <figure><img src="${f.img.general}" alt="Fotografía general de ${esc(f.nombre)}"><figcaption>Fotografía general</figcaption></figure></section>
   <section class="sec" id="t6" hidden><h3>Condición de accesos (preliminar)</h3>
     <div class="acla">${esc(f.acceso.clase)}</div>
@@ -666,27 +718,37 @@ function abrirFicha(n,opts={}){
   ps.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{
     ps.querySelectorAll('nav.tabs button').forEach(x=>x.classList.toggle('on',x===b));
     ps.querySelectorAll('section.sec').forEach(s=>s.hidden=s.id!==b.dataset.t);
+    hoja(true);
     ps.querySelector('nav.tabs').scrollIntoView({block:'nearest'});
   });
   ps.querySelectorAll('img').forEach(i=>i.onclick=()=>{lb.querySelector('img').src=i.src;lb.classList.add('on')});
   const fb=document.getElementById('fotosBtn'); if(fb) fb.onclick=()=>abrirGaleria(n);
-  ps.querySelectorAll('[data-ruta]').forEach(b=>b.onclick=()=>abrirRuta());
   const db=document.getElementById('dbtn'); if(db) db.onclick=()=>descargarFicha(n);
   prepararComentario(n);
-  ps.scrollTop=0; panel.classList.add('open'); document.body.classList.add('ficha');
+  ps.scrollTop=0; panel.classList.add('open'); panel.classList.remove('full'); document.body.classList.remove('hojafull'); document.body.classList.add('ficha');
   const mobile = innerWidth<=760;
   const lay = delimBy[n];
   if(opts.volar===false){}
   else if(lay){ map.flyToBounds(lay.getBounds(),{duration:1,maxZoom:17,
-      paddingTopLeft:mobile?[30,30]:[30,30], paddingBottomRight:mobile?[30,innerHeight*0.75+20]:[panelW()+30,30]}); }
-  else { map.flyTo([p.lat,p.lon],15,{duration:1}); setTimeout(()=>map.panBy(mobile?[0,innerHeight*0.375]:[panelW()/2,0],{animate:true}),1050); }
+      paddingTopLeft:mobile?[30,30]:[30,30], paddingBottomRight:mobile?[30,innerHeight*0.52+20]:[panelW()+30,30]}); }
+  else { map.flyTo([p.lat,p.lon],15,{duration:1}); setTimeout(()=>map.panBy(mobile?[0,innerHeight*0.26]:[panelW()/2,0],{animate:true}),1050); }
   history.replaceState(null,'','#playa-'+n);
   sel.value=n;
 }
 function panelW(){return panel.getBoundingClientRect().width}
 function esEscritorio(){return innerWidth>760}
-function cerrarFicha(){if(esEscritorio()) return; fichaActual=null; panel.classList.remove('open');document.body.classList.remove('ficha');Object.values(markers).forEach(m=>m.getElement()&&m.getElement().firstChild.classList.remove('activa'));history.replaceState(null,'',location.pathname)}
+function cerrarFicha(){if(esEscritorio()) return; fichaActual=null; panel.classList.remove('open','full'); document.body.classList.remove('hojafull');document.body.classList.remove('ficha');Object.values(markers).forEach(m=>m.getElement()&&m.getElement().firstChild.classList.remove('activa'));history.replaceState(null,'',location.pathname)}
 document.getElementById('cerrar').onclick=cerrarFicha;
+/* Celular: altura real de pantalla y gestos de la hoja inferior */
+const fijarVH=()=>document.documentElement.style.setProperty('--vh',(innerHeight/100)+'px'); fijarVH(); addEventListener('resize',fijarVH);
+function hoja(full){ if(esEscritorio()) return; panel.classList.toggle('full',full); document.body.classList.toggle('hojafull',full); }
+document.getElementById('grab').onclick=()=>hoja(!panel.classList.contains('full'));
+(()=>{ let y0=null;
+  const ini=e=>{y0=e.touches[0].clientY}, fin=e=>{ if(y0==null) return; const dy=e.changedTouches[0].clientY-y0; y0=null;
+    if(dy<-35) hoja(true); else if(dy>35){ if(panel.classList.contains('full')) hoja(false); else cerrarFicha(); } };
+  panel.addEventListener('touchstart',e=>{ if(e.target.closest('.grab,.hero')) ini(e); },{passive:true});
+  panel.addEventListener('touchend',e=>{ if(y0!=null) fin(e); },{passive:true});
+})();
 /* Comentarios (Web3Forms) */
 const W3F_KEY='e8c0837a-76ba-4134-9031-949ba66554ee';
 /* Comentarios con foto: FormSubmit (adjunto por correo) */
@@ -723,7 +785,7 @@ function prepararComentario(n){
   let foto=null;
   const quitarFoto=()=>{foto=null; fin.value=''; prev.hidden=true; if(pimg.src.startsWith('blob:')) URL.revokeObjectURL(pimg.src); pimg.removeAttribute('src');};
   ta.addEventListener('input',()=>{cnt.textContent=ta.value.length+' / 2000'});
-  ta.addEventListener('focus',()=>{fm.classList.add('abierto'); ta.rows=4;});
+  ta.addEventListener('focus',()=>{fm.classList.add('abierto'); ta.rows=4; hoja(true);});
   fin.addEventListener('change',()=>{
     msg.className='cmsg'; msg.textContent='';
     const fl=fin.files[0]; if(!fl){quitarFoto();return;}
@@ -796,6 +858,7 @@ document.addEventListener('keydown',e=>{
 });
 const lb=document.getElementById('lb'); lb.onclick=()=>lb.classList.remove('on');
 document.getElementById('legBtn').onclick=()=>document.getElementById('legend').classList.toggle('on');
+document.getElementById('lcerrar').onclick=()=>document.getElementById('legend').classList.remove('on');
 
 
 /* Ruta de intervención: desatenciones → niveles del modelo → mobiliario */
