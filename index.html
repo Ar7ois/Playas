@@ -152,6 +152,8 @@ section.sec h3{margin:0 0 12px;font-size:13px;letter-spacing:.05em;text-transfor
 .kv div{padding:9px 11px;font-size:13px;line-height:1.4;background:var(--bg)}
 .kv div.full{grid-column:1/-1}
 .kv b{display:block;font-size:11px;font-weight:600;color:var(--tx2);margin-bottom:2px}
+h4.sub{margin:4px 0 7px;font-size:12.5px;font-weight:700;color:var(--guinda-o);display:flex;align-items:center;gap:8px}
+h4.sub::after{content:'';flex:1;height:1px;background:var(--line)}
 .kv.one{grid-template-columns:1fr}
 figure{margin:0 0 14px}
 figure img{width:100%;display:block;border-radius:10px;cursor:zoom-in;border:1px solid var(--line)}
@@ -331,7 +333,7 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
   padding:8px 14px;font:600 12px "Noto Sans",sans-serif;color:var(--verde);box-shadow:0 3px 12px rgba(0,0,0,.2)}}
 
 /* ===== Celular: hoja inferior, pestañas en cuadrícula y capas dentro de la simbología ===== */
-.grab,.lcerrar,.lbase{display:none}
+.grab,.lcerrar,.lbase,.legend .lcerrar,.legend .lbase{display:none}
 @media (max-width:760px){
   .leaflet-control-layers{display:none!important}
   .leaflet-top.leaflet-right{top:auto;bottom:calc(var(--vh,1vh)*52 + 10px)}
@@ -357,6 +359,7 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
   nav.tabs button{border:1px solid var(--line);border-radius:9px;padding:8px 6px;text-align:center;white-space:normal;font-size:12.5px;line-height:1.2;display:flex;flex-direction:column;align-items:center;justify-content:center}
   nav.tabs button.on{background:#F6EEF0;border-color:var(--guinda);color:var(--guinda-o)}
   nav.tabs button.t2l small{display:inline}
+  nav.tabs button.t2l{grid-column:1/-1}
   section.sec{padding:14px 16px 6px}
   .brand{left:10px;right:10px;top:10px;padding:10px 12px}
   .ruta-btn{padding:7px 10px}
@@ -414,7 +417,7 @@ ul.acc li::before{content:"";position:absolute;left:10px;top:12px;width:14px;hei
     <label class="lchk"><input type="checkbox" data-capa="concesiones"><span class="sw" style="background:rgba(0,163,224,.3);border:2px solid #00A3E0"></span>Concesiones</label>
     <label class="lchk"><input type="checkbox" data-capa="zofemat"><span class="ln"><i style="border-top:2.5px solid #1E6FD9"></i><i style="border-top:2.5px dashed #FF4FA3"></i></span>ZOFEMAT</label>
     <div class="lsub"><span><i style="border-top:2.5px solid #1E6FD9"></i>Pleamar máxima</span><span><i style="border-top:2.5px dashed #FF4FA3"></i>Zona federal</span></div>
-    <label class="lchk"><input type="checkbox" data-capa="accesos"><span class="pt"></span>Accesos preliminar</label>
+    <label class="lchk"><input type="checkbox" data-capa="accesos"><span class="ln"><i style="border-top:4px solid #E3001B;border-radius:2px"></i></span>Accesos ZOFEMAT-SEMARNAT</label>
     <label class="lchk"><input type="checkbox" data-capa="modulos"><span class="mi"><img src="img/icono_modulo.svg" alt=""></span>Módulos</label>
   </div>
   <div class="lbase">
@@ -538,7 +541,7 @@ function popupHTML(p,con){
   ${con?`<button class="btn" onclick="abrirFicha(${p.num})">Ver ficha completa</button>`:(p.unidad?'<span class="tag">Ficha completa en preparación</span>':'<span class="tag">Sin evaluación</span>')}</div>`;
 }
 
-/* Capas activables: Concesiones, ZOFEMAT y Accesos preliminar */
+/* Capas activables: Concesiones, ZOFEMAT y Accesos ZOFEMAT-SEMARNAT */
 const CAPAS=window.CAPAS;
 const escC=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 map.createPane('capas'); map.getPane('capas').style.zIndex=440;
@@ -557,12 +560,12 @@ const zofLayer=L.geoJSON(CAPAS.zofemat,{pane:'capas',
   onEachFeature:(f,l)=>{const p=f.properties;
     l.bindTooltip(`ZOFEMAT · ${escC(ZFLAB[p.capa]||p.capa)}`,{sticky:true});
     l.bindPopup(`<div class="capa-pop"><h4>ZOFEMAT · ${escC(ZFLAB[p.capa]||p.capa)}</h4>${dl([['Plano',p.plano],['Proyecto',p.proyecto],['Escala',p.escala],['Fecha',p.fecha]])}</div>`,{maxWidth:300});}});
-const accLayer=L.geoJSON(CAPAS.accesos,{
-  pointToLayer:(f,ll)=>L.circleMarker(ll,{pane:'accesos',radius:6,color:'#fff',weight:2,fillColor:'#00C26E',fillOpacity:1}),
+const accLayer=L.geoJSON(CAPAS.accesos,{pane:'accesos',
+  style:()=>({color:'#E3001B',weight:4,opacity:.95,lineCap:'round'}),
   onEachFeature:(f,l)=>{const p=f.properties;
-    l.bindTooltip(escC(p.nombre),{direction:'top',offset:[0,-6]});
-    l.bindPopup(()=>`<div class="capa-pop"><h4>Acceso preliminar</h4>${dl([['Nombre',p.nombre],['Playa',`${p.num}. ${PL[p.num]?PL[p.num].nombre:''}`]])}</div>`,{maxWidth:300});}});
-const accBy={}; accLayer.eachLayer(l=>(accBy[l.feature.properties.num]=accBy[l.feature.properties.num]||[]).push(l));
+    l.bindTooltip(`Acceso ZOFEMAT-SEMARNAT · ${escC(p.playa)}`,{sticky:true});
+    l.bindPopup(`<div class="capa-pop"><h4>Acceso ZOFEMAT-SEMARNAT</h4>${dl([['ID',p.id],['Playa',p.playa],['Longitud',p.longitud],['Expediente',p.expediente],['Destino',p.destino],['Exp.',p.exp2],['Concesión',p.concesion]])}</div>`,{maxWidth:320});
+    l.on('mouseover',()=>l.setStyle({weight:7})); l.on('mouseout',()=>l.setStyle({weight:4}));}});
 /* Módulos (propuestas de ubicación) */
 const modLayer=L.layerGroup(); const modBy={};
 const modIcon=L.divIcon({className:'',html:'<div class="mod-ic"><img src="img/icono_modulo.svg" alt=""></div>',iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-12]});
@@ -582,7 +585,7 @@ chks.forEach(c=>c.addEventListener('change',()=>{const ly=CAPAL[c.dataset.capa];
 function syncChks(){chks.forEach(c=>c.checked=map.hasLayer(CAPAL[c.dataset.capa]));}
 
 zonifCtl.addTo(map);
-L.control.layers({'Satélite':sat,'Calles':calles},{'Nombres de lugares':lbl,'Zonas':zonasLayer,'Delimitación de playas':delimLayer,'Puntos de playa':playasLayer,'Concesiones':concLayer,'ZOFEMAT':zofLayer,'Accesos preliminar':accLayer,'Módulos':modLayer},{position:'topright',collapsed:true}).addTo(map);
+L.control.layers({'Satélite':sat,'Calles':calles},{'Nombres de lugares':lbl,'Zonas':zonasLayer,'Delimitación de playas':delimLayer,'Puntos de playa':playasLayer,'Concesiones':concLayer,'ZOFEMAT':zofLayer,'Accesos ZOFEMAT-SEMARNAT':accLayer,'Módulos':modLayer},{position:'topright',collapsed:true}).addTo(map);
 map.on('overlayadd overlayremove',syncChks);
 /* Mapa base desde la simbología (celular) */
 const BASES={sat:sat,calles:calles};
@@ -632,7 +635,6 @@ function aplicarFiltros(){
     v?playasLayer.addLayer(markers[n]):playasLayer.removeLayer(markers[n]);
     if(delimBy[n]) v?delimLayer.addLayer(delimBy[n]):delimLayer.removeLayer(delimBy[n]);
     (zonifBy[n]||[]).forEach(l=>v?zonifLayer.addLayer(l):zonifLayer.removeLayer(l));
-    (accBy[n]||[]).forEach(l=>v?accLayer.addLayer(l):accLayer.removeLayer(l));
     (modBy[n]||[]).forEach(l=>v?modLayer.addLayer(l):modLayer.removeLayer(l));
   });
   zonaLays.forEach(l=>{const v=!fz||zNum(l.feature.properties.nombre)===fz; v?zonasLayer.addLayer(l):zonasLayer.removeLayer(l);});
@@ -666,7 +668,9 @@ sel.addEventListener('change',e=>{
 const panel=document.getElementById('panel'), ps=document.getElementById('pscroll');
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function kv(rows,one){
-  return `<div class="kv${one?' one':''}">`+rows.map(([k,v])=>`<div class="${(!one&&String(v).length>60)?'full':''}"><b>${esc(k)}</b>${esc(v)}</div>`).join('')+`</div>`;
+  const full=rows.map(([k,v])=>!one&&String(v).length>60), med=full.map((x,i)=>x?-1:i).filter(i=>i>=0);
+  if(!one&&med.length%2) full[med[med.length-1]]=true;   /* sin celdas vacías */
+  return `<div class="kv${one?' one':''}">`+rows.map(([k,v],i)=>`<div class="${full[i]?'full':''}"><b>${esc(k)}</b>${esc(v)}</div>`).join('')+`</div>`;
 }
 let fichaActual=null;
 function abrirFicha(n,opts={}){
@@ -701,19 +705,18 @@ function abrirFicha(n,opts={}){
     </form></div>
   <nav class="tabs" role="tablist">
     <button class="on" data-t="t1">Identificación</button><button data-t="t5">Requerimientos</button>
-    <button data-t="t6" class="t2l">Condición de accesos<small>(preliminar)</small></button><button data-t="t2">Territorio</button></nav>
+    <button data-t="t6" class="t2l">Condición de accesos<small>(preliminar)</small></button></nav>
   <section class="sec" id="t1"><h3>Datos de identificación</h3>
     <figure><img src="${f.img.plano}" alt="Ubicación de servicios y accesos de ${esc(f.nombre)}"><figcaption>Ubicación de servicios y accesos</figcaption></figure>
-    ${kv(f.identificacion)}</section>
+    ${f.ident_grupos.map(([g,rows])=>`<h4 class="sub">${esc(g)}</h4>${kv(rows)}`).join('')}</section>
   <section class="sec" id="t5" hidden><h3>${esc(f.items_titulo)}</h3>
     <div class="descarga"><button class="dbtn" type="button" id="dbtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11m0 0-4.5-4.5M12 15l4.5-4.5M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Descargar ficha (PDF)</button><span class="dmsg" id="dmsg" role="status" aria-live="polite"></span></div>
     <ul class="acc">${f.items.map(a=>`<li>${esc(a)}</li>`).join('')}</ul>
     <figure><img src="${f.img.general}" alt="Fotografía general de ${esc(f.nombre)}"><figcaption>Fotografía general</figcaption></figure></section>
   <section class="sec" id="t6" hidden><h3>Condición de accesos (preliminar)</h3>
     <div class="acla">${esc(f.acceso.clase)}</div>
-    <figure class="acfig"><img src="${f.acceso.img}" alt="Acceso de ${esc(f.nombre)}" loading="lazy"></figure>
-    <p class="acdesc">${esc(f.acceso.desc)}</p></section>
-  <section class="sec" id="t2" hidden><h3>Datos territoriales y de uso</h3>${kv(f.territorio)}</section>
+    <p class="acdesc">${esc(f.acceso.desc)}</p>
+    <figure class="acfig"><img src="${f.acceso.img}" alt="Acceso de ${esc(f.nombre)}" loading="lazy"></figure></section>
   <div class="fuente">${esc(f.fuente)} · Unidad de Gestión de Playa ${esc(f.unidad)}</div>`;
   ps.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>{
     ps.querySelectorAll('nav.tabs button').forEach(x=>x.classList.toggle('on',x===b));
@@ -1064,13 +1067,27 @@ async function descargarFicha(n){
       y+=h; draw('#E4E1DA'); doc.setLineWidth(.2); doc.line(M,y,W-M,y);
     });
     y+=10;
+    /* identificación */
+    titulo('Datos de identificación');
+    f.ident_grupos.forEach(([g,rows])=>{
+      espacio(18); doc.setFont('Noto','bold'); doc.setFontSize(10); col('#691C32'); doc.text(g,M,y+3.6); y+=7;
+      rows.forEach(([k,v])=>{
+        doc.setFont('Noto','normal'); doc.setFontSize(9.5); const ls=doc.splitTextToSize(String(v),CW-58), h=ls.length*4.5+3;
+        espacio(h); doc.setFont('Noto','bold'); doc.setFontSize(8.5); col('#6F7271');
+        const lk=doc.splitTextToSize(k,52); doc.text(lk,M+2,y+3.6);
+        doc.setFont('Noto','normal'); doc.setFontSize(9.5); col('#1F1F1F'); doc.text(ls,M+56,y+3.6);
+        y+=Math.max(h,lk.length*4+3); draw('#E4E1DA'); doc.setLineWidth(.2); doc.line(M,y-1,W-M,y-1);
+      });
+      y+=4;
+    });
+    y+=6;
     /* condición de accesos (preliminar) */
     espacio(16+10+60); titulo('Condición de accesos (preliminar)');
     doc.setFont('Noto','bold'); doc.setFontSize(12); const cl=doc.splitTextToSize(f.acceso.clase,CW-12);
     fill('#F6EEF0'); doc.rect(M,y,CW,cl.length*5.4+5,'F'); fill('#9F2241'); doc.rect(M,y,1.4,cl.length*5.4+5,'F');
     col('#691C32'); doc.text(cl,M+5,y+6.2); y+=cl.length*5.4+9;
-    imagen(imgAcc,100); y+=4;
-    parrafo(f.acceso.desc,10,false,'#1F1F1F'); y+=10;
+    parrafo(f.acceso.desc,10,false,'#1F1F1F'); y+=4;
+    imagen(imgAcc,100); y+=10;
     /* módulos */
     const mods=(window.MODULOS||[]).filter(x=>x.num===n);
     espacio(30); titulo('Módulos');
