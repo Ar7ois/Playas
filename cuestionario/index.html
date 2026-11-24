@@ -267,6 +267,12 @@ const LSK='cup_v2';
 let S={regs:{},ents:{},active:null,draft:{},cfg:{url:SCRIPT_URL_DEFAULT,token:''},lastEnt:''};
 let V={scr:'home'};let showErr=false;
 try{const x=JSON.parse(localStorage.getItem(LSK));if(x)S=Object.assign(S,x)}catch(e){}
+if(!S.cfg)S.cfg={url:'',token:''};
+const URL_OK=u=>/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(String(u||''));
+let conectado=false;
+{const m=location.hash.match(/^#conectar=([^&]+)$/);if(m){try{const c=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));if(URL_OK(c.u)){S.cfg.url=c.u;S.cfg.token=String(c.k||'');conectado=true}}catch(e){}
+  try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}}
+const enlaceConexion=()=>location.origin+location.pathname+'#conectar='+encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify({u:S.cfg.url,k:S.cfg.token})))));
 let saveT;const save=()=>{clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(LSK,JSON.stringify(S))}catch(e){toast('No se pudo guardar en el navegador')}},250)};
 const REG=()=>S.active?S.regs[S.active]:null;
 const A=()=>S.active?S.regs[S.active].a:S.draft;
@@ -515,10 +521,12 @@ function fotosScr(){
   <p class="note" id="syncmsg" style="margin-top:8px"></p></div>
   <div class="card"><h2>Fotos adicionales (carpeta «Otras»)</h2>${r?`<p class="note">${esc(a.A01)} › Otras</p><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="0"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="0"></label></div>
    ${fotoRows(otras,false)}`:'<p class="note">Abre un registro en el Apartado 1 para agregar fotos.</p>'}</div>
-  <div class="card"><h2>Conexión con Drive</h2><p class="note">Dirección del servicio de Google Apps Script que recibe las fotos (ver README del repositorio) y clave compartida.</p>
+  <div class="card"><h2>Conexión con Drive</h2><p class="note">${S.cfg.url?'Conectado con el servicio de Drive.':'Sin conexión configurada. Ábrelo con el enlace de conexión o escribe la dirección y la clave.'}</p>
    <div class="fld"><div class="fhead"><span class="lab">URL del servicio</span></div><input type="text" id="cfgUrl" value="${esc(S.cfg.url)}" placeholder="https://script.google.com/macros/s/…/exec"></div>
    <div class="fld"><div class="fhead"><span class="lab">Clave</span></div><input type="text" id="cfgTok" value="${esc(S.cfg.token)}"></div>
-   <div class="btns" style="justify-content:flex-start"><button class="btn ghost" type="button" data-act="cfg">Guardar y probar conexión</button></div></div>`;
+   <div class="btns" style="justify-content:flex-start"><button class="btn ghost" type="button" data-act="cfg">Guardar y probar conexión</button><button class="btn" type="button" data-act="sharelink">Copiar enlace para compartir</button></div>
+   <p class="note" style="margin-top:8px">El enlace para compartir deja conectado a Drive el teléfono de quien lo abre. Compártelo solo con las personas que levantarán información.</p>
+   <div id="linkBox" class="hide"><textarea readonly style="min-height:90px;font-size:13px;margin-top:8px"></textarea></div></div>`;
 }
 function regsScr(){
   const ks=Object.keys(S.regs).sort();
@@ -641,8 +649,10 @@ document.addEventListener('click',async ev=>{
   if(k==='gps'){V={scr:'gps'};render()}
   if(k==='fotos'){V={scr:'fotos'};render()}
   if(k==='regs'){V={scr:'regs'};render()}
-  if(k==='cfg'){S.cfg.url=$('#cfgUrl').value.trim();S.cfg.token=$('#cfgTok').value.trim();save();const r=await post({accion:'ping'});toast(r&&r.ok?(r.opaco?'Solicitud enviada; el servicio no devolvió confirmación':'Conexión correcta con Drive'):'No hay conexión con el servicio')}
+  if(k==='cfg'){S.cfg.url=$('#cfgUrl').value.trim();S.cfg.token=$('#cfgTok').value.trim();if(!URL_OK(S.cfg.url)){toast('La URL debe empezar con https://script.google.com/macros/s/ y terminar en /exec');return}save();const r=await post({accion:'ping'});toast(r&&r.ok?(r.opaco?'Solicitud enviada; el servicio no devolvió confirmación':'Conexión correcta con Drive'):'No hay conexión con el servicio')}
   if(k==='sync')syncFotos();
+  if(k==='sharelink'){if(!URL_OK(S.cfg.url)){toast('Primero guarda la URL y la clave del servicio');return}const l=enlaceConexion();const box=$('#linkBox');if(box){box.classList.remove('hide');box.querySelector('textarea').value=l}
+    try{await navigator.clipboard.writeText(l);toast('Enlace copiado: compártelo por WhatsApp')}catch(e){toast('Copia el enlace del recuadro')}}
   if(k==='gpsstart')gpsStart();
   if(k==='gpsstop')gpsStop();
   if(k==='kml'){if(!ptsDe(S.active)&&!FOT.some(f=>f.reg===S.active&&f.lat!=null)){toast('Aún no hay recorrido ni fotos con coordenada');return}saveFile(kmlName(S.active),kml([S.active]))}
@@ -792,7 +802,7 @@ $('#logo').innerHTML=ICON.logo;
 const net=()=>{const on=navigator.onLine;$('#net').textContent=on?'En línea':'Sin conexión';$('#net').style.background=on?'rgba(255,255,255,.18)':'rgba(0,0,0,.25)'};
 const autoSync=()=>{if(S.cfg.url&&navigator.onLine&&FOT.some(f=>f.estado!=='subida'))syncFotos(true)};
 window.addEventListener('online',()=>{net();autoSync()});window.addEventListener('offline',net);net();
-(async()=>{IDB=await idbOpen();if(IDB)FOT=await idbAll();render(false);autoSync()})();
+(async()=>{IDB=await idbOpen();if(IDB)FOT=await idbAll();render(false);if(conectado){save();toast('Cuestionario conectado con Drive')}autoSync()})();
 if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{})}
 render(false);
 }

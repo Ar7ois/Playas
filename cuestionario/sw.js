@@ -1,5 +1,5 @@
 // Service worker: guarda la aplicación y sus bibliotecas para usarla sin internet.
-const CACHE='cedula-playas-v8';
+const CACHE='cedula-playas-v9';
 const BASE=['./','./index.html','./manifest.webmanifest','./icon.svg'];
 const IMG=["./img/item-001.jpg", "./img/item-002.jpg", "./img/item-003.jpg", "./img/item-006.jpg", "./img/item-010.jpg", "./img/item-012.jpg", "./img/item-013.jpg", "./img/item-016.jpg", "./img/item-018.jpg", "./img/item-020.jpg", "./img/item-024.jpg", "./img/item-025.jpg", "./img/item-026.jpg", "./img/item-029.jpg", "./img/item-031.jpg", "./img/item-035.jpg", "./img/item-038.jpg", "./img/item-050.jpg", "./img/item-065.jpg", "./img/item-067.jpg", "./img/item-068.jpg", "./img/item-071.jpg", "./img/item-072.jpg", "./img/item-073.jpg", "./img/item-076.jpg", "./img/item-079.jpg", "./img/item-093.jpg", "./img/item-094.jpg"];
 const CDN=['https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js','https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js'];
