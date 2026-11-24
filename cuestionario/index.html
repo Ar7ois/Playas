@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0B5D8A">
+<title>Cuestionario de Caracterización de Playas</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap">
+<style>.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane > svg,.leaflet-pane > canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer {position: absolute;left: 0;top: 0;}.leaflet-container {overflow: hidden;}.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow {-webkit-user-select: none;-moz-user-select: none;user-select: none;-webkit-user-drag: none;}.leaflet-tile::selection {background: transparent;}.leaflet-safari .leaflet-tile {image-rendering: -webkit-optimize-contrast;}.leaflet-safari .leaflet-tile-container {width: 1600px;height: 1600px;-webkit-transform-origin: 0 0;}.leaflet-marker-icon,.leaflet-marker-shadow {display: block;}.leaflet-container .leaflet-overlay-pane svg {max-width: none !important;max-height: none !important;}.leaflet-container .leaflet-marker-pane img,.leaflet-container .leaflet-shadow-pane img,.leaflet-container .leaflet-tile-pane img,.leaflet-container img.leaflet-image-layer,.leaflet-container .leaflet-tile {max-width: none !important;max-height: none !important;width: auto;padding: 0;}.leaflet-container img.leaflet-tile {mix-blend-mode: plus-lighter;}.leaflet-container.leaflet-touch-zoom {-ms-touch-action: pan-x pan-y;touch-action: pan-x pan-y;}.leaflet-container.leaflet-touch-drag {-ms-touch-action: pinch-zoom;touch-action: none;touch-action: pinch-zoom;}.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {-ms-touch-action: none;touch-action: none;}.leaflet-container {-webkit-tap-highlight-color: transparent;}.leaflet-container a {-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);}.leaflet-tile {filter: inherit;visibility: hidden;}.leaflet-tile-loaded {visibility: inherit;}.leaflet-zoom-box {width: 0;height: 0;-moz-box-sizing: border-box;box-sizing: border-box;z-index: 800;}.leaflet-overlay-pane svg {-moz-user-select: none;}.leaflet-pane         { z-index: 400; }.leaflet-tile-pane    { z-index: 200; }.leaflet-overlay-pane { z-index: 400; }.leaflet-shadow-pane  { z-index: 500; }.leaflet-marker-pane  { z-index: 600; }.leaflet-tooltip-pane   { z-index: 650; }.leaflet-popup-pane   { z-index: 700; }.leaflet-map-pane canvas { z-index: 100; }.leaflet-map-pane svg    { z-index: 200; }.leaflet-vml-shape {width: 1px;height: 1px;}.lvml {behavior: url(#default#VML);display: inline-block;position: absolute;}.leaflet-control {position: relative;z-index: 800;pointer-events: visiblePainted;pointer-events: auto;}.leaflet-top,.leaflet-bottom {position: absolute;z-index: 1000;pointer-events: none;}.leaflet-top {top: 0;}.leaflet-right {right: 0;}.leaflet-bottom {bottom: 0;}.leaflet-left {left: 0;}.leaflet-control {float: left;clear: both;}.leaflet-right .leaflet-control {float: right;}.leaflet-top .leaflet-control {margin-top: 10px;}.leaflet-bottom .leaflet-control {margin-bottom: 10px;}.leaflet-left .leaflet-control {margin-left: 10px;}.leaflet-right .leaflet-control {margin-right: 10px;}.leaflet-fade-anim .leaflet-popup {opacity: 0;-webkit-transition: opacity 0.2s linear;-moz-transition: opacity 0.2s linear;transition: opacity 0.2s linear;}.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {opacity: 1;}.leaflet-zoom-animated {-webkit-transform-origin: 0 0;-ms-transform-origin: 0 0;transform-origin: 0 0;}svg.leaflet-zoom-animated {will-change: transform;}.leaflet-zoom-anim .leaflet-zoom-animated {-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);-moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);transition:         transform 0.25s cubic-bezier(0,0,0.25,1);}.leaflet-zoom-anim .leaflet-tile,.leaflet-pan-anim .leaflet-tile {-webkit-transition: none;-moz-transition: none;transition: none;}.leaflet-zoom-anim .leaflet-zoom-hide {visibility: hidden;}.leaflet-interactive {cursor: pointer;}.leaflet-grab {cursor: -webkit-grab;cursor:    -moz-grab;cursor:         grab;}.leaflet-crosshair,.leaflet-crosshair .leaflet-interactive {cursor: crosshair;}.leaflet-popup-pane,.leaflet-control {cursor: auto;}.leaflet-dragging .leaflet-grab,.leaflet-dragging .leaflet-grab .leaflet-interactive,.leaflet-dragging .leaflet-marker-draggable {cursor: move;cursor: -webkit-grabbing;cursor:    -moz-grabbing;cursor:         grabbing;}.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-image-layer,.leaflet-pane > svg path,.leaflet-tile-container {pointer-events: none;}.leaflet-marker-icon.leaflet-interactive,.leaflet-image-layer.leaflet-interactive,.leaflet-pane > svg path.leaflet-interactive,svg.leaflet-image-layer.leaflet-interactive path {pointer-events: visiblePainted;pointer-events: auto;}.leaflet-container {background: #ddd;outline-offset: 1px;}.leaflet-container a {color: #0078A8;}.leaflet-zoom-box {border: 2px dotted #38f;background: rgba(255,255,255,0.5);}.leaflet-container {font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;font-size: 12px;font-size: 0.75rem;line-height: 1.5;}.leaflet-bar {box-shadow: 0 1px 5px rgba(0,0,0,0.65);border-radius: 4px;}.leaflet-bar a {background-color: #fff;border-bottom: 1px solid #ccc;width: 26px;height: 26px;line-height: 26px;display: block;text-align: center;text-decoration: none;color: black;}.leaflet-bar a,.leaflet-control-layers-toggle {background-position: 50% 50%;background-repeat: no-repeat;display: block;}.leaflet-bar a:hover,.leaflet-bar a:focus {background-color: #f4f4f4;}.leaflet-bar a:first-child {border-top-left-radius: 4px;border-top-right-radius: 4px;}.leaflet-bar a:last-child {border-bottom-left-radius: 4px;border-bottom-right-radius: 4px;border-bottom: none;}.leaflet-bar a.leaflet-disabled {cursor: default;background-color: #f4f4f4;color: #bbb;}.leaflet-touch .leaflet-bar a {width: 30px;height: 30px;line-height: 30px;}.leaflet-touch .leaflet-bar a:first-child {border-top-left-radius: 2px;border-top-right-radius: 2px;}.leaflet-touch .leaflet-bar a:last-child {border-bottom-left-radius: 2px;border-bottom-right-radius: 2px;}.leaflet-control-zoom-in,.leaflet-control-zoom-out {font: bold 18px 'Lucida Console', Monaco, monospace;text-indent: 1px;}.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {font-size: 22px;}.leaflet-control-layers {box-shadow: 0 1px 5px rgba(0,0,0,0.4);background: #fff;border-radius: 5px;}.leaflet-control-layers-toggle {background-image: url(images/layers.png);width: 36px;height: 36px;}.leaflet-retina .leaflet-control-layers-toggle {background-image: url(images/layers-2x.png);background-size: 26px 26px;}.leaflet-touch .leaflet-control-layers-toggle {width: 44px;height: 44px;}.leaflet-control-layers .leaflet-control-layers-list,.leaflet-control-layers-expanded .leaflet-control-layers-toggle {display: none;}.leaflet-control-layers-expanded .leaflet-control-layers-list {display: block;position: relative;}.leaflet-control-layers-expanded {padding: 6px 10px 6px 6px;color: #333;background: #fff;}.leaflet-control-layers-scrollbar {overflow-y: scroll;overflow-x: hidden;padding-right: 5px;}.leaflet-control-layers-selector {margin-top: 2px;position: relative;top: 1px;}.leaflet-control-layers label {display: block;font-size: 13px;font-size: 1.08333em;}.leaflet-control-layers-separator {height: 0;border-top: 1px solid #ddd;margin: 5px -10px 5px -6px;}.leaflet-default-icon-path {background-image: url(images/marker-icon.png);}.leaflet-container .leaflet-control-attribution {background: #fff;background: rgba(255, 255, 255, 0.8);margin: 0;}.leaflet-control-attribution,.leaflet-control-scale-line {padding: 0 5px;color: #333;line-height: 1.4;}.leaflet-control-attribution a {text-decoration: none;}.leaflet-control-attribution a:hover,.leaflet-control-attribution a:focus {text-decoration: underline;}.leaflet-attribution-flag {display: inline !important;vertical-align: baseline !important;width: 1em;height: 0.6669em;}.leaflet-left .leaflet-control-scale {margin-left: 5px;}.leaflet-bottom .leaflet-control-scale {margin-bottom: 5px;}.leaflet-control-scale-line {border: 2px solid #777;border-top: none;line-height: 1.1;padding: 2px 5px 1px;white-space: nowrap;-moz-box-sizing: border-box;box-sizing: border-box;background: rgba(255, 255, 255, 0.8);text-shadow: 1px 1px #fff;}.leaflet-control-scale-line:not(:first-child) {border-top: 2px solid #777;border-bottom: none;margin-top: -2px;}.leaflet-control-scale-line:not(:first-child):not(:last-child) {border-bottom: 2px solid #777;}.leaflet-touch .leaflet-control-attribution,.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar {box-shadow: none;}.leaflet-touch .leaflet-control-layers,.leaflet-touch .leaflet-bar {border: 2px solid rgba(0,0,0,0.2);background-clip: padding-box;}.leaflet-popup {position: absolute;text-align: center;margin-bottom: 20px;}.leaflet-popup-content-wrapper {padding: 1px;text-align: left;border-radius: 12px;}.leaflet-popup-content {margin: 13px 24px 13px 20px;line-height: 1.3;font-size: 13px;font-size: 1.08333em;min-height: 1px;}.leaflet-popup-content p {margin: 17px 0;margin: 1.3em 0;}.leaflet-popup-tip-container {width: 40px;height: 20px;position: absolute;left: 50%;margin-top: -1px;margin-left: -20px;overflow: hidden;pointer-events: none;}.leaflet-popup-tip {width: 17px;height: 17px;padding: 1px;margin: -10px auto 0;pointer-events: auto;-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);-ms-transform: rotate(45deg);transform: rotate(45deg);}.leaflet-popup-content-wrapper,.leaflet-popup-tip {background: white;color: #333;box-shadow: 0 3px 14px rgba(0,0,0,0.4);}.leaflet-container a.leaflet-popup-close-button {position: absolute;top: 0;right: 0;border: none;text-align: center;width: 24px;height: 24px;font: 16px/24px Tahoma, Verdana, sans-serif;color: #757575;text-decoration: none;background: transparent;}.leaflet-container a.leaflet-popup-close-button:hover,.leaflet-container a.leaflet-popup-close-button:focus {color: #585858;}.leaflet-popup-scrolled {overflow: auto;}.leaflet-oldie .leaflet-popup-content-wrapper {-ms-zoom: 1;}.leaflet-oldie .leaflet-popup-tip {width: 24px;margin: 0 auto;-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);}.leaflet-oldie .leaflet-control-zoom,.leaflet-oldie .leaflet-control-layers,.leaflet-oldie .leaflet-popup-content-wrapper,.leaflet-oldie .leaflet-popup-tip {border: 1px solid #999;}.leaflet-div-icon {background: #fff;border: 1px solid #666;}.leaflet-tooltip {position: absolute;padding: 6px;background-color: #fff;border: 1px solid #fff;border-radius: 3px;color: #222;white-space: nowrap;-webkit-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;pointer-events: none;box-shadow: 0 1px 3px rgba(0,0,0,0.4);}.leaflet-tooltip.leaflet-interactive {cursor: pointer;pointer-events: auto;}.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before {position: absolute;pointer-events: none;border: 6px solid transparent;background: transparent;content: "";}.leaflet-tooltip-bottom {margin-top: 6px;}.leaflet-tooltip-top {margin-top: -6px;}.leaflet-tooltip-bottom:before,.leaflet-tooltip-top:before {left: 50%;margin-left: -6px;}.leaflet-tooltip-top:before {bottom: 0;margin-bottom: -12px;border-top-color: #fff;}.leaflet-tooltip-bottom:before {top: 0;margin-top: -12px;margin-left: -6px;border-bottom-color: #fff;}.leaflet-tooltip-left {margin-left: -6px;}.leaflet-tooltip-right {margin-left: 6px;}.leaflet-tooltip-left:before,.leaflet-tooltip-right:before {top: 50%;margin-top: -6px;}.leaflet-tooltip-left:before {right: 0;margin-right: -12px;border-left-color: #fff;}.leaflet-tooltip-right:before {left: 0;margin-left: -12px;border-right-color: #fff;}@media print {.leaflet-control {-webkit-print-color-adjust: exact;print-color-adjust: exact;}}</style>
+<style>
+/* VOICE work: formulario de campo claro y amable, con la identidad visual marina
+   IDEA un cuadernillo de playa: tarjetas blancas sobre fondo de arena, cielo y olas
+   PICTURE el propio formulario; iconos de línea marinos identifican cada apartado
+   COLOUR azul marino dominante, turquesa de apoyo, amarillo sol como acento, arena y cielo
+   TYPE Nunito redondeada con respaldo del sistema (funciona sin internet)
+   LAYOUT una columna de lectura; en escritorio el menú usa dos columnas de tarjetas */
+:root{color-scheme:light dark;
+--bg:light-dark(#f7fafc,#0a1a26);--card:light-dark(#fff,#10283a);--ink:light-dark(#0f2a3d,#e8f3fa);--mut:light-dark(#566c7c,#a8bfce);
+--line:light-dark(#d4e5ee,#244257);--g:light-dark(#0b5d8a,#7cc9f7);--gd:light-dark(#08476a,#b5e2fb);--v:light-dark(#0c7f7a,#18b7b0);--on:light-dark(#fff,#06202f);
+--d:light-dark(#ffbe45,#ffbe45);--dl:light-dark(#fbf1e1,#183446);--soft:light-dark(#e6f4fb,#173a50);--sea:#0b5d8a;--teal:#18b7b0;--sun:#ffbe45;--bad:light-dark(#b42318,#ff8a7a);--badbg:light-dark(#fff1ef,#3a1f1b)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Nunito,"Noto Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;overflow-x:clip;position:relative}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1440 900%22 preserveAspectRatio=%22none%22 fill=%22none%22%3E%3Cdefs%3E%3ClinearGradient id=%22f%22 x2=%221%22 y2=%221%22%3E%3Cstop stop-color=%22%23F6E2C2%22/%3E%3Cstop offset=%22.42%22 stop-color=%22%23F7FAFC%22/%3E%3Cstop offset=%221%22 stop-color=%22%237CC9F7%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width=%221440%22 height=%22900%22 fill=%22url(%23f)%22/%3E%3Cpath fill=%22%237CC9F7%22 opacity=%22.35%22 d=%22M0 0 H1440 V198.0 Q1080.0 306.0 720.0 117.0 T0 72.0Z%22/%3E%3Cpath fill=%22%2318B7B0%22 opacity=%22.22%22 d=%22M0 774.0 Q432.0 648.0 792.0000000000001 774.0 T1440 720.0 V900 H0Z%22/%3E%3Cpath fill=%22%23F6E2C2%22 opacity=%22.8%22 d=%22M0 846.0 Q576.0 747.0 979.2 864.0 T1440 801.0 V900 H0Z%22/%3E%3C/svg%3E") center/cover no-repeat;pointer-events:none}
+:root[data-theme=dark] body::before{opacity:.1}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) body::before{opacity:.1}}
+button,input,select,textarea{font:inherit;color:inherit}
+.top{position:sticky;top:0;z-index:5;background:linear-gradient(100deg,#0b5d8a,#0a6c9c 60%,#0f8aa6);color:#fff;box-shadow:0 2px 0 var(--teal);padding:10px max(16px,3vw);display:flex;gap:8px 14px;align-items:center;flex-wrap:wrap}
+.top b{font-weight:900;font-size:17px;flex:1;display:flex;align-items:center;gap:10px}
+.logo{flex:none;height:46px;padding:3px 10px;border-radius:12px;background:#fff;display:grid;place-items:center}.logo svg{height:40px;width:auto;display:block}
+.ttl{line-height:1.2}
+.top .who{font-size:14px;opacity:.92}
+.nav{display:flex;gap:8px;flex-wrap:wrap}.nav .sm{display:none}
+.top button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.55);color:#fff;border-radius:10px;padding:7px 12px;min-height:40px;cursor:pointer;font-size:14px}
+.net{font-size:12px;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.18)}
+.bar{height:6px;background:color-mix(in srgb,#7cc9f7 45%,transparent)}.bar i{display:block;height:100%;background:var(--sun);width:0;transition:width .3s}
+main{max-width:860px;margin:0 auto;padding:20px max(16px,3vw) 90px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 1px 2px rgba(11,93,138,.06);padding:20px 22px;margin-bottom:14px}
+.hcard{border-top:8px solid var(--sea)}.hcard.v{border-top-color:var(--teal)}
+.kick{font-size:14px;color:var(--mut);margin:0 0 4px}
+h1{font-size:clamp(26px,4vw,34px);line-height:1.1;letter-spacing:-.01em;font-weight:900;color:var(--gd);margin:0 0 10px;text-wrap:balance}
+h2{font-size:21px;line-height:1.2;margin:0 0 8px;color:var(--g);font-weight:800}
+h3{font-size:18px;margin:0 0 6px;line-height:1.3}
+p{margin:0 0 10px}
+.note{font-size:14px;color:var(--mut)}
+.pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--dl);color:var(--gd);margin:4px 6px 0 0}
+.pill.v{color:var(--v)}.pill.ok{background:var(--v);color:var(--on)}.pill.bad{background:var(--badbg);color:var(--bad)}
+ul.l,ol.l{margin:6px 0 10px;padding-left:22px}ul.l li,ol.l li{margin:5px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.apt{position:relative;display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--card);border:1px solid var(--line);border-left:8px solid var(--sea);border-radius:16px;padding:16px 84px 16px 18px;cursor:pointer;min-height:150px;box-shadow:0 1px 2px rgba(11,93,138,.06)}
+.ico{flex:none;width:56px;height:56px;border-radius:50%;background:#f7fafc;border:1.5px solid #d4e5ee;display:grid;place-items:center}.ico svg{width:36px;height:36px}
+.apt .ico{position:absolute;right:16px;top:16px}
+.ico.big{width:72px;height:72px;float:right;margin:0 0 8px 12px}.ico.big svg{width:46px;height:46px}
+.apt:hover{border-color:var(--d);border-left-color:var(--g)}
+.apt.v{border-left-color:var(--teal)}
+.apt .n{font-size:13px;font-weight:800;color:var(--gd)}
+.apt h3{margin:0;font-size:19px}
+.apt .s{font-size:14px;color:var(--mut);flex:1}
+.apt.lock{opacity:.55;cursor:not-allowed}
+.apt .st{font-size:13px;font-weight:700}
+.avbtn{display:flex;width:100%;align-items:center;gap:14px;text-align:left;cursor:pointer;border-left:8px solid var(--sun)}.avbtn>span:nth-child(2){flex:1}
+.avbtn b{font-size:18px}.avbtn .go{font-weight:800;color:var(--g);flex:none}
+.pcard h3{margin:0}.pcard.act{border-color:var(--teal);box-shadow:0 0 0 2px color-mix(in srgb,var(--teal) 35%,transparent)}
+.phead{display:flex;justify-content:space-between;gap:10px;margin-bottom:8px}
+.trow{display:grid;grid-template-columns:150px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid var(--line)}
+.tl{font-weight:700;font-size:15px}.tbar{display:flex;align-items:center;gap:10px;white-space:nowrap}.tbar .pb{flex:1;margin:0;max-width:260px}
+@media(max-width:600px){.trow{grid-template-columns:minmax(0,1fr) auto}.trow .tl{grid-column:1/-1}}
+.hero{overflow:hidden}.heroimg{float:right;width:230px;margin:-2px -4px 10px 18px}.heroimg svg{width:100%;height:auto;display:block}
+@media(max-width:600px){.heroimg{float:none;display:block;width:200px;margin:0 0 10px}}
+.avance summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.pb{display:block;height:8px;border-radius:99px;background:var(--line);overflow:hidden;margin-top:4px}.pb i{display:block;height:100%}
+.tools{display:flex;flex-wrap:wrap;gap:10px}
+.btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;margin-top:8px}
+.btn{min-height:46px;padding:10px 20px;border-radius:12px;border:1.5px solid var(--g);background:var(--g);color:var(--on);font-weight:700;cursor:pointer;font-size:15px}
+.btn.sec{background:transparent;color:var(--g)}
+.btn.ghost{border-color:var(--line);background:var(--card);color:var(--ink);font-weight:600}
+.btn.sm{min-height:38px;padding:6px 12px;font-size:14px}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;color:var(--g);font-weight:700;cursor:pointer;padding:6px 0;margin-bottom:8px;min-height:40px;font-size:15px}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 0}
+.steps span{font-size:13px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}
+.steps span.on{background:var(--g);border-color:var(--g);color:var(--on);font-weight:700}
+.steps span.ok{border-color:var(--v);color:var(--v)}
+.fld{margin:14px 0 0;padding:2px 0}
+.fld.bad{background:var(--badbg);border-radius:10px;padding:8px 10px;margin-left:-10px;margin-right:-10px}
+.fhead{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:6px}
+.fhead .lab{font-size:15px;font-weight:700}
+.req{color:var(--g)}
+.na{border:1.5px solid var(--line);background:var(--card);border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;cursor:pointer;min-height:34px;color:var(--mut);flex:none}
+.na.on{background:var(--mut);border-color:var(--mut);color:var(--card)}
+.lockmsg{font-size:13px;color:var(--mut);font-style:italic}
+.err{font-size:13px;color:var(--bad);margin-top:6px;font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1.5px solid var(--line);border-radius:12px;cursor:pointer;font-size:15px;background:var(--card)}
+.chips input{accent-color:#0b5d8a;width:18px;height:18px;margin:0}
+.chips label:has(input:checked){border-color:var(--g);background:var(--soft);font-weight:600}
+.chips label:has(input:disabled){opacity:.4;cursor:not-allowed}
+.chips.sc label{min-width:54px;justify-content:center}
+input[type=text],input[type=number],input[type=date],input[type=time],select,textarea{width:100%;font-size:16px;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--card);min-height:46px}
+input:disabled,select:disabled,textarea:disabled{opacity:.5;background:var(--dl)}
+textarea{min-height:72px;resize:vertical}
+input:focus,select:focus,textarea:focus,button:focus-visible,.chips label:has(input:focus-visible){outline:3px solid color-mix(in srgb,var(--d) 70%,transparent);outline-offset:1px}
+.row2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.q .num{font-size:13px;font-weight:800;color:var(--gd);background:var(--dl);border-radius:6px;padding:2px 8px;margin-right:8px}
+.q .stem{font-weight:600;color:var(--v);margin:6px 0 4px}
+.q .why{font-size:14px;color:var(--mut)}
+.q.done{border-left:6px solid var(--v)}
+.q.bad{border-left:6px solid var(--bad)}
+.ref{display:grid;place-items:center;aspect-ratio:16/7;max-height:240px;width:100%;border:2px dashed #b9dcea;border-radius:14px;background:linear-gradient(180deg,var(--soft),var(--dl));color:var(--mut);font-size:14px;margin:10px 0 4px;overflow:hidden;text-align:center;padding:8px}
+.ref img{width:100%;height:100%;object-fit:cover;display:block}
+.ref.ok{aspect-ratio:auto;max-height:none;border:0;background:var(--dl);padding:0;position:relative}.ref.ok img{width:100%;height:auto;max-height:380px;object-fit:contain;border-radius:14px}
+.ref.ok::after{content:'Imagen de referencia';position:absolute;left:10px;bottom:10px;background:rgba(11,93,138,.88);color:#fff;font-size:12px;font-weight:700;padding:3px 10px;border-radius:99px}
+.ref svg{width:44px;height:44px;margin:0 auto 4px;display:block}
+.dep{border-left:3px solid var(--line);padding-left:14px;margin-top:6px}
+.frows{display:grid;gap:10px;margin-top:10px}.frow{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;align-items:start;border:1px solid var(--line);border-radius:10px;padding:8px}.frow img{width:110px;height:110px;object-fit:cover;border-radius:8px;display:block}.frow textarea{min-height:60px}
+.lnk{background:none;border:0;color:var(--bad);font-weight:700;cursor:pointer;padding:4px 0;font-size:13px}
+@media(max-width:420px){.frow{grid-template-columns:84px minmax(0,1fr)}.frow img{width:84px;height:84px}}
+.thumbs{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.thumbs figure{margin:0;position:relative;width:92px}
+.thumbs img{width:92px;height:92px;object-fit:cover;border-radius:8px;border:1px solid var(--line);display:block}
+.thumbs figcaption{font-size:11px;color:var(--mut);text-align:center}
+.thumbs button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:15px;line-height:1}
+.up{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1.5px dashed var(--g);border-radius:10px;color:var(--g);font-weight:700;cursor:pointer}
+.up input{position:absolute;width:1px;height:1px;opacity:0}
+.pend{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border:1.5px solid var(--d);background:var(--dl);border-radius:10px;padding:10px 14px;margin-bottom:14px}
+.alert{border:1.5px solid var(--bad);background:var(--badbg);color:var(--bad);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-weight:600}
+.okbox{border:1.5px solid var(--v);color:var(--v);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-weight:600}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:13px;color:var(--mut)}
+.num{font-variant-numeric:tabular-nums}
+.scroll{overflow-x:auto}
+.meta{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:10px}
+.meta div{border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.meta b{display:block;font-size:22px;color:var(--g);font-variant-numeric:tabular-nums}
+.meta span{font-size:13px;color:var(--mut)}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#0b5d8a;color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2);padding:10px 18px;border-radius:10px;font-size:15px;z-index:9;opacity:0;transition:opacity .25s;pointer-events:none;max-width:92vw}
+.toast.on{opacity:1}
+.hide{display:none!important}
+@media(max-width:700px){.grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){.top b{font-size:14px;flex:1 1 auto}.logo{height:38px;padding:2px 8px}.logo svg{height:33px}.top .net{font-size:11px}.nav{flex-basis:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.nav button{padding:6px 4px;min-height:40px;font-size:13px}.lg{display:none}.nav .sm{display:inline}.top .who{flex-basis:100%;order:3;font-size:13px}.card{padding:18px 16px}.row2{grid-template-columns:minmax(0,1fr)}.fld.bad{margin-left:-6px;margin-right:-6px;padding:8px 6px}
+.stack thead{display:none}.stack tr{display:grid;padding-block:8px;border-bottom:1px solid var(--line)}.stack td{display:flex;justify-content:space-between;gap:12px;border:0;padding:3px 0}.stack td::before{content:attr(data-l);font-size:13px;color:var(--mut)}}
+@media(prefers-reduced-motion:reduce){.bar i,.toast{transition:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <b><span class="logo" id="logo"></span><span class="ttl">Cuestionario de Caracterización de Playas</span></b>
+  <span class="net" id="net">Sin conexión</span>
+  <span class="net hide" id="gpsPill">● Grabando recorrido</span>
+  <nav class="nav"><button type="button" id="bGps"><span class="lg">Recorrido </span>GPS</button><button type="button" id="bPlaya"><span class="lg">Elegir playa</span><span class="sm">Playa</span></button><button type="button" id="bAvance">Avance<span class="lg"> por playa</span></button><button type="button" id="bMenu">Menú</button></nav>
+  <span class="who" id="who"></span>
+</header>
+<div class="bar"><i id="prog"></i></div>
+<main id="main"></main>
+<div class="toast" id="toast" role="status"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js" async></script>
+<script>
+{
+const DATA={"apt":[{"c":"B","t":"B. Espacio funcional, accesos, movilidad y zonificación","i":"Cada zona, acceso o elemento deberá levantarse en campo y documentarse con evidencia verificable, conforme a su naturaleza y al apartado en que se registre.","subs":[{"c":"B.1.1","t":"B.1.1. Zonas funcionales de uso, estancia y servicios","i":"Este subapartado registra las zonas que permiten el uso público de la playa. Su propósito es identificar qué zonas existen, dónde se ubican y cómo contribuyen al aprovechamiento recreativo del espacio.","it":[[1,"Acceso público","Garantizar puntos de entrada a la playa desde el exterior, libres, visibles, seguros y sin condicionamientos indebidos.","¿El tramo cuenta con acceso público a la playa, libre, visible y sin condicionamientos indebidos?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile","Waypoint GPS"]],[2,"Estacionamiento","Ordenar la llegada vehicular y evitar invasión u obstrucción de accesos y zonas de playa.","¿Existe estacionamiento que ordene la llegada vehicular sin invadir ni obstruir accesos o zonas de playa?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[3,"Tránsito libre","Mantener una franja continua dentro de la playa para la circulación peatonal sin obstrucciones.","¿Existe una franja continua de tránsito peatonal libre de obstrucciones dentro de la playa?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[4,"Estancia recreativa","Ordenar descanso, sombra y permanencia.","¿Existe una zona de estancia recreativa destinada al descanso, la sombra y la permanencia?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[5,"Baño seguro / contacto con agua","Definir dónde se permite nadar o entrar al mar.","¿Existe una zona definida de baño seguro o de contacto con el agua?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[6,"Actividades acuáticas","Delimitar la práctica de deportes acuáticos como acuamotos, banana, surf u otras actividades similares.","¿Existe una zona delimitada para actividades acuáticas (acuamotos, banana, surf u otras similares)?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[8,"Baños y regaderas","Concentrar sanitarios, regaderas y servicios básicos para usuarios.","¿Existe una zona que concentre baños y regaderas para las personas usuarias?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[10,"Prestadores y comercio autorizado","Ordenar actividad económica sin privatizar la playa.","¿Existe una zona para prestadores y comercio autorizado que ordene la actividad económica sin privatizar la playa?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[11,"Proveeduría","Definir puntos y horarios para abastecimiento, carga y descarga de insumos.","¿Existen puntos y horarios definidos de proveeduría para abastecimiento, carga y descarga de insumos?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[12,"Línea de costa","Delimitar la superficie útil de playa y ordenar los usos frente al mar.","¿Está delimitada la línea de costa que define la superficie útil de playa y ordena los usos frente al mar?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]]]},{"c":"B.1.2","t":"B.1.2. Zonas excluidas o no usables para recreación","i":"Este subapartado identifica áreas o condiciones que reducen, restringen o impiden el uso recreativo efectivo de la playa, ya sea por protección ambiental, escurrimientos, infraestructura, ocupación indebida o restricciones físicas del sitio.","it":[[13,"Conservación / protección ecosistémica","Proteger dunas, vegetación, fauna, zonas erosionadas o ambientalmente sensibles.","¿Existen zonas de conservación o protección ecosistémica (dunas, vegetación, fauna, zonas erosionadas o sensibles) que excluyan el uso recreativo?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]],[16,"Privatización / invasión","Detectar restricciones indebidas y valorar acciones para recuperar el uso público.","¿Se detecta privatización o invasión que restrinja indebidamente el uso público de la playa?",1,["Foto","Ortofoto","Track GPS","Archivo KML / Shapefile"]]]},{"c":"B.2","t":"B.2. Ordenamiento operativo de flujos, mobiliario y logística de acceso","i":"Este apartado valora si la playa cuenta con mecanismos para organizar la circulación, controlar flujos, distribuir mobiliario, ordenar estacionamientos y gestionar carga/descarga, evitando saturación, conflictos de uso y obstrucciones.","it":[[18,"Aplicación operativa de la zonificación","Verificar si las zonas definidas se respetan y funcionan en campo.","¿Las zonas definidas se respetan y funcionan en campo?",1,["Evidencia documental","Foto","Waypoint GPS"]],[20,"Distribución de mobiliario en playa","Ordenar mobiliario para mantener áreas libres, tránsito y estancia adecuada.","¿El mobiliario en playa está distribuido de modo que mantiene áreas libres, tránsito y estancia adecuada?",1,["Evidencia documental","Foto","Waypoint GPS"]],[23,"Áreas de carga, descarga y abastecimiento","Organizar la logística de servicios sin afectar accesos, tránsito o uso recreativo.","¿Existen áreas de carga, descarga y abastecimiento que no afecten accesos, tránsito ni uso recreativo?",1,["Evidencia documental","Foto","Waypoint GPS"]]]},{"c":"B.3","t":"B.3. Accesibilidad y conectividad","i":"Este apartado valora si la playa está conectada de forma segura, legible e incluyente con su entorno urbano, natural o turístico, considerando accesos físicos, cruces peatonales, transporte público, senderos, pasarelas y condiciones de accesibilidad universal.","it":[[24,"Conectividad con el entorno urbano, natural o turístico","Valorar la relación de la playa con vialidades, andadores, malecones, zonas hoteleras, comunidades o espacios naturales cercanos.","¿La playa está conectada con vialidades, andadores, malecones, zonas hoteleras, comunidades o espacios naturales cercanos?",1,["Evidencia documental","Foto","Waypoint GPS"]],[25,"Senderos y pasarelas de conexión","Verificar continuidad peatonal entre accesos, estacionamientos, paraderos, servicios y zonas de playa.","¿Existen senderos y pasarelas con continuidad peatonal entre accesos, estacionamientos, paraderos, servicios y zonas de playa?",1,["Evidencia documental","Foto","Waypoint GPS"]],[26,"Accesos físicos a la playa: rampas, escaleras, senderos y puentes","Evaluar la condición, seguridad y funcionalidad de las infraestructuras de ingreso a la playa.","¿Existen accesos físicos a la playa (rampas, escaleras, senderos o puentes)?",1,["Evidencia documental","Foto","Waypoint GPS"]],[29,"Elementos de accesibilidad universal: barandales, baños accesibles, señalética y apoyos de orientación","Valorar si la playa permite uso seguro, incluyente y comprensible para distintos perfiles de usuarios.","¿Existen elementos de accesibilidad universal (barandales, baños accesibles, señalética y apoyos de orientación)?",1,["Evidencia documental","Foto","Waypoint GPS"]]]}]},{"c":"C","t":"C. Condición física, ambiental, calidad y protección costera","i":"Cada componente, medida o parámetro registrado en el apartado C deberá levantarse o verificarse en campo y documentarse con evidencia verificable, conforme al tipo de información que corresponda.","subs":[{"c":"C.1","t":"C.1. Perfil físico y natural","i":"Este apartado identifica las condiciones físicas y naturales de la playa que pueden influir en su uso recreativo, seguridad, disponibilidad de superficie, restricciones de tránsito y operación general del sitio.","it":[[31,"Erosión","Identificar pérdida de superficie útil y restricciones de uso.","¿Se observa erosión que implique pérdida de superficie útil o restricciones de uso?",1,["Observación directa","Foto"]],[34,"Bancos de arena","Reconocer cambios en la superficie disponible y en la distribución de usos.","¿Existen bancos de arena que modifiquen la superficie disponible o la distribución de usos?",1,["Observación directa","Foto"]],[35,"Formaciones rocosas","Identificar barreras físicas, restricciones de tránsito y zonas de riesgo.","¿Existen formaciones rocosas que constituyan barreras físicas, restricciones de tránsito o zonas de riesgo?",1,["Observación directa","Foto"]]]},{"c":"C.2","t":"C.2. Ecosistemas y componentes ecológicos","i":"Este apartado registra los componentes naturales, ecológicos, paisajísticos o patrimoniales presentes en la playa y su entorno, con el propósito de valorar su estado de conservación, relevancia ambiental y compatibilidad con el uso recreativo.","it":[[38,"Ecosistemas y formaciones naturales costeras","Valorar la presencia y estado de conservación de manglar, dunas, matorral costero, humedales, selvas, marismas, fanerógamas marinas u otros componentes naturales relevantes.","¿Existen ecosistemas o formaciones naturales costeras (manglar, dunas, matorral costero, humedales, selvas, marismas, fanerógamas marinas u otros)?",0,["Observación directa","Foto"]]]},{"c":"C.3","t":"C.3. Vulnerabilidad y protección civil en playas","i":"Este apartado valora si la playa cuenta con medidas preventivas, protocolos, señalización y capacidades básicas de respuesta ante riesgos naturales, emergencias, alta afluencia de visitantes o fenómenos meteorológicos.","it":[[46,"Señalética de riesgo visible para el visitante","Informar peligros, restricciones y medidas de seguridad.","¿Existe señalética de riesgo visible para el visitante?",0,["Evidencia documental","Foto (cuando sea verificable en sitio)"]]]}]},{"c":"D","t":"D. Servicios al visitante, higiene, seguridad, información y confort","i":"Cada elemento registrado en el apartado D deberá verificarse en campo y documentarse con registro fotográfico en alta resolución, de manera individual, conforme al componente evaluado y a la condición observada.","subs":[{"c":"D.1","t":"D.1. Servicios básicos al visitante","i":"Este apartado registra los servicios disponibles para orientar, atender y apoyar al visitante durante su estancia en la playa, considerando información, hidratación, alimentos, asistencia básica, limpieza y otros servicios de apoyo.","it":[[50,"Módulos de información","Orientar la consulta y atención básica al visitante.","¿Existen módulos de información para la consulta y atención básica al visitante?",1,["Foto"]],[53,"Información sobre riesgos y reglamento","Prevenir incidentes y ordenar conductas permitidas o restringidas.","¿Se brinda información sobre riesgos y reglamento?",1,["Foto"]],[65,"Barrido y limpieza de playa","Mantener arena y áreas de estancia en condiciones adecuadas.","¿Se realiza barrido y limpieza de la playa?",1,["Foto"]],[66,"Limpieza de espejo de agua","Retirar residuos o elementos que afecten el uso recreativo del mar.","¿Se realiza limpieza del espejo de agua?",1,["Foto"]]]},{"c":"D.2","t":"D.2. Salud e higiene","i":"Este apartado valora la existencia y condición de servicios e infraestructura sanitaria que permiten mantener la playa limpia, segura y adecuada para el uso público, incluyendo sanitarios, regaderas, manejo de residuos y posibles descargas.","it":[[67,"Sanitarios públicos","Cubrir necesidades básicas de higiene y confort del visitante.","¿Existen sanitarios públicos?",1,["Foto"]],[68,"Regaderas / lavapiés","Facilitar aseo posterior al uso de playa.","¿Existen regaderas o lavapiés?",1,["Foto"]],[69,"Contenedores de basura","Concentrar residuos y mantener limpia el área de uso público.","¿Existen contenedores de basura?",1,["Foto"]],[70,"Manejo de residuos","Asegurar recolección, separación y disposición adecuada.","¿Existe manejo de residuos (recolección, separación y disposición)?",1,["Foto"]],[71,"Descargas al mar (conocidas)","Identificar puntos de riesgo sanitario y ambiental.","¿Se identifican descargas al mar conocidas?",1,["Foto"]]]},{"c":"D.3","t":"D.3. Seguridad","i":"Este apartado identifica los elementos, personal, infraestructura y mecanismos de vigilancia, prevención y respuesta que contribuyen a reducir riesgos y atender emergencias en la playa.","it":[[72,"Torres / puestos de salvavidas","Facilitar vigilancia y respuesta rápida ante emergencias acuáticas.","¿Existen torres o puestos de salvavidas?",1,["Foto"]],[73,"Cobertura de salvavidas (personal)","Asegurar presencia operativa para supervisión y rescate.","¿Existe cobertura de salvavidas (personal) en la playa?",1,["Foto"]],[74,"Horario de operación de salvavidas","Definir la franja de vigilancia activa en playa.","¿Existe un horario de operación de salvavidas definido?",1,["Foto"]],[76,"Banderas e indicadores de riesgo visibles","Comunicar el estado del mar y el nivel de riesgo para bañistas.","¿Existen banderas e indicadores de riesgo visibles?",1,["Foto"]],[78,"Balizas y bolardos","Delimitar áreas de tránsito, restricción o protección.","¿Existen balizas y bolardos que delimiten áreas de tránsito, restricción o protección?",1,["Foto"]],[79,"Módulos de seguridad / vigilancia fija","Concentrar atención, monitoreo y reacción operativa.","¿Existen módulos de seguridad o vigilancia fija?",1,["Foto"]]]},{"c":"D.4","t":"D.4. Información y señalética","i":"Este apartado valora si la playa cuenta con información visible, clara y útil para orientar al visitante, ordenar recorridos, comunicar reglas, advertir riesgos y facilitar el uso seguro del espacio.","it":[[84,"Información de horarios de uso y operación","Informar horarios, restricciones temporales y condiciones generales de uso.","¿Existe información de horarios de uso y operación?",1,["Foto"]],[85,"Señalamientos horizontales","Ordenar flujos, recorridos y zonas de uso sobre el espacio físico.","¿Existen señalamientos horizontales?",1,["Foto"]],[86,"Señalamientos verticales de orientación","Comunicar direcciones, accesos, servicios y recorridos principales.","¿Existen señalamientos verticales de orientación?",1,["Foto"]],[87,"Señalética de seguridad y reglamentación","Informar riesgos, reglas básicas, restricciones y protocolos de emergencia.","¿Existe señalética de seguridad y reglamentación?",1,["Foto"]],[88,"Mapa físico de playa","Mostrar accesos, servicios, zonas de uso, rutas y puntos relevantes en sitio.","¿Existe un mapa físico de la playa?",1,["Foto"]]]},{"c":"D.5","t":"D.5. Ambientación y confort","i":"Este apartado registra los elementos que mejoran la estancia, permanencia y disfrute del visitante, considerando sombra, mobiliario, paisaje, espacios recreativos, miradores, áreas de contemplación y valor visual del entorno.","it":[[93,"Sombra, descanso y confort climático","Mejorar permanencia y protección frente al sol.","¿Existen elementos de sombra, descanso y confort climático?",1,["Foto"]],[94,"Mobiliario y distribución","Proveer descanso y ordenar el uso del espacio disponible.","¿Existe mobiliario y una distribución que ordene el uso del espacio disponible?",1,["Foto"]]]}]}],"f4":[["T","Ambiental","Los usuarios respetan las medidas de protección ambiental de esta playa."],["T","Ambiental","Esta playa presenta mejores condiciones de protección ambiental que otras."],["T","Ambiental","Estoy dispuesto(a) a reducir ciertas comodidades para proteger la playa."],["T","Ambiental","La información ambiental disponible ayuda a proteger la playa."],["T","Ambiental","Los esfuerzos para proteger esta playa son suficientes."],["T","Limpieza e higiene","Confío en la calidad sanitaria del agua para entrar al mar."],["T","Limpieza e higiene","No observé basura flotando en el agua."],["T","Limpieza e higiene","Observé poca basura visible en la arena."],["T","Limpieza e higiene","No observé residuos peligrosos, como vidrios, metales o jeringas."],["T","Limpieza e higiene","La limpieza operativa fue evidente durante el día."],["T","Limpieza e higiene","Las condiciones de limpieza favorecen la comodidad del visitante."],["T","Limpieza e higiene","Los recipientes para separar basura son claros y fáciles de usar."],["P","Limpieza e higiene","Cuento con un sistema de separación de residuos."],["P","Limpieza e higiene","Realizo limpieza regular del área donde ofrezco mis servicios."],["P","Limpieza e higiene","Manejo adecuadamente las aguas residuales sin verterlas a la playa."],["T","Seguridad y protección","Me sentí seguro(a) dentro del agua."],["T","Seguridad y protección","Observé salvavidas presentes y atentos."],["T","Seguridad y protección","La vigilancia de salvavidas es suficiente para el tamaño de esta playa."],["P","Seguridad y protección","Mi personal cuenta con capacitación en seguridad o primeros auxilios."],["T","Saturación y uso del espacio","La cantidad de personas generó saturación y afectó mi experiencia."],["T","Saturación y uso del espacio","El mobiliario ocupó demasiado espacio en la playa."],["T","Saturación y uso del espacio","No observé conflictos por uso del espacio entre usuarios y prestadores."],["T","Saturación y uso del espacio","No observé áreas de playa invadidas por hoteles o negocios."],["T","Experiencia y calidad del servicio","La belleza escénica del lugar me pareció alta."],["T","Experiencia y calidad del servicio","El ruido no afectó mi experiencia en la playa."],["T","Experiencia y calidad del servicio","Los servicios sanitarios, como baños, duchas o lavapiés, son adecuados."],["T","Experiencia y calidad del servicio","El equipamiento de apoyo, como pasarelas, accesos o canecas, es suficiente."],["T","Experiencia y calidad del servicio","El servicio de sombra, como sombrillas o carpas, es adecuado."],["T","Experiencia y calidad del servicio","Los servicios gastronómicos, como restaurantes o bares, son adecuados."],["T","Experiencia y calidad del servicio","Considero que la playa es incluyente."],["T","Experiencia y calidad del servicio","Estoy satisfecho(a) con mi experiencia general en esta playa."],["T","Información y señalética","La información visible de la playa es clara."],["T","Información y señalética","La información turística, como avisos o mapas, es suficiente y clara."],["R","Gobernanza y gestión","Existen reglas claras de convivencia y uso del espacio en la playa."],["R","Gobernanza y gestión","Las autoridades atienden oportunamente los problemas de la playa."],["R","Gobernanza y gestión","Me gustaría participar en acciones comunitarias para mejorar la playa."],["P","Gobernanza y gestión","Conozco la existencia del Comité u Órgano de Gestión de Playa."],["P","Gobernanza y gestión","He participado en reuniones o mesas de diálogo sobre la playa."],["P","Gobernanza y gestión","El municipio supervisa adecuadamente las actividades comerciales."],["P","Gobernanza y gestión","SECTUR/FONATUR atiende los problemas de la playa."],["R","Economía local y convivencia","El turismo en esta playa genera beneficios económicos para mi comunidad."],["R","Economía local y convivencia","El turismo genera problemas de convivencia, como basura, ruido o saturación."],["T","Prestadores, permisos y operación","La venta ambulante se observa ordenada y en nivel adecuado."],["P","Prestadores, permisos y operación","Cuento con los permisos necesarios para operar legalmente."],["P","Prestadores, permisos y operación","Cumplo las reglas aplicables de ZOFEMAT."],["P","Prestadores, permisos y operación","La informalidad comercial afecta mi actividad."]],"playas":[[1,"1. Playa Pie de la Cuesta 1","1. Pie de la Cuesta"],[2,"2. Playa Pie de la Cuesta 2","1. Pie de la Cuesta"],[3,"3. Playa Poza Azul","1. Pie de la Cuesta"],[4,"4. Playa Las Ardillas (Monjitas)","1. Pie de la Cuesta"],[5,"5. Playa Mimosa","1. Pie de la Cuesta"],[6,"6. Playa El Secreto Bella Miel","2. Acapulco Tradicional"],[7,"7. Playa La Angosta","2. Acapulco Tradicional"],[8,"8. Playa Caletilla","2. Acapulco Tradicional"],[9,"9. Playa Caleta","2. Acapulco Tradicional"],[10,"10. Playa La Roqueta","2. Acapulco Tradicional"],[11,"11. La Roqueta-Playa Las Palmitas","2. Acapulco Tradicional"],[12,"12. La Roqueta-Playa de los Enamorados","2. Acapulco Tradicional"],[13,"13. La Roqueta-Playa del Amor","2. Acapulco Tradicional"],[14,"14. Playa La Aguada","2. Acapulco Tradicional"],[15,"15. Playa Larga","2. Acapulco Tradicional"],[16,"16. Playa Honda","2. Acapulco Tradicional"],[17,"17. Playa Manzanillo","2. Acapulco Tradicional"],[18,"18. Playa Tlacopanocha","2. Acapulco Tradicional"],[19,"19. Playa Hornitos","3. Zona Dorada"],[20,"20. Playa Hamacas","3. Zona Dorada"],[21,"21. Playa Dominguillo","3. Zona Dorada"],[22,"22. Playa Suave","3. Zona Dorada"],[23,"23. Playa Tamarindos","3. Zona Dorada"],[24,"24. Playa Hornos-Karabalí","3. Zona Dorada"],[25,"25. Playa Papagayo","3. Zona Dorada"],[26,"26. Playa El Morro-Magallanes","3. Zona Dorada"],[27,"27. Playa Condesa","3. Zona Dorada"],[28,"28. Playa Icacos I","3. Zona Dorada"],[29,"29. Playa Icacos II","3. Zona Dorada"],[30,"30. Playa Icacos III","3. Zona Dorada"],[31,"31. Playa Icacos IV","3. Zona Dorada"],[32,"32. Playa Guitarrón","4. Las Brisas"],[33,"33. Playa del Secreto","4. Las Brisas"],[34,"34. Playa Las Brisas","4. Las Brisas"],[35,"35. Playa Pichilingue","5. Puerto Marqués"],[36,"36. Playa Wellita","5. Puerto Marqués"],[37,"37. Playa Palmita Sola","5. Puerto Marqués"],[38,"38. Playa Puerto Marqués","5. Puerto Marqués"],[39,"39. Playa Hermosa","5. Puerto Marqués"],[40,"40. Playa Majahua","5. Puerto Marqués"],[41,"41. Playa Revolcadero/Princess","6. Zona Diamante"],[42,"42. Playa La Torre","6. Zona Diamante"],[43,"43. Playa Diamante 1","6. Zona Diamante"],[44,"44. Playa Diamante 2","6. Zona Diamante"],[45,"45. Playa San Vicente (Dentro de Playa La Bonfil)","7. Zona Bonfil"],[46,"46. Playa La Bonfil","7. Zona Bonfil"],[47,"47. Playa La Gloria","7. Zona Bonfil"],[48,"48. Playa Tres Vidas","8. Zona Barra Vieja"],[49,"49. Playa Encantada","8. Zona Barra Vieja"],[50,"50. Playa Barra Vieja","8. Zona Barra Vieja"]]};
+const ICON={"ubicacion": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M32 49 C25 40 16 30 16 22 A16 16 0 0 1 48 22 C48 30 39 40 32 49Z\" stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003ccircle cx=\"32\" cy=\"22\" r=\"6\" stroke=\"#18B7B0\" stroke-width=\"1\" fill=\"#18B7B0\"/>\u003cpath d=\"M16 39 L8 39 L3 57 L61 57 L56 39 L48 39\" stroke=\"#18B7B0\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "sombrilla": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M5 30 Q12 5 34 8 Q54 10 59 35 Z\" stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"#7CC9F7\"/>\u003cpath d=\"M34 8 Q20 17 20 31 M34 8 Q45 19 44 33 M33 33 L26 56\" stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M8 59 Q32 48 56 59\" stroke=\"#FFBE45\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "accesibilidad": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003ccircle cx=\"28\" cy=\"9\" r=\"5\" stroke=\"#0B5D8A\" stroke-width=\"1\" fill=\"#0B5D8A\"/>\u003cpath d=\"M28 19 L30 36 H45 L55 52 L62 49 M29 25 H43 M22 30 A16 16 0 1 0 41 51\" stroke=\"#0B5D8A\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "ola": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M3 44 C17 40 19 14 38 15 C51 15 56 27 52 34 C46 24 35 27 36 37 C37 46 49 49 61 43\" stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M3 49 Q17 43 29 49 T61 48\" stroke=\"#18B7B0\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "servicios": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M8 27 L14 9 H50 L56 27 Q51 38 44 27 Q38 38 32 27 Q26 38 20 27 Q13 38 8 27Z\" stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M12 34 V57 H52 V34 M12 44 H52 M25 9 L20 27 M39 9 L44 27\" stroke=\"#18B7B0\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "concha": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M12 42 Q3 28 19 17 Q32 3 46 17 Q61 28 51 42 L38 54 H26 Z M26 50 L17 24 M31 50 L27 15 M35 50 L37 15 M39 50 L49 24\" stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "huellas": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cg fill=\"#18B7B0\">\u003cellipse cx=\"20\" cy=\"39\" rx=\"7\" ry=\"13\" transform=\"rotate(-20 20 39)\"/>\u003cellipse cx=\"43\" cy=\"46\" rx=\"7\" ry=\"13\" transform=\"rotate(20 43 46)\"/>\u003ccircle cx=\"9\" cy=\"22\" r=\"3\"/>\u003ccircle cx=\"15\" cy=\"18\" r=\"3\"/>\u003ccircle cx=\"22\" cy=\"18\" r=\"3\"/>\u003ccircle cx=\"28\" cy=\"23\" r=\"3\"/>\u003ccircle cx=\"35\" cy=\"29\" r=\"3\"/>\u003ccircle cx=\"42\" cy=\"26\" r=\"3\"/>\u003ccircle cx=\"49\" cy=\"28\" r=\"3\"/>\u003ccircle cx=\"55\" cy=\"33\" r=\"3\"/>\u003c/g>\u003c/svg>", "sol": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003ccircle cx=\"32\" cy=\"32\" r=\"13\" stroke=\"#FFBE45\" stroke-width=\"1\" fill=\"#FFBE45\"/>\u003cpath d=\"M51.0 32.0 L58.0 32.0\" stroke=\"#FFBE45\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M45.435028842544405 45.4350288425444 L50.38477631085024 50.384776310850235\" stroke=\"#FFBE45\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M32.0 51.0 L32.0 58.0\" stroke=\"#FFBE45\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M18.5649711574556 45.435028842544405 L13.615223689149765 50.38477631085024\" stroke=\"#FFBE45\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M13.0 32.0 L6.0 32.0\" stroke=\"#FFBE45\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M18.564971157455595 18.5649711574556 L13.615223689149762 13.615223689149765\" stroke=\"#FFBE45\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M31.999999999999996 13.0 L31.999999999999996 6.0\" stroke=\"#FFBE45\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M45.4350288425444 18.564971157455595 L50.38477631085023 13.615223689149762\" stroke=\"#FFBE45\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "caracol": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M8 48 Q3 39 13 30 Q12 19 26 18 Q29 8 42 12 Q53 9 59 5 Q59 20 51 27 Q48 43 34 46 Q20 60 8 48Z M13 30 Q28 31 34 46 M26 18 Q40 22 44 37 M42 12 Q51 17 51 27\" stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "palmera": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M23 58 Q42 34 34 17\" stroke=\"#7CBF6B\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M34 18 Q15 0 5 21 Q20 12 34 18 Q10 19 10 39 Q22 24 34 18 Q42 0 59 12 Q44 10 34 18 Q56 15 60 36 Q46 22 34 18 Q39 3 28 3 Q33 9 34 18\" stroke=\"#7CBF6B\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"#7CBF6B\"/>\u003c/svg>", "simbolo": "\u003csvg aria-hidden=\"true\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 -8 182 180\" fill=\"none\">\u003cpath fill=\"#FFBE45\" d=\"M45 43 A29 29 0 0 1 102 43Z\"/>\u003cg stroke=\"#FFBE45\" stroke-width=\"5\" stroke-linecap=\"round\">\u003cpath d=\"M74 7V0 M45 16L39 9 M103 16L110 9 M33 32L23 28\"/>\u003c/g>\u003cpath fill=\"#18B7B0\" d=\"M3 117 C30 57 86 39 112 79 C89 66 63 83 50 108 C35 110 18 114 3 117Z\"/>\u003cpath fill=\"#0B5D8A\" d=\"M10 124 C44 110 58 79 94 83 C67 100 72 131 99 138 C125 145 146 136 170 126 C137 166 53 177 10 124Z\"/>\u003cpath fill=\"#F6E2C2\" d=\"M99 124 Q135 96 168 115 L180 124 Q142 119 126 137Z\"/>\u003cg transform=\"translate(99 23) scale(1.2)\">\u003cpath d=\"M23 58 Q42 34 34 17\" stroke=\"#7CBF6B\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M34 18 Q15 0 5 21 Q20 12 34 18 Q10 19 10 39 Q22 24 34 18 Q42 0 59 12 Q44 10 34 18 Q56 15 60 36 Q46 22 34 18 Q39 3 28 3 Q33 9 34 18\" stroke=\"#7CBF6B\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"#7CBF6B\"/>\u003c/g>\u003c/svg>", "limpieza": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M12 19 H48 M19 19 L22 57 H42 L46 19 M9 13 H51 V19 H9 Z M24 13 V7 H36 V13 M29 27 V48 M37 27 V48\" stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003cpath d=\"M42 51 Q39 32 59 32 Q59 51 42 51Z\" stroke=\"#7CBF6B\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"#7CBF6B\"/>\u003c/svg>", "seguridad": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003ccircle cx=\"32\" cy=\"32\" r=\"25\" stroke=\"#0B5D8A\" stroke-width=\"3\" fill=\"none\"/>\u003ccircle cx=\"32\" cy=\"32\" r=\"13\" stroke=\"#0B5D8A\" stroke-width=\"3\" fill=\"none\"/>\u003cpath d=\"M15 14 L23 23 M49 14 L41 23 M15 50 L23 41 M49 50 L41 41\" stroke=\"#FFBE45\" stroke-width=\"7\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "estrella_mar": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M32 4 L40 23 L61 25 L45 39 L50 60 L32 48 L14 60 L19 39 L3 25 L24 23Z\" stroke=\"#18B7B0\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "oleaje": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\">\u003cpath d=\"M3 22 Q10 10 17 22 T31 22 T45 22 T59 22 M3 39 Q10 27 17 39 T31 39 T45 39 T59 39\" stroke=\"#18B7B0\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\" fill=\"none\"/>\u003c/svg>", "logo": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"15 0 440 170\" role=\"img\" aria-label=\"Jefe Marino\">\u003cdefs>\u003clinearGradient id=\"gold\" x2=\"0.3\" y2=\"1\">\u003cstop stop-color=\"#efbd50\"/>\u003cstop offset=\"1\" stop-color=\"#f8dfa9\"/>\u003c/linearGradient>\u003clinearGradient id=\"green\" x2=\"0.2\" y2=\"1\">\u003cstop stop-color=\"#8db866\"/>\u003cstop offset=\"1\" stop-color=\"#6ca34e\"/>\u003c/linearGradient>\u003clinearGradient id=\"aqua\" x2=\"0.7\" y2=\"1\">\u003cstop stop-color=\"#78ccc4\"/>\u003cstop offset=\"1\" stop-color=\"#50b7ca\"/>\u003c/linearGradient>\u003clinearGradient id=\"blue\" x2=\"0.3\" y2=\"1\">\u003cstop stop-color=\"#39789e\"/>\u003cstop offset=\"1\" stop-color=\"#76c9c9\"/>\u003c/linearGradient>\u003c/defs> \u003cpath fill=\"url(#gold)\" fill-rule=\"evenodd\" d=\"M217,143 L216,140 L211,135 L210,135 L203,131 L200,131 L199,130 L185,130 L184,131 L181,131 L180,132 L175,133 L172,135 L170,135 L169,136 L168,136 L167,137 L165,137 L162,139 L160,139 L159,140 L157,140 L156,141 L152,141 L151,142 L145,142 L144,143 L136,143 L135,142 L129,142 L128,141 L127,141 L138,147 L140,147 L141,148 L143,148 L144,149 L147,149 L148,150 L152,150 L153,151 L170,151 L171,150 L175,150 L176,149 L179,149 L180,148 L182,148 L183,147 L186,147 L189,145 L192,145 L193,144 L195,144 L196,143 L200,143 L201,142 L215,142 L216,143Z M69,40 L69,43 L72,45 L74,45 L75,46 L77,46 L78,47 L81,47 L82,48 L83,48 L85,46 L85,45 L83,43 L82,43 L79,41 L77,41 L76,40 L74,40 L73,39 L70,39Z M91,52 L91,55 L90,56 L90,60 L92,60 L93,59 L109,59 L110,60 L114,60 L115,61 L119,61 L120,62 L125,63 L134,68 L134,67 L135,66 L135,64 L140,58 L140,57 L146,52 L147,52 L152,49 L151,48 L150,45 L147,42 L147,41 L143,37 L142,37 L137,33 L135,33 L132,31 L128,31 L127,30 L117,30 L116,31 L113,31 L112,32 L110,32 L109,33 L104,35 L95,44 L95,45Z M155,15 L152,15 L147,20 L147,21 L143,26 L144,29 L147,29 L152,24 L152,23 L155,20 L155,19 L156,18Z M90,15 L89,16 L89,19 L90,20 L90,21 L97,29 L100,29 L101,28 L101,26 L98,22 L98,21 L93,15Z M121,4 L119,6 L119,18 L121,21 L123,21 L125,18 L125,6 L123,4Z\"/> \u003cpath fill=\"url(#green)\" fill-rule=\"evenodd\" d=\"M219,58 L218,58 L216,56 L214,56 L213,55 L202,55 L201,56 L199,56 L198,57 L197,57 L194,60 L193,60 L192,61 L191,60 L191,54 L190,53 L190,49 L189,48 L188,45 L184,41 L183,41 L181,39 L179,39 L178,38 L175,38 L174,37 L167,37 L166,38 L163,38 L163,39 L164,39 L165,40 L168,41 L170,43 L171,43 L176,48 L177,48 L179,50 L179,52 L182,56 L182,57 L183,58 L183,60 L182,61 L176,56 L175,56 L174,55 L172,55 L171,54 L165,54 L164,53 L163,53 L162,54 L158,54 L157,55 L155,55 L154,56 L151,57 L145,62 L145,63 L142,67 L141,72 L146,69 L148,69 L149,68 L151,68 L152,67 L155,67 L156,66 L157,66 L159,63 L160,64 L160,66 L171,66 L172,67 L175,67 L176,68 L174,70 L171,70 L170,71 L167,72 L161,77 L161,78 L159,80 L159,81 L157,84 L157,88 L156,89 L156,94 L157,95 L157,94 L165,86 L166,86 L167,85 L167,82 L168,81 L169,82 L170,82 L175,78 L176,78 L179,76 L181,76 L182,75 L184,75 L185,76 L185,82 L184,83 L184,88 L183,89 L183,91 L182,92 L181,97 L180,98 L177,105 L175,107 L175,108 L173,110 L173,111 L171,113 L171,114 L165,120 L165,121 L162,124 L161,124 L155,130 L154,130 L149,134 L144,136 L147,136 L148,135 L152,135 L153,134 L155,134 L156,133 L161,132 L166,129 L168,129 L170,127 L171,127 L176,124 L176,123 L180,118 L180,117 L186,106 L186,104 L187,103 L187,100 L188,99 L188,96 L189,95 L189,88 L190,87 L190,80 L189,79 L189,76 L190,75 L195,77 L197,79 L198,79 L201,81 L201,82 L203,84 L203,85 L206,88 L207,88 L208,89 L208,92 L211,96 L211,97 L213,100 L213,102 L214,102 L214,101 L215,100 L215,97 L216,96 L216,87 L215,86 L215,83 L214,82 L212,77 L208,73 L207,73 L205,71 L200,70 L197,68 L199,66 L201,66 L202,65 L206,65 L207,64 L210,64 L211,63 L212,63 L213,64 L215,64 L216,65 L220,65 L223,67 L225,67 L224,66 L223,63Z\"/> \u003cpath fill=\"url(#aqua)\" fill-rule=\"evenodd\" d=\"M29,141 L50,141 L51,142 L58,143 L61,145 L63,145 L64,146 L73,150 L75,152 L78,153 L80,155 L81,155 L87,160 L90,161 L92,163 L93,163 L102,168 L104,168 L105,169 L167,169 L168,168 L170,168 L173,166 L175,166 L176,165 L185,161 L187,159 L188,159 L190,157 L191,157 L193,155 L194,155 L197,152 L198,152 L196,152 L193,154 L191,154 L190,155 L188,155 L187,156 L184,156 L183,157 L179,157 L178,158 L172,158 L171,159 L153,159 L152,158 L147,158 L146,157 L143,157 L142,156 L140,156 L139,155 L134,154 L133,153 L124,149 L118,144 L117,144 L113,140 L112,140 L111,139 L112,138 L111,139 L109,139 L108,140 L107,140 L106,139 L105,140 L102,140 L101,141 L100,141 L98,139 L109,150 L110,150 L113,153 L118,155 L120,157 L121,157 L126,160 L131,161 L132,162 L133,162 L134,163 L136,163 L137,164 L144,165 L145,166 L144,167 L135,167 L134,166 L129,166 L128,165 L125,165 L124,164 L122,164 L119,162 L117,162 L116,161 L109,158 L106,155 L105,155 L98,148 L98,147 L96,145 L94,140 L93,141 L91,141 L90,142 L89,141 L88,142 L85,142 L84,141 L82,141 L81,140 L80,141 L79,141 L75,138 L74,139 L72,137 L69,137 L68,136 L66,136 L65,135 L65,134 L64,135 L63,134 L62,134 L61,133 L61,132 L60,132 L59,131 L59,130 L58,129 L57,129 L56,128 L56,127 L53,125 L55,123 L55,121 L56,120 L54,122 L54,124 L53,125 L52,125 L51,124 L52,123 L48,127 L47,127 L44,130 L43,130 L35,137 L34,137 L31,140 L30,140Z M150,97 L149,96 L146,89 L142,85 L142,83 L140,81 L139,81 L135,77 L134,77 L132,75 L131,75 L124,71 L122,71 L121,70 L119,70 L118,69 L115,69 L114,68 L111,68 L110,67 L90,67 L89,68 L85,68 L84,69 L81,69 L80,70 L75,71 L74,72 L63,77 L57,82 L56,82 L54,84 L54,85 L50,89 L49,89 L48,90 L48,91 L42,97 L42,98 L39,101 L39,102 L35,107 L35,108 L29,119 L29,121 L27,124 L27,127 L26,128 L26,130 L25,131 L25,134 L28,131 L29,131 L32,128 L33,128 L43,119 L44,119 L49,114 L50,114 L58,107 L59,107 L67,101 L70,100 L72,98 L73,98 L84,92 L86,92 L87,91 L89,91 L90,90 L92,90 L93,89 L96,89 L97,88 L101,88 L102,87 L121,87 L122,88 L126,88 L127,89 L132,90 L136,93 L137,93 L145,101 L145,102 L147,104 L146,105 L149,109 L149,112 L148,113 L145,110 L148,113 L149,116 L150,116 L150,113 L151,112 L151,101 L150,100Z\"/> \u003cpath fill=\"url(#blue)\" fill-rule=\"evenodd\" d=\"M148,109 L144,103 L143,103 L138,99 L136,99 L133,97 L130,97 L129,96 L126,96 L125,95 L107,95 L106,96 L99,97 L98,98 L96,98 L95,99 L93,99 L92,100 L87,101 L86,102 L79,105 L77,107 L72,109 L70,111 L67,112 L64,115 L63,115 L59,119 L58,119 L56,121 L56,123 L54,125 L53,124 L53,123 L52,124 L55,125 L57,127 L57,128 L58,128 L60,130 L60,131 L61,131 L62,132 L62,133 L63,133 L64,134 L65,133 L66,134 L66,135 L68,135 L69,136 L72,136 L74,138 L75,137 L79,140 L80,140 L81,139 L82,140 L84,140 L85,141 L88,141 L89,140 L91,142 L90,141 L91,140 L93,140 L93,139 L92,138 L92,135 L91,134 L91,127 L92,126 L93,127 L93,130 L94,131 L96,136 L97,136 L100,140 L101,140 L102,139 L105,139 L106,138 L107,139 L108,139 L109,138 L111,138 L112,139 L111,138 L111,137 L108,132 L108,130 L107,129 L107,120 L108,119 L108,117 L109,116 L109,115 L111,113 L111,112 L115,108 L116,108 L121,105 L123,105 L124,104 L135,104 L136,105 L138,105 L139,106 L142,107 L148,112Z\"/> \u003cpath fill=\"#23445d\" fill-rule=\"evenodd\" d=\"M308,121 L309,122 L309,125 L305,129 L303,129 L302,130 L301,130 L300,129 L298,129 L296,127 L296,124 L299,121 L301,121 L302,120 L306,120 L307,121Z M424,109 L429,109 L434,114 L434,117 L435,118 L435,119 L434,120 L434,123 L429,128 L424,128 L423,127 L422,127 L420,125 L420,124 L418,121 L418,116 L419,115 L420,112Z M356,102 L354,104 L354,134 L355,135 L360,136 L364,133 L364,105 L362,102Z M423,101 L422,102 L417,103 L411,109 L411,110 L409,113 L409,124 L410,125 L410,127 L415,133 L416,133 L419,135 L421,135 L422,136 L430,136 L431,135 L433,135 L434,134 L437,133 L442,128 L442,127 L443,126 L443,124 L444,123 L444,114 L443,113 L443,111 L442,110 L442,109 L436,103 L434,103 L433,102 L431,102 L430,101Z M399,103 L398,103 L395,101 L388,101 L387,102 L384,103 L381,106 L378,102 L372,102 L371,103 L371,134 L372,135 L373,135 L374,136 L377,136 L380,134 L380,115 L381,114 L381,113 L384,110 L385,110 L386,109 L390,109 L394,113 L394,133 L398,136 L403,135 L403,134 L404,133 L404,111 L403,110 L403,108 L402,107 L402,106Z M346,101 L342,101 L341,102 L339,102 L335,106 L332,102 L326,102 L325,103 L325,134 L326,135 L327,135 L328,136 L331,136 L334,134 L334,117 L335,116 L335,114 L339,110 L347,110 L349,108 L349,104Z M292,103 L289,106 L289,109 L291,111 L294,111 L295,110 L296,110 L297,109 L299,109 L300,108 L304,108 L308,111 L308,112 L309,113 L309,115 L308,116 L307,116 L306,115 L299,115 L298,116 L295,116 L294,117 L292,117 L290,119 L289,119 L288,120 L288,121 L287,122 L287,124 L286,125 L286,127 L287,128 L287,130 L288,131 L288,132 L290,134 L291,134 L292,135 L294,135 L295,136 L301,136 L302,135 L304,135 L305,134 L306,134 L308,132 L309,132 L312,136 L315,136 L316,135 L317,135 L318,134 L318,110 L317,109 L316,106 L313,103 L311,103 L310,102 L308,102 L307,101 L298,101 L297,102Z M230,94 L230,98 L229,99 L229,110 L228,111 L228,125 L227,126 L227,133 L228,134 L228,135 L230,135 L231,136 L234,136 L237,134 L237,127 L238,126 L238,110 L239,109 L240,109 L241,110 L242,113 L244,115 L244,116 L245,117 L246,120 L248,122 L249,125 L250,125 L252,127 L257,127 L259,125 L259,124 L261,122 L263,117 L265,115 L266,112 L269,109 L270,110 L270,122 L271,123 L271,134 L274,136 L277,136 L278,135 L280,135 L281,134 L281,122 L280,121 L280,110 L279,109 L279,96 L276,92 L268,92 L266,94 L264,99 L262,101 L262,102 L259,106 L257,111 L255,113 L254,113 L253,112 L252,109 L250,107 L250,106 L249,106 L248,105 L248,104 L245,100 L244,97 L240,92 L232,92Z M354,90 L354,95 L355,96 L356,96 L357,97 L361,97 L362,96 L363,96 L363,95 L364,94 L364,90 L362,88 L356,88Z M342,59 L343,58 L343,57 L347,53 L353,53 L356,56 L356,60 L355,61 L343,61 L342,60Z M281,60 L281,58 L286,53 L291,53 L292,54 L293,54 L295,57 L295,59 L293,61 L282,61Z M346,46 L345,47 L343,47 L342,48 L339,49 L334,55 L334,57 L333,58 L333,61 L332,62 L332,64 L333,65 L333,70 L334,71 L335,74 L340,79 L341,79 L344,81 L356,81 L359,79 L361,79 L364,76 L364,75 L365,74 L364,71 L363,70 L360,70 L358,72 L357,72 L354,74 L349,74 L348,73 L345,72 L342,67 L343,66 L359,66 L360,65 L362,65 L365,61 L365,55 L362,51 L362,50 L358,47 L356,47 L355,46Z M281,47 L279,49 L278,49 L274,53 L274,54 L272,57 L272,61 L271,62 L271,66 L272,67 L272,70 L273,71 L274,74 L279,79 L280,79 L283,81 L295,81 L296,80 L301,78 L304,74 L304,73 L302,70 L299,70 L297,72 L296,72 L293,74 L288,74 L287,73 L284,72 L282,70 L281,67 L282,66 L298,66 L299,65 L301,65 L304,61 L304,56 L303,55 L303,53 L298,48 L297,48 L294,46 L284,46 L283,47Z M263,35 L259,35 L256,37 L256,68 L255,69 L255,70 L251,73 L246,73 L242,70 L238,70 L236,73 L236,74 L237,75 L237,77 L239,79 L240,79 L243,81 L247,81 L248,82 L251,82 L252,81 L256,81 L257,80 L260,79 L264,75 L264,74 L265,73 L265,71 L266,70 L266,37Z M330,32 L321,32 L320,33 L318,33 L314,37 L314,38 L312,41 L312,46 L311,47 L308,47 L306,49 L306,52 L308,54 L311,54 L312,55 L312,79 L314,81 L320,81 L322,78 L322,55 L323,54 L330,54 L331,53 L331,48 L330,47 L323,47 L322,46 L322,42 L324,40 L332,40 L333,39 L333,34Z\"/> \u003cpath fill=\"#68bdc9\" fill-rule=\"evenodd\" d=\"M438,88 L436,86 L428,86 L427,87 L424,87 L423,88 L421,88 L418,90 L427,90 L428,91 L437,91 L438,90Z M428,68 L427,67 L424,67 L423,68 L418,70 L406,82 L406,83 L407,83 L408,82 L410,82 L423,75 L425,75 L429,71Z M410,58 L407,57 L402,63 L402,65 L401,66 L401,68 L400,69 L400,72 L399,73 L399,75 L398,76 L398,77 L406,68 L406,67 L411,61Z\"/> \u003c/svg>", "sanitarios": "\u003csvg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 64 64\" fill=\"none\" role=\"img\" aria-labelledby=\"titulo\">\u003ctitle id=\"titulo\">Sanitarios\u003c/title>\u003cg stroke=\"#0B5D8A\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\u003ccircle cx=\"17\" cy=\"10\" r=\"4.5\"/>\u003ccircle cx=\"47\" cy=\"10\" r=\"4.5\"/>\u003cpath d=\"M8 32V24a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8M13 27v30m8-30v30M39 34l4-15h8l4 15M43 25l-7 17h22l-7-17M43 42v15m8-15v15\"/>\u003c/g>\u003cpath d=\"M32 7v50\" stroke=\"#18B7B0\" stroke-width=\"3\" stroke-linecap=\"round\"/>\u003c/svg>"};
+const AICON={1:'ubicacion',2:'sombrilla',3:'accesibilidad',4:'ola',5:'servicios',6:'concha'};
+const SICON={'D.2':'sanitarios','D.1':'limpieza','D.3':'seguridad','D.5':'palmera','C.1':'ola','C.2':'palmera'};
+const DRIVE_URL='https://drive.google.com/drive/folders/1DVhVQYuH-3z_SpyECU_i74dEsd6C10xM?usp=sharing';
+const SCRIPT_URL_DEFAULT='';
+const $=s=>document.querySelector(s);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(3,'0');
+const NA='N/A', NOAP='No aplica';
+const ZONAS=[...new Set(DATA.playas.map(p=>p[2]))].sort((a,b)=>parseInt(a)-parseInt(b));
+const PLAYAS=DATA.playas;
+const zonaDe=name=>(PLAYAS.find(p=>p[1]===name)||[])[2]||'';
+const playaNum=name=>{const m=String(name||'').match(/^(\d+)\./);return m?+m[1]:null};
+const today=()=>{const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+const nowHM=()=>{const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')};
+const has=v=>Array.isArray(v)?v.length>0:v!=null&&String(v).trim()!=='';
+const uid=()=>(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2600)};
+
+// ===== Definición de campos =====
+// t: select|radio|check|text|number|date|time|area|gps|zona|playa ; na: admite N/A ; dep: (a)=>habilitado ; tipos: aplica a tipos de encuestado
+const OTRO=(id,src,word)=>({id,l:'Especifica',t:'text',dep:a=>[].concat(a[src]||[]).includes(word),sub:1});
+const DATOS=[
+ {t:'1.1 Identificación',d:'Zona, playa, turno y equipo de levantamiento. Zona y playa se filtran entre sí; playa y turno identifican el registro.',f:[
+  {id:'A02',l:'Zona',t:'zona'},{id:'A01',l:'Sitio / Playa',t:'playa'},{id:'A07',l:'Turno',t:'radio',o:['Turno matutino','Turno vespertino']},
+  {id:'A04',l:'Fecha',t:'date'},{id:'A03',l:'Clave / código / Brigada',t:'text',na:1},{id:'A05',l:'Número de equipo',t:'number',na:1},
+  {id:'A06',l:'Municipio / Entidad',t:'text',na:1},{id:'A09',l:'Responsable del levantamiento',t:'text'}]},
+ {t:'1.2 Condiciones del levantamiento',d:'Temporada, clima, oleaje y actividades observadas durante el turno.',f:[
+  {id:'A18',l:'Temporalidad',t:'radio',o:['Alta: Semana Santa','Alta: Verano','Alta: Invierno','Alta: Puentes / feriados','Baja']},
+  {id:'A18b',l:'Mes (temporada baja)',t:'select',o:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],dep:a=>a.A18==='Baja',sub:1},
+  {id:'A19',l:'Clima general',t:'check',o:['Despejado','Nublado','Lluvia','Viento fuerte','Otro']},OTRO('A19b','A19','Otro'),
+  {id:'A20',l:'Marea / Oleaje',t:'radio',o:['Bajo','Medio','Alto','Otro']},OTRO('A20b','A20','Otro'),
+  {id:'A21',l:'Actividades turístico-recreativas observadas',t:'check',o:['Nado','Descanso (sol y playa)','Buceo','Snorkel','Actividades acuáticas motorizadas','Actividades acuáticas no motorizadas','Ecoturismo','Pesca deportiva','Observación de fauna','Cultural / interpretativa','Ninguno','Otras']},OTRO('A21b','A21','Otras'),
+  {id:'A22',l:'Actividad principal observada',t:'radio',o:['Permanencia','Nado','Recorrido','Otra']},OTRO('A22b','A22','Otra')]},
+ {t:'1.3 Clasificación de la playa',d:'Vocación, tipología, estatus de acceso y función dominante.',f:[
+  {id:'A23',l:'Vocación',t:'radio',o:['Turística','Turística-Conservación','Conservación y Protección Ecológica','Reparación Ecológica']},
+  {id:'A24',l:'Tipología de la playa',t:'radio',o:['Playa urbana','Playa de poblado/enclave','Playa rural','Playa natural','Playa enclave']},
+  {id:'A25',l:'Estatus de acceso',t:'radio',o:['Playa Pública','Acceso Restringido','Playa Pública de acceso rústico','Playa Pública de Acceso Marítimo']},
+  {id:'A26',l:'Función dominante',t:'radio',o:['Recreativo-turístico','Estado natural','Recreativo Privado','Abandono / Ecosistema Degradado']}]},
+ {t:'1.4 Tramo y ubicación',gab:1,d:'Se llena en gabinete, con ortofoto y la información georreferenciada del levantamiento: referencias físicas del tramo, medidas y coordenadas.',f:[
+  {id:'A10',l:'Inicio del tramo (referencia física)',t:'text',na:1},{id:'A11',l:'Fin del tramo (referencia física)',t:'text',na:1},
+  {id:'A12',l:'Longitud del tramo (m)',t:'number',na:1,h:'Mediante ortofoto.'},{id:'A13',l:'Ancho útil promedio (m)',t:'number',na:1,h:'Mediante ortofoto y superficie.'},
+  {id:'A14',l:'Superficie útil S (m²)',t:'number',na:1,h:'Mediante ortofoto.'},{id:'A15',l:'Coordenadas del levantamiento',t:'gps',na:1,nogps:1},
+  {id:'A16',l:'Ubicación GPS del levantamiento (waypoint)',t:'text',na:1}]}];
+const CIERRE=[{t:'6.1 Horario y validación',d:'Se responde al terminar el levantamiento de la playa en el turno.',f:[
+  {id:'C01',l:'Hora de inicio del levantamiento',t:'time',h:'Se propone la hora en que se creó el registro; corrígela si es necesario.'},
+  {id:'C02',l:'Hora de término del levantamiento',t:'time',now:1},
+  {id:'C03',l:'Observaciones generales del levantamiento',t:'area',na:1},
+  {id:'I01',l:'Responsable del levantamiento (nombre)',t:'text'},{id:'I02',l:'Supervisor(a) (nombre)',t:'text',na:1},
+  {id:'I03',l:'Autoridad / institución validante (nombre y cargo)',t:'text',na:1}]}];
+const TT='Turista / visitante',TR='Residente / población local',TP='Prestador de servicios/Concesionario/permisionario';
+const ENT_CTRL=[
+ {id:'F2_01',l:'Fecha',t:'date'},{id:'F2_02',l:'Hora',t:'time',now:1},{id:'F2_03',l:'Tramo de la playa',t:'text',na:1},
+ {id:'F2_04',l:'Entrevistador(a)',t:'text'},{id:'F2_05',l:'Tipo de encuestado',t:'radio',o:[TT,TR,TP]},
+ {id:'F2_06',l:'Edad (años)',t:'number',na:1},{id:'F2_07',l:'Sexo registrado',t:'radio',o:['Mujer','Hombre','Prefiere no decir']},
+ {id:'F2_08',l:'Lugar de procedencia (visitante) / Colonia (residente)',t:'radio',o:['Local','Nacional','Internacional']},
+ {id:'F2_09',l:'Pertenencia a otro grupo étnico',t:'radio',o:['Sí','No']},{id:'F2_09b',l:'¿Cuál?',t:'text',dep:a=>a.F2_09==='Sí',sub:1},
+ {id:'F2_10',l:'Nivel educativo',t:'radio',o:['Sin escolaridad','Primaria','Secundaria','Bachillerato','Licenciatura','Posgrado','Prefiere no decir']},
+ {id:'F2_11',l:'Ocupación principal',t:'text',na:1},
+ {id:'F2_12',l:'Ingreso familiar mensual (opcional)',t:'radio',o:['< $4,000','$4,001–$8,000','$8,001–$16,000','$16,001–$32,000','$32,001–$48,000','> $48,000','No contesta']},
+ {id:'F2_13',l:'Ubicación de la entrevista',t:'gps',na:1}];
+const ENT_HAB=[
+ {id:'F3_01',l:'Frecuencia con que visita / usa esta playa',t:'radio',o:['Primera vez','1–5 veces/año','+ 5 veces/año','Residente y vengo regularmente','Prestador de servicios']},
+ {id:'F3_02',l:'Motivo principal',t:'radio',o:['Recreación','Descanso','Actividad física','Trabajo','Acompañamiento','Otro']},OTRO('F3_02b','F3_02','Otro'),
+ {id:'F3_03',l:'Tipo de hospedaje',t:'radio',o:['Hotel','Airbnb','Cabañas/villas','Pensión','Campamento','Otro'],tipos:[TT]},Object.assign(OTRO('F3_03b','F3_03','Otro'),{tipos:[TT]}),
+ {id:'F3_04',l:'Cómo viajan',t:'radio',o:['Por cuenta propia','Paquete turístico','Otro'],tipos:[TT]},
+ {id:'F3_05',l:'Modo de transporte al destino',t:'radio',o:['Auto','Autobús','Autobús rentado','Avión','Otro'],tipos:[TT]},Object.assign(OTRO('F3_05b','F3_05','Otro'),{tipos:[TT]}),
+ {id:'F3_06',l:'¿Con quién viene hoy?',t:'check',o:['Sola/o','Pareja','Familia','Amigos','Grupo','Otro'],tipos:[TT]},Object.assign(OTRO('F3_06b','F3_06','Otro'),{tipos:[TT]}),
+ {id:'F3_07',l:'Duración de la visita',t:'radio',o:['1–8 h','≤ 8 h sin pernocta','≤ 8 h con pernocta','Dos a tres pernoctas','Más de tres pernoctas'],tipos:[TT]},
+ {id:'F3_08',l:'Tiempo de permanencia hoy en la playa',t:'radio',o:['< 1 h','1–2 h','2–4 h','> 4 h','No sabe']},
+ {id:'F3_09',l:'Horario de mayor afluencia percibido',t:'radio',o:['< 9:00','9:00–12:00','12:00–15:00','15:00–18:00','> 18:00','No sabe']},
+ {id:'F3_10',l:'Número de veces al día que acude a la playa',t:'number',na:1},
+ ...['Alimentos','Mobiliario','Actividades','Transporte','Otros','Total'].map((g,i)=>({id:'F3_1'+(i+1),l:'Gasto aproximado hoy en playa (MXN): '+g,t:'number',na:1,tipos:[TT]}))];
+[DATOS.flatMap(p=>p.f),ENT_CTRL,ENT_HAB].forEach(L=>L.forEach((f,i)=>{if(f.sub&&!f.xl)f.xl=f.l==='Especifica'?L[i-1].l+' – especifica':L[i-1].l+' – '+f.l}));
+const F4=DATA.f4.map((r,i)=>({id:'F4_'+String(i+1).padStart(2,'0'),l:r[2],g:r[1],t:'scale',tipos:r[0]==='T'?null:r[0]==='R'?[TR]:[TP],ap:r[0]}));
+const F4G=[...new Set(F4.map(x=>x.g))];
+const ENT_PAGES=[{t:'2.1 Datos de control y perfil',d:'Información básica de la entrevista y datos sociodemográficos mínimos (F.2).',f:ENT_CTRL},
+ {t:'2.2 Hábitos y uso de la playa',d:'Frecuencia, motivo, forma de viaje, permanencia y gasto (F.3). Las preguntas para turistas se bloquean con otro tipo de encuestado.',f:ENT_HAB},
+ ...F4G.map((g,i)=>({t:'2.'+(i+3)+' Percepción: '+g,d:'Escala de 1 a 5: 1 es la valoración más baja y 5 la más alta (F.4).',f:F4.filter(x=>x.g===g),g}))];
+
+// Ítems
+const DESC={B:'Zonas de uso, accesos, ordenamiento operativo, accesibilidad y conectividad.',C:'Perfil físico, ecosistemas costeros y señalética de riesgo.',D:'Servicios básicos, higiene, seguridad, información y confort.'};
+const ITEMS={};const APT_IT=DATA.apt.map((ap,k)=>{ap.subs.forEach(s=>s.it.forEach(it=>ITEMS[it[0]]={it,ap,s}));return ap});
+const APTS=[
+ {n:1,k:'datos',t:'Datos de playa',s:'Identificación, tramo, condiciones y clasificación de la playa.',src:'Apartado A de la cédula · hoja BD_A',
+  que:'Identifica la playa evaluada, el equipo de levantamiento, el tramo, las condiciones del turno y la clasificación de la playa. Cada playa y turno forman un registro.',
+  como:['Las secciones 1.1 a 1.3 se llenan en campo. La sección 1.4 Tramo y ubicación (inicio y fin del tramo, longitud, ancho útil, superficie, coordenadas y waypoint) se llena en gabinete, con ortofoto; en campo puedes dejarla pendiente con «Completar en gabinete».','Elige primero la zona o la playa: la lista de playas muestra solo las de la zona elegida, y al elegir una playa la zona se asigna sola.','Elige el turno. Playa y turno identifican el registro.','Responde todos los campos. Si un dato no corresponde, pulsa «N/A».','Si cambias el turno de una playa que ya tiene respuestas, se abre (o se crea) el registro del otro turno con los datos de identificación y clasificación de la playa.','Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.'],pages:DATOS},
+ {n:2,k:'perc',t:'Encuesta de percepción',s:'Entrevistas a turistas, población local y prestadores de servicios.',src:'Apartado F de la cédula (F.2, F.3 y F.4)',
+  que:'Registra la percepción de las personas usuarias, población local, prestadores de servicios, concesionarios o permisionarios sobre el uso, operación, servicios, condiciones ambientales, seguridad, gobernanza y experiencia general de la playa.',
+  como:['Cada entrevista es un registro independiente dentro de la playa activa. Pulsa «Nueva entrevista» por cada persona.','El levantamiento base es de 30 entrevistas por playa a turistas y visitantes, con 15 mujeres y 15 hombres; si la persona prefiere no decirlo, se asienta en esa categoría.','De manera complementaria se aplican 10 entrevistas a población local y 10 a prestadores de servicios, concesionarios o permisionarios, cuando estén presentes o sean relevantes.','El tipo de encuestado define las preguntas: las de turistas y las complementarias de cada grupo se habilitan o bloquean solas.','En la percepción, 1 es la valoración más baja y 5 la más alta; «N/A» cuando la persona no puede valorar el enunciado.']},
+ ...APT_IT.map((ap,k)=>({n:3+k,k:ap.c,t:ap.t.slice(3),s:DESC[ap.c],src:'Apartado '+ap.c+' de la cédula · hoja Matriz_Turno',
+  que:ap.i,ap,
+  como:['Cada ítem inicia con «¿Existe?». Si eliges «No existe», la condición queda en 0 y el resto se bloquea; con «No aplica» todo se bloquea. Solo con «Existe» se registran cantidad, condición de 1 a 5, observaciones, evidencia y fotografías.','Toma o adjunta al menos una fotografía de la condición del ítem. Se guardan en el teléfono y se envían a la carpeta del ítem en Drive cuando haya conexión.','La imagen de referencia de cada ítem muestra un ejemplo visual del elemento a evaluar.','Si un campo no corresponde, pulsa «N/A». Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.',
+   ap.c==='C'?'Este apartado se responde una sola vez por playa, en el turno matutino.':'Este apartado se responde en el turno matutino y en el vespertino.'],
+  pages:ap.subs.map(s=>({t:s.t,d:s.i,items:s.it.map(i=>i[0])}))})),
+ {n:6,k:'cierre',t:'Cierre del levantamiento',s:'Hora de inicio y de término, observaciones y validación.',src:'Apartado A (horario) e I de la cédula',
+  que:'Cierra el registro de la playa en el turno: horario del levantamiento, observaciones generales y personas que validan.',
+  como:['Llénalo al terminar todos los apartados del turno.','La hora de inicio se propone con la hora en que se creó el registro; la hora de término con «Hora actual».','Las firmas se recaban en el formato impreso.'],pages:CIERRE}];
+const SCALE=['1','2','3','4','5',NA];
+
+// ===== Estado =====
+const LSK='cup_v2';
+let S={regs:{},ents:{},active:null,draft:{},cfg:{url:SCRIPT_URL_DEFAULT,token:''},lastEnt:''};
+let V={scr:'home'};let showErr=false;
+try{const x=JSON.parse(localStorage.getItem(LSK));if(x)S=Object.assign(S,x)}catch(e){}
+let saveT;const save=()=>{clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(LSK,JSON.stringify(S))}catch(e){toast('No se pudo guardar en el navegador')}},250)};
+const REG=()=>S.active?S.regs[S.active]:null;
+const A=()=>S.active?S.regs[S.active].a:S.draft;
+const vesp=a=>(a||A()).A07==='Turno vespertino';
+const regKey=a=>{const n=playaNum(a.A01);return n&&a.A07?('p'+String(n).padStart(2,'0')+'_'+(a.A07==='Turno vespertino'?'vesp':'mat')):null};
+
+// ===== Fotos (IndexedDB) =====
+let IDB=null;let FOT=[];
+const idbOpen=()=>new Promise(r=>{try{const q=indexedDB.open('cup_fotos',1);q.onupgradeneeded=()=>{q.result.createObjectStore('meta',{keyPath:'id'});q.result.createObjectStore('blob')};q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)}catch(e){r(null)}});
+const tx=(st,m='readonly')=>IDB.transaction(st,m);
+const idbAll=()=>new Promise(r=>{const q=tx('meta').objectStore('meta').getAll();q.onsuccess=()=>r(q.result||[]);q.onerror=()=>r([])});
+const idbPut=(meta,blob)=>new Promise((r,j)=>{const t=tx(['meta','blob'],'readwrite');t.objectStore('meta').put(meta);if(blob)t.objectStore('blob').put(blob,meta.id);t.oncomplete=()=>r();t.onerror=()=>j(t.error)});
+const idbDel=id=>new Promise(r=>{const t=tx(['meta','blob'],'readwrite');t.objectStore('meta').delete(id);t.objectStore('blob').delete(id);t.oncomplete=()=>r();t.onerror=()=>r()});
+const idbBlob=id=>new Promise(r=>{const q=tx('blob').objectStore('blob').get(id);q.onsuccess=()=>r(q.result);q.onerror=()=>r(null)});
+const URLS={};
+async function thumbURL(id){if(URLS[id])return URLS[id];const b=await idbBlob(id);if(!b)return '';return URLS[id]=URL.createObjectURL(b)}
+const fotosDe=(reg,carp)=>FOT.filter(f=>f.reg===reg&&f.carpeta===carp);
+async function comprimir(file){
+  try{const bmp=await createImageBitmap(file);const M=1280,k=Math.min(1,M/Math.max(bmp.width,bmp.height));const c=document.createElement('canvas');c.width=Math.round(bmp.width*k);c.height=Math.round(bmp.height*k);c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
+    return await new Promise(r=>c.toBlob(b=>r(b||file),'image/jpeg',.78))}catch(e){return file}}
+const stamp=()=>{const d=new Date(),p=x=>String(x).padStart(2,'0');return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'-'+p(d.getHours())+p(d.getMinutes())+p(d.getSeconds())};
+function posFoto(){return new Promise(res=>{
+  const fb=()=>res(G.fix?Object.assign({},G.fix,{src:'Último punto del recorrido'}):null);
+  if(G.fix&&Date.now()-Date.parse(G.fix.t)<20000)return res(Object.assign({},G.fix,{src:'Recorrido GPS'}));
+  if(!navigator.geolocation)return fb();
+  navigator.geolocation.getCurrentPosition(p=>res({lat:+p.coords.latitude.toFixed(6),lon:+p.coords.longitude.toFixed(6),acc:Math.round(p.coords.accuracy),t:new Date().toISOString(),src:'GPS al tomar la foto'}),fb,{enableHighAccuracy:true,timeout:10000,maximumAge:15000})})}
+async function addFotos(files,carpeta,itemN){
+  if(!IDB){toast('Este navegador no permite guardar fotos');return}
+  const reg=S.active,a=A();let k=fotosDe(reg,carpeta).length;
+  toast('Guardando foto y coordenada…');const pos=await posFoto();
+  for(const f of files){const b=await comprimir(f);k++;
+    const nombre='P'+String(playaNum(a.A01)).padStart(2,'0')+'_'+(itemN?'I'+pad(itemN):'OTRAS')+'_'+(vesp(a)?'VESP':'MAT')+'_'+stamp()+'_'+k+'.jpg';
+    const m={id:uid(),reg,playa:a.A01,turno:a.A07,carpeta,item:itemN||null,nombre,estado:'pendiente',fecha:new Date().toISOString(),lat:pos?pos.lat:null,lon:pos?pos.lon:null,acc:pos?pos.acc:null,gsrc:pos?pos.src:'Sin coordenada'};
+    await idbPut(m,b);FOT.push(m)}
+  render(false);toast(files.length+' foto(s) guardada(s)'+(pos?' con coordenada':' sin coordenada'));
+}
+
+// ===== Validación =====
+const tipoOK=(f,a)=>!f.tipos||f.tipos.includes(a.F2_05);
+const enabled=(f,a)=>tipoOK(f,a)&&(!f.dep||f.dep(a));
+function fieldOK(f,a){if(!enabled(f,a))return true;const v=a[f.id];if(f.t==='gps')return v===NA||(has(a[f.id+'_lat'])&&has(a[f.id+'_lon']));return has(v)}
+function itemMissing(n,a,reg=S.active){
+  const id='Q'+pad(n),I=ITEMS[n].it,e=a[id+'_EST'],m=[];
+  if(!has(e))return ['est'];
+  if(e!=='Existe')return m;
+  if(I[4]&&!has(a[id+'_CAN']))m.push('can');
+  if(!has(a[id+'_CON']))m.push('con');
+  if(!has(a[id+'_OBS']))m.push('obs');
+  if(!has(a[id+'_EVI']))m.push('evi');
+  const fm=a[id+'_FOTM']||(a[id+'_FOT']===NA?'Sin foto':'');const fl=fotosDe(reg,carpetaItem(n));
+  if(!fm)m.push('fot');else if(fm==='Con foto'&&(!fl.length||fl.some(f=>!has(f.coment))))m.push('fot');
+  return m;
+}
+const carpetaItem=n=>pad(n)+' '+ITEMS[n].it[1];
+function pageMissing(ap,pg,a){
+  if(pg.items)return pg.items.filter(n=>itemMissing(n,a).length).map(n=>'Q'+pad(n));
+  return pg.f.filter(f=>!fieldOK(f,a)).map(f=>f.id);
+}
+function aptProg(ap){
+  if(ap.k==='perc'){const L=entsAct();const done=L.filter(entDone).length;return {p:Math.min(1,done/50),st:!L.length?'Por iniciar':'En proceso',txt:L.length?(done+' entrevista(s) completas de 50'):''}}
+  const a=A();if(!S.active&&ap.n!==1)return {p:0,st:'Por iniciar'};
+  let tot,ok,any;
+  if(ap.ap){const its=ap.pages.flatMap(p=>p.items);tot=its.length;ok=its.filter(n=>!itemMissing(n,a).length).length;any=its.some(n=>has(a['Q'+pad(n)+'_EST']))}
+  else{tot=ap.pages.length;ok=ap.pages.filter(p=>!pageMissing(ap,p,a).length).length;any=ap.pages.some(p=>p.f.some(f=>has(a[f.id])))}
+  const gabPend=ap.k==='datos'&&ap.pages.some(p=>p.gab&&pageMissing(ap,p,a).length)&&ap.pages.filter(p=>!p.gab).every(p=>!pageMissing(ap,p,a).length);
+  return {p:tot?ok/tot:0,st:ok===tot?'Completo':gabPend?'Campo completo · falta gabinete':any?'En proceso':'Por iniciar'};
+}
+const aptStatus=ap=>{const r=aptProg(ap);return r.st==='Por iniciar'?'':r.st};
+const aptLocked=ap=>'';
+const aptNote=ap=>(ap.k==='C'&&S.active&&vesp())?'Normalmente se responde una vez por playa, en el turno matutino.':'';
+
+// ===== Render de campos =====
+function fieldHTML(f,a,scope){
+  const v=a[f.id],en=enabled(f,a),isNA=v===NA,bad=showErr&&!fieldOK(f,a);
+  const head=`<div class="fhead"><span class="lab">${esc(f.l)} ${f.na?'':'<span class="req">*</span>'}</span>${f.na&&en?`<button type="button" class="na ${isNA?'on':''}" data-na="${f.id}" aria-pressed="${isNA}">N/A</button>`:''}</div>`;
+  const dis=(!en||isNA)?'disabled':'';
+  let body='';
+  if(!en)body=`<div class="lockmsg">${f.tipos&&!tipoOK(f,a)?'No aplica para este tipo de encuestado.':'Bloqueado por la respuesta anterior.'}</div>`;
+  else if(f.t==='radio'||f.t==='scale'){const o=f.t==='scale'?SCALE:f.o;body=`<div class="chips ${f.t==='scale'?'sc':''}">${o.map((x,k)=>`<label><input type="radio" name="${scope}${f.id}" data-f="${f.id}" value="${esc(x)}" ${v===x?'checked':''} ${dis}>${esc(x)}</label>`).join('')}</div>`}
+  else if(f.t==='check')body=`<div class="chips">${f.o.map(x=>`<label><input type="checkbox" data-m="${f.id}" value="${esc(x)}" ${Array.isArray(v)&&v.includes(x)?'checked':''} ${dis}>${esc(x)}</label>`).join('')}</div>`;
+  else if(f.t==='select'||f.t==='zona'||f.t==='playa'){let o=f.o;
+    if(f.t==='zona')o=ZONAS;
+    if(f.t==='playa')o=PLAYAS.filter(p=>!a.A02||p[2]===a.A02).map(p=>p[1]);
+    const lk=(f.t==='zona'||f.t==='playa')&&keyLocked()?'disabled':'';
+    body=`<select id="${scope}${f.id}" data-f="${f.id}" ${dis} ${lk}><option value="">Selecciona…</option>${o.map(x=>`<option ${v===x?'selected':''}>${esc(x)}</option>`).join('')}</select>${f.t==='playa'&&a.A02?`<div class="note" style="margin-top:4px">${o.length} playas en ${esc(a.A02)}.</div>`:''}${lk?'<div class="note">El registro ya tiene respuestas; para otra playa abre un registro nuevo.</div>':''}`}
+  else if(f.t==='area')body=`<textarea id="${scope}${f.id}" data-f="${f.id}" ${dis}>${isNA?'':esc(v)}</textarea>`;
+  else if(f.t==='gps')body=`<div class="row2"><input type="number" step="any" inputmode="decimal" placeholder="Latitud" data-f="${f.id}_lat" value="${esc(a[f.id+'_lat'])}" ${dis}><input type="number" step="any" inputmode="decimal" placeholder="Longitud" data-f="${f.id}_lon" value="${esc(a[f.id+'_lon'])}" ${dis}></div>${f.nogps?'':`<button type="button" class="btn ghost sm" style="margin-top:8px" data-gps="${f.id}" ${dis}>Obtener ubicación</button>`}`;
+  else body=`<div style="display:flex;gap:8px"><input id="${scope}${f.id}" type="${f.t}" data-f="${f.id}" ${f.t==='number'?'step="any" inputmode="decimal" min="0"':''} value="${isNA?'':esc(v)}" ${dis}>${f.now&&!isNA&&en?`<button type="button" class="btn ghost sm" data-now="${f.id}" style="flex:none">Hora actual</button>`:''}</div>`;
+  return `<div class="fld ${f.sub?'dep':''} ${bad?'bad':''}" id="fld_${f.id}">${head}${f.h&&en?`<div class="note" style="margin:-4px 0 6px">${esc(f.h)}</div>`:''}${body}${bad?'<div class="err">Pendiente: responde o marca N/A.</div>':''}</div>`;
+}
+const keyLocked=()=>{const r=REG();if(!r)return false;return Object.keys(r.a).some(k=>/^Q\d{3}_EST$/.test(k))||FOT.some(f=>f.reg===S.active)};
+const REFSVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 8"/></svg>';
+function itemHTML(n,a){
+  const [_,name,desc,stem,cant,ev]=ITEMS[n].it,id='Q'+pad(n),e=a[id+'_EST'],miss=showErr?itemMissing(n,a):[];
+  const ok=!itemMissing(n,a).length;const fot=fotosDe(S.active,carpetaItem(n));
+  const lockAll=e!=='Existe';const fm=a[id+'_FOTM']||(a[id+'_FOT']===NA?'Sin foto':'');
+  const naBtn=k=>`<button type="button" class="na ${a[id+'_'+k]===NA?'on':''}" data-na="${id}_${k}">N/A</button>`;
+  const E=k=>miss.includes(k)?' bad':'';
+  return `<section class="card q ${ok?'done':miss.length?'bad':''}" id="fld_${id}">
+  <h3><span class="num">${pad(n)}</span>${esc(name)}</h3>
+  <p class="stem">${esc(stem)}</p><p class="why">Propósito: ${esc(desc)}</p>
+  <div class="ref" data-ref="${pad(n)}"><img alt="Imagen de referencia del ítem ${pad(n)}" src="img/item-${pad(n)}.jpg" data-refimg="1"></div>
+  <div class="fld${E('est')}"><div class="fhead"><span class="lab">¿Existe? <span class="req">*</span></span></div>
+   <div class="chips">${['Existe','No existe','No aplica'].map(x=>`<label><input type="radio" name="${id}_EST" data-f="${id}_EST" value="${x}" ${e===x?'checked':''}>${x}</label>`).join('')}</div>${miss.includes('est')?'<div class="err">Elige una opción.</div>':''}</div>
+  ${e==='No existe'?'<div class="note" style="margin-top:10px">Condición registrada: <b>0</b> (no existe cuando debería existir). El resto del ítem queda bloqueado.</div>':''}
+  ${e==='No aplica'?'<div class="note" style="margin-top:10px">Condición registrada: <b>No aplica</b>. El resto del ítem queda bloqueado.</div>':''}
+  <div class="${lockAll?'hide':''}">
+   ${cant?`<div class="fld${E('can')}"><div class="fhead"><span class="lab">Cantidad <span class="req">*</span></span>${naBtn('CAN')}</div><input type="number" min="1" step="1" inputmode="numeric" data-f="${id}_CAN" value="${a[id+'_CAN']===NA?'':esc(a[id+'_CAN'])}" ${a[id+'_CAN']===NA?'disabled':''} style="max-width:200px">${miss.includes('can')?'<div class="err">Escribe la cantidad o marca N/A.</div>':''}</div>`:''}
+   <div class="fld${E('con')}"><div class="fhead"><span class="lab">Condición (1 a 5) <span class="req">*</span></span></div>
+    <div class="chips sc">${['1','2','3','4','5'].map(x=>`<label title="${esc(LECT[x])}"><input type="radio" name="${id}_CON" data-f="${id}_CON" value="${x}" ${a[id+'_CON']===x?'checked':''}>${x}</label>`).join('')}</div>
+    <div class="note" style="margin-top:6px">${a[id+'_CON']?esc(a[id+'_CON']+': '+LECT[a[id+'_CON']]):'1 crítica · 2 deficiente · 3 básica o parcial · 4 buena · 5 óptima'}</div>${miss.includes('con')?'<div class="err">Califica la condición.</div>':''}</div>
+   <div class="fld${E('obs')}"><div class="fhead"><span class="lab">Observaciones <span class="req">*</span></span>${naBtn('OBS')}</div><textarea data-f="${id}_OBS" placeholder="Lo observado que sustenta la calificación" ${a[id+'_OBS']===NA?'disabled':''}>${a[id+'_OBS']===NA?'':esc(a[id+'_OBS'])}</textarea>${miss.includes('obs')?'<div class="err">Escribe la observación o marca N/A.</div>':''}</div>
+   <div class="fld${E('evi')}"><div class="fhead"><span class="lab">Tipo de evidencia <span class="req">*</span></span>${naBtn('EVI')}</div><div class="chips">${ev.map(x=>`<label><input type="checkbox" data-m="${id}_EVI" value="${esc(x)}" ${Array.isArray(a[id+'_EVI'])&&a[id+'_EVI'].includes(x)?'checked':''} ${a[id+'_EVI']===NA?'disabled':''}>${esc(x)}</label>`).join('')}</div>${miss.includes('evi')?'<div class="err">Marca al menos un tipo de evidencia o N/A.</div>':''}</div>
+   <div class="fld${E('fot')}"><div class="fhead"><span class="lab">Fotografía de la condición <span class="req">*</span></span></div>
+    <div class="chips">${['Con foto','Sin foto'].map(x=>`<label><input type="radio" name="${id}_FOTM" data-f="${id}_FOTM" value="${x}" ${fm===x?'checked':''}>${x}</label>`).join('')}</div>
+    ${fm==='Sin foto'?'<div class="note" style="margin-top:8px">Se registra sin fotografía. Puedes continuar.</div>':''}
+    ${fm==='Con foto'?`<div style="margin-top:10px"><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="${n}"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="${n}"></label></div>
+     <div class="note" style="margin-top:6px">Cada foto guarda su nombre y la coordenada del teléfono al tomarla o cargarla. Se envía a Drive en: ${esc(a.A01||'')} › ${esc(carpetaItem(n))}</div>
+     ${fotoRows(fot,true)}</div>`:''}
+    ${miss.includes('fot')?`<div class="err">${!fm?'Elige «Con foto» o «Sin foto».':!fot.length?'Carga al menos una foto o elige «Sin foto».':'Escribe el comentario de cada foto.'}</div>`:''}</div>
+  </div></section>`;
+}
+function fotoRows(L,req){return `<div class="frows">${L.map(f=>`<div class="frow"><img data-thumb="${f.id}" alt="Foto ${esc(f.nombre)}">
+  <div><label class="note" for="fc_${f.id}">Comentario de la foto${req?' <span class="req">*</span>':''}</label><textarea id="fc_${f.id}" data-fc="${f.id}" placeholder="Qué muestra la foto">${esc(f.coment||'')}</textarea>
+  <div class="note">${esc(f.nombre)}<br>${f.lat!=null?'Coordenada: '+f.lat+', '+f.lon+' (±'+f.acc+' m)':'Sin coordenada'}</div>
+  <div class="note">${f.estado==='subida'?'Enviada a Drive':'Pendiente de envío'} · <button type="button" class="lnk" data-delfoto="${f.id}">Quitar foto</button></div></div></div>`).join('')}</div>`}
+const LECT={'0':'Condición inexistente cuando debería existir','1':'Condición crítica cuando debería existir','2':'Condición deficiente','3':'Condición básica o parcial','4':'Condición buena','5':'Condición óptima o muy favorable'};
+
+// ===== Pantallas =====
+function home(){
+  const r=REG(),a=A();
+  return `<div class="card hcard hero"><span class="heroimg">${ICON.logo}</span><p class="kick">Secretaría de Turismo · Unidad de Información y Política Turística</p>
+  <h1>Cuestionario de Caracterización de Playas</h1>
+  <p>Levantamiento en campo y gabinete de la caracterización de playas y de la encuesta de percepción. Funciona sin internet: lo capturado se guarda en este dispositivo y las fotos se envían a Drive cuando hay conexión.</p>
+  <div class="okbox" style="margin:10px 0 0;${r?'':'border-color:var(--line);color:var(--ink)'}">${r?`Registro activo: ${esc(a.A01)} · ${esc(a.A07)}`:'Sin playa activa. Usa «Elegir playa» o abre cualquier apartado para empezar.'}</div>
+  ${r?`<div class="btns" style="justify-content:flex-start"><button class="btn ghost sm" type="button" data-turno="${vesp()?'Turno matutino':'Turno vespertino'}">Cambiar a ${vesp()?'turno matutino':'turno vespertino'}</button><button class="btn ghost sm" type="button" data-act="newreg">Iniciar registro de otra playa</button></div>`:''}</div>
+  <button type="button" class="card avbtn" data-act="gps" style="border-left-color:var(--teal)"><span class="ico">${ICON.huellas}</span><span><b>Recorrido GPS</b><span class="note" style="display:block">${G.watch!=null?'Grabando: '+esc(S.regs[G.reg]?.a.A01||'')+' · '+ptsDe(G.reg)+' puntos':S.active&&ptsDe(S.active)?ptsDe(S.active)+' puntos grabados en esta playa. Ver mapa o exportar KML.':'Graba el recorrido de la playa y expórtalo en KML.'}</span></span><span class="go">${G.watch!=null?'Ver →':'Abrir →'}</span></button>
+  <button type="button" class="card avbtn" data-act="avance"><span class="ico">${ICON.sol}</span><span><b>Avance por playa</b><span class="note" style="display:block">${Object.keys(S.regs).length?new Set(Object.values(S.regs).map(r=>r.a.A01)).size+' playa(s) iniciada(s). Ver avance y continuar.':'Aún no hay playas iniciadas.'}</span></span><span class="go">Ver →</span></button>
+  <div class="grid">${APTS.map(ap=>{const lk=aptLocked(ap),pr=aptProg(ap);return `<button type="button" class="apt ${ap.n>=3&&ap.n<=5?'v':''} ${lk?'lock':''}" data-apt="${ap.n}"><span class="ico">${ICON[AICON[ap.n]]}</span>
+   <span class="n">Apartado ${ap.n}</span><h3>${esc(ap.t)}</h3><span class="s">${esc(ap.s)}</span>
+   ${lk?`<span class="st" style="color:var(--mut)">${esc(lk)}</span>`:`<span class="pb"><i style="width:${Math.round(pr.p*100)}%;background:${pr.st==='Completo'?'var(--v)':'var(--d)'}"></i></span><span class="st" style="color:${pr.st==='Completo'?'var(--v)':'var(--gd)'}">${esc(pr.st)}${pr.st==='Por iniciar'?'':' · '+Math.round(pr.p*100)+' %'}</span>`}${aptNote(ap)?`<span class="note">${esc(aptNote(ap))}</span>`:''}</button>`}).join('')}</div>
+  <div class="card" style="margin-top:14px"><h2>Herramientas</h2><div class="tools">
+   <button class="btn sec" type="button" data-act="fotos">Fotos y envío a Drive (${FOT.filter(f=>f.estado!=='subida').length} pendientes)</button>
+   <button class="btn sec" type="button" data-act="regs">Registros y exportación</button><button class="btn" type="button" data-exp="xlsx">Descargar Excel</button></div></div>`;
+}
+function selHTML(){
+  if(S.active)return '';
+  return `<div class="card" style="border-top:6px solid var(--d)"><h2>¿Qué playa vas a llenar?</h2><p class="note">Elige zona, playa y turno. Si la playa ya tiene registro en ese turno, se abre.</p>${DATOS[0].f.filter(f=>['A02','A01','A07'].includes(f.id)).map(f=>fieldHTML(f,A(),'')).join('')}</div>`;
+}
+function intro(ap){
+  const lk=aptLocked(ap);
+  return `<button class="back" type="button" data-act="menu">← Regresar al menú</button>
+  <div class="card hcard ${ap.n>=3&&ap.n<=5?'v':''}"><span class="ico big">${ICON[AICON[ap.n]]}</span><p class="kick">Apartado ${ap.n} · ${esc(ap.src)}</p><h1>${esc(ap.t)}</h1>
+   <h2 style="margin-top:14px">Qué es</h2><p>${esc(ap.que)}</p>
+   <h2 style="margin-top:14px">Cómo se llena</h2><ol class="l">${ap.como.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>
+   ${ap.pages?`<div class="steps">${ap.pages.map((p,i)=>`<span class="${!pageMissing(ap,p,A()).length&&S.active?'ok':''}">Sección ${i+1}${p.gab?' · gabinete':''}</span>`).join('')}</div>`:''}
+   ${aptNote(ap)?`<div class="okbox" style="margin-top:14px;color:var(--ink);border-color:var(--d)">${esc(aptNote(ap))} Puedes llenarlo si lo necesitas.</div>`:''}</div>
+  ${ap.n===1?'':selHTML()}
+  <div class="btns"><button class="btn sec" type="button" data-act="menu">Regresar</button><button class="btn" type="button" data-act="${ap.k==='perc'?'entlist':'start'}">${ap.k==='perc'?'Ver entrevistas':'Comenzar'}</button></div>`;
+}
+function regProg(k){
+  const a=S.regs[k].a;let tot=0,ok=0;
+  APTS.forEach(ap=>{if(ap.k==='perc')return;if(ap.k==='C'&&vesp(a))return;
+    if(ap.ap){ap.pages.forEach(p=>p.items.forEach(n=>{tot++;if(!itemMissing(n,a,k).length)ok++}))}
+    else ap.pages.forEach(p=>{tot++;if(!pageMissing(ap,p,a).length)ok++})});
+  return tot?ok/tot:0;
+}
+function avanceList(){
+  const by={};Object.keys(S.regs).forEach(k=>{const n=playaNum(S.regs[k].a.A01);(by[n]=by[n]||{})[k.endsWith('vesp')?'v':'m']=k});
+  const nums=Object.keys(by).map(Number).sort((x,y)=>x-y);
+  if(!nums.length)return '<div class="card"><p>Aún no has iniciado ninguna playa. Usa «Elegir playa» para empezar.</p><div class="btns" style="justify-content:flex-start"><button class="btn" type="button" id="bPlaya2" data-act="eligeplaya">Elegir playa</button></div></div>';
+  const fila=(n,t,k,otra)=>{const lab=t==='m'?'Turno matutino':'Turno vespertino';
+    if(!k)return `<div class="trow"><span class="tl">${lab}</span><span class="note">Sin iniciar</span><button class="btn sec sm" type="button" data-newturno="${esc(otra)}|${lab}">Iniciar turno</button></div>`;
+    const p=Math.round(regProg(k)*100);
+    return `<div class="trow"><span class="tl">${lab}</span><span class="tbar"><span class="pb"><i style="width:${p}%;background:${p===100?'var(--v)':'var(--d)'}"></i></span><b class="num">${p} %</b>${p===100?'<span class="pill ok" style="margin:0">Completo</span>':''}</span><button class="btn sm" type="button" data-goreg="${esc(k)}">${p===100?'Revisar':'Continuar'}</button></div>`};
+  return nums.map(n=>{const g=by[n],k0=g.m||g.v,a=S.regs[k0].a;const L=S.ents['p'+n]||[];const ec=L.filter(entDone).length;const act=(S.active===g.m||S.active===g.v);
+    return `<section class="card pcard ${act?'act':''}"><div class="phead"><div><h3>${esc(a.A01)}</h3><span class="note">${esc(a.A02||'')}${act?' · en llenado':''}</span></div></div>
+    ${fila(n,'m',g.m,g.v)}${fila(n,'v',g.v,g.m)}
+    <div class="trow"><span class="tl">Entrevistas</span><span class="tbar"><span class="pb"><i style="width:${Math.min(100,Math.round(ec/50*100))}%;background:var(--g)"></i></span><b class="num">${ec} de 50</b></span><button class="btn ghost sm" type="button" data-goent="${esc(k0)}">Ver entrevistas</button></div></section>`}).join('');
+}
+function avanceScr(){
+  return `<button class="back" type="button" data-act="menu">← Regresar al menú general</button>
+  <div class="card hcard"><span class="ico big">${ICON.sol}</span><h1>Avance por playa</h1><p>Playas que has iniciado en este dispositivo, con el avance de cada turno (Apartados 1, 3, 4, 5 y 6) y las entrevistas completas. Toca «Continuar» para seguir llenando la playa donde quedó pendiente.</p>
+  <div class="btns" style="justify-content:flex-start"><button class="btn sec sm" type="button" data-act="eligeplaya">Elegir otra playa</button><button class="btn ghost sm" type="button" data-act="menu">Menú general</button></div></div>
+  ${avanceList()}`;
+}
+const avancePanel=()=>`<div class="card" style="margin-top:14px;border-top:6px solid var(--d)"><h2>Avance por playa</h2><p class="note">Playas iniciadas y su nivel de avance. Toca «Continuar» para seguir con una de ellas.</p></div>${avanceList()}`;
+function irAlLlenado(k){
+  S.active=k;S.draft={};const a=A();
+  for(const ap of APTS){if(ap.k==='perc'||aptLocked(ap))continue;
+    const i=ap.pages.findIndex(p=>!p.gab&&pageMissing(ap,p,a).length);
+    if(i>=0){V={scr:'page',apt:ap.n,pg:i};prefill(ap);return}}
+  const ap=APTS[0],gi=ap.pages.findIndex(p=>p.gab&&pageMissing(ap,p,a).length);
+  if(gi>=0){V={scr:'page',apt:1,pg:gi};return}
+  V={scr:'home'};
+}
+function page(ap,pi){
+  const pg=ap.pages[pi],a=A(),miss=showErr?pageMissing(ap,pg,a):[];
+  return `<button class="back" type="button" data-act="intro">← Regresar a la explicación del apartado</button>
+  <div class="card hcard ${ap.n>=3&&ap.n<=5?'v':''}"><span class="ico big">${ICON[SICON[(pg.t.match(/^[A-E]\.\d/)||[])[0]]||AICON[ap.n]]}</span><p class="kick">Apartado ${ap.n}. ${esc(ap.t)}</p><h2 style="font-size:24px">${esc(pg.t)}</h2><p>${esc(pg.d)}</p>
+   <div class="steps">${ap.pages.map((p,i)=>`<span class="${i===pi?'on':!pageMissing(ap,p,a).length?'ok':''}">${i+1}${p.gab?' · gabinete':''}</span>`).join('')}</div></div>
+  ${ap.n===1&&pi===0&&S.active?`<div class="okbox" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Playa en llenado: ${esc(a.A01)} · ${esc(a.A07)}</span><button class="btn ghost sm" type="button" data-act="newreg">Elegir otra playa</button></div>`:''}
+  ${pg.gab?'<div class="okbox" style="color:var(--ink);border-color:var(--d)">Esta sección se llena en gabinete. En campo puedes dejarla pendiente con «Completar en gabinete».</div>':''}
+  ${(()=>{const mm=pageMissing(ap,pg,a);return mm.length?`<div class="pend"><span>Pendientes en esta sección: <b>${mm.length}</b>. Puedes avanzar y completarlos después.</span><button class="btn ghost sm" type="button" data-act="hl">${showErr?'Quitar resaltado':'Resaltar pendientes'}</button></div>`:'<div class="okbox">Sección completa.</div>'})()}
+  ${pg.items?pg.items.map(n=>itemHTML(n,a)).join(''):`<div class="card">${pg.f.map(f=>fieldHTML(f,a,'')).join('')}</div>`}
+  <div class="btns"><button class="btn sec" type="button" data-act="prev">${pi===0?'Explicación':'Atrás'}</button><span class="note">Sección ${pi+1} de ${ap.pages.length}</span>
+   <span style="display:flex;gap:10px;flex-wrap:wrap">${pg.gab?'<button class="btn sec" type="button" data-act="gablater">Completar en gabinete</button>':''}<button class="btn" type="button" data-act="next">${pi===ap.pages.length-1?'Terminar apartado':'Siguiente'}</button></span></div>
+  ${ap.n===1&&pi===0?avancePanel():''}`;
+}
+const entsAct=()=>{const a=A();const n=playaNum(a.A01);return n?(S.ents['p'+n]||[]):[]};
+function entList(){
+  const a=A(),L=entsAct();
+  const c=(t,s)=>L.filter(e=>e.a.F2_05===t&&(!s||e.a.F2_07===s)).length;
+  return `<button class="back" type="button" data-act="intro">← Regresar a la explicación del apartado</button>
+  <div class="card hcard"><p class="kick">Apartado 2. Encuesta de percepción</p><h2 style="font-size:24px">Entrevistas de ${esc(a.A01)}</h2>
+  <div class="meta"><div><b>${c(TT)} de 30</b><span>Turistas y visitantes</span></div><div><b>${c(TT,'Mujer')} de 15</b><span>Mujeres</span></div><div><b>${c(TT,'Hombre')} de 15</b><span>Hombres</span></div><div><b>${c(TT,'Prefiere no decir')}</b><span>Prefiere no decir</span></div><div><b>${c(TR)} de 10</b><span>Población local</span></div><div><b>${c(TP)} de 10</b><span>Prestadores y concesionarios</span></div></div>
+  <div class="btns" style="justify-content:flex-start;margin-top:14px"><button class="btn" type="button" data-act="newent">Nueva entrevista</button><button class="btn sec" type="button" data-act="menu">Regresar al menú</button></div></div>
+  <div class="card">${L.length?`<div class="scroll"><table class="stack"><thead><tr><th>Núm.</th><th>Tipo</th><th>Sexo</th><th>Entrevistador(a)</th><th>Estado</th><th></th></tr></thead><tbody>
+  ${L.map((e,i)=>`<tr><td data-l="Núm." class="num">${i+1}</td><td data-l="Tipo">${esc(e.a.F2_05||'—')}</td><td data-l="Sexo">${esc(e.a.F2_07||'—')}</td><td data-l="Entrevistador(a)">${esc(e.a.F2_04||'—')}</td><td data-l="Estado">${entDone(e)?'<span class="pill ok">Completa</span>':'<span class="pill bad">Incompleta</span>'}</td><td><button class="btn ghost sm" type="button" data-openent="${e.id}">Abrir</button> <button class="btn ghost sm" type="button" data-delent="${e.id}">Eliminar</button></td></tr>`).join('')}</tbody></table></div>`:'<p class="note">Aún no hay entrevistas en esta playa.</p>'}</div>`;
+}
+const entPages=e=>ENT_PAGES.filter(p=>!p.g||p.f.some(f=>tipoOK(f,e.a)));
+const entDone=e=>entPages(e).every(p=>!p.f.filter(f=>!fieldOK(f,e.a)).length);
+function entPage(){
+  const e=curEnt();if(!e){V.scr='entlist';return entList()}
+  const P=entPages(e),pi=Math.min(V.pg||0,P.length-1),pg=P[pi],miss=showErr?pg.f.filter(f=>!fieldOK(f,e.a)):[];
+  const shown=pg.g?pg.f.filter(f=>tipoOK(f,e.a)):pg.f;
+  return `<button class="back" type="button" data-act="entlist">← Regresar a la lista de entrevistas</button>
+  <div class="card hcard"><p class="kick">Apartado 2. Encuesta de percepción · Entrevista ${entsAct().indexOf(e)+1} · ${esc(A().A01)}</p><h2 style="font-size:24px">${esc(pg.t)}</h2><p>${esc(pg.d)}</p>
+  <div class="steps">${P.map((p,i)=>`<span class="${i===pi?'on':!p.f.filter(f=>!fieldOK(f,e.a)).length?'ok':''}">${i+1}</span>`).join('')}</div></div>
+  ${(()=>{const mm=pg.f.filter(f=>!fieldOK(f,e.a));return mm.length?`<div class="pend"><span>Pendientes en esta sección: <b>${mm.length}</b>. Puedes avanzar y completarlos después.</span><button class="btn ghost sm" type="button" data-act="hl">${showErr?'Quitar resaltado':'Resaltar pendientes'}</button></div>`:''})()}
+  ${pi===0&&!e.a.F2_05?'<div class="okbox" style="color:var(--ink);border-color:var(--d)">El tipo de encuestado define qué preguntas se aplican en las siguientes secciones.</div>':''}
+  <div class="card">${shown.map(f=>fieldHTML(f,e.a,'e')).join('')}</div>
+  <div class="btns"><button class="btn sec" type="button" data-act="eprev">${pi===0?'Lista':'Atrás'}</button><span class="note">Sección ${pi+1} de ${P.length}</span>
+   <button class="btn" type="button" data-act="enext">${pi===P.length-1?'Guardar entrevista':'Siguiente'}</button></div>`;
+}
+const curEnt=()=>entsAct().find(x=>x.id===V.ent);
+function fotosScr(){
+  const pend=FOT.filter(f=>f.estado!=='subida'),sub=FOT.filter(f=>f.estado==='subida');
+  const a=A(),r=REG();const otras=r?fotosDe(S.active,'Otras'):[];
+  return `<button class="back" type="button" data-act="menu">← Regresar al menú</button>
+  <div class="card hcard v"><span class="ico big">${ICON.caracol}</span><h1>Fotos y envío a Drive</h1>
+  <p>Las fotos se guardan en este dispositivo y se envían a la carpeta compartida de Drive cuando hay conexión. En Drive se crea una carpeta por playa y, dentro, una carpeta por ítem y la carpeta «Otras».</p>
+  <p><a href="${DRIVE_URL}" target="_blank" rel="noopener">Abrir la carpeta de Drive</a></p>
+  <div class="meta"><div><b>${pend.length}</b><span>Pendientes de envío</span></div><div><b>${sub.length}</b><span>Enviadas a Drive</span></div></div>
+  <div class="btns" style="justify-content:flex-start;margin-top:12px"><button class="btn" type="button" data-act="sync" ${pend.length?'':'disabled'}>Enviar fotos pendientes</button><button class="btn sec" type="button" data-act="senddata">Enviar respaldo de datos a Drive</button></div>
+  <p class="note" id="syncmsg" style="margin-top:8px"></p></div>
+  <div class="card"><h2>Fotos adicionales (carpeta «Otras»)</h2>${r?`<p class="note">${esc(a.A01)} › Otras</p><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="0"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="0"></label></div>
+   ${fotoRows(otras,false)}`:'<p class="note">Abre un registro en el Apartado 1 para agregar fotos.</p>'}</div>
+  <div class="card"><h2>Conexión con Drive</h2><p class="note">Dirección del servicio de Google Apps Script que recibe las fotos (ver README del repositorio) y clave compartida.</p>
+   <div class="fld"><div class="fhead"><span class="lab">URL del servicio</span></div><input type="text" id="cfgUrl" value="${esc(S.cfg.url)}" placeholder="https://script.google.com/macros/s/…/exec"></div>
+   <div class="fld"><div class="fhead"><span class="lab">Clave</span></div><input type="text" id="cfgTok" value="${esc(S.cfg.token)}"></div>
+   <div class="btns" style="justify-content:flex-start"><button class="btn ghost" type="button" data-act="cfg">Guardar y probar conexión</button></div></div>`;
+}
+function regsScr(){
+  const ks=Object.keys(S.regs).sort();
+  const ents=Object.values(S.ents).reduce((t,l)=>t+l.length,0);
+  return `<button class="back" type="button" data-act="menu">← Regresar al menú</button>
+  <div class="card hcard"><h1>Registros y exportación</h1><p>Registros por playa y turno guardados en este dispositivo y ${ents} entrevista(s) de percepción.</p></div>
+  <div class="card">${ks.length?`<div class="scroll"><table class="stack"><thead><tr><th>Playa</th><th>Turno</th><th>Fecha</th><th>Avance</th><th></th></tr></thead><tbody>${ks.map(k=>{const a=S.regs[k].a;const its=APTS.filter(x=>x.ap).flatMap(x=>(x.k==='C'&&vesp(a))?[]:x.pages.flatMap(p=>p.items));const ok=its.filter(n=>!itemMissing(n,a,k).length).length;
+   return `<tr><td data-l="Playa">${esc(a.A01)}</td><td data-l="Turno">${esc(String(a.A07).replace('Turno ',''))}</td><td data-l="Fecha">${esc(a.A04||'')}</td><td data-l="Avance" class="num">${its.length?Math.round(100*ok/its.length):0} %</td><td>${k===S.active?'<span class="pill ok">Activo</span>':`<button class="btn ghost sm" type="button" data-openreg="${k}">Abrir</button>`}</td></tr>`}).join('')}</tbody></table></div>`:'<p class="note">Aún no hay registros.</p>'}</div>
+  <div class="card"><h2>Descargar la información</h2><p class="note">Un solo archivo de Excel con las hojas Matriz_Turno, BD_A, Percepción, Fotos (nombre de archivo y coordenada de cada foto) y Recorrido GPS.</p><div class="tools">
+   <button class="btn" type="button" data-exp="xlsx">Descargar Excel (toda la información)</button><button class="btn sec" type="button" data-act="kmlall">Recorridos y fotos en KML</button><button class="btn ghost" type="button" data-exp="json">Respaldo completo (JSON)</button></div>
+   <details id="otros" style="margin-top:12px"><summary class="note" style="cursor:pointer;min-height:40px">Otros formatos (CSV por hoja)</summary><div class="tools" style="margin-top:8px"><button class="btn ghost sm" type="button" data-exp="mt">Matriz_Turno</button><button class="btn ghost sm" type="button" data-exp="bd">BD_A</button><button class="btn ghost sm" type="button" data-exp="pe">Percepción</button><button class="btn ghost sm" type="button" data-exp="fo">Fotos</button><button class="btn ghost sm" type="button" data-exp="gp">Recorrido GPS</button></div></details>
+   <div id="expBox"></div>
+   <h2 style="margin-top:18px">Importar respaldo</h2><p class="note">Une los registros y entrevistas de otro dispositivo (archivo JSON de respaldo).</p><label class="up">Elegir archivo JSON<input type="file" accept=".json,application/json" id="impJson"></label></div>`;
+}
+function render(scroll=true){
+  if(MAP){try{MAP.remove()}catch(e){}MAP=null}
+  let h='';
+  if(V.scr==='home')h=home();
+  else if(V.scr==='intro')h=intro(APTS[V.apt-1]);
+  else if(V.scr==='page')h=page(APTS[V.apt-1],V.pg);
+  else if(V.scr==='entlist')h=entList();
+  else if(V.scr==='ent')h=entPage();
+  else if(V.scr==='fotos')h=fotosScr();
+  else if(V.scr==='regs')h=regsScr();
+  else if(V.scr==='avance')h=avanceScr();
+  else if(V.scr==='gps')h=gpsScr();
+  $('#main').innerHTML=h;
+  const a=A();$('#who').textContent=S.active?(a.A01+' · '+a.A07):'Sin registro activo';
+  let pr=0;if(V.scr==='page')pr=(V.pg+1)/APTS[V.apt-1].pages.length;else if(V.scr==='ent'){const e=curEnt();if(e)pr=((V.pg||0)+1)/entPages(e).length}
+  $('#prog').style.width=Math.round(pr*100)+'%';
+  document.querySelectorAll('[data-thumb]').forEach(async im=>{im.src=await thumbURL(im.dataset.thumb)});
+  if(scroll)window.scrollTo({top:0});
+  if(V.scr==='gps')initMap();
+  gpsUI();
+  save();
+}
+document.addEventListener('toggle',ev=>{if(ev.target.id==='avance')V.avOpen=ev.target.open},true);
+document.addEventListener('load',ev=>{const t=ev.target;if(t.tagName==='IMG'&&t.dataset.refimg)t.parentElement.classList.add('ok')},true);
+document.addEventListener('error',ev=>{const t=ev.target;if(t.tagName==='IMG'&&t.dataset.refimg){const b=t.parentElement;b.innerHTML=ICON.palmera+'<div>Imagen de referencia por cargar</div>'}},true);
+
+// ===== Registro activo =====
+function syncKey(){
+  const a=A(),k=regKey(a);if(!k)return;
+  if(!S.active){
+    if(S.regs[k]){const ex=S.regs[k].a;Object.keys(a).forEach(x=>{if(!has(ex[x]))ex[x]=a[x]});S.active=k;S.draft={};toast('Se abrió el registro existente de esa playa y turno')}
+    else{S.regs[k]={a:Object.assign({},a),t0:nowHM(),created:new Date().toISOString()};S.active=k;S.draft={};toast('Registro creado: '+a.A01)}
+  }else if(k!==S.active){
+    if(S.regs[k]){toast('Ya existe un registro de esa playa y turno; ábrelo desde Registros');return false}
+    S.regs[k]=S.regs[S.active];delete S.regs[S.active];S.active=k;
+  }
+  return true;
+}
+const COPIA=['A01','A02','A03','A04','A05','A06','A09','A10','A11','A12','A13','A14','A15','A15_lat','A15_lon','A16','A23','A24','A25','A26'];
+function cambiarTurno(v){const cur=A();const k=regKey(Object.assign({},cur,{A07:v}));if(!k)return;
+  if(!S.regs[k]){const na={A07:v};COPIA.forEach(f=>{if(has(cur[f]))na[f]=cur[f]});S.regs[k]={a:na,t0:nowHM(),created:new Date().toISOString()};toast('Se creó el registro del '+v.toLowerCase()+' con los datos de la playa')}
+  else toast('Se abrió el registro del '+v.toLowerCase());S.active=k}
+function setVal(id,v){
+  if(id==='A07'&&V.scr!=='ent'&&S.active&&keyLocked()&&v!==A().A07){cambiarTurno(v);return}
+  const a=V.scr==='ent'?curEnt().a:A();
+  if(id==='A02'){a.A02=v;if(a.A01&&zonaDe(a.A01)!==v)delete a.A01}
+  else if(id==='A01'){a.A01=v;if(v)a.A02=zonaDe(v)}
+  else a[id]=v;
+  const m=id.match(/^Q(\d{3})_EST$/);
+  if(m){const q='Q'+m[1];if(v==='No existe')a[q+'_CON']='0';else if(v==='No aplica')a[q+'_CON']=NOAP;else if(['0',NOAP].includes(a[q+'_CON']))delete a[q+'_CON']}
+  if(V.scr!=='ent'&&['A01','A02','A07'].includes(id)){const r=syncKey();if(r===false){render(false);return}}
+  if(V.scr==='ent'&&id==='F2_05'){}
+}
+
+// ===== Eventos =====
+$('#main').addEventListener('change',async ev=>{
+  const t=ev.target;
+  if(t.dataset.foto!==undefined){const n=+t.dataset.foto;const files=[...t.files];if(files.length)await addFotos(files,n?carpetaItem(n):'Otras',n||null);return}
+  if(t.id==='impJson'){const f=t.files[0];if(!f)return;try{const x=JSON.parse(await f.text());let r=0,e=0;Object.entries(x.regs||{}).forEach(([k,v])=>{if(!S.regs[k]){S.regs[k]=v;r++}});Object.entries(x.ents||{}).forEach(([k,l])=>{const cur=S.ents[k]=S.ents[k]||[];l.forEach(it=>{if(!cur.some(c=>c.id===it.id)){cur.push(it);e++}})});save();render(false);toast('Importados: '+r+' registro(s) y '+e+' entrevista(s)')}catch(err){toast('El archivo no es un respaldo válido')}return}
+  if(t.dataset.f&&t.type!=='text'&&t.tagName!=='TEXTAREA'&&t.type!=='number'){setVal(t.dataset.f,t.value);render(false);return}
+  if(t.dataset.m){const a=V.scr==='ent'?curEnt().a:A();const s=new Set(Array.isArray(a[t.dataset.m])?a[t.dataset.m]:[]);t.checked?s.add(t.value):s.delete(t.value);a[t.dataset.m]=[...s];render(false)}
+});
+let fcT;$('#main').addEventListener('input',ev=>{const t=ev.target;if(t.dataset.fc){const m=FOT.find(f=>f.id===t.dataset.fc);if(m){m.coment=t.value;clearTimeout(fcT);fcT=setTimeout(()=>idbPut(m).catch(()=>{}),400)}const box=t.closest('.fld');if(box&&[...box.querySelectorAll('[data-fc]')].every(x=>x.value.trim())){box.classList.remove('bad');box.querySelector('.err')?.remove()}return}if(t.dataset.f&&(t.type==='text'||t.type==='number'||t.tagName==='TEXTAREA')){const a=V.scr==='ent'?curEnt().a:A();a[t.dataset.f]=t.value;if(t.dataset.f==='A09'||t.dataset.f==='F2_04'){}save();
+  if(showErr){const box=t.closest('.fld');if(box&&has(t.value)){box.classList.remove('bad');box.querySelector('.err')?.remove()}}}});
+$('#main').addEventListener('focusout',ev=>{const t=ev.target;if(t.dataset&&t.dataset.fc){const q=t.closest('.q');if(q){const n=+q.id.slice(5);const ok=!itemMissing(n,A()).length;q.classList.toggle('done',ok);if(ok)q.classList.remove('bad')}return}if(t.dataset&&t.dataset.f&&(t.type==='text'||t.type==='number'||t.tagName==='TEXTAREA')){const q=t.closest('.q');if(q){const n=+q.id.slice(5);q.classList.toggle('done',!itemMissing(n,A()).length)}}});
+document.addEventListener('click',async ev=>{
+  const g=ev.target.closest('button,[data-apt]');if(!g)return;const d=g.dataset;
+  if(g.id==='bGps'){V={scr:'gps'};showErr=false;render();return}
+  if(g.id==='bAvance'){V={scr:'avance'};showErr=false;render();return}
+  if(g.id==='bPlaya'){V={scr:'page',apt:1,pg:0};showErr=false;prefill(APTS[0]);render();return}
+  if(g.id==='bMenu'){V={scr:'home'};showErr=false;render();return}
+  if(d.apt){const ap=APTS[+d.apt-1];V={scr:'intro',apt:ap.n};showErr=false;render();return}
+  if(d.na){const a=V.scr==='ent'?curEnt().a:A();a[d.na]=a[d.na]===NA?'':NA;if(a[d.na]==='')delete a[d.na];render(false);return}
+  if(d.now){const a=V.scr==='ent'?curEnt().a:A();a[d.now]=nowHM();render(false);return}
+  if(d.gps){const a=V.scr==='ent'?curEnt().a:A();if(!navigator.geolocation){toast('Este dispositivo no permite obtener la ubicación');return}toast('Obteniendo ubicación…');
+    navigator.geolocation.getCurrentPosition(p=>{a[d.gps+'_lat']=p.coords.latitude.toFixed(6);a[d.gps+'_lon']=p.coords.longitude.toFixed(6);render(false);toast('Ubicación registrada')},()=>toast('No se pudo obtener la ubicación; escríbela'),{enableHighAccuracy:true,timeout:20000});return}
+  if(d.delfoto){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar quitar';return}await idbDel(d.delfoto);FOT=FOT.filter(f=>f.id!==d.delfoto);render(false);toast('Foto quitada');return}
+  if(d.openent){V={scr:'ent',apt:2,ent:d.openent,pg:0};showErr=false;render();return}
+  if(d.delent){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar';return}const n='p'+playaNum(A().A01);S.ents[n]=(S.ents[n]||[]).filter(e=>e.id!==d.delent);render(false);return}
+  if(d.goreg){irAlLlenado(d.goreg);showErr=false;render();toast('Registro abierto: '+A().A01+' · '+A().A07);return}
+  if(d.newturno){const [k,v]=d.newturno.split('|');S.active=k;cambiarTurno(v);irAlLlenado(S.active);showErr=false;render();return}
+  if(d.goent){S.active=d.goent;S.draft={};V={scr:'entlist',apt:2};showErr=false;render();return}
+  if(d.turno){cambiarTurno(d.turno);render(false);return}
+  if(d.openreg){S.active=d.openreg;S.draft={};V={scr:'home'};render();toast('Registro abierto');return}
+  if(d.exp){exportar(d.exp);return}
+  const k=d.act;if(!k)return;
+  const ap=APTS[(V.apt||1)-1];
+  if(k==='menu'){V={scr:'home'};showErr=false;render()}
+  if(k==='intro'){V={scr:'intro',apt:V.apt};showErr=false;render()}
+  if((k==='start'||k==='entlist')&&ap.n!==1&&!S.active){toast('Elige primero la playa y el turno');document.querySelector('#fld_A02')?.scrollIntoView({behavior:'smooth',block:'center'});return}
+  if(k==='start'){V={scr:'page',apt:ap.n,pg:0};showErr=false;prefill(ap);render()}
+  if(k==='entlist'){V={scr:'entlist',apt:2};showErr=false;render()}
+  if(k==='prev'){showErr=false;if(V.pg===0)V={scr:'intro',apt:V.apt};else V.pg--;render()}
+  if(k==='next'){const miss=pageMissing(ap,ap.pages[V.pg],A()),n0=V.pg+1;showErr=false;
+    if(V.pg<ap.pages.length-1){V.pg++;prefill(ap);render();if(miss.length)toast('Sección '+n0+' guardada con '+miss.length+' pendiente(s)')}
+    else{const rest=ap.pages.some(pp=>pageMissing(ap,pp,A()).length);V={scr:'home'};render();toast(rest?'Apartado '+ap.n+' guardado con pendientes':'Apartado '+ap.n+' completo')}}
+  if(k==='hl'){showErr=!showErr;render(false);if(showErr){const el=document.querySelector('.fld.bad,.q.bad');el&&el.scrollIntoView({behavior:'smooth',block:'center'})}}
+  if(k==='eligeplaya'){V={scr:'page',apt:1,pg:0};showErr=false;prefill(APTS[0]);render()}
+  if(k==='gablater'){showErr=false;V={scr:'home'};render();toast('Sección de gabinete pendiente')}
+  if(k==='newent'){const a=A();const e={id:uid(),created:new Date().toISOString(),a:{F2_01:today(),F2_02:nowHM(),F2_04:S.lastEnt||''}};const n='p'+playaNum(a.A01);(S.ents[n]=S.ents[n]||[]).push(e);V={scr:'ent',apt:2,ent:e.id,pg:0};showErr=false;render()}
+  if(k==='eprev'){showErr=false;if(!V.pg)V={scr:'entlist',apt:2};else V.pg--;render()}
+  if(k==='enext'){const e=curEnt(),P=entPages(e),pg=P[V.pg||0];const miss=pg.f.filter(f=>!fieldOK(f,e.a));if(miss.length)toast('Sección guardada con '+miss.length+' pendiente(s)');
+    showErr=false;if(e.a.F2_04)S.lastEnt=e.a.F2_04;if((V.pg||0)<P.length-1){V.pg=(V.pg||0)+1;render()}else{V={scr:'entlist',apt:2};render();toast(entDone(e)?'Entrevista completa':'Entrevista guardada con pendientes')}}
+  if(k==='newreg'){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar: iniciar registro nuevo';return}S.active=null;S.draft={A04:today()};V={scr:'page',apt:1,pg:0};showErr=false;render()}
+  if(k==='avance'){V={scr:'avance'};render()}
+  if(k==='gps'){V={scr:'gps'};render()}
+  if(k==='fotos'){V={scr:'fotos'};render()}
+  if(k==='regs'){V={scr:'regs'};render()}
+  if(k==='cfg'){S.cfg.url=$('#cfgUrl').value.trim();S.cfg.token=$('#cfgTok').value.trim();save();const r=await post({accion:'ping'});toast(r&&r.ok?(r.opaco?'Solicitud enviada; el servicio no devolvió confirmación':'Conexión correcta con Drive'):'No hay conexión con el servicio')}
+  if(k==='sync')syncFotos();
+  if(k==='gpsstart')gpsStart();
+  if(k==='gpsstop')gpsStop();
+  if(k==='kml'){if(!ptsDe(S.active)&&!FOT.some(f=>f.reg===S.active&&f.lat!=null)){toast('Aún no hay recorrido ni fotos con coordenada');return}saveFile(kmlName(S.active),kml([S.active]))}
+  if(k==='kmlall'){const ks=Object.keys(S.regs).filter(x=>ptsDe(x)||FOT.some(f=>f.reg===x&&f.lat!=null));if(!ks.length){toast('No hay recorridos grabados');return}saveFile('Recorridos_playas_'+stamp().slice(0,8)+'.kml',kml(ks))}
+  if(k==='kmldrive'){const r=await post({accion:'kml',playa:A().A01,nombre:kmlName(S.active),data:kml([S.active])});toast(r&&r.ok?(r.opaco?'KML enviado a Drive (sin confirmación del servicio)':'KML guardado en la carpeta de la playa en Drive'):'No se pudo enviar el KML')}
+  if(k==='gpsdel'){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar: borrar recorrido';return}if(G.reg===S.active)gpsStop(true);REG().tracks=[];save();render(false);toast('Recorrido borrado')}
+  if(k==='senddata'){const r=await post({accion:'datos',nombre:'respaldo_'+stamp()+'.json',data:JSON.stringify({regs:S.regs,ents:S.ents})});toast(r&&r.ok?'Respaldo enviado a Drive (_Registros)':'No se pudo enviar el respaldo')}
+});
+function prefill(ap){const a=A();if(ap.k==='datos'&&!a.A04)a.A04=today();if(ap.k==='cierre'){const r=REG();if(r&&!a.C01)a.C01=r.t0||'';if(!a.I01&&a.A09)a.I01=a.A09}}
+
+// ===== Recorrido GPS =====
+const G={watch:null,wake:null,reg:null,fix:null,err:''};let MAP=null;
+const hav=(a,b)=>{const R=6371000,t=x=>x*Math.PI/180;const dl=t(b.lat-a.lat),dn=t(b.lon-a.lon);const h=Math.sin(dl/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+const ptsDe=k=>((S.regs[k]&&S.regs[k].tracks)||[]).reduce((t,x)=>t+x.length,0);
+async function wake(){try{if('wakeLock' in navigator&&document.visibilityState==='visible')G.wake=await navigator.wakeLock.request('screen')}catch(e){}}
+function gpsStart(){
+  if(!S.active){toast('Elige primero la playa y el turno');return}
+  if(!navigator.geolocation){toast('Este dispositivo no permite usar el GPS');return}
+  if(G.watch!=null)gpsStop(true);
+  const r=REG();r.tracks=r.tracks||[];r.tracks.push([]);G.reg=S.active;G.err='Buscando señal GPS…';
+  G.watch=navigator.geolocation.watchPosition(gpsPos,e=>{G.err=e.code===1?'Permiso de ubicación denegado. Actívalo en el navegador.':'Sin señal GPS; se sigue intentando.';gpsUI()},{enableHighAccuracy:true,maximumAge:0,timeout:30000});
+  wake();save();render(false);toast('Grabando recorrido');
+}
+function gpsStop(silent){
+  if(G.watch!=null)navigator.geolocation.clearWatch(G.watch);G.watch=null;try{G.wake&&G.wake.release()}catch(e){}G.wake=null;
+  const r=S.regs[G.reg];if(r&&r.tracks&&r.tracks.length&&!r.tracks[r.tracks.length-1].length)r.tracks.pop();G.reg=null;G.err='';save();
+  if(!silent){render(false);toast('Recorrido detenido y guardado')}
+}
+function gpsPos(p){
+  const c=p.coords;G.fix={lat:+c.latitude.toFixed(6),lon:+c.longitude.toFixed(6),acc:Math.round(c.accuracy),t:new Date().toISOString()};G.err='';
+  const r=S.regs[G.reg];if(!r||!r.tracks)return;const seg=r.tracks[r.tracks.length-1];const last=seg[seg.length-1];
+  if(!last||hav(last,G.fix)>=3||Date.now()-Date.parse(last.t)>=15000){seg.push(G.fix);save();if(MAP&&MAP._seg&&G.reg===S.active){MAP._seg.addLatLng([G.fix.lat,G.fix.lon]);MAP.panTo([G.fix.lat,G.fix.lon])}}
+  gpsUI();
+}
+function gpsUI(){
+  const on=G.watch!=null,pill=$('#gpsPill');pill.classList.toggle('hide',!on);if(on)pill.textContent='● Grabando · '+ptsDe(G.reg)+' puntos';
+  const inf=$('#gpsInfo');if(inf){const k=S.active,r=REG();inf.innerHTML=k?`<div><b class="num">${ptsDe(k)}</b><span>Puntos grabados</span></div><div><b class="num">${(r.tracks||[]).filter(x=>x.length).length}</b><span>Tramos grabados</span></div><div><b class="num">${G.fix&&on?'±'+G.fix.acc+' m':'—'}</b><span>Precisión actual</span></div><div><b class="num">${FOT.filter(f=>f.reg===k&&f.lat!=null).length}</b><span>Fotos con coordenada</span></div>`:'';}
+  const er=$('#gpsErr');if(er)er.textContent=on?G.err:'';
+}
+document.addEventListener('visibilitychange',()=>{if(G.watch!=null&&document.visibilityState==='visible')wake()});
+function initMap(){
+  const el=$('#map');if(!el)return;if(!window.L){el.innerHTML='<div class="ref" style="height:100%;aspect-ratio:auto;max-height:none">El mapa no está disponible sin la biblioteca de mapas. El recorrido se graba y se exporta igual.</div>';return}
+  const r=REG();MAP=L.map(el);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(MAP);
+  const segs=(r&&r.tracks)||[];let all=[];
+  segs.forEach((sg,i)=>{const ll=sg.map(q=>[q.lat,q.lon]);all=all.concat(ll);const pl=L.polyline(ll,{color:'#0b5d8a',weight:5,opacity:.9}).addTo(MAP);if(i===segs.length-1&&G.reg===S.active&&G.watch!=null)MAP._seg=pl});
+  FOT.filter(f=>f.reg===S.active&&f.lat!=null).forEach(f=>{L.circleMarker([f.lat,f.lon],{radius:7,color:'#0b5d8a',weight:2,fillColor:'#ffbe45',fillOpacity:1}).addTo(MAP).bindPopup(esc(f.nombre)+(f.coment?'<br>'+esc(f.coment):''));all.push([f.lat,f.lon])});
+  if(all.length)MAP.fitBounds(all,{padding:[24,24],maxZoom:18});else if(G.fix)MAP.setView([G.fix.lat,G.fix.lon],17);else MAP.setView([16.85,-99.88],12);
+}
+function gpsScr(){
+  const r=REG(),a=A(),on=G.watch!=null,aqui=on&&G.reg===S.active;
+  return `<button class="back" type="button" data-act="menu">← Regresar al menú general</button>
+  <div class="card hcard v"><span class="ico big">${ICON.huellas}</span><h1>Recorrido GPS</h1>
+  <p>Graba el recorrido de la playa con el GPS del teléfono. Se guarda en el dispositivo aunque no haya internet y se exporta en KML junto con la ubicación de las fotos.</p>
+  <ul class="l"><li>Inicia la grabación al empezar a caminar la playa y detenla al terminar. Puedes pausar y reanudar; cada reanudación es un tramo nuevo.</li><li>Mientras graba, la pantalla se mantiene encendida. Deja el cuestionario abierto: si cierras la app o apagas la pantalla, el teléfono puede suspender el GPS.</li><li>Puedes seguir llenando los apartados mientras graba.</li></ul></div>
+  ${selHTML()}
+  ${r?`<div class="card"><div class="phead"><div><h3>${esc(a.A01)}</h3><span class="note">${esc(a.A07)}</span></div><span class="pill ${aqui?'bad':''}">${aqui?'● Grabando':on?'Grabando en otra playa':'Detenido'}</span></div>
+   ${on&&!aqui?`<p class="note">Se está grabando el recorrido de ${esc(S.regs[G.reg]?.a.A01||'')}. Al iniciar aquí se detiene aquel.</p>`:''}
+   <div class="btns" style="justify-content:flex-start">${aqui?'<button class="btn" type="button" data-act="gpsstop">Detener grabación</button>':`<button class="btn" type="button" data-act="gpsstart">${ptsDe(S.active)?'Reanudar grabación':'Iniciar grabación'}</button>`}</div>
+   <p class="err" id="gpsErr"></p><div class="meta" id="gpsInfo"></div>
+   <div id="map" style="height:340px;border-radius:10px;margin-top:14px;border:1px solid var(--line);z-index:0"></div>
+   <p class="note" style="margin-top:6px">Línea azul: recorrido. Puntos amarillos: fotos con coordenada. El fondo de mapa requiere internet.</p>
+   <div class="tools" style="margin-top:8px"><button class="btn sec" type="button" data-act="kml">Descargar KML</button><button class="btn sec" type="button" data-act="kmldrive">Enviar KML a Drive</button><button class="btn ghost" type="button" data-act="gpsdel">Borrar recorrido</button></div></div>`:''}`;
+}
+function kml(keys){
+  const x=v=>String(v??'').replace(/[<>&'"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;'}[c]));
+  const body=keys.map(k=>{const r=S.regs[k],a=r.a,segs=(r.tracks||[]).filter(t=>t.length);const fotos=FOT.filter(f=>f.reg===k&&f.lat!=null);
+    return `<Folder><name>${x(a.A01+' · '+a.A07)}</name>
+${segs.map((t,i)=>`<Placemark><name>Recorrido ${i+1}</name><styleUrl>#ruta</styleUrl><TimeSpan><begin>${t[0].t}</begin><end>${t[t.length-1].t}</end></TimeSpan><LineString><tessellate>1</tessellate><coordinates>${t.map(q=>q.lon+','+q.lat+',0').join(' ')}</coordinates></LineString></Placemark>`).join('\n')}
+${fotos.map(f=>`<Placemark><name>${x(f.nombre)}</name><styleUrl>#foto</styleUrl><description>${x((f.item?carpetaItem(f.item):'Otras')+(f.coment?' · '+f.coment:'')+' · ±'+f.acc+' m')}</description><TimeStamp><when>${f.fecha}</when></TimeStamp><Point><coordinates>${f.lon},${f.lat},0</coordinates></Point></Placemark>`).join('\n')}
+</Folder>`}).join('\n');
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Recorridos · Caracterización de Playas</name>
+<Style id="ruta"><LineStyle><color>ff8a5d0b</color><width>4</width></LineStyle></Style><Style id="foto"><IconStyle><color>ff45beff</color><scale>0.9</scale></IconStyle></Style>
+${body}</Document></kml>`;
+}
+const kmlName=k=>'Recorrido_'+k.toUpperCase()+'_'+stamp().slice(0,8)+'.kml';
+
+// ===== Envío a Drive =====
+async function post(p,quiet){
+  if(!S.cfg.url){if(!quiet)toast('Configura primero la URL del servicio en «Fotos y envío a Drive»');return null}
+  if(!navigator.onLine){if(!quiet)toast('Sin conexión');return null}
+  const body=JSON.stringify(Object.assign({token:S.cfg.token},p));
+  try{const r=await fetch(S.cfg.url,{method:'POST',body});return await r.json()}
+  catch(e){try{await fetch(S.cfg.url,{method:'POST',mode:'no-cors',body});return {ok:true,opaco:true}}catch(e2){return null}}
+}
+const b64=blob=>new Promise(r=>{const f=new FileReader();f.onload=()=>r(String(f.result).split(',')[1]);f.readAsDataURL(blob)});
+let syncing=false;
+async function syncFotos(quiet){
+  if(syncing)return;syncing=true;const pend=FOT.filter(f=>f.estado!=='subida');let ok=0,bad=0;
+  for(const f of pend){const msg=$('#syncmsg');if(msg)msg.textContent='Enviando '+(ok+bad+1)+' de '+pend.length+'…';
+    const blob=await idbBlob(f.id);if(!blob){bad++;continue}
+    const r=await post({accion:'foto',playa:f.playa,carpeta:f.carpeta,nombre:f.nombre,comentario:f.coment||'',lat:f.lat,lon:f.lon,acc:f.acc,mime:'image/jpeg',data:await b64(blob)},quiet);
+    if(r&&r.ok){f.estado='subida';f.envio=r.opaco?'sin confirmación':'confirmado';f.url=r.url||'';await idbPut(f);ok++}else{bad++;if(!navigator.onLine)break}}
+  syncing=false;if(!quiet||ok){render(false);toast(ok+' foto(s) enviada(s) a Drive'+(bad?', '+bad+' con error':''))}
+}
+
+// ===== Exportación =====
+const csvC=v=>{v=v==null?'':Array.isArray(v)?v.join(', '):String(v);return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v};
+const dash=v=>v==null||v===''||v===NOAP||v===NA?'-':v;
+const MIME={csv:'text/csv',json:'application/json',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',kml:'application/vnd.google-earth.kml+xml'};
+async function saveFile(name,content){
+  const ext=name.split('.').pop(),bin=typeof content!=='string';
+  const data=bin?content:(ext==='csv'?'\ufeff':'')+content;
+  if(window.claude?.use){try{const dl=await window.claude.use('downloads');if(dl){await dl.save({filename:name,data:bin?new Blob([data],{type:MIME[ext]}):data});toast('Archivo generado: '+name);return}}catch(e){}
+    if(!bin){const box=$('#expBox')||$('#main');const d=document.createElement('div');d.className='card';d.innerHTML='<p class="note">Esta vista no permite descargar archivos .'+ext+'. Copia el contenido:</p><textarea readonly style="min-height:160px;font-size:13px"></textarea>';d.querySelector('textarea').value=content;box.appendChild(d);d.scrollIntoView({behavior:'smooth'})}else toast('Esta vista no permite descargar el archivo');return}
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:MIME[ext]||'application/octet-stream'}));a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);toast('Archivo generado: '+name);
+}
+const fdt=iso=>{if(!iso)return '';const d=new Date(iso);return isNaN(d)?iso:d.toLocaleString('es-MX',{dateStyle:'short',timeStyle:'medium'})};
+function tablas(){
+  const ks=Object.keys(S.regs).sort(),T={};
+  {const cols=[['Playa','A01'],['Zona','A02'],['Vocación','A23'],['Tipología de la playa','A24'],['Turno','A07'],['Fecha','A04'],['Clave / código / Brigada','A03'],['Número de equipo','A05'],['Municipio / Entidad','A06'],['Hora inicio / Hora término',a=>(a.C01||'')+(a.C02?' – '+a.C02:'')],['Responsable del levantamiento','A09'],['Inicio del tramo (referencia física)','A10'],['Fin del tramo (referencia física)','A11'],['Frente de playa (m)','A12'],['Ancho útil promedio (m)','A13'],['Superficie (m2)','A14'],['Latitud','A15_lat'],['Longitud','A15_lon'],['Ubicación GPS del levantamiento','A16'],['Temporalidad',a=>(a.A18||'')+(a.A18==='Baja'&&a.A18b?' ('+a.A18b+')':'')],['Clima general',a=>[].concat(a.A19||[]).concat(a.A19b?[a.A19b]:[]).join(', ')],['Marea / Oleaje',a=>(a.A20||'')+(a.A20b?' ('+a.A20b+')':'')],['Actividades turístico-recreativas observadas',a=>[].concat(a.A21||[]).concat(a.A21b?[a.A21b]:[]).join(', ')],['Actividad principal observada',a=>(a.A22||'')+(a.A22b?' ('+a.A22b+')':'')],['Estatus de Acceso','A25'],['Función Dominante','A26'],['Observaciones generales','C03'],['Supervisor(a)','I02'],['Autoridad validante','I03'],['Puntos de recorrido GPS',(a,k)=>ptsDe(k)],['Avance general (%)',(a,k)=>Math.round(regProg(k)*100)]];
+   T.BD_A=[cols.map(c=>c[0]),...ks.map(k=>{const a=S.regs[k].a;return cols.map(c=>{const v=typeof c[1]==='function'?c[1](a,k):a[c[1]];return Array.isArray(v)?v.join(', '):v??''})})]}
+  {const by={};ks.forEach(k=>{const pn=k.split('_')[0];(by[pn]=by[pn]||{})[k.endsWith('vesp')?'v':'m']=S.regs[k]});
+   const head=['Consecutivo','No','Playa','Título','Subtítulo','No_Ítem','Ítem','Estado (matutino)','Cantidad (matutino)','Condición (matutino)','Estado (vespertino)','Cantidad (vespertino)','Condición (vespertino)','Observaciones generales','Tipo de evidencia','Fotos (matutino)','Fotos (vespertino)','Comentarios de fotos'];
+   let rows=[],c=0;Object.keys(by).sort().forEach(pn=>{const M=by[pn].m,Vs=by[pn].v,m=M?.a||{},v=Vs?.a||{};const pl=(M||Vs).a.A01;
+    Object.values(ITEMS).sort((x,y)=>x.it[0]-y.it[0]).forEach(({it,ap,s})=>{const n=it[0],id='Q'+pad(n),both=ap.c!=='C';
+     const obs=[m[id+'_OBS'],both?v[id+'_OBS']:''].filter(x=>has(x)&&x!==NA);const ev=[...new Set([].concat(Array.isArray(m[id+'_EVI'])?m[id+'_EVI']:[],both&&Array.isArray(v[id+'_EVI'])?v[id+'_EVI']:[]))];
+     const nf=reg=>{if(!reg||!S.regs[reg])return '-';const ra=S.regs[reg].a;if(ra[id+'_EST']!=='Existe')return '-';const fm=ra[id+'_FOTM']||(ra[id+'_FOT']===NA?'Sin foto':'');if(fm==='Sin foto')return 'Sin foto';return FOT.filter(f=>f.reg===reg&&f.carpeta===carpetaItem(n)).length};
+     const fcom=[pn+'_mat',pn+'_vesp'].flatMap(r=>FOT.filter(f=>f.reg===r&&f.carpeta===carpetaItem(n)&&has(f.coment)).map(f=>f.nombre+': '+f.coment)).join(' | ')||'-';
+     rows.push([++c,parseInt(pn.slice(1)),pl,ap.t,s.t,n,it[1],dash(m[id+'_EST']),dash(m[id+'_CAN']),dash(m[id+'_CON']),both?dash(v[id+'_EST']):'-',both?dash(v[id+'_CAN']):'-',both?dash(v[id+'_CON']):'-',obs.length>1?'Matutino: '+obs[0]+' | Vespertino: '+obs[1]:(obs[0]||'-'),ev.join(', ')||'-',M?nf(pn+'_mat'):'-',both&&Vs?nf(pn+'_vesp'):'-',fcom])})});
+   T.Matriz_Turno=[head,...rows]}
+  {const all=[];Object.keys(S.ents).sort((a,b)=>parseInt(a.slice(1))-parseInt(b.slice(1))).forEach(k=>S.ents[k].forEach((e,i)=>all.push([k,i+1,e])));
+   const ctrl=ENT_CTRL.filter(f=>f.t!=='gps'),hab=ENT_HAB,val=(f,a)=>{const v=!enabled(f,a)?NOAP:a[f.id];return Array.isArray(v)?v.join(', '):v??''};
+   T.Percepcion=[['ID','Playa','NUM ENCUESTA','Estado','Latitud','Longitud',...ctrl.map(f=>f.xl||f.l),...hab.map(f=>f.xl||f.l),...F4.map(f=>f.l)],
+    ...all.map(([k,i,e])=>{const pl=PLAYAS.find(p=>p[0]===parseInt(k.slice(1)));return [e.id,pl?pl[1]:k,i,entDone(e)?'Completa':'Con pendientes',e.a.F2_13===NA?NA:e.a.F2_13_lat??'',e.a.F2_13===NA?NA:e.a.F2_13_lon??'',...ctrl.map(f=>val(f,e.a)),...hab.map(f=>val(f,e.a)),...F4.map(f=>val(f,e.a))]})]}
+  T.Fotos=[['Playa','Turno','No_Ítem','Carpeta en Drive','Nombre de archivo','Latitud','Longitud','Precisión (m)','Fuente de la coordenada','Fecha y hora','Comentario','Estado de envío','Enlace en Drive'],
+   ...FOT.slice().sort((x,y)=>(x.reg+x.nombre).localeCompare(y.reg+y.nombre)).map(f=>[f.playa,f.turno||(S.regs[f.reg]?.a.A07||''),f.item??'',f.carpeta,f.nombre,f.lat??'',f.lon??'',f.acc??'',f.gsrc||'Sin coordenada',fdt(f.fecha),f.coment||'',f.estado==='subida'?'Enviada a Drive':'Pendiente',f.url||''])];
+  T.Recorrido_GPS=[['Playa','Turno','Recorrido','Punto','Fecha y hora','Latitud','Longitud','Precisión (m)'],
+   ...ks.flatMap(k=>{const a=S.regs[k].a;return ((S.regs[k].tracks)||[]).flatMap((t,i)=>t.map((q,j)=>[a.A01,a.A07,i+1,j+1,fdt(q.t),q.lat,q.lon,q.acc]))})];
+  return T;
+}
+const toCSV=rows=>rows.map(r=>r.map(csvC).join(',')).join('\n');
+function exportar(f){
+  if(f==='json')return saveFile('respaldo_caracterizacion_playas_'+stamp()+'.json',JSON.stringify({regs:S.regs,ents:S.ents,fotos:FOT},null,1));
+  const T=tablas();
+  if(f==='xlsx'){
+    if(!window.XLSX){toast('El generador de Excel no está disponible sin conexión en este momento; usa los CSV');$('#otros')&&($('#otros').open=true);return}
+    const wb=XLSX.utils.book_new();
+    [['Matriz_Turno','Matriz_Turno'],['BD_A','BD_A'],['Percepcion','Percepción'],['Fotos','Fotos'],['Recorrido_GPS','Recorrido GPS']].forEach(([k,n])=>{const ws=XLSX.utils.aoa_to_sheet(T[k]);ws['!cols']=T[k][0].map((h,i)=>({wch:Math.min(48,Math.max(10,String(h).length+2,...T[k].slice(1,60).map(r=>String(r[i]??'').length+1)))}));ws['!autofilter']={ref:XLSX.utils.encode_range({s:{r:0,c:0},e:{r:Math.max(0,T[k].length-1),c:T[k][0].length-1}})};XLSX.utils.book_append_sheet(wb,ws,n)});
+    return saveFile('Caracterizacion_Playas_'+stamp()+'.xlsx',XLSX.write(wb,{bookType:'xlsx',type:'array'}));
+  }
+  const map={mt:['Matriz_Turno','Matriz_Turno_46_items.csv'],bd:['BD_A','BD_A_registros.csv'],pe:['Percepcion','Percepcion_respuestas.csv'],fo:['Fotos','Fotos_coordenadas.csv'],gp:['Recorrido_GPS','Recorrido_GPS_puntos.csv']}[f];
+  if(map)return saveFile(map[1],toCSV(T[map[0]]));
+}
+
+// ===== Conexión y arranque =====
+$('#logo').innerHTML=ICON.logo;
+const net=()=>{const on=navigator.onLine;$('#net').textContent=on?'En línea':'Sin conexión';$('#net').style.background=on?'rgba(255,255,255,.18)':'rgba(0,0,0,.25)'};
+const autoSync=()=>{if(S.cfg.url&&navigator.onLine&&FOT.some(f=>f.estado!=='subida'))syncFotos(true)};
+window.addEventListener('online',()=>{net();autoSync()});window.addEventListener('offline',net);net();
+(async()=>{IDB=await idbOpen();if(IDB)FOT=await idbAll();render(false);autoSync()})();
+if('serviceWorker' in navigator&&location.protocol==='https:'){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+render(false);
+}
+</script>
+</body>
+</html>
