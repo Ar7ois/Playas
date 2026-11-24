@@ -1,6 +1,6 @@
 {
   "name": "Cuestionario de Caracterización de Playas",
-  "short_name": "Playas SECTUR",
+  "short_name": "Playas",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",

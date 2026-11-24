@@ -84,6 +84,17 @@ ul.l,ol.l{margin:6px 0 10px;padding-left:22px}ul.l li,ol.l li{margin:5px 0}
 .steps span{font-size:13px;padding:3px 10px;border-radius:99px;border:1px solid var(--line);color:var(--mut)}
 .steps span.on{background:var(--g);border-color:var(--g);color:var(--on);font-weight:700}
 .steps span.ok{border-color:var(--v);color:var(--v)}
+.steps button{font:inherit;font-size:14px;min-width:36px;padding:5px 10px;border-radius:99px;border:1px solid var(--line);background:#fff;color:var(--mut);cursor:pointer}
+.steps button.on{background:var(--g);border-color:var(--g);color:var(--on);font-weight:700}
+.steps button.ok{border-color:var(--v);color:var(--v)}
+.steps button:hover{border-color:var(--g)}
+.autov{display:flex;flex-direction:column;gap:2px;padding:10px 12px;border:1px dashed var(--line);border-radius:10px;background:#f7fafc}
+.autov b{font-size:18px}
+.pillbtn{border:0;cursor:pointer;font:inherit;font-size:13px;font-weight:700}
+.phead .pill{white-space:nowrap;align-self:flex-start}
+.chipbtn{display:inline-block;text-align:left;white-space:normal}
+.pendrow td{background:#fff8ec}
+.chipbtn{font:inherit;font-size:13px;margin:4px 4px 0 0;padding:4px 10px;border-radius:99px;border:1px solid var(--sun);background:#fff;color:var(--ink);cursor:pointer}
 .fld{margin:14px 0 0;padding:2px 0}
 .fld.bad{background:var(--badbg);border-radius:10px;padding:8px 10px;margin-left:-10px;margin-right:-10px}
 .fhead{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-bottom:6px}
@@ -125,6 +136,7 @@ input:focus,select:focus,textarea:focus,button:focus-visible,.chips label:has(in
 .thumbs button{position:absolute;top:4px;right:4px;width:28px;height:28px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;cursor:pointer;font-size:15px;line-height:1}
 .up{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1.5px dashed var(--g);border-radius:10px;color:var(--g);font-weight:700;cursor:pointer}
 .up input{position:absolute;width:1px;height:1px;opacity:0}
+.persona{border:1.5px solid var(--sun);background:var(--dl);border-radius:12px;padding:12px 14px;margin-top:10px}
 .pend{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;border:1.5px solid var(--d);background:var(--dl);border-radius:10px;padding:10px 14px;margin-bottom:14px}
 .alert{border:1.5px solid var(--bad);background:var(--badbg);color:var(--bad);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-weight:600}
 .okbox{border:1.5px solid var(--v);color:var(--v);border-radius:10px;padding:12px 14px;margin-bottom:14px;font-weight:600}
@@ -142,7 +154,7 @@ th{font-size:13px;color:var(--mut)}
 .hide{display:none!important}
 @media(max-width:700px){.grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.top b{font-size:14px;flex:1 1 auto}.logo{height:38px;padding:2px 8px}.logo svg{height:33px}.top .net{font-size:11px}.nav{flex-basis:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.nav button{padding:6px 4px;min-height:40px;font-size:13px}.lg{display:none}.nav .sm{display:inline}.top .who{flex-basis:100%;order:3;font-size:13px}.card{padding:18px 16px}.row2{grid-template-columns:minmax(0,1fr)}.fld.bad{margin-left:-6px;margin-right:-6px;padding:8px 6px}
-.stack thead{display:none}.stack tr{display:grid;padding-block:8px;border-bottom:1px solid var(--line)}.stack td{display:flex;justify-content:space-between;gap:12px;border:0;padding:3px 0}.stack td::before{content:attr(data-l);font-size:13px;color:var(--mut)}}
+.stack thead{display:none}.stack tr{display:grid;padding-block:8px;border-bottom:1px solid var(--line)}.stack td{display:flex;justify-content:space-between;gap:12px;border:0;padding:3px 0}.stack td::before{content:attr(data-l);font-size:13px;color:var(--mut)}.stack .pendrow td{display:block;padding:8px 10px;border-radius:10px}.stack .pendrow td::before{display:none}}
 @media(prefers-reduced-motion:reduce){.bar i,.toast{transition:none}}
 </style>
 </head>
@@ -151,7 +163,7 @@ th{font-size:13px;color:var(--mut)}
   <b><span class="logo" id="logo"></span><span class="ttl">Cuestionario de Caracterización de Playas</span></b>
   <span class="net" id="net">Sin conexión</span>
   <span class="net hide" id="gpsPill">● Grabando recorrido</span>
-  <nav class="nav"><button type="button" id="bGps"><span class="lg">Recorrido </span>GPS</button><button type="button" id="bPlaya"><span class="lg">Elegir playa</span><span class="sm">Playa</span></button><button type="button" id="bAvance">Avance<span class="lg"> por playa</span></button><button type="button" id="bMenu">Menú</button></nav>
+  <nav class="nav"><button type="button" id="bMenu">Menú</button><button type="button" id="bGps"><span class="lg">Recorrido </span>GPS</button><button type="button" id="bPlaya"><span class="lg">Elegir playa</span><span class="sm">Playa</span></button><button type="button" id="bAvance">Avance<span class="lg"> por playa</span></button></nav>
   <span class="who" id="who"></span>
 </header>
 <div class="bar"><i id="prog"></i></div>
@@ -214,7 +226,7 @@ const CIERRE=[{t:'6.1 Horario y validación',d:'Se responde al terminar el levan
   {id:'I03',l:'Autoridad / institución validante (nombre y cargo)',t:'text',na:1}]}];
 const TT='Turista / visitante',TR='Residente / población local',TP='Prestador de servicios/Concesionario/permisionario';
 const ENT_CTRL=[
- {id:'F2_01',l:'Fecha',t:'date'},{id:'F2_02',l:'Hora',t:'time',now:1},{id:'F2_03',l:'Tramo de la playa',t:'text',na:1},
+ {id:'F2_01',l:'Fecha',t:'date',auto:1},{id:'F2_02',l:'Hora',t:'time',auto:1},{id:'F2_03',l:'Tramo de la playa',t:'text',na:1},
  {id:'F2_04',l:'Entrevistador(a)',t:'text'},{id:'F2_05',l:'Tipo de encuestado',t:'radio',o:[TT,TR,TP]},
  {id:'F2_06',l:'Edad (años)',t:'number',na:1},{id:'F2_07',l:'Sexo registrado',t:'radio',o:['Mujer','Hombre','Prefiere no decir']},
  {id:'F2_08',l:'Lugar de procedencia (visitante) / Colonia (residente)',t:'radio',o:['Local','Nacional','Internacional']},
@@ -234,7 +246,9 @@ const ENT_HAB=[
  {id:'F3_08',l:'Tiempo de permanencia hoy en la playa',t:'radio',o:['< 1 h','1–2 h','2–4 h','> 4 h','No sabe']},
  {id:'F3_09',l:'Horario de mayor afluencia percibido',t:'radio',o:['< 9:00','9:00–12:00','12:00–15:00','15:00–18:00','> 18:00','No sabe']},
  {id:'F3_10',l:'Número de veces al día que acude a la playa',t:'number',na:1},
- ...['Alimentos','Mobiliario','Actividades','Transporte','Otros','Total'].map((g,i)=>({id:'F3_1'+(i+1),l:'Gasto aproximado hoy en playa (MXN): '+g,t:'number',na:1,tipos:[TT]}))];
+ ...['Alimentos','Mobiliario','Actividades','Transporte','Otros','Total'].map((g,i)=>({id:'F3_1'+(i+1),l:'Gasto aproximado hoy en playa (MXN): '+g,t:'number',na:g==='Total'?0:1,calc:g==='Total'?1:0,tipos:[TT]}))];
+const GASTO=['F3_11','F3_12','F3_13','F3_14','F3_15'];
+const sumGasto=a=>{const n=GASTO.map(k=>a[k]).filter(v=>v!==NA&&v!==''&&v!=null&&!isNaN(+v));const t=n.length?String(n.reduce((x,y)=>x+(+y),0)):'';a.F3_16=t;return t};
 [DATOS.flatMap(p=>p.f),ENT_CTRL,ENT_HAB].forEach(L=>L.forEach((f,i)=>{if(f.sub&&!f.xl)f.xl=f.l==='Especifica'?L[i-1].l+' – especifica':L[i-1].l+' – '+f.l}));
 const F4=DATA.f4.map((r,i)=>({id:'F4_'+String(i+1).padStart(2,'0'),l:r[2],g:r[1],t:'scale',tipos:r[0]==='T'?null:r[0]==='R'?[TR]:[TP],ap:r[0]}));
 const F4G=[...new Set(F4.map(x=>x.g))];
@@ -251,7 +265,7 @@ const APTS=[
   como:['Las secciones 1.1 a 1.3 se llenan en campo. La sección 1.4 Tramo y ubicación (inicio y fin del tramo, longitud, ancho útil, superficie, coordenadas y waypoint) se llena en gabinete, con ortofoto; en campo puedes dejarla pendiente con «Completar en gabinete».','Elige primero la zona o la playa: la lista de playas muestra solo las de la zona elegida, y al elegir una playa la zona se asigna sola.','Elige el turno. Playa y turno identifican el registro.','Responde todos los campos. Si un dato no corresponde, pulsa «N/A».','Si cambias el turno de una playa que ya tiene respuestas, se abre (o se crea) el registro del otro turno con los datos de identificación y clasificación de la playa.','Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.'],pages:DATOS},
  {n:2,k:'perc',t:'Encuesta de percepción',s:'Entrevistas a turistas, población local y prestadores de servicios.',src:'Apartado F de la cédula (F.2, F.3 y F.4)',
   que:'Registra la percepción de las personas usuarias, población local, prestadores de servicios, concesionarios o permisionarios sobre el uso, operación, servicios, condiciones ambientales, seguridad, gobernanza y experiencia general de la playa.',
-  como:['Cada entrevista es un registro independiente dentro de la playa activa. Pulsa «Nueva entrevista» por cada persona.','El levantamiento base es de 30 entrevistas por playa a turistas y visitantes, con 15 mujeres y 15 hombres; si la persona prefiere no decirlo, se asienta en esa categoría.','De manera complementaria se aplican 10 entrevistas a población local y 10 a prestadores de servicios, concesionarios o permisionarios, cuando estén presentes o sean relevantes.','El tipo de encuestado define las preguntas: las de turistas y las complementarias de cada grupo se habilitan o bloquean solas.','En la percepción, 1 es la valoración más baja y 5 la más alta; «N/A» cuando la persona no puede valorar el enunciado.']},
+  como:['Cada entrevista es un registro independiente dentro de la playa activa. Pulsa «Nueva entrevista» por cada persona.','En cada entrevista elige el tipo de encuestado (turista o visitante, población local, prestador de servicios) y el sexo registrado.','La fecha y la hora se toman automáticamente del dispositivo.','El tipo de encuestado define las preguntas: las de turistas y las complementarias de cada grupo se habilitan o bloquean solas.','En la percepción, 1 es la valoración más baja y 5 la más alta; «N/A» cuando la persona no puede valorar el enunciado.']},
  ...APT_IT.map((ap,k)=>({n:3+k,k:ap.c,t:ap.t.slice(3),s:DESC[ap.c],src:'Apartado '+ap.c+' de la cédula · hoja Matriz_Turno',
   que:ap.i,ap,
   como:['Cada ítem inicia con «¿Existe?». Si eliges «No existe», la condición queda en 0 y el resto se bloquea; con «No aplica» todo se bloquea. Solo con «Existe» se registran cantidad, condición de 1 a 5, observaciones, evidencia y fotografías.','Toma o adjunta al menos una fotografía de la condición del ítem. Se guardan en el teléfono y se envían a la carpeta del ítem en Drive cuando haya conexión.','La imagen de referencia de cada ítem muestra un ejemplo visual del elemento a evaluar.','Si un campo no corresponde, pulsa «N/A». Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.',
@@ -264,10 +278,14 @@ const SCALE=['1','2','3','4','5',NA];
 
 // ===== Estado =====
 const LSK='cup_v2';
-let S={regs:{},ents:{},active:null,draft:{},cfg:{url:SCRIPT_URL_DEFAULT,token:''},lastEnt:''};
+let S={regs:{},ents:{},active:null,draft:{},cfg:{url:SCRIPT_URL_DEFAULT,token:''},lastEnt:'',dev:'',seq:0};
 let V={scr:'home'};let showErr=false;
 try{const x=JSON.parse(localStorage.getItem(LSK));if(x)S=Object.assign(S,x)}catch(e){}
 if(!S.cfg)S.cfg={url:'',token:''};
+if(!S.dev){const c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';S.dev=Array.from(crypto.getRandomValues(new Uint8Array(4)),x=>c[x%c.length]).join('')}
+if(!S.seq)S.seq=0;
+const slug=t=>String(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,14)||'SINNOMBRE';
+const personaOK=()=>String(S.cfg.persona||'').trim().length>=3;
 const URL_OK=u=>/^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(String(u||''));
 let conectado=false;
 {const m=location.hash.match(/^#conectar=([^&]+)$/);if(m){try{const c=JSON.parse(decodeURIComponent(escape(atob(decodeURIComponent(m[1])))));if(URL_OK(c.u)){S.cfg.url=c.u;S.cfg.token=String(c.k||'');conectado=true}}catch(e){}
@@ -301,19 +319,20 @@ function posFoto(){return new Promise(res=>{
   navigator.geolocation.getCurrentPosition(p=>res({lat:+p.coords.latitude.toFixed(6),lon:+p.coords.longitude.toFixed(6),acc:Math.round(p.coords.accuracy),t:new Date().toISOString(),src:'GPS al tomar la foto'}),fb,{enableHighAccuracy:true,timeout:10000,maximumAge:15000})})}
 async function addFotos(files,carpeta,itemN){
   if(!IDB){toast('Este navegador no permite guardar fotos');return}
+  if(!personaOK()){toast('Escribe primero tu nombre');render(false);return}
   const reg=S.active,a=A();let k=fotosDe(reg,carpeta).length;
   toast('Guardando foto y coordenada…');const pos=await posFoto();
   for(const f of files){const b=await comprimir(f);k++;
-    const nombre='P'+String(playaNum(a.A01)).padStart(2,'0')+'_'+(itemN?'I'+pad(itemN):'OTRAS')+'_'+(vesp(a)?'VESP':'MAT')+'_'+stamp()+'_'+k+'.jpg';
-    const m={id:uid(),reg,playa:a.A01,turno:a.A07,carpeta,item:itemN||null,nombre,estado:'pendiente',fecha:new Date().toISOString(),lat:pos?pos.lat:null,lon:pos?pos.lon:null,acc:pos?pos.acc:null,gsrc:pos?pos.src:'Sin coordenada'};
+    S.seq=(S.seq||0)+1;const nombre='P'+String(playaNum(a.A01)).padStart(2,'0')+'_'+(itemN?'I'+pad(itemN):'OTRAS')+'_'+(vesp(a)?'VESP':'MAT')+'_'+slug(S.cfg.persona)+'_'+stamp()+'_'+S.dev+String(S.seq).padStart(4,'0')+'.jpg';
+    const m={id:uid(),reg,playa:a.A01,turno:a.A07,persona:String(S.cfg.persona).trim(),dev:S.dev,carpeta,item:itemN||null,nombre,estado:'pendiente',fecha:new Date().toISOString(),lat:pos?pos.lat:null,lon:pos?pos.lon:null,acc:pos?pos.acc:null,gsrc:pos?pos.src:'Sin coordenada'};
     await idbPut(m,b);FOT.push(m)}
-  render(false);toast(files.length+' foto(s) guardada(s)'+(pos?' con coordenada':' sin coordenada'));
+  save();render(false);toast(files.length+' foto(s) guardada(s)'+(pos?' con coordenada':' sin coordenada'));
 }
 
 // ===== Validación =====
 const tipoOK=(f,a)=>!f.tipos||f.tipos.includes(a.F2_05);
 const enabled=(f,a)=>tipoOK(f,a)&&(!f.dep||f.dep(a));
-function fieldOK(f,a){if(!enabled(f,a))return true;const v=a[f.id];if(f.t==='gps')return v===NA||(has(a[f.id+'_lat'])&&has(a[f.id+'_lon']));return has(v)}
+function fieldOK(f,a){if(!enabled(f,a))return true;if(f.calc||f.auto)return true;const v=a[f.id];if(f.t==='gps')return v===NA||(has(a[f.id+'_lat'])&&has(a[f.id+'_lon']));return has(v)}
 function itemMissing(n,a,reg=S.active){
   const id='Q'+pad(n),I=ITEMS[n].it,e=a[id+'_EST'],m=[];
   if(!has(e))return ['est'];
@@ -347,7 +366,7 @@ const aptNote=ap=>(ap.k==='C'&&S.active&&vesp())?'Normalmente se responde una ve
 // ===== Render de campos =====
 function fieldHTML(f,a,scope){
   const v=a[f.id],en=enabled(f,a),isNA=v===NA,bad=showErr&&!fieldOK(f,a);
-  const head=`<div class="fhead"><span class="lab">${esc(f.l)} ${f.na?'':'<span class="req">*</span>'}</span>${f.na&&en?`<button type="button" class="na ${isNA?'on':''}" data-na="${f.id}" aria-pressed="${isNA}">N/A</button>`:''}</div>`;
+  const head=`<div class="fhead"><span class="lab">${esc(f.l)} ${f.na||f.calc||f.auto?'':'<span class="req">*</span>'}</span>${f.na&&en?`<button type="button" class="na ${isNA?'on':''}" data-na="${f.id}" aria-pressed="${isNA}">N/A</button>`:''}</div>`;
   const dis=(!en||isNA)?'disabled':'';
   let body='';
   if(!en)body=`<div class="lockmsg">${f.tipos&&!tipoOK(f,a)?'No aplica para este tipo de encuestado.':'Bloqueado por la respuesta anterior.'}</div>`;
@@ -359,6 +378,9 @@ function fieldHTML(f,a,scope){
     const lk=(f.t==='zona'||f.t==='playa')&&keyLocked()?'disabled':'';
     body=`<select id="${scope}${f.id}" data-f="${f.id}" ${dis} ${lk}><option value="">Selecciona…</option>${o.map(x=>`<option ${v===x?'selected':''}>${esc(x)}</option>`).join('')}</select>${f.t==='playa'&&a.A02?`<div class="note" style="margin-top:4px">${o.length} playas en ${esc(a.A02)}.</div>`:''}${lk?'<div class="note">El registro ya tiene respuestas; para otra playa abre un registro nuevo.</div>':''}`}
   else if(f.t==='area')body=`<textarea id="${scope}${f.id}" data-f="${f.id}" ${dis}>${isNA?'':esc(v)}</textarea>`;
+  else if(f.auto)body=`<div class="autov"><b class="num">${esc(v||'—')}</b><span class="note">Se toma automáticamente del dispositivo.</span></div>`;
+  else if(f.calc)body=`<div class="autov"><b class="num" data-calc="${f.id}">${(()=>{const t=sumGasto(a);return t===''?'—':'$'+Number(t).toLocaleString('es-MX')})()}</b><span class="note">Se calcula solo con la suma de los gastos anteriores.</span></div>`;
+  else if(f.t==='gps'&&!f.nogps)body=`<div class="autov">${has(a[f.id+'_lat'])?`<b class="num">${esc(a[f.id+'_lat'])}, ${esc(a[f.id+'_lon'])}</b><span class="note">Coordenada guardada.</span>`:'<span class="note">Sin coordenada. Pulsa el botón en el lugar de la entrevista.</span>'}</div><button type="button" class="btn ${has(a[f.id+'_lat'])?'ghost':''} sm" style="margin-top:8px" data-gps="${f.id}" ${dis}>${has(a[f.id+'_lat'])?'Volver a tomar la ubicación':'Guardar ubicación'}</button>`;
   else if(f.t==='gps')body=`<div class="row2"><input type="number" step="any" inputmode="decimal" placeholder="Latitud" data-f="${f.id}_lat" value="${esc(a[f.id+'_lat'])}" ${dis}><input type="number" step="any" inputmode="decimal" placeholder="Longitud" data-f="${f.id}_lon" value="${esc(a[f.id+'_lon'])}" ${dis}></div>${f.nogps?'':`<button type="button" class="btn ghost sm" style="margin-top:8px" data-gps="${f.id}" ${dis}>Obtener ubicación</button>`}`;
   else body=`<div style="display:flex;gap:8px"><input id="${scope}${f.id}" type="${f.t}" data-f="${f.id}" ${f.t==='number'?'step="any" inputmode="decimal" min="0"':''} value="${isNA?'':esc(v)}" ${dis}>${f.now&&!isNA&&en?`<button type="button" class="btn ghost sm" data-now="${f.id}" style="flex:none">Hora actual</button>`:''}</div>`;
   return `<div class="fld ${f.sub?'dep':''} ${bad?'bad':''}" id="fld_${f.id}">${head}${f.h&&en?`<div class="note" style="margin:-4px 0 6px">${esc(f.h)}</div>`:''}${body}${bad?'<div class="err">Pendiente: responde o marca N/A.</div>':''}</div>`;
@@ -389,12 +411,16 @@ function itemHTML(n,a){
    <div class="fld${E('fot')}"><div class="fhead"><span class="lab">Fotografía de la condición <span class="req">*</span></span></div>
     <div class="chips">${['Con foto','Sin foto'].map(x=>`<label><input type="radio" name="${id}_FOTM" data-f="${id}_FOTM" value="${x}" ${fm===x?'checked':''}>${x}</label>`).join('')}</div>
     ${fm==='Sin foto'?'<div class="note" style="margin-top:8px">Se registra sin fotografía. Puedes continuar.</div>':''}
-    ${fm==='Con foto'?`<div style="margin-top:10px"><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="${n}"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="${n}"></label></div>
+    ${fm==='Con foto'&&!personaOK()?personaHTML():''}
+    ${fm==='Con foto'&&personaOK()?`<div style="margin-top:10px"><div class="note" style="margin-bottom:6px">Fotos de: <b>${esc(S.cfg.persona)}</b></div><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="${n}"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="${n}"></label></div>
      <div class="note" style="margin-top:6px">Cada foto guarda su nombre y la coordenada del teléfono al tomarla o cargarla. Se envía a Drive en: ${esc(a.A01||'')} › ${esc(carpetaItem(n))}</div>
      ${fotoRows(fot,true)}</div>`:''}
     ${miss.includes('fot')?`<div class="err">${!fm?'Elige «Con foto» o «Sin foto».':!fot.length?'Carga al menos una foto o elige «Sin foto».':'Escribe el comentario de cada foto.'}</div>`:''}</div>
   </div></section>`;
 }
+function personaHTML(){return `<div class="persona"><label class="lab">Tu nombre (quien toma las fotos) <span class="req">*</span></label>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px"><input class="personaIn" type="text" autocomplete="name" placeholder="Nombre y apellido" value="${esc(S.cfg.persona||'')}" style="flex:1 1 220px"><button class="btn sm" type="button" data-act="setpersona">Guardar nombre</button></div>
+  <p class="note" style="margin-top:6px">Se agrega al nombre de cada foto para saber quién la tomó. Se pide una sola vez en este teléfono.</p></div>`}
 function fotoRows(L,req){return `<div class="frows">${L.map(f=>`<div class="frow"><img data-thumb="${f.id}" alt="Foto ${esc(f.nombre)}">
   <div><label class="note" for="fc_${f.id}">Comentario de la foto${req?' <span class="req">*</span>':''}</label><textarea id="fc_${f.id}" data-fc="${f.id}" placeholder="Qué muestra la foto">${esc(f.coment||'')}</textarea>
   <div class="note">${esc(f.nombre)}<br>${f.lat!=null?'Coordenada: '+f.lat+', '+f.lon+' (±'+f.acc+' m)':'Sin coordenada'}</div>
@@ -404,9 +430,10 @@ const LECT={'0':'Condición inexistente cuando debería existir','1':'Condición
 // ===== Pantallas =====
 function home(){
   const r=REG(),a=A();
-  return `<div class="card hcard hero"><span class="heroimg">${ICON.logo}</span><p class="kick">Secretaría de Turismo · Unidad de Información y Política Turística</p>
+  return `<div class="card hcard hero"><span class="heroimg">${ICON.logo}</span>
   <h1>Cuestionario de Caracterización de Playas</h1>
   <p>Levantamiento en campo y gabinete de la caracterización de playas y de la encuesta de percepción. Funciona sin internet: lo capturado se guarda en este dispositivo y las fotos se envían a Drive cuando hay conexión.</p>
+  <div class="persona" style="margin:10px 0 0"><b>Activa la ubicación del teléfono.</b> Cuando el navegador pregunte, elige «Permitir». Sin ese permiso no se graban el recorrido GPS ni las coordenadas de fotos y entrevistas.</div>
   <div class="okbox" style="margin:10px 0 0;${r?'':'border-color:var(--line);color:var(--ink)'}">${r?`Registro activo: ${esc(a.A01)} · ${esc(a.A07)}`:'Sin playa activa. Usa «Elegir playa» o abre cualquier apartado para empezar.'}</div>
   ${r?`<div class="btns" style="justify-content:flex-start"><button class="btn ghost sm" type="button" data-turno="${vesp()?'Turno matutino':'Turno vespertino'}">Cambiar a ${vesp()?'turno matutino':'turno vespertino'}</button><button class="btn ghost sm" type="button" data-act="newreg">Iniciar registro de otra playa</button></div>`:''}</div>
   <button type="button" class="card avbtn" data-act="gps" style="border-left-color:var(--teal)"><span class="ico">${ICON.huellas}</span><span><b>Recorrido GPS</b><span class="note" style="display:block">${G.watch!=null?'Grabando: '+esc(S.regs[G.reg]?.a.A01||'')+' · '+ptsDe(G.reg)+' puntos':S.active&&ptsDe(S.active)?ptsDe(S.active)+' puntos grabados en esta playa. Ver mapa o exportar KML.':'Graba el recorrido de la playa y expórtalo en KML.'}</span></span><span class="go">${G.watch!=null?'Ver →':'Abrir →'}</span></button>
@@ -473,7 +500,7 @@ function page(ap,pi){
   const pg=ap.pages[pi],a=A(),miss=showErr?pageMissing(ap,pg,a):[];
   return `<button class="back" type="button" data-act="intro">← Regresar a la explicación del apartado</button>
   <div class="card hcard ${ap.n>=3&&ap.n<=5?'v':''}"><span class="ico big">${ICON[SICON[(pg.t.match(/^[A-E]\.\d/)||[])[0]]||AICON[ap.n]]}</span><p class="kick">Apartado ${ap.n}. ${esc(ap.t)}</p><h2 style="font-size:24px">${esc(pg.t)}</h2><p>${esc(pg.d)}</p>
-   <div class="steps">${ap.pages.map((p,i)=>`<span class="${i===pi?'on':!pageMissing(ap,p,a).length?'ok':''}">${i+1}${p.gab?' · gabinete':''}</span>`).join('')}</div></div>
+   <div class="steps">${ap.pages.map((p,i)=>`<${S.active?'button type="button" data-apg="'+i+'"':'span'} title="${esc(p.t)}" class="${i===pi?'on':!pageMissing(ap,p,a).length?'ok':''}">${i+1}${p.gab?' · gabinete':''}</${S.active?'button':'span'}>`).join('')}</div></div>
   ${ap.n===1&&pi===0&&S.active?`<div class="okbox" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Playa en llenado: ${esc(a.A01)} · ${esc(a.A07)}</span><button class="btn ghost sm" type="button" data-act="newreg">Elegir otra playa</button></div>`:''}
   ${pg.gab?'<div class="okbox" style="color:var(--ink);border-color:var(--d)">Esta sección se llena en gabinete. En campo puedes dejarla pendiente con «Completar en gabinete».</div>':''}
   ${(()=>{const mm=pageMissing(ap,pg,a);return mm.length?`<div class="pend"><span>Pendientes en esta sección: <b>${mm.length}</b>. Puedes avanzar y completarlos después.</span><button class="btn ghost sm" type="button" data-act="hl">${showErr?'Quitar resaltado':'Resaltar pendientes'}</button></div>`:'<div class="okbox">Sección completa.</div>'})()}
@@ -488,10 +515,9 @@ function entList(){
   const c=(t,s)=>L.filter(e=>e.a.F2_05===t&&(!s||e.a.F2_07===s)).length;
   return `<button class="back" type="button" data-act="intro">← Regresar a la explicación del apartado</button>
   <div class="card hcard"><p class="kick">Apartado 2. Encuesta de percepción</p><h2 style="font-size:24px">Entrevistas de ${esc(a.A01)}</h2>
-  <div class="meta"><div><b>${c(TT)} de 30</b><span>Turistas y visitantes</span></div><div><b>${c(TT,'Mujer')} de 15</b><span>Mujeres</span></div><div><b>${c(TT,'Hombre')} de 15</b><span>Hombres</span></div><div><b>${c(TT,'Prefiere no decir')}</b><span>Prefiere no decir</span></div><div><b>${c(TR)} de 10</b><span>Población local</span></div><div><b>${c(TP)} de 10</b><span>Prestadores y concesionarios</span></div></div>
   <div class="btns" style="justify-content:flex-start;margin-top:14px"><button class="btn" type="button" data-act="newent">Nueva entrevista</button><button class="btn sec" type="button" data-act="menu">Regresar al menú</button></div></div>
   <div class="card">${L.length?`<div class="scroll"><table class="stack"><thead><tr><th>Núm.</th><th>Tipo</th><th>Sexo</th><th>Entrevistador(a)</th><th>Estado</th><th></th></tr></thead><tbody>
-  ${L.map((e,i)=>`<tr><td data-l="Núm." class="num">${i+1}</td><td data-l="Tipo">${esc(e.a.F2_05||'—')}</td><td data-l="Sexo">${esc(e.a.F2_07||'—')}</td><td data-l="Entrevistador(a)">${esc(e.a.F2_04||'—')}</td><td data-l="Estado">${entDone(e)?'<span class="pill ok">Completa</span>':'<span class="pill bad">Incompleta</span>'}</td><td><button class="btn ghost sm" type="button" data-openent="${e.id}">Abrir</button> <button class="btn ghost sm" type="button" data-delent="${e.id}">Eliminar</button></td></tr>`).join('')}</tbody></table></div>`:'<p class="note">Aún no hay entrevistas en esta playa.</p>'}</div>`;
+  ${L.map((e,i)=>`<tr><td data-l="Núm." class="num">${i+1}</td><td data-l="Tipo">${esc(e.a.F2_05||'—')}</td><td data-l="Sexo">${esc(e.a.F2_07||'—')}</td><td data-l="Entrevistador(a)">${esc(e.a.F2_04||'—')}</td><td data-l="Estado">${entDone(e)?'<span class="pill ok">Completa</span>':`<button type="button" class="pill bad pillbtn" data-pendent="${e.id}" aria-expanded="${V.pendEnt===e.id}">Incompleta ${V.pendEnt===e.id?'▴':'▾'}</button>`}</td><td><button class="btn ghost sm" type="button" data-openent="${e.id}">Abrir</button> <button class="btn ghost sm" type="button" data-delent="${e.id}">Eliminar</button></td></tr>${V.pendEnt===e.id&&!entDone(e)?`<tr class="pendrow"><td colspan="6"><span class="note">Falta en:</span> ${entPages(e).map((p,j)=>[p,j,p.f.filter(f=>!fieldOK(f,e.a)).length]).filter(x=>x[2]).map(([p,j,n])=>`<button type="button" class="chipbtn" data-openent="${e.id}" data-pg="${j}">${j+1}. ${esc(p.t.replace(/^\d+(\.\d+)?\s*/,''))} · ${n}</button>`).join('')}</td></tr>`:''}`).join('')}</tbody></table></div>`:'<p class="note">Aún no hay entrevistas en esta playa.</p>'}</div>`;
 }
 const entPages=e=>ENT_PAGES.filter(p=>!p.g||p.f.some(f=>tipoOK(f,e.a)));
 const entDone=e=>entPages(e).every(p=>!p.f.filter(f=>!fieldOK(f,e.a)).length);
@@ -501,7 +527,7 @@ function entPage(){
   const shown=pg.g?pg.f.filter(f=>tipoOK(f,e.a)):pg.f;
   return `<button class="back" type="button" data-act="entlist">← Regresar a la lista de entrevistas</button>
   <div class="card hcard"><p class="kick">Apartado 2. Encuesta de percepción · Entrevista ${entsAct().indexOf(e)+1} · ${esc(A().A01)}</p><h2 style="font-size:24px">${esc(pg.t)}</h2><p>${esc(pg.d)}</p>
-  <div class="steps">${P.map((p,i)=>`<span class="${i===pi?'on':!p.f.filter(f=>!fieldOK(f,e.a)).length?'ok':''}">${i+1}</span>`).join('')}</div></div>
+  <div class="steps">${P.map((p,i)=>`<button type="button" data-epg="${i}" title="${esc(p.t)}" class="${i===pi?'on':!p.f.filter(f=>!fieldOK(f,e.a)).length?'ok':''}">${i+1}</button>`).join('')}</div></div>
   ${(()=>{const mm=pg.f.filter(f=>!fieldOK(f,e.a));return mm.length?`<div class="pend"><span>Pendientes en esta sección: <b>${mm.length}</b>. Puedes avanzar y completarlos después.</span><button class="btn ghost sm" type="button" data-act="hl">${showErr?'Quitar resaltado':'Resaltar pendientes'}</button></div>`:''})()}
   ${pi===0&&!e.a.F2_05?'<div class="okbox" style="color:var(--ink);border-color:var(--d)">El tipo de encuestado define qué preguntas se aplican en las siguientes secciones.</div>':''}
   <div class="card">${shown.map(f=>fieldHTML(f,e.a,'e')).join('')}</div>
@@ -519,14 +545,11 @@ function fotosScr(){
   <div class="meta"><div><b>${pend.length}</b><span>Pendientes de envío</span></div><div><b>${sub.length}</b><span>Enviadas a Drive</span></div></div>
   <div class="btns" style="justify-content:flex-start;margin-top:12px"><button class="btn" type="button" data-act="sync" ${pend.length?'':'disabled'}>Enviar fotos pendientes</button><button class="btn sec" type="button" data-act="senddata">Enviar respaldo de datos a Drive</button></div>
   <p class="note" id="syncmsg" style="margin-top:8px"></p></div>
-  <div class="card"><h2>Fotos adicionales (carpeta «Otras»)</h2>${r?`<p class="note">${esc(a.A01)} › Otras</p><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="0"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="0"></label></div>
-   ${fotoRows(otras,false)}`:'<p class="note">Abre un registro en el Apartado 1 para agregar fotos.</p>'}</div>
-  <div class="card"><h2>Conexión con Drive</h2><p class="note">${S.cfg.url?'Conectado con el servicio de Drive.':'Sin conexión configurada. Ábrelo con el enlace de conexión o escribe la dirección y la clave.'}</p>
-   <div class="fld"><div class="fhead"><span class="lab">URL del servicio</span></div><input type="text" id="cfgUrl" value="${esc(S.cfg.url)}" placeholder="https://script.google.com/macros/s/…/exec"></div>
-   <div class="fld"><div class="fhead"><span class="lab">Clave</span></div><input type="text" id="cfgTok" value="${esc(S.cfg.token)}"></div>
-   <div class="btns" style="justify-content:flex-start"><button class="btn ghost" type="button" data-act="cfg">Guardar y probar conexión</button><button class="btn" type="button" data-act="sharelink">Copiar enlace para compartir</button></div>
-   <p class="note" style="margin-top:8px">El enlace para compartir deja conectado a Drive el teléfono de quien lo abre. Compártelo solo con las personas que levantarán información.</p>
-   <div id="linkBox" class="hide"><textarea readonly style="min-height:90px;font-size:13px;margin-top:8px"></textarea></div></div>`;
+  <div class="card"><h2>Persona que toma las fotos</h2>${personaHTML()}</div>
+  <div class="card"><h2>Fotos adicionales (carpeta «Otras»)</h2>${r&&!personaOK()?'<p class="note">Escribe tu nombre en «Persona que toma las fotos» para poder agregar fotos.</p>':''}${r&&personaOK()?`<p class="note">${esc(a.A01)} › Otras</p><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="0"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="0"></label></div>
+   ${fotoRows(otras,false)}`:(r?'':'<p class="note">Abre un registro en el Apartado 1 para agregar fotos.</p>')}</div>
+  <div class="card"><h2>Conexión con Drive</h2><p class="note">${URL_OK(S.cfg.url)?'Este dispositivo está conectado con la carpeta de Drive.':'Este dispositivo aún no está conectado. Abre una vez, con internet, el enlace que te compartieron.'}</p>
+   ${URL_OK(S.cfg.url)?'<div class="btns" style="justify-content:flex-start"><button class="btn ghost" type="button" data-act="ping">Probar conexión</button></div>':''}</div>`;
 }
 function regsScr(){
   const ks=Object.keys(S.regs).sort();
@@ -603,7 +626,7 @@ $('#main').addEventListener('change',async ev=>{
   if(t.dataset.f&&t.type!=='text'&&t.tagName!=='TEXTAREA'&&t.type!=='number'){setVal(t.dataset.f,t.value);render(false);return}
   if(t.dataset.m){const a=V.scr==='ent'?curEnt().a:A();const s=new Set(Array.isArray(a[t.dataset.m])?a[t.dataset.m]:[]);t.checked?s.add(t.value):s.delete(t.value);a[t.dataset.m]=[...s];render(false)}
 });
-let fcT;$('#main').addEventListener('input',ev=>{const t=ev.target;if(t.dataset.fc){const m=FOT.find(f=>f.id===t.dataset.fc);if(m){m.coment=t.value;clearTimeout(fcT);fcT=setTimeout(()=>idbPut(m).catch(()=>{}),400)}const box=t.closest('.fld');if(box&&[...box.querySelectorAll('[data-fc]')].every(x=>x.value.trim())){box.classList.remove('bad');box.querySelector('.err')?.remove()}return}if(t.dataset.f&&(t.type==='text'||t.type==='number'||t.tagName==='TEXTAREA')){const a=V.scr==='ent'?curEnt().a:A();a[t.dataset.f]=t.value;if(t.dataset.f==='A09'||t.dataset.f==='F2_04'){}save();
+let fcT;$('#main').addEventListener('input',ev=>{const t=ev.target;if(t.dataset.fc){const m=FOT.find(f=>f.id===t.dataset.fc);if(m){m.coment=t.value;clearTimeout(fcT);fcT=setTimeout(()=>idbPut(m).catch(()=>{}),400)}const box=t.closest('.fld');if(box&&[...box.querySelectorAll('[data-fc]')].every(x=>x.value.trim())){box.classList.remove('bad');box.querySelector('.err')?.remove()}return}if(t.dataset.f&&(t.type==='text'||t.type==='number'||t.tagName==='TEXTAREA')){const a=V.scr==='ent'?curEnt().a:A();a[t.dataset.f]=t.value;if(GASTO.includes(t.dataset.f)){const tt=sumGasto(a),el=document.querySelector('[data-calc="F3_16"]');if(el)el.textContent=tt===''?'—':'$'+Number(tt).toLocaleString('es-MX')}save();
   if(showErr){const box=t.closest('.fld');if(box&&has(t.value)){box.classList.remove('bad');box.querySelector('.err')?.remove()}}}});
 $('#main').addEventListener('focusout',ev=>{const t=ev.target;if(t.dataset&&t.dataset.fc){const q=t.closest('.q');if(q){const n=+q.id.slice(5);const ok=!itemMissing(n,A()).length;q.classList.toggle('done',ok);if(ok)q.classList.remove('bad')}return}if(t.dataset&&t.dataset.f&&(t.type==='text'||t.type==='number'||t.tagName==='TEXTAREA')){const q=t.closest('.q');if(q){const n=+q.id.slice(5);q.classList.toggle('done',!itemMissing(n,A()).length)}}});
 document.addEventListener('click',async ev=>{
@@ -616,9 +639,12 @@ document.addEventListener('click',async ev=>{
   if(d.na){const a=V.scr==='ent'?curEnt().a:A();a[d.na]=a[d.na]===NA?'':NA;if(a[d.na]==='')delete a[d.na];render(false);return}
   if(d.now){const a=V.scr==='ent'?curEnt().a:A();a[d.now]=nowHM();render(false);return}
   if(d.gps){const a=V.scr==='ent'?curEnt().a:A();if(!navigator.geolocation){toast('Este dispositivo no permite obtener la ubicación');return}toast('Obteniendo ubicación…');
-    navigator.geolocation.getCurrentPosition(p=>{a[d.gps+'_lat']=p.coords.latitude.toFixed(6);a[d.gps+'_lon']=p.coords.longitude.toFixed(6);render(false);toast('Ubicación registrada')},()=>toast('No se pudo obtener la ubicación; escríbela'),{enableHighAccuracy:true,timeout:20000});return}
+    navigator.geolocation.getCurrentPosition(p=>{a[d.gps+'_lat']=p.coords.latitude.toFixed(6);a[d.gps+'_lon']=p.coords.longitude.toFixed(6);render(false);toast('Ubicación registrada')},()=>toast('No se pudo obtener la ubicación. Revisa que la ubicación esté activada y permitida para esta página.'),{enableHighAccuracy:true,timeout:20000});return}
   if(d.delfoto){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar quitar';return}await idbDel(d.delfoto);FOT=FOT.filter(f=>f.id!==d.delfoto);render(false);toast('Foto quitada');return}
-  if(d.openent){V={scr:'ent',apt:2,ent:d.openent,pg:0};showErr=false;render();return}
+  if(d.epg!==undefined){V.pg=+d.epg;showErr=false;render();return}
+  if(d.apg!==undefined){V.pg=+d.apg;showErr=false;prefill(APTS.find(x=>x.n===V.apt));render();return}
+  if(d.pendent){V.pendEnt=V.pendEnt===d.pendent?null:d.pendent;render(false);return}
+  if(d.openent){V={scr:'ent',apt:2,ent:d.openent,pg:+(d.pg||0)};{const e=curEnt();if(e){if(!e.a.F2_01)e.a.F2_01=today();if(!e.a.F2_02)e.a.F2_02=nowHM()}}showErr=false;render();return}
   if(d.delent){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar';return}const n='p'+playaNum(A().A01);S.ents[n]=(S.ents[n]||[]).filter(e=>e.id!==d.delent);render(false);return}
   if(d.goreg){irAlLlenado(d.goreg);showErr=false;render();toast('Registro abierto: '+A().A01+' · '+A().A07);return}
   if(d.newturno){const [k,v]=d.newturno.split('|');S.active=k;cambiarTurno(v);irAlLlenado(S.active);showErr=false;render();return}
@@ -650,16 +676,20 @@ document.addEventListener('click',async ev=>{
   if(k==='fotos'){V={scr:'fotos'};render()}
   if(k==='regs'){V={scr:'regs'};render()}
   if(k==='cfg'){S.cfg.url=$('#cfgUrl').value.trim();S.cfg.token=$('#cfgTok').value.trim();if(!URL_OK(S.cfg.url)){toast('La URL debe empezar con https://script.google.com/macros/s/ y terminar en /exec');return}save();const r=await post({accion:'ping'});toast(r&&r.ok?(r.opaco?'Solicitud enviada; el servicio no devolvió confirmación':'Conexión correcta con Drive'):'No hay conexión con el servicio')}
+  if(k==='setpersona'){const v=(g.closest('.persona')?.querySelector('input')?.value||'').trim();if(v.length<3){toast('Escribe tu nombre completo');return}S.cfg.persona=v;save();render(false);toast('Nombre guardado: '+v)}
+  if(k==='ping'){const r=await post({accion:'ping'});toast(r&&r.ok?(r.opaco?'Solicitud enviada; el servicio no devolvió confirmación':'Conexión correcta con Drive'):'No hay conexión con el servicio')}
   if(k==='sync')syncFotos();
   if(k==='sharelink'){if(!URL_OK(S.cfg.url)){toast('Primero guarda la URL y la clave del servicio');return}const l=enlaceConexion();const box=$('#linkBox');if(box){box.classList.remove('hide');box.querySelector('textarea').value=l}
     try{await navigator.clipboard.writeText(l);toast('Enlace copiado: compártelo por WhatsApp')}catch(e){toast('Copia el enlace del recuadro')}}
   if(k==='gpsstart')gpsStart();
   if(k==='gpsstop')gpsStop();
+  if(k==='gpsend'){const r=REG();if(!r)return;if(G.watch!=null&&G.reg===S.active)gpsStop(true);r.gpsFin=new Date().toISOString();save();render(false);
+    if(navigator.onLine&&URL_OK(S.cfg.url)&&ptsDe(S.active)){const x=await post({accion:'kml',playa:A().A01,nombre:kmlName(S.active),data:kml([S.active])},true);toast(x&&x.ok?'Recorrido terminado y enviado a Drive':'Recorrido terminado. Envía el KML a Drive cuando haya internet')}else toast('Recorrido terminado y guardado. Envía el KML a Drive cuando haya internet')}
   if(k==='kml'){if(!ptsDe(S.active)&&!FOT.some(f=>f.reg===S.active&&f.lat!=null)){toast('Aún no hay recorrido ni fotos con coordenada');return}saveFile(kmlName(S.active),kml([S.active]))}
   if(k==='kmlall'){const ks=Object.keys(S.regs).filter(x=>ptsDe(x)||FOT.some(f=>f.reg===x&&f.lat!=null));if(!ks.length){toast('No hay recorridos grabados');return}saveFile('Recorridos_playas_'+stamp().slice(0,8)+'.kml',kml(ks))}
   if(k==='kmldrive'){const r=await post({accion:'kml',playa:A().A01,nombre:kmlName(S.active),data:kml([S.active])});toast(r&&r.ok?(r.opaco?'KML enviado a Drive (sin confirmación del servicio)':'KML guardado en la carpeta de la playa en Drive'):'No se pudo enviar el KML')}
   if(k==='gpsdel'){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar: borrar recorrido';return}if(G.reg===S.active)gpsStop(true);REG().tracks=[];save();render(false);toast('Recorrido borrado')}
-  if(k==='senddata'){const r=await post({accion:'datos',nombre:'respaldo_'+stamp()+'.json',data:JSON.stringify({regs:S.regs,ents:S.ents})});toast(r&&r.ok?'Respaldo enviado a Drive (_Registros)':'No se pudo enviar el respaldo')}
+  if(k==='senddata'){const r=await post({accion:'datos',nombre:'respaldo_'+slug(S.cfg.persona)+'_'+S.dev+'_'+stamp()+'.json',data:JSON.stringify({regs:S.regs,ents:S.ents})});toast(r&&r.ok?'Respaldo enviado a Drive (_Registros)':'No se pudo enviar el respaldo')}
 });
 function prefill(ap){const a=A();if(ap.k==='datos'&&!a.A04)a.A04=today();if(ap.k==='cierre'){const r=REG();if(r&&!a.C01)a.C01=r.t0||'';if(!a.I01&&a.A09)a.I01=a.A09}}
 
@@ -672,7 +702,7 @@ function gpsStart(){
   if(!S.active){toast('Elige primero la playa y el turno');return}
   if(!navigator.geolocation){toast('Este dispositivo no permite usar el GPS');return}
   if(G.watch!=null)gpsStop(true);
-  const r=REG();r.tracks=r.tracks||[];r.tracks.push([]);G.reg=S.active;G.err='Buscando señal GPS…';
+  const r=REG();delete r.gpsFin;r.tracks=r.tracks||[];r.tracks.push([]);G.reg=S.active;G.err='Buscando señal GPS…';
   G.watch=navigator.geolocation.watchPosition(gpsPos,e=>{G.err=e.code===1?'Permiso de ubicación denegado. Actívalo en el navegador.':'Sin señal GPS; se sigue intentando.';gpsUI()},{enableHighAccuracy:true,maximumAge:0,timeout:30000});
   wake();save();render(false);toast('Grabando recorrido');
 }
@@ -706,11 +736,12 @@ function gpsScr(){
   return `<button class="back" type="button" data-act="menu">← Regresar al menú general</button>
   <div class="card hcard v"><span class="ico big">${ICON.huellas}</span><h1>Recorrido GPS</h1>
   <p>Graba el recorrido de la playa con el GPS del teléfono. Se guarda en el dispositivo aunque no haya internet y se exporta en KML junto con la ubicación de las fotos.</p>
-  <ul class="l"><li>Inicia la grabación al empezar a caminar la playa y detenla al terminar. Puedes pausar y reanudar; cada reanudación es un tramo nuevo.</li><li>Mientras graba, la pantalla se mantiene encendida. Deja el cuestionario abierto: si cierras la app o apagas la pantalla, el teléfono puede suspender el GPS.</li><li>Puedes seguir llenando los apartados mientras graba.</li></ul></div>
+  <ul class="l"><li>Inicia la grabación al empezar a caminar la playa. Puedes pausar y reanudar; cada reanudación es un tramo nuevo.</li><li>Al acabar, pulsa «Terminar recorrido»: se guarda y, si hay internet, el KML se envía a Drive.</li><li>Mientras graba, la pantalla se mantiene encendida. Deja el cuestionario abierto: si cierras la app o apagas la pantalla, el teléfono puede suspender el GPS.</li><li>Puedes seguir llenando los apartados mientras graba.</li></ul></div>
   ${selHTML()}
-  ${r?`<div class="card"><div class="phead"><div><h3>${esc(a.A01)}</h3><span class="note">${esc(a.A07)}</span></div><span class="pill ${aqui?'bad':''}">${aqui?'● Grabando':on?'Grabando en otra playa':'Detenido'}</span></div>
+  ${r?`<div class="card"><div class="phead"><div><h3>${esc(a.A01)}</h3><span class="note">${esc(a.A07)}</span></div><span class="pill ${aqui?'bad':r.gpsFin?'ok':''}">${aqui?'● Grabando':on?'Grabando en otra playa':r.gpsFin?'Terminado':ptsDe(S.active)?'En pausa':'Sin iniciar'}</span></div>
    ${on&&!aqui?`<p class="note">Se está grabando el recorrido de ${esc(S.regs[G.reg]?.a.A01||'')}. Al iniciar aquí se detiene aquel.</p>`:''}
-   <div class="btns" style="justify-content:flex-start">${aqui?'<button class="btn" type="button" data-act="gpsstop">Detener grabación</button>':`<button class="btn" type="button" data-act="gpsstart">${ptsDe(S.active)?'Reanudar grabación':'Iniciar grabación'}</button>`}</div>
+   ${r.gpsFin?`<div class="okbox">Recorrido terminado a las ${esc(new Date(r.gpsFin).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',hour12:false}))}.</div>`:''}
+   <div class="btns" style="justify-content:flex-start">${aqui?'<button class="btn sec" type="button" data-act="gpsstop">Pausar</button>':`<button class="btn ${r.gpsFin?'ghost':''}" type="button" data-act="gpsstart">${ptsDe(S.active)?'Reanudar grabación':'Iniciar grabación'}</button>`}${(aqui||ptsDe(S.active))&&!r.gpsFin?'<button class="btn" type="button" data-act="gpsend">Terminar recorrido</button>':''}</div>
    <p class="err" id="gpsErr"></p><div class="meta" id="gpsInfo"></div>
    <div id="map" style="height:340px;border-radius:10px;margin-top:14px;border:1px solid var(--line);z-index:0"></div>
    <p class="note" style="margin-top:6px">Línea azul: recorrido. Puntos amarillos: fotos con coordenada. El fondo de mapa requiere internet.</p>
@@ -727,7 +758,7 @@ ${fotos.map(f=>`<Placemark><name>${x(f.nombre)}</name><styleUrl>#foto</styleUrl>
 <Style id="ruta"><LineStyle><color>ff8a5d0b</color><width>4</width></LineStyle></Style><Style id="foto"><IconStyle><color>ff45beff</color><scale>0.9</scale></IconStyle></Style>
 ${body}</Document></kml>`;
 }
-const kmlName=k=>'Recorrido_'+k.toUpperCase()+'_'+stamp().slice(0,8)+'.kml';
+const kmlName=k=>'Recorrido_'+k.toUpperCase()+'_'+slug(S.cfg.persona)+'_'+S.dev+'_'+stamp()+'.kml';
 
 // ===== Envío a Drive =====
 async function post(p,quiet){
@@ -743,7 +774,7 @@ async function syncFotos(quiet){
   if(syncing)return;syncing=true;const pend=FOT.filter(f=>f.estado!=='subida');let ok=0,bad=0;
   for(const f of pend){const msg=$('#syncmsg');if(msg)msg.textContent='Enviando '+(ok+bad+1)+' de '+pend.length+'…';
     const blob=await idbBlob(f.id);if(!blob){bad++;continue}
-    const r=await post({accion:'foto',playa:f.playa,carpeta:f.carpeta,nombre:f.nombre,comentario:f.coment||'',lat:f.lat,lon:f.lon,acc:f.acc,mime:'image/jpeg',data:await b64(blob)},quiet);
+    const r=await post({accion:'foto',playa:f.playa,carpeta:f.carpeta,nombre:f.nombre,comentario:'Tomada por: '+(f.persona||'')+(f.coment?' · '+f.coment:''),lat:f.lat,lon:f.lon,acc:f.acc,mime:'image/jpeg',data:await b64(blob)},quiet);
     if(r&&r.ok){f.estado='subida';f.envio=r.opaco?'sin confirmación':'confirmado';f.url=r.url||'';await idbPut(f);ok++}else{bad++;if(!navigator.onLine)break}}
   syncing=false;if(!quiet||ok){render(false);toast(ok+' foto(s) enviada(s) a Drive'+(bad?', '+bad+' con error':''))}
 }
@@ -777,8 +808,8 @@ function tablas(){
    const ctrl=ENT_CTRL.filter(f=>f.t!=='gps'),hab=ENT_HAB,val=(f,a)=>{const v=!enabled(f,a)?NOAP:a[f.id];return Array.isArray(v)?v.join(', '):v??''};
    T.Percepcion=[['ID','Playa','NUM ENCUESTA','Estado','Latitud','Longitud',...ctrl.map(f=>f.xl||f.l),...hab.map(f=>f.xl||f.l),...F4.map(f=>f.l)],
     ...all.map(([k,i,e])=>{const pl=PLAYAS.find(p=>p[0]===parseInt(k.slice(1)));return [e.id,pl?pl[1]:k,i,entDone(e)?'Completa':'Con pendientes',e.a.F2_13===NA?NA:e.a.F2_13_lat??'',e.a.F2_13===NA?NA:e.a.F2_13_lon??'',...ctrl.map(f=>val(f,e.a)),...hab.map(f=>val(f,e.a)),...F4.map(f=>val(f,e.a))]})]}
-  T.Fotos=[['Playa','Turno','No_Ítem','Carpeta en Drive','Nombre de archivo','Latitud','Longitud','Precisión (m)','Fuente de la coordenada','Fecha y hora','Comentario','Estado de envío','Enlace en Drive'],
-   ...FOT.slice().sort((x,y)=>(x.reg+x.nombre).localeCompare(y.reg+y.nombre)).map(f=>[f.playa,f.turno||(S.regs[f.reg]?.a.A07||''),f.item??'',f.carpeta,f.nombre,f.lat??'',f.lon??'',f.acc??'',f.gsrc||'Sin coordenada',fdt(f.fecha),f.coment||'',f.estado==='subida'?'Enviada a Drive':'Pendiente',f.url||''])];
+  T.Fotos=[['Playa','Turno','No_Ítem','Carpeta en Drive','Nombre de archivo','Tomada por','Latitud','Longitud','Precisión (m)','Fuente de la coordenada','Fecha y hora','Comentario','Estado de envío','Enlace en Drive'],
+   ...FOT.slice().sort((x,y)=>(x.reg+x.nombre).localeCompare(y.reg+y.nombre)).map(f=>[f.playa,f.turno||(S.regs[f.reg]?.a.A07||''),f.item??'',f.carpeta,f.nombre,f.persona||'',f.lat??'',f.lon??'',f.acc??'',f.gsrc||'Sin coordenada',fdt(f.fecha),f.coment||'',f.estado==='subida'?'Enviada a Drive':'Pendiente',f.url||''])];
   T.Recorrido_GPS=[['Playa','Turno','Recorrido','Punto','Fecha y hora','Latitud','Longitud','Precisión (m)'],
    ...ks.flatMap(k=>{const a=S.regs[k].a;return ((S.regs[k].tracks)||[]).flatMap((t,i)=>t.map((q,j)=>[a.A01,a.A07,i+1,j+1,fdt(q.t),q.lat,q.lon,q.acc]))})];
   return T;

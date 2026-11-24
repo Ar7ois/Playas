@@ -1,4 +1,3 @@
 Imágenes de referencia por ítem (item-NNN.jpg, número del ítem a tres dígitos).
-Incluidas: 28 de 46. Pendientes: 004, 005, 008, 011, 023, 034, 046, 053, 066, 069, 070, 074, 078, 084, 085, 086, 087, 088.
-Para agregar o cambiar una, guarda el archivo aquí con ese nombre (JPG, lado mayor de 1280 px, menos de 350 KB).
-Si el archivo no existe, el cuestionario muestra «Imagen de referencia por cargar».
+Incluidas: 46 de 46.
+Para cambiar una, guarda el archivo aquí con ese nombre (JPG, lado mayor de 1280 px, menos de 350 KB).
