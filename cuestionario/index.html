@@ -54,6 +54,8 @@ p{margin:0 0 10px}
 .pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--dl);color:var(--gd);margin:4px 6px 0 0}
 .pill.v{color:var(--v)}.pill.ok{background:var(--v);color:var(--on)}.pill.bad{background:var(--badbg);color:var(--bad)}
 ul.l,ol.l{margin:6px 0 10px;padding-left:22px}ul.l li,ol.l li{margin:5px 0}
+.paso2{border-top:6px solid var(--teal);margin:14px 0}.paso2 .grid{margin-top:10px}
+.hero~.apt{width:100%;margin-top:14px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .apt{position:relative;display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--card);border:1px solid var(--line);border-left:8px solid var(--sea);border-radius:16px;padding:16px 84px 16px 18px;cursor:pointer;min-height:150px;box-shadow:0 1px 2px rgba(11,93,138,.06)}
 .ico{flex:none;width:56px;height:56px;border-radius:50%;background:#f7fafc;border:1.5px solid #d4e5ee;display:grid;place-items:center}.ico svg{width:36px;height:36px}
@@ -270,16 +272,15 @@ const APTS=[
   como:['Las secciones 1.1 a 1.3 se llenan en campo. La sección 1.4 Tramo y ubicación (de dónde a dónde se evalúa la playa y coordenada del levantamiento) se llena en gabinete; en campo puedes dejarla pendiente con «Completar en gabinete».','Elige primero la zona o la playa: la lista de playas muestra solo las de la zona elegida, y al elegir una playa la zona se asigna sola.','Elige el turno. Playa y turno identifican el registro.','Responde todos los campos. Si un dato no corresponde, pulsa «N/A».','Si cambias el turno de una playa que ya tiene respuestas, se abre (o se crea) el registro del otro turno con los datos de identificación y clasificación de la playa.','Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.'],pages:DATOS},
  {n:2,k:'perc',t:'Encuesta de percepción',s:'Entrevistas a turistas, población local y prestadores de servicios.',src:'Apartado F de la cédula (F.2, F.3 y F.4)',
   que:'Registra la percepción de las personas usuarias, población local, prestadores de servicios, concesionarios o permisionarios sobre el uso, operación, servicios, condiciones ambientales, seguridad, gobernanza y experiencia general de la playa.',
-  como:['Cada entrevista es un registro independiente dentro de la playa activa. Pulsa «Nueva entrevista» por cada persona.','En cada entrevista elige el tipo de encuestado (turista o visitante, población local, prestador de servicios) y el sexo registrado.','La fecha y la hora se toman automáticamente del dispositivo.','El tipo de encuestado define las preguntas: las de turistas y las complementarias de cada grupo se habilitan o bloquean solas.','En la percepción, 1 es la valoración más baja y 5 la más alta; «N/A» cuando la persona no puede valorar el enunciado.']},
+  como:['Cada entrevista es un registro independiente dentro de la playa activa. Pulsa «Nueva entrevista» por cada persona.','En cada entrevista elige el tipo de encuestado (turista o visitante, población local, prestador de servicios) y el sexo registrado.','La fecha y la hora se toman automáticamente del dispositivo.','El tipo de encuestado define las preguntas: las de turistas y las complementarias de cada grupo se habilitan o bloquean solas.','En la percepción, 1 es la valoración más baja y 5 la más alta. Todas las afirmaciones se califican.']},
  ...APT_IT.map((ap,k)=>({n:3+k,k:ap.c,t:ap.t.slice(3),s:DESC[ap.c],src:'Apartado '+ap.c+' de la cédula · hoja Matriz_Turno',
   que:ap.i,ap,
-  como:['Cada ítem inicia con «¿Existe?». Si eliges «No existe», la condición queda en 0 y el resto se bloquea; con «No aplica» todo se bloquea. Solo con «Existe» se registran cantidad, condición de 1 a 5, observaciones, evidencia y fotografías.','Toma o adjunta al menos una fotografía de la condición del ítem. Se guardan en el teléfono y se envían a la carpeta del ítem en Drive cuando haya conexión.','La imagen de referencia de cada ítem muestra un ejemplo visual del elemento a evaluar.','Si un campo no corresponde, pulsa «N/A». Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.',
+  como:['Cada ítem inicia con «¿Existe?». Si eliges «No existe», la condición queda en 0 y el resto se bloquea; con «No aplica» todo se bloquea. Solo con «Existe» se registran cantidad, condición de 1 a 5, observaciones y fotografías.','La foto es obligatoria: toma o carga al menos una de la condición del ítem. Se guardan en el teléfono y se envían a la carpeta del ítem en Drive cuando haya conexión.','La imagen de referencia de cada ítem muestra un ejemplo visual del elemento a evaluar.','Si un campo no corresponde, pulsa «N/A». Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.',
    ap.c==='C'?'Este apartado se responde una sola vez por playa, en el turno matutino.':'Este apartado se responde en el turno matutino y en el vespertino.'],
-  pages:ap.subs.map(s=>({t:s.t,d:s.i,items:s.it.map(i=>i[0])}))})),
- {n:6,k:'cierre',t:'Cierre del levantamiento',s:'Hora de inicio y de término, observaciones y validación.',src:'Apartado A (horario) e I de la cédula',
-  que:'Cierra el registro de la playa en el turno: horario del levantamiento, observaciones generales y personas que validan.',
-  como:['Llénalo al terminar todos los apartados del turno.','La hora de inicio se propone con la hora en que se creó el registro; la hora de término con «Hora actual».','Las firmas se recaban en el formato impreso.'],pages:CIERRE}];
-const SCALE=['1','2','3','4','5',NA];
+  pages:ap.subs.map(s=>({t:s.t,d:s.i,items:s.it.map(i=>i[0])}))}))];
+const PASO=ap=>ap.n===1?'Paso 1. Datos de playa':ap.n===2?'Paso 3. Encuesta de percepción':'Paso 2. Situación de playa';
+
+const SCALE=['1','2','3','4','5',NA],SCALE5=['1','2','3','4','5'];
 
 // ===== Estado =====
 const LSK='cup_v2';
@@ -346,9 +347,8 @@ function itemMissing(n,a,reg=S.active){
   if(I[4]&&!has(a[id+'_CAN']))m.push('can');
   if(!has(a[id+'_CON']))m.push('con');
   if(!has(a[id+'_OBS']))m.push('obs');
-  if(!has(a[id+'_EVI']))m.push('evi');
-  const fm=a[id+'_FOTM']||(a[id+'_FOT']===NA?'Sin foto':'');const fl=fotosDe(reg,carpetaItem(n));
-  if(!fm)m.push('fot');else if(fm==='Con foto'&&(!fl.length||fl.some(f=>!has(f.coment))))m.push('fot');
+  const fl=fotosDe(reg,carpetaItem(n));
+  if(!fl.length||fl.some(f=>!has(f.coment)))m.push('fot');
   return m;
 }
 const carpetaItem=n=>pad(n)+' '+ITEMS[n].it[1];
@@ -373,10 +373,10 @@ const aptNote=ap=>(ap.k==='C'&&S.active&&vesp())?'Normalmente se responde una ve
 function fieldHTML(f,a,scope){
   const v=a[f.id],en=enabled(f,a),isNA=v===NA,bad=showErr&&!fieldOK(f,a);
   const head=`<div class="fhead"><span class="lab">${esc(f.l)} ${f.na||f.calc||f.auto?'':'<span class="req">*</span>'}</span>${f.na&&en?`<button type="button" class="na ${isNA?'on':''}" data-na="${f.id}" aria-pressed="${isNA}">N/A</button>`:''}</div>`;
-  const dis=(!en||isNA)?'disabled':'';
+  const dis=(!en||(isNA&&!['radio','scale','check'].includes(f.t)))?'disabled':'';
   let body='';
   if(!en)body=`<div class="lockmsg">${f.tipos&&!tipoOK(f,a)?'No aplica para este tipo de encuestado.':'Bloqueado por la respuesta anterior.'}</div>`;
-  else if(f.t==='radio'||f.t==='scale'){const o=f.t==='scale'?SCALE:f.o;body=`<div class="chips ${f.t==='scale'?'sc':''}">${o.map((x,k)=>`<label><input type="radio" name="${scope}${f.id}" data-f="${f.id}" value="${esc(x)}" ${v===x?'checked':''} ${dis}>${esc(x)}</label>`).join('')}</div>`}
+  else if(f.t==='radio'||f.t==='scale'){const o=f.t==='scale'?(f.g?SCALE5:SCALE):f.o;body=`<div class="chips ${f.t==='scale'?'sc':''}">${o.map((x,k)=>`<label><input type="radio" name="${scope}${f.id}" data-f="${f.id}" value="${esc(x)}" ${v===x?'checked':''} ${dis}>${esc(x)}</label>`).join('')}</div>`}
   else if(f.t==='check')body=`<div class="chips">${f.o.map(x=>`<label><input type="checkbox" data-m="${f.id}" value="${esc(x)}" ${Array.isArray(v)&&v.includes(x)?'checked':''} ${dis}>${esc(x)}</label>`).join('')}</div>`;
   else if(f.t==='select'||f.t==='zona'||f.t==='playa'){let o=f.o;
     if(f.t==='zona')o=ZONAS;
@@ -413,15 +413,12 @@ function itemHTML(n,a){
     <div class="chips sc">${['1','2','3','4','5'].map(x=>`<label title="${esc(LECT[x])}"><input type="radio" name="${id}_CON" data-f="${id}_CON" value="${x}" ${a[id+'_CON']===x?'checked':''}>${x}</label>`).join('')}</div>
     <div class="note" style="margin-top:6px">${a[id+'_CON']?esc(a[id+'_CON']+': '+LECT[a[id+'_CON']]):'1 crítica · 2 deficiente · 3 básica o parcial · 4 buena · 5 óptima'}</div>${miss.includes('con')?'<div class="err">Califica la condición.</div>':''}</div>
    <div class="fld${E('obs')}"><div class="fhead"><span class="lab">Observaciones <span class="req">*</span></span>${naBtn('OBS')}</div><textarea data-f="${id}_OBS" placeholder="Lo observado que sustenta la calificación" ${a[id+'_OBS']===NA?'disabled':''}>${a[id+'_OBS']===NA?'':esc(a[id+'_OBS'])}</textarea>${miss.includes('obs')?'<div class="err">Escribe la observación o marca N/A.</div>':''}</div>
-   <div class="fld${E('evi')}"><div class="fhead"><span class="lab">Tipo de evidencia <span class="req">*</span></span>${naBtn('EVI')}</div><div class="chips">${ev.map(x=>`<label><input type="checkbox" data-m="${id}_EVI" value="${esc(x)}" ${Array.isArray(a[id+'_EVI'])&&a[id+'_EVI'].includes(x)?'checked':''} ${a[id+'_EVI']===NA?'disabled':''}>${esc(x)}</label>`).join('')}</div>${miss.includes('evi')?'<div class="err">Marca al menos un tipo de evidencia o N/A.</div>':''}</div>
-   <div class="fld${E('fot')}"><div class="fhead"><span class="lab">Fotografía de la condición <span class="req">*</span></span></div>
-    <div class="chips">${['Con foto','Sin foto'].map(x=>`<label><input type="radio" name="${id}_FOTM" data-f="${id}_FOTM" value="${x}" ${fm===x?'checked':''}>${x}</label>`).join('')}</div>
-    ${fm==='Sin foto'?'<div class="note" style="margin-top:8px">Se registra sin fotografía. Puedes continuar.</div>':''}
-    ${fm==='Con foto'&&!personaOK()?personaHTML():''}
-    ${fm==='Con foto'&&personaOK()?`<div style="margin-top:10px"><div class="note" style="margin-bottom:6px">Fotos de: <b>${esc(S.cfg.persona)}</b></div><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="${n}"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="${n}"></label></div>
+   <div class="fld${E('fot')}"><div class="fhead"><span class="lab">Tomar foto <span class="req">*</span></span></div>
+    ${!personaOK()?personaHTML():''}
+    ${personaOK()?`<div style="margin-top:10px"><div class="note" style="margin-bottom:6px">Fotos de: <b>${esc(S.cfg.persona)}</b></div><div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-foto="${n}"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-foto="${n}"></label></div>
      <div class="note" style="margin-top:6px">Cada foto guarda su nombre y la coordenada del teléfono al tomarla o cargarla. Se envía a Drive en: ${esc(a.A01||'')} › ${esc(carpetaItem(n))}</div>
      ${fotoRows(fot,true)}</div>`:''}
-    ${miss.includes('fot')?`<div class="err">${!fm?'Elige «Con foto» o «Sin foto».':!fot.length?'Carga al menos una foto o elige «Sin foto».':'Escribe el comentario de cada foto.'}</div>`:''}</div>
+    ${miss.includes('fot')?`<div class="err">${!fot.length?'Toma o carga al menos una foto.':'Escribe el comentario de cada foto.'}</div>`:''}</div>
   </div></section>`;
 }
 function personaHTML(){return `<div class="persona"><label class="lab">Tu nombre (quien toma las fotos) <span class="req">*</span></label>
@@ -434,6 +431,9 @@ function fotoRows(L,req){return `<div class="frows">${L.map(f=>`<div class="frow
 const LECT={'0':'Condición inexistente cuando debería existir','1':'Condición crítica cuando debería existir','2':'Condición deficiente','3':'Condición básica o parcial','4':'Condición buena','5':'Condición óptima o muy favorable'};
 
 // ===== Pantallas =====
+function aptCard(ap){const lk=aptLocked(ap),pr=aptProg(ap);return `<button type="button" class="apt ${ap.n>=3?'v':''} ${lk?'lock':''}" data-apt="${ap.n}"><span class="ico">${ICON[AICON[ap.n]]}</span>
+   <h3>${esc(ap.n>=3?ap.t:PASO(ap))}</h3><span class="s">${esc(ap.s)}</span>
+   ${lk?`<span class="st" style="color:var(--mut)">${esc(lk)}</span>`:`<span class="pb"><i style="width:${Math.round(pr.p*100)}%;background:${pr.st==='Completo'?'var(--v)':'var(--d)'}"></i></span><span class="st" style="color:${pr.st==='Completo'?'var(--v)':'var(--gd)'}">${esc(pr.st)}${pr.st==='Por iniciar'?'':' · '+Math.round(pr.p*100)+' %'}</span>`}${aptNote(ap)?`<span class="note">${esc(aptNote(ap))}</span>`:''}</button>`}
 function home(){
   const r=REG(),a=A();
   return `<div class="card hcard hero"><span class="heroimg">${ICON.logo}</span>
@@ -444,9 +444,9 @@ function home(){
   ${r?`<div class="btns" style="justify-content:flex-start"><button class="btn ghost sm" type="button" data-turno="${vesp()?'Turno matutino':'Turno vespertino'}">Cambiar a ${vesp()?'turno matutino':'turno vespertino'}</button><button class="btn ghost sm" type="button" data-act="newreg">Iniciar registro de otra playa</button></div>`:''}</div>
   <button type="button" class="card avbtn" data-act="gps" style="border-left-color:var(--teal)"><span class="ico">${ICON.huellas}</span><span><b>Recorrido GPS</b><span class="note" style="display:block">${G.watch!=null?'Grabando: '+esc(S.regs[G.reg]?.a.A01||'')+' · '+ptsDe(G.reg)+' puntos':S.active&&ptsDe(S.active)?ptsDe(S.active)+' puntos grabados en esta playa. Ver mapa o exportar KML.':'Graba el recorrido de la playa y expórtalo en KML.'}</span></span><span class="go">${G.watch!=null?'Ver →':'Abrir →'}</span></button>
   <button type="button" class="card avbtn" data-act="avance"><span class="ico">${ICON.sol}</span><span><b>Avance por playa</b><span class="note" style="display:block">${Object.keys(S.regs).length?new Set(Object.values(S.regs).map(r=>r.a.A01)).size+' playa(s) iniciada(s). Ver avance y continuar.':'Aún no hay playas iniciadas.'}</span></span><span class="go">Ver →</span></button>
-  <div class="grid">${APTS.map(ap=>{const lk=aptLocked(ap),pr=aptProg(ap);return `<button type="button" class="apt ${ap.n>=3&&ap.n<=5?'v':''} ${lk?'lock':''}" data-apt="${ap.n}"><span class="ico">${ICON[AICON[ap.n]]}</span>
-   <span class="n">Apartado ${ap.n}</span><h3>${esc(ap.t)}</h3><span class="s">${esc(ap.s)}</span>
-   ${lk?`<span class="st" style="color:var(--mut)">${esc(lk)}</span>`:`<span class="pb"><i style="width:${Math.round(pr.p*100)}%;background:${pr.st==='Completo'?'var(--v)':'var(--d)'}"></i></span><span class="st" style="color:${pr.st==='Completo'?'var(--v)':'var(--gd)'}">${esc(pr.st)}${pr.st==='Por iniciar'?'':' · '+Math.round(pr.p*100)+' %'}</span>`}${aptNote(ap)?`<span class="note">${esc(aptNote(ap))}</span>`:''}</button>`}).join('')}</div>
+  ${aptCard(APTS[0])}
+  <div class="card paso2"><h2>Paso 2. Situación de playa</h2><p class="note">Recorre la playa y evalúa cada ítem con su foto.</p><div class="grid">${APTS.filter(ap=>ap.n>=3).map(aptCard).join('')}</div></div>
+  ${aptCard(APTS[1])}
   <div class="card" style="margin-top:14px"><h2>Herramientas</h2><div class="tools">
    <button class="btn sec" type="button" data-act="fotos">Fotos y envío a Drive (${FOT.filter(f=>f.estado!=='subida').length} pendientes)</button>
    <button class="btn sec" type="button" data-act="regs">Registros y exportación</button><button class="btn" type="button" data-exp="xlsx">Descargar Excel</button><button class="btn" type="button" data-act="xlsdrive">Enviar Excel a Drive</button></div>
@@ -460,7 +460,7 @@ function selHTML(){
 function intro(ap){
   const lk=aptLocked(ap);
   return `<button class="back" type="button" data-act="menu">← Regresar al menú</button>
-  <div class="card hcard ${ap.n>=3&&ap.n<=5?'v':''}"><span class="ico big">${ICON[AICON[ap.n]]}</span><p class="kick">Apartado ${ap.n} · ${esc(ap.src)}</p><h1>${esc(ap.t)}</h1>
+  <div class="card hcard ${ap.n>=3&&ap.n<=5?'v':''}"><span class="ico big">${ICON[AICON[ap.n]]}</span><p class="kick">${esc(PASO(ap))}</p><h1>${esc(ap.t)}</h1>
    <h2 style="margin-top:14px">Qué es</h2><p>${esc(ap.que)}</p>
    <h2 style="margin-top:14px">Cómo se llena</h2><ol class="l">${ap.como.map(x=>`<li>${esc(x)}</li>`).join('')}</ol>
    ${ap.pages?`<div class="steps">${ap.pages.map((p,i)=>`<span class="${!pageMissing(ap,p,A()).length&&S.active?'ok':''}">Sección ${i+1}${p.gab?' · gabinete':''}</span>`).join('')}</div>`:''}
@@ -490,7 +490,7 @@ function avanceList(){
 }
 function avanceScr(){
   return `<button class="back" type="button" data-act="menu">← Regresar al menú general</button>
-  <div class="card hcard"><span class="ico big">${ICON.sol}</span><h1>Avance por playa</h1><p>Playas que has iniciado en este dispositivo, con el avance de cada turno (Apartados 1, 3, 4, 5 y 6) y las entrevistas completas. Toca «Continuar» para seguir llenando la playa donde quedó pendiente.</p>
+  <div class="card hcard"><span class="ico big">${ICON.sol}</span><h1>Avance por playa</h1><p>Playas que has iniciado en este dispositivo, con el avance de cada turno (pasos 1 y 2) y las entrevistas completas. Toca «Continuar» para seguir llenando la playa donde quedó pendiente.</p>
   <div class="btns" style="justify-content:flex-start"><button class="btn sec sm" type="button" data-act="eligeplaya">Elegir otra playa</button><button class="btn ghost sm" type="button" data-act="menu">Menú general</button></div></div>
   ${avanceList()}`;
 }
@@ -507,7 +507,7 @@ function irAlLlenado(k){
 function page(ap,pi){
   const pg=ap.pages[pi],a=A(),miss=showErr?pageMissing(ap,pg,a):[];
   return `<button class="back" type="button" data-act="intro">← Regresar a la explicación del apartado</button>
-  <div class="card hcard ${ap.n>=3&&ap.n<=5?'v':''}"><span class="ico big">${ICON[SICON[(pg.t.match(/^[A-E]\.\d/)||[])[0]]||AICON[ap.n]]}</span><p class="kick">Apartado ${ap.n}. ${esc(ap.t)}</p><h2 style="font-size:24px">${esc(pg.t)}</h2><p>${esc(pg.d)}</p>
+  <div class="card hcard ${ap.n>=3&&ap.n<=5?'v':''}"><span class="ico big">${ICON[SICON[(pg.t.match(/^[A-E]\.\d/)||[])[0]]||AICON[ap.n]]}</span><p class="kick">${esc(ap.n>=3?PASO(ap)+' · '+ap.t:PASO(ap))}</p><h2 style="font-size:24px">${esc(pg.t)}</h2><p>${esc(pg.d)}</p>
    <div class="steps">${ap.pages.map((p,i)=>`<${S.active?'button type="button" data-apg="'+i+'"':'span'} title="${esc(p.t)}" class="${i===pi?'on':!pageMissing(ap,p,a).length?'ok':''}">${i+1}${p.gab?' · gabinete':''}</${S.active?'button':'span'}>`).join('')}</div></div>
   ${ap.n===1&&pi===0&&S.active?`<div class="okbox" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between"><span>Playa en llenado: ${esc(a.A01)} · ${esc(a.A07)}</span><button class="btn ghost sm" type="button" data-act="newreg">Elegir otra playa</button></div>`:''}
   ${pg.gab?'<div class="okbox" style="color:var(--ink);border-color:var(--d)">Esta sección se llena en gabinete. En campo puedes dejarla pendiente con «Completar en gabinete».</div>':''}
@@ -522,7 +522,7 @@ function entList(){
   const a=A(),L=entsAct();
   const c=(t,s)=>L.filter(e=>e.a.F2_05===t&&(!s||e.a.F2_07===s)).length;
   return `<button class="back" type="button" data-act="intro">← Regresar a la explicación del apartado</button>
-  <div class="card hcard"><p class="kick">Apartado 2. Encuesta de percepción</p><h2 style="font-size:24px">Entrevistas de ${esc(a.A01)}</h2>
+  <div class="card hcard"><p class="kick">Paso 3. Encuesta de percepción</p><h2 style="font-size:24px">Entrevistas de ${esc(a.A01)}</h2>
   <div class="btns" style="justify-content:flex-start;margin-top:14px"><button class="btn" type="button" data-act="newent">Nueva entrevista</button><button class="btn sec" type="button" data-act="menu">Regresar al menú</button></div></div>
   <div class="card">${L.length?`<div class="scroll"><table class="stack"><thead><tr><th>Núm.</th><th>Tipo</th><th>Sexo</th><th>Entrevistador(a)</th><th>Estado</th><th></th></tr></thead><tbody>
   ${L.map((e,i)=>`<tr><td data-l="Núm." class="num">${i+1}</td><td data-l="Tipo">${esc(e.a.F2_05||'—')}</td><td data-l="Sexo">${esc(e.a.F2_07||'—')}</td><td data-l="Entrevistador(a)">${esc(e.a.F2_04||'—')}</td><td data-l="Estado">${entDone(e)?'<span class="pill ok">Completa</span>':`<button type="button" class="pill bad pillbtn" data-pendent="${e.id}" aria-expanded="${V.pendEnt===e.id}">Incompleta ${V.pendEnt===e.id?'▴':'▾'}</button>`}</td><td><button class="btn ghost sm" type="button" data-openent="${e.id}">Abrir</button> <button class="btn ghost sm" type="button" data-delent="${e.id}">Eliminar</button></td></tr>${V.pendEnt===e.id&&!entDone(e)?`<tr class="pendrow"><td colspan="6"><span class="note">Falta en:</span> ${entPages(e).map((p,j)=>[p,j,p.f.filter(f=>!fieldOK(f,e.a)).length]).filter(x=>x[2]).map(([p,j,n])=>`<button type="button" class="chipbtn" data-openent="${e.id}" data-pg="${j}">${j+1}. ${esc(p.t.replace(/^\d+(\.\d+)?\s*/,''))} · ${n}</button>`).join('')}</td></tr>`:''}`).join('')}</tbody></table></div>`:'<p class="note">Aún no hay entrevistas en esta playa.</p>'}</div>`;
@@ -534,7 +534,7 @@ function entPage(){
   const P=entPages(e),pi=Math.min(V.pg||0,P.length-1),pg=P[pi],miss=showErr?pg.f.filter(f=>!fieldOK(f,e.a)):[];
   const shown=pg.g?pg.f.filter(f=>tipoOK(f,e.a)):pg.f;
   return `<button class="back" type="button" data-act="entlist">← Regresar a la lista de entrevistas</button>
-  <div class="card hcard"><p class="kick">Apartado 2. Encuesta de percepción · Entrevista ${entsAct().indexOf(e)+1} · ${esc(A().A01)}</p><h2 style="font-size:24px">${esc(pg.t)}</h2><p>${esc(pg.d)}</p>
+  <div class="card hcard"><p class="kick">Paso 3. Encuesta de percepción · Entrevista ${entsAct().indexOf(e)+1} · ${esc(A().A01)}</p><h2 style="font-size:24px">${esc(pg.t)}</h2><p>${esc(pg.d)}</p>
   <div class="steps">${P.map((p,i)=>`<button type="button" data-epg="${i}" title="${esc(p.t)}" class="${i===pi?'on':!p.f.filter(f=>!fieldOK(f,e.a)).length?'ok':''}">${i+1}</button>`).join('')}</div></div>
   ${(()=>{const mm=pg.f.filter(f=>!fieldOK(f,e.a));return mm.length?`<div class="pend"><span>Pendientes en esta sección: <b>${mm.length}</b>. Puedes avanzar y completarlos después.</span><button class="btn ghost sm" type="button" data-act="hl">${showErr?'Quitar resaltado':'Resaltar pendientes'}</button></div>`:''})()}
   ${pi===0&&!e.a.F2_05?'<div class="okbox" style="color:var(--ink);border-color:var(--d)">El tipo de encuestado define qué preguntas se aplican en las siguientes secciones.</div>':''}
@@ -672,7 +672,7 @@ document.addEventListener('click',async ev=>{
   if(k==='prev'){showErr=false;if(V.pg===0)V={scr:'intro',apt:V.apt};else V.pg--;render()}
   if(k==='next'){const miss=pageMissing(ap,ap.pages[V.pg],A()),n0=V.pg+1;showErr=false;
     if(V.pg<ap.pages.length-1){V.pg++;prefill(ap);render();if(miss.length)toast('Sección '+n0+' guardada con '+miss.length+' pendiente(s)')}
-    else{const rest=ap.pages.some(pp=>pageMissing(ap,pp,A()).length);V={scr:'home'};render();toast(rest?'Apartado '+ap.n+' guardado con pendientes':'Apartado '+ap.n+' completo')}}
+    else{const rest=ap.pages.some(pp=>pageMissing(ap,pp,A()).length);V={scr:'home'};render();toast(rest?PASO(ap)+(ap.n>=3?' · '+ap.t:'')+': guardado con pendientes':PASO(ap)+(ap.n>=3?' · '+ap.t:'')+': completo')}}
   if(k==='hl'){showErr=!showErr;render(false);if(showErr){const el=document.querySelector('.fld.bad,.q.bad');el&&el.scrollIntoView({behavior:'smooth',block:'center'})}}
   if(k==='eligeplaya'){V={scr:'page',apt:1,pg:0};showErr=false;prefill(APTS[0]);render()}
   if(k==='gablater'){showErr=false;V={scr:'home'};render();toast('Sección de gabinete pendiente')}
@@ -713,7 +713,7 @@ document.addEventListener('click',async ev=>{
   if(k==='gpsdel'){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar: borrar recorrido';return}if(G.reg===S.active)gpsStop(true);REG().tracks=[];save();render(false);toast('Recorrido borrado')}
   if(k==='senddata'){const r=await post({accion:'datos',nombre:'respaldo_'+slug(S.cfg.persona)+'_'+S.dev+'_'+stamp()+'.json',data:JSON.stringify({regs:S.regs,ents:S.ents})});toast(r&&r.ok?'Respaldo enviado a Drive (_Registros)':'No se pudo enviar el respaldo')}
 });
-function prefill(ap){const a=A();if(ap.k==='datos'&&!a.A04)a.A04=today();if(ap.k==='datos'&&!a.A08&&S.cfg.persona)a.A08=S.cfg.persona;if(ap.k==='cierre'){const r=REG();if(r&&!a.C01)a.C01=r.t0||'';if(!a.I01&&a.A09)a.I01=a.A09}}
+function prefill(ap){const a=A();if(ap.k==='datos'&&!a.A04)a.A04=today();if(ap.k==='datos'&&!a.A08&&S.cfg.persona)a.A08=S.cfg.persona;if(ap.k==='datos'&&!a.C01)a.C01=nowHM();if(ap.k==='cierre'){const r=REG();if(r&&!a.C01)a.C01=r.t0||'';if(!a.I01&&a.A09)a.I01=a.A09}}
 
 // ===== Recorrido GPS =====
 const G={watch:null,wake:null,reg:null,fix:null,err:''};let MAP=null;
@@ -815,7 +815,7 @@ async function saveFile(name,content){
 const fdt=iso=>{if(!iso)return '';const d=new Date(iso);return isNaN(d)?iso:d.toLocaleString('es-MX',{dateStyle:'short',timeStyle:'medium'})};
 function tablas(){
   const ks=Object.keys(S.regs).sort(),T={};
-  {const cols=[['Playa','A01'],['Zona','A02'],['Vocación','A23'],['Tipología de la playa','A24'],['Turno','A07'],['Fecha','A04'],['Clave / código / Brigada','A03'],['Número de equipo','A05'],['Municipio / Entidad','A06'],['Hora inicio / Hora término',a=>(a.C01||'')+(a.C02?' – '+a.C02:'')],['Responsable del levantamiento','A09'],['Persona que toma las fotos','A08'],['Tramo evaluado (de dónde a dónde)','A10'],['Latitud del levantamiento','A15_lat'],['Longitud del levantamiento','A15_lon'],['Temporalidad',a=>(a.A18||'')+(a.A18==='Baja'&&a.A18b?' ('+a.A18b+')':'')],['Clima general',a=>[].concat(a.A19||[]).concat(a.A19b?[a.A19b]:[]).join(', ')],['Marea / Oleaje',a=>(a.A20||'')+(a.A20b?' ('+a.A20b+')':'')],['Actividades turístico-recreativas observadas',a=>[].concat(a.A21||[]).concat(a.A21b?[a.A21b]:[]).join(', ')],['Actividad principal observada',a=>(a.A22||'')+(a.A22b?' ('+a.A22b+')':'')],['Estatus de Acceso','A25'],['Función Dominante','A26'],['Observaciones generales','C03'],['Supervisor(a)','I02'],['Autoridad validante','I03'],['Puntos de recorrido GPS',(a,k)=>ptsDe(k)],['Avance general (%)',(a,k)=>Math.round(regProg(k)*100)]];
+  {const cols=[['Playa','A01'],['Zona','A02'],['Vocación','A23'],['Tipología de la playa','A24'],['Turno','A07'],['Fecha','A04'],['Clave / código / Brigada','A03'],['Número de equipo','A05'],['Municipio / Entidad','A06'],['Hora de inicio',a=>a.C01||''],['Responsable del levantamiento','A09'],['Persona que toma las fotos','A08'],['Tramo evaluado (de dónde a dónde)','A10'],['Latitud del levantamiento','A15_lat'],['Longitud del levantamiento','A15_lon'],['Temporalidad',a=>(a.A18||'')+(a.A18==='Baja'&&a.A18b?' ('+a.A18b+')':'')],['Clima general',a=>[].concat(a.A19||[]).concat(a.A19b?[a.A19b]:[]).join(', ')],['Marea / Oleaje',a=>(a.A20||'')+(a.A20b?' ('+a.A20b+')':'')],['Actividades turístico-recreativas observadas',a=>[].concat(a.A21||[]).concat(a.A21b?[a.A21b]:[]).join(', ')],['Actividad principal observada',a=>(a.A22||'')+(a.A22b?' ('+a.A22b+')':'')],['Estatus de Acceso','A25'],['Función Dominante','A26'],['Puntos de recorrido GPS',(a,k)=>ptsDe(k)],['Avance general (%)',(a,k)=>Math.round(regProg(k)*100)]];
    T.BD_A=[cols.map(c=>c[0]),...ks.map(k=>{const a=S.regs[k].a;return cols.map(c=>{const v=typeof c[1]==='function'?c[1](a,k):a[c[1]];return Array.isArray(v)?v.join(', '):v??''})})]}
   {const by={};ks.forEach(k=>{const pn=k.split('_')[0];(by[pn]=by[pn]||{})[k.endsWith('vesp')?'v':'m']=S.regs[k]});
    const head=['Consecutivo','No','Playa','Título','Subtítulo','No_Ítem','Ítem','Estado (matutino)','Cantidad (matutino)','Condición (matutino)','Estado (vespertino)','Cantidad (vespertino)','Condición (vespertino)','Observaciones generales','Tipo de evidencia','Fotos (matutino)','Fotos (vespertino)','Comentarios de fotos'];
@@ -824,7 +824,7 @@ function tablas(){
      const obs=[m[id+'_OBS'],both?v[id+'_OBS']:''].filter(x=>has(x)&&x!==NA);const ev=[...new Set([].concat(Array.isArray(m[id+'_EVI'])?m[id+'_EVI']:[],both&&Array.isArray(v[id+'_EVI'])?v[id+'_EVI']:[]))];
      const nf=reg=>{if(!reg||!S.regs[reg])return '-';const ra=S.regs[reg].a;if(ra[id+'_EST']!=='Existe')return '-';const fm=ra[id+'_FOTM']||(ra[id+'_FOT']===NA?'Sin foto':'');if(fm==='Sin foto')return 'Sin foto';return FOT.filter(f=>f.reg===reg&&f.carpeta===carpetaItem(n)).length};
      const fcom=[pn+'_mat',pn+'_vesp'].flatMap(r=>FOT.filter(f=>f.reg===r&&f.carpeta===carpetaItem(n)&&has(f.coment)).map(f=>f.nombre+': '+f.coment)).join(' | ')||'-';
-     rows.push([++c,parseInt(pn.slice(1)),pl,ap.t,s.t,n,it[1],dash(m[id+'_EST']),dash(m[id+'_CAN']),dash(m[id+'_CON']),both?dash(v[id+'_EST']):'-',both?dash(v[id+'_CAN']):'-',both?dash(v[id+'_CON']):'-',obs.length>1?'Matutino: '+obs[0]+' | Vespertino: '+obs[1]:(obs[0]||'-'),ev.join(', ')||'-',M?nf(pn+'_mat'):'-',both&&Vs?nf(pn+'_vesp'):'-',fcom])})});
+     rows.push([++c,parseInt(pn.slice(1)),pl,ap.t,s.t,n,it[1],dash(m[id+'_EST']),dash(m[id+'_CAN']),dash(m[id+'_CON']),both?dash(v[id+'_EST']):'-',both?dash(v[id+'_CAN']):'-',both?dash(v[id+'_CON']):'-',obs.length>1?'Matutino: '+obs[0]+' | Vespertino: '+obs[1]:(obs[0]||'-'),ev.join(', ')||(m[id+'_EST']==='Existe'||(both&&v[id+'_EST']==='Existe')?'Foto':'-'),M?nf(pn+'_mat'):'-',both&&Vs?nf(pn+'_vesp'):'-',fcom])})});
    T.Matriz_Turno=[head,...rows]}
   {const all=[];Object.keys(S.ents).sort((a,b)=>parseInt(a.slice(1))-parseInt(b.slice(1))).forEach(k=>S.ents[k].forEach((e,i)=>all.push([k,i+1,e])));
    const ctrl=ENT_CTRL.filter(f=>f.t!=='gps'),hab=ENT_HAB,val=(f,a)=>{const v=!enabled(f,a)?NOAP:a[f.id];return Array.isArray(v)?v.join(', '):v??''};
