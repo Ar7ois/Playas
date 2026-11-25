@@ -1,10 +1,11 @@
 /**
- * Servicio de recepción de fotos y respaldos · Cuestionario de Caracterización de Playas (SECTUR)
+ * Servicio de recepción de fotos y respaldos · Cuestionario de Caracterización de Playas
  *
  * Estructura que crea en la carpeta raíz de Drive:
  *   <Playa>/<NNN Ítem>/   una carpeta por cada uno de los 46 ítems
  *   <Playa>/Otras/        fotos adicionales
  *   <Playa>/Recorrido_….kml  recorrido GPS y fotos georreferenciadas
+ *   Datos_<persona>_<teléfono>_parteN.xlsx  Excel de cada teléfono (se reemplaza en cada envío)
  *   _Registros/           respaldos de datos (JSON) enviados desde el cuestionario
  *
  * Instalación: ver README.md del repositorio (Implementar > Nueva implementación > Aplicación web).
@@ -141,6 +142,15 @@ function doPost(e) {
       const it = carpetaPlaya.getFilesByName(p.nombre);
       if (it.hasNext()) { const f = it.next(); f.setContent(p.data); return salida({ ok: true, id: f.getId(), url: f.getUrl(), actualizado: true }); }
       const archivo = carpetaPlaya.createFile(p.nombre, p.data, 'application/vnd.google-earth.kml+xml');
+      return salida({ ok: true, id: archivo.getId(), url: archivo.getUrl() });
+    }
+    if (p.accion === 'excel') {
+      const raiz = DriveApp.getFolderById(ROOT_ID);
+      const nombre = p.nombre || ('Datos_' + Date.now() + '.xlsx');
+      const viejos = raiz.getFilesByName(nombre);
+      while (viejos.hasNext()) viejos.next().setTrashed(true);
+      const blob = Utilities.newBlob(Utilities.base64Decode(p.data), p.mime || MimeType.MICROSOFT_EXCEL, nombre);
+      const archivo = raiz.createFile(blob);
       return salida({ ok: true, id: archivo.getId(), url: archivo.getUrl() });
     }
     if (p.accion === 'datos') {
