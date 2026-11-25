@@ -54,6 +54,11 @@ p{margin:0 0 10px}
 .pill{display:inline-block;font-size:13px;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--dl);color:var(--gd);margin:4px 6px 0 0}
 .pill.v{color:var(--v)}.pill.ok{background:var(--v);color:var(--on)}.pill.bad{background:var(--badbg);color:var(--bad)}
 ul.l,ol.l{margin:6px 0 10px;padding-left:22px}ul.l li,ol.l li{margin:5px 0}
+.fase{border-top:6px solid var(--teal)}.fase>p{margin:4px 0 8px}
+.medrec{border:1.5px solid #e86f1f;border-radius:12px;padding:12px 14px;background:#fff7f0}
+.medrow{border-top:1px solid var(--line);padding:10px 0}
+.insp h2{margin-bottom:6px}
+select#medTipo{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;background:#fff}
 .paso2{border-top:6px solid var(--teal);margin:14px 0}.paso2 .grid{margin-top:10px}
 .hero~.apt{width:100%;margin-top:14px}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
@@ -171,7 +176,7 @@ th{font-size:13px;color:var(--mut)}
   <b><span class="logo" id="logo"></span><span class="ttl">Cuestionario de Caracterización de Playas</span></b>
   <span class="net" id="net">Sin conexión</span>
   <span class="net hide" id="gpsPill">● Grabando recorrido</span>
-  <nav class="nav"><button type="button" id="bMenu">Menú</button><button type="button" id="bGps"><span class="lg">Recorrido </span>GPS</button><button type="button" id="bPlaya"><span class="lg">Elegir playa</span><span class="sm">Playa</span></button><button type="button" id="bAvance">Avance<span class="lg"> por playa</span></button></nav>
+  <nav class="nav"><button type="button" id="bMenu">Menú</button><button type="button" id="bGps"><span class="lg">Recorrido </span>GPS</button><button type="button" id="bInsp">Inspección</button><button type="button" id="bAvance">Avance<span class="lg"> por playa</span></button></nav>
   <span class="who" id="who"></span>
 </header>
 <div class="bar"><i id="prog"></i></div>
@@ -272,7 +277,7 @@ const APTS=[
   como:['Las secciones 1.1 a 1.3 se llenan en campo. La sección 1.4 Tramo y ubicación (de dónde a dónde se evalúa la playa y coordenada del levantamiento) se llena en gabinete; en campo puedes dejarla pendiente con «Completar en gabinete».','Elige primero la zona o la playa: la lista de playas muestra solo las de la zona elegida, y al elegir una playa la zona se asigna sola.','Elige el turno. Playa y turno identifican el registro.','Responde todos los campos. Si un dato no corresponde, pulsa «N/A».','Si cambias el turno de una playa que ya tiene respuestas, se abre (o se crea) el registro del otro turno con los datos de identificación y clasificación de la playa.','Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.'],pages:DATOS},
  {n:2,k:'perc',t:'Encuesta de percepción',s:'Entrevistas a turistas, población local y prestadores de servicios.',src:'Apartado F de la cédula (F.2, F.3 y F.4)',
   que:'Registra la percepción de las personas usuarias, población local, prestadores de servicios, concesionarios o permisionarios sobre el uso, operación, servicios, condiciones ambientales, seguridad, gobernanza y experiencia general de la playa.',
-  como:['Cada entrevista es un registro independiente dentro de la playa activa. Pulsa «Nueva entrevista» por cada persona.','En cada entrevista elige el tipo de encuestado (turista o visitante, población local, prestador de servicios) y el sexo registrado.','La fecha y la hora se toman automáticamente del dispositivo.','El tipo de encuestado define las preguntas: las de turistas y las complementarias de cada grupo se habilitan o bloquean solas.','En la percepción, 1 es la valoración más baja y 5 la más alta. Todas las afirmaciones se califican.']},
+  como:['Cada entrevista es un registro independiente dentro de la playa activa. Pulsa «Nueva entrevista» por cada persona.','En cada entrevista elige el tipo de encuestado (turista o visitante, población local, prestador de servicios) y el sexo registrado.','La fecha y la hora se toman automáticamente del dispositivo.','El tipo de encuestado define las preguntas: las de turistas y las complementarias de cada grupo se habilitan o bloquean solas.','En la percepción, 1 es la valoración más baja y 5 la más alta; «NC» cuando la persona no contesta.']},
  ...APT_IT.map((ap,k)=>({n:3+k,k:ap.c,t:ap.t.slice(3),s:DESC[ap.c],src:'Apartado '+ap.c+' de la cédula · hoja Matriz_Turno',
   que:ap.i,ap,
   como:['Cada ítem inicia con «¿Existe?». Si eliges «No existe», la condición queda en 0 y el resto se bloquea; con «No aplica» todo se bloquea. Solo con «Existe» se registran cantidad, condición de 1 a 5, observaciones y fotografías.','La foto es obligatoria: toma o carga al menos una de la condición del ítem. Se guardan en el teléfono y se envían a la carpeta del ítem en Drive cuando haya conexión.','La imagen de referencia de cada ítem muestra un ejemplo visual del elemento a evaluar.','Si un campo no corresponde, pulsa «N/A». Puedes avanzar aunque queden campos vacíos; el nivel de avance indica lo pendiente.',
@@ -280,7 +285,7 @@ const APTS=[
   pages:ap.subs.map(s=>({t:s.t,d:s.i,items:s.it.map(i=>i[0])}))}))];
 const PASO=ap=>ap.n===1?'Paso 1. Datos de playa':ap.n===2?'Paso 3. Encuesta de percepción':'Paso 2. Situación de playa';
 
-const SCALE=['1','2','3','4','5',NA],SCALE5=['1','2','3','4','5'];
+const SCALE=['1','2','3','4','5',NA],SCALE5=['1','2','3','4','5','NC'];
 
 // ===== Estado =====
 const LSK='cup_v2';
@@ -324,13 +329,13 @@ function posFoto(){return new Promise(res=>{
   if(G.fix&&Date.now()-Date.parse(G.fix.t)<20000)return res(Object.assign({},G.fix,{src:'Recorrido GPS'}));
   if(!navigator.geolocation)return fb();
   navigator.geolocation.getCurrentPosition(p=>res({lat:+p.coords.latitude.toFixed(6),lon:+p.coords.longitude.toFixed(6),acc:Math.round(p.coords.accuracy),t:new Date().toISOString(),src:'GPS al tomar la foto'}),fb,{enableHighAccuracy:true,timeout:10000,maximumAge:15000})})}
-async function addFotos(files,carpeta,itemN){
+async function addFotos(files,carpeta,itemN,code){
   if(!IDB){toast('Este navegador no permite guardar fotos');return}
   if(!personaOK()){toast('Escribe primero tu nombre');render(false);return}
   const reg=S.active,a=A();let k=fotosDe(reg,carpeta).length;
   toast('Guardando foto y coordenada…');const pos=await posFoto();
   for(const f of files){const b=await comprimir(f);k++;
-    S.seq=(S.seq||0)+1;const nombre='P'+String(playaNum(a.A01)).padStart(2,'0')+'_'+(itemN?'I'+pad(itemN):'OTRAS')+'_'+(vesp(a)?'VESP':'MAT')+'_'+slug(S.cfg.persona)+'_'+stamp()+'_'+S.dev+String(S.seq).padStart(4,'0')+'.jpg';
+    S.seq=(S.seq||0)+1;const nombre='P'+String(playaNum(a.A01)).padStart(2,'0')+'_'+(itemN?'I'+pad(itemN):code||'OTRAS')+'_'+(vesp(a)?'VESP':'MAT')+'_'+slug(S.cfg.persona)+'_'+stamp()+'_'+S.dev+String(S.seq).padStart(4,'0')+'.jpg';
     const m={id:uid(),reg,playa:a.A01,turno:a.A07,persona:String(S.cfg.persona).trim(),dev:S.dev,carpeta,item:itemN||null,nombre,estado:'pendiente',fecha:new Date().toISOString(),lat:pos?pos.lat:null,lon:pos?pos.lon:null,acc:pos?pos.acc:null,gsrc:pos?pos.src:'Sin coordenada'};
     await idbPut(m,b);FOT.push(m)}
   save();render(false);toast(files.length+' foto(s) guardada(s)'+(pos?' con coordenada':' sin coordenada'));
@@ -440,7 +445,7 @@ function home(){
   <h1>Cuestionario de Caracterización de Playas</h1>
   <p>Levantamiento en campo y gabinete de la caracterización de playas y de la encuesta de percepción. Funciona sin internet: lo capturado se guarda en este dispositivo y las fotos se envían a Drive cuando hay conexión.</p>
   <div class="persona" style="margin:10px 0 0"><b>Activa la ubicación del teléfono.</b> Cuando el navegador pregunte, elige «Permitir». Sin ese permiso no se graban el recorrido GPS ni las coordenadas de fotos y entrevistas.</div>
-  <div class="okbox" style="margin:10px 0 0;${r?'':'border-color:var(--line);color:var(--ink)'}">${r?`Registro activo: ${esc(a.A01)} · ${esc(a.A07)}`:'Sin playa activa. Usa «Elegir playa» o abre cualquier apartado para empezar.'}</div>
+  <div class="okbox" style="margin:10px 0 0;${r?'':'border-color:var(--line);color:var(--ink)'}">${r?`Registro activo: ${esc(a.A01)} · ${esc(a.A07)}`:'Sin playa activa. Abre el Paso 1. Datos de playa para elegirla.'}</div>
   ${r?`<div class="btns" style="justify-content:flex-start"><button class="btn ghost sm" type="button" data-turno="${vesp()?'Turno matutino':'Turno vespertino'}">Cambiar a ${vesp()?'turno matutino':'turno vespertino'}</button><button class="btn ghost sm" type="button" data-act="newreg">Iniciar registro de otra playa</button></div>`:''}</div>
   <button type="button" class="card avbtn" data-act="gps" style="border-left-color:var(--teal)"><span class="ico">${ICON.huellas}</span><span><b>Recorrido GPS</b><span class="note" style="display:block">${G.watch!=null?'Grabando: '+esc(S.regs[G.reg]?.a.A01||'')+' · '+ptsDe(G.reg)+' puntos':S.active&&ptsDe(S.active)?ptsDe(S.active)+' puntos grabados en esta playa. Ver mapa o exportar KML.':'Graba el recorrido de la playa y expórtalo en KML.'}</span></span><span class="go">${G.watch!=null?'Ver →':'Abrir →'}</span></button>
   <button type="button" class="card avbtn" data-act="avance"><span class="ico">${ICON.sol}</span><span><b>Avance por playa</b><span class="note" style="display:block">${Object.keys(S.regs).length?new Set(Object.values(S.regs).map(r=>r.a.A01)).size+' playa(s) iniciada(s). Ver avance y continuar.':'Aún no hay playas iniciadas.'}</span></span><span class="go">Ver →</span></button>
@@ -478,7 +483,7 @@ function regProg(k){
 function avanceList(){
   const by={};Object.keys(S.regs).forEach(k=>{const n=playaNum(S.regs[k].a.A01);(by[n]=by[n]||{})[k.endsWith('vesp')?'v':'m']=k});
   const nums=Object.keys(by).map(Number).sort((x,y)=>x-y);
-  if(!nums.length)return '<div class="card"><p>Aún no has iniciado ninguna playa. Usa «Elegir playa» para empezar.</p><div class="btns" style="justify-content:flex-start"><button class="btn" type="button" id="bPlaya2" data-act="eligeplaya">Elegir playa</button></div></div>';
+  if(!nums.length)return '<div class="card"><p>Aún no has iniciado ninguna playa. Abre el Paso 1. Datos de playa para empezar.</p><div class="btns" style="justify-content:flex-start"><button class="btn" type="button" id="bPlaya2" data-act="eligeplaya">Elegir playa</button></div></div>';
   const fila=(n,t,k,otra)=>{const lab=t==='m'?'Turno matutino':'Turno vespertino';
     if(!k)return `<div class="trow"><span class="tl">${lab}</span><span class="note">Sin iniciar</span><button class="btn sec sm" type="button" data-newturno="${esc(otra)}|${lab}">Iniciar turno</button></div>`;
     const p=Math.round(regProg(k)*100);
@@ -585,6 +590,7 @@ function render(scroll=true){
   else if(V.scr==='regs')h=regsScr();
   else if(V.scr==='avance')h=avanceScr();
   else if(V.scr==='gps')h=gpsScr();
+  else if(V.scr==='insp')h=inspScr();
   $('#main').innerHTML=h;
   const a=A();$('#who').textContent=S.active?(a.A01+' · '+a.A07):'Sin registro activo';
   let pr=0;if(V.scr==='page')pr=(V.pg+1)/APTS[V.apt-1].pages.length;else if(V.scr==='ent'){const e=curEnt();if(e)pr=((V.pg||0)+1)/entPages(e).length}
@@ -630,6 +636,7 @@ function setVal(id,v){
 // ===== Eventos =====
 $('#main').addEventListener('change',async ev=>{
   const t=ev.target;
+  if(t.dataset.insfoto){const I=INSP.find(x=>x[0]===t.dataset.insfoto);const files=[...t.files];if(I&&files.length)await addFotos(files,insCarpeta(I),null,'INS'+I[0]);return}
   if(t.dataset.foto!==undefined){const n=+t.dataset.foto;const files=[...t.files];if(files.length)await addFotos(files,n?carpetaItem(n):'Otras',n||null);return}
   if(t.id==='impJson'){const f=t.files[0];if(!f)return;try{const x=JSON.parse(await f.text());let r=0,e=0;Object.entries(x.regs||{}).forEach(([k,v])=>{if(!S.regs[k]){S.regs[k]=v;r++}});Object.entries(x.ents||{}).forEach(([k,l])=>{const cur=S.ents[k]=S.ents[k]||[];l.forEach(it=>{if(!cur.some(c=>c.id===it.id)){cur.push(it);e++}})});save();render(false);toast('Importados: '+r+' registro(s) y '+e+' entrevista(s)')}catch(err){toast('El archivo no es un respaldo válido')}return}
   if(t.dataset.f&&t.type!=='text'&&t.tagName!=='TEXTAREA'&&t.type!=='number'){setVal(t.dataset.f,t.value);render(false);return}
@@ -642,6 +649,7 @@ document.addEventListener('click',async ev=>{
   const g=ev.target.closest('button,[data-apt]');if(!g)return;const d=g.dataset;
   if(g.id==='bGps'){V={scr:'gps'};showErr=false;render();return}
   if(g.id==='bAvance'){V={scr:'avance'};showErr=false;render();return}
+  if(g.id==='bInsp'){V={scr:'insp'};showErr=false;render();return}
   if(g.id==='bPlaya'){V={scr:'page',apt:1,pg:0};showErr=false;prefill(APTS[0]);render();return}
   if(g.id==='bMenu'){V={scr:'home'};showErr=false;render();return}
   if(d.apt){const ap=APTS[+d.apt-1];V={scr:'intro',apt:ap.n};showErr=false;render();return}
@@ -649,6 +657,8 @@ document.addEventListener('click',async ev=>{
   if(d.now){const a=V.scr==='ent'?curEnt().a:A();a[d.now]=nowHM();render(false);return}
   if(d.gps){const a=V.scr==='ent'?curEnt().a:A();if(!navigator.geolocation){toast('Este dispositivo no permite obtener la ubicación');return}toast('Obteniendo ubicación…');
     navigator.geolocation.getCurrentPosition(p=>{a[d.gps+'_lat']=p.coords.latitude.toFixed(6);a[d.gps+'_lon']=p.coords.longitude.toFixed(6);render(false);toast('Ubicación registrada')},()=>toast('No se pudo obtener la ubicación. Revisa que la ubicación esté activada y permitida para esta página.'),{enableHighAccuracy:true,timeout:20000});return}
+  if(d.medsend){const m=medsDe(S.active).find(x=>x.id===d.medsend);if(m){g.disabled=true;g.textContent='Enviando…';const ok=await medSend(S.active,m,false);render(false);if(ok)toast('Medición enviada a Drive')}return}
+  if(d.meddel){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar: borrar';return}const r=REG();if(G.med===d.meddel)gpsStop(true);r.meds=(r.meds||[]).filter(x=>x.id!==d.meddel);save();render(false);toast('Medición borrada');return}
   if(d.sendfoto){if(!URL_OK(S.cfg.url)){toast('Este teléfono no está conectado con Drive');return}if(!navigator.onLine){toast('Sin internet: la foto se enviará cuando haya conexión');return}g.disabled=true;g.textContent='Enviando…';await syncFotos(false,d.sendfoto);return}
   if(d.delfoto){if(g.dataset.sure!=='1'){g.dataset.sure='1';g.textContent='Confirmar quitar';return}await idbDel(d.delfoto);FOT=FOT.filter(f=>f.id!==d.delfoto);render(false);toast('Foto quitada');return}
   if(d.epg!==undefined){V.pg=+d.epg;showErr=false;render();return}
@@ -705,7 +715,10 @@ document.addEventListener('click',async ev=>{
     try{await navigator.clipboard.writeText(l);toast('Enlace copiado: compártelo por WhatsApp')}catch(e){toast('Copia el enlace del recuadro')}}
   if(k==='gpsstart')gpsStart();
   if(k==='gpsstop')gpsStop();
-  if(k==='gpsend'){const r=REG();if(!r)return;if(G.watch!=null&&G.reg===S.active)gpsStop(true);r.gpsFin=new Date().toISOString();save();render(false);
+  if(k==='medstart')medStart();
+  if(k==='medend')await medEnd();
+  if(k==='medsendall'){const L=medsDe(S.active).filter(m=>m.fin&&m.estado!=='enviada'&&m.pts.length>1);if(!L.length){toast('No hay mediciones pendientes');return}let n=0;for(const m of L)if(await medSend(S.active,m,true))n++;render(false);toast(n+' de '+L.length+' medición(es) enviada(s) a Drive');return}
+  if(k==='gpsend'){const r=REG();if(!r)return;if(G.watch!=null&&G.reg===S.active&&G.mode==='ruta')gpsStop(true);r.gpsFin=new Date().toISOString();save();render(false);
     if(navigator.onLine&&URL_OK(S.cfg.url)&&ptsDe(S.active)){const x=await post({accion:'kml',playa:A().A01,nombre:kmlName(S.active),data:kml([S.active])},true);toast(x&&x.ok?'Recorrido terminado y enviado a Drive':'Recorrido terminado. Envía el KML a Drive cuando haya internet')}else toast('Recorrido terminado y guardado. Envía el KML a Drive cuando haya internet')}
   if(k==='kml'){if(!ptsDe(S.active)&&!FOT.some(f=>f.reg===S.active&&f.lat!=null)){toast('Aún no hay recorrido ni fotos con coordenada');return}saveFile(kmlName(S.active),kml([S.active]))}
   if(k==='kmlall'){const ks=Object.keys(S.regs).filter(x=>ptsDe(x)||FOT.some(f=>f.reg===x&&f.lat!=null));if(!ks.length){toast('No hay recorridos grabados');return}saveFile('Recorridos_playas_'+stamp().slice(0,8)+'.kml',kml(ks))}
@@ -718,29 +731,64 @@ function prefill(ap){const a=A();if(ap.k==='datos'&&!a.A04)a.A04=today();if(ap.k
 // ===== Recorrido GPS =====
 const G={watch:null,wake:null,reg:null,fix:null,err:''};let MAP=null;
 const hav=(a,b)=>{const R=6371000,t=x=>x*Math.PI/180;const dl=t(b.lat-a.lat),dn=t(b.lon-a.lon);const h=Math.sin(dl/2)**2+Math.cos(t(a.lat))*Math.cos(t(b.lat))*Math.sin(dn/2)**2;return 2*R*Math.asin(Math.sqrt(h))};
+const MEDT=['Largo','Ancho','Distancia entre elementos','Contorno de zona'];
+const medsDe=k=>(S.regs[k]&&S.regs[k].meds)||[];
+function medCalc(m){const P=m.pts||[];let rec=0;for(let i=1;i<P.length;i++)rec+=hav(P[i-1],P[i]);
+  const recta=P.length>1?hav(P[0],P[P.length-1]):0;let per=null,area=null;
+  if(m.tipo==='Contorno de zona'&&P.length>2){per=rec+hav(P[P.length-1],P[0]);const la=P[0].lat*Math.PI/180,R=6371000;const xy=P.map(q=>[R*q.lon*Math.PI/180*Math.cos(la),R*q.lat*Math.PI/180]);let s2=0;for(let i=0;i<xy.length;i++){const [x1,y1]=xy[i],[x2,y2]=xy[(i+1)%xy.length];s2+=x1*y2-x2*y1}area=Math.abs(s2)/2}
+  const acc=P.length?P.reduce((t,q)=>t+(q.acc||0),0)/P.length:null;
+  return {rec,recta,per,area,acc,n:P.length,principal:m.tipo==='Contorno de zona'?per:recta}}
+const r1=x=>x==null?'':Math.round(x*10)/10;
+const medTxt=m=>{const c=medCalc(m);if(c.n<2)return 'Sin puntos suficientes';return m.tipo==='Contorno de zona'?(c.n>2?'Perímetro '+r1(c.per)+' m · Área '+Math.round(c.area)+' m²':'Faltan puntos para el contorno'):r1(c.recta)+' m (línea recta inicio–fin) · recorrido '+r1(c.rec)+' m'};
 const ptsDe=k=>((S.regs[k]&&S.regs[k].tracks)||[]).reduce((t,x)=>t+x.length,0);
 async function wake(){try{if('wakeLock' in navigator&&document.visibilityState==='visible')G.wake=await navigator.wakeLock.request('screen')}catch(e){}}
 function gpsStart(){
   if(!S.active){toast('Elige primero la playa y el turno');return}
   if(!navigator.geolocation){toast('Este dispositivo no permite usar el GPS');return}
   if(G.watch!=null)gpsStop(true);
-  const r=REG();delete r.gpsFin;r.tracks=r.tracks||[];r.tracks.push([]);G.reg=S.active;G.err='Buscando señal GPS…';
+  const r=REG();delete r.gpsFin;r.tracks=r.tracks||[];r.tracks.push([]);G.reg=S.active;G.mode='ruta';G.err='Buscando señal GPS…';
   G.watch=navigator.geolocation.watchPosition(gpsPos,e=>{G.err=e.code===1?'Permiso de ubicación denegado. Actívalo en el navegador.':'Sin señal GPS; se sigue intentando.';gpsUI()},{enableHighAccuracy:true,maximumAge:0,timeout:30000});
   wake();save();render(false);toast('Grabando recorrido');
 }
+function medStart(){
+  if(!S.active){toast('Elige primero la playa y el turno');return}
+  if(!navigator.geolocation){toast('Este dispositivo no permite usar el GPS');return}
+  const nom=($('#medNom')?.value||'').trim(),tipo=$('#medTipo')?.value||MEDT[0];
+  if(nom.length<2){toast('Escribe qué vas a medir');$('#medNom')?.focus();return}
+  if(G.watch!=null){const eraRuta=G.mode==='ruta';gpsStop(true);if(eraRuta)toast('Se pausó el perímetro para hacer la medición')}
+  const r=REG();r.meds=r.meds||[];const m={id:uid(),nom,tipo,pts:[],ini:new Date().toISOString(),fin:null,persona:S.cfg.persona||'',estado:'pendiente'};r.meds.push(m);
+  G.reg=S.active;G.mode='med';G.med=m.id;G.err='Buscando señal GPS…';
+  G.watch=navigator.geolocation.watchPosition(gpsPos,e=>{G.err=e.code===1?'Permiso de ubicación denegado. Actívalo en el navegador.':'Sin señal GPS; se sigue intentando.';gpsUI()},{enableHighAccuracy:true,maximumAge:0,timeout:30000});
+  wake();save();render(false);toast('Midiendo: '+nom);
+}
+function medKml(k,m){const x=v=>String(v??'').replace(/[<>&'"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;'}[c]));const a=S.regs[k].a,P=m.pts,cs=P.map(q=>q.lon+','+q.lat+',0');
+  const geo=m.tipo==='Contorno de zona'&&P.length>2?`<Polygon><outerBoundaryIs><LinearRing><coordinates>${cs.concat(cs[0]).join(' ')}</coordinates></LinearRing></outerBoundaryIs></Polygon>`:`<LineString><tessellate>1</tessellate><coordinates>${cs.join(' ')}</coordinates></LineString>`;
+  return `<Placemark><name>${x(m.nom+' · '+m.tipo)}</name><styleUrl>#med</styleUrl><description>${x(a.A01+' · '+a.A07+' · '+medTxt(m)+' · Medido por: '+(m.persona||''))}</description>${geo}</Placemark>`}
+const medDoc=body=>`<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Mediciones · Caracterización de Playas</name><Style id="med"><LineStyle><color>ff1f6fe8</color><width>4</width></LineStyle><PolyStyle><color>551f6fe8</color></PolyStyle></Style>${body}</Document></kml>`;
+async function medSend(k,m,quiet){
+  if(!URL_OK(S.cfg.url)){if(!quiet)toast('Este teléfono no está conectado con Drive');return false}
+  if(!navigator.onLine){if(!quiet)toast('Sin internet: envía la medición cuando haya conexión');return false}
+  if((m.pts||[]).length<2){if(!quiet)toast('La medición no tiene puntos suficientes');return false}
+  const r=await post({accion:'kml',playa:S.regs[k].a.A01,nombre:'Medicion_'+slug(m.nom)+'_'+slug(m.persona||S.cfg.persona)+'_'+S.dev+'_'+m.id.slice(0,8)+'.kml',data:medDoc(medKml(k,m))},true);
+  if(r&&r.ok){m.estado='enviada';save();return true}return false}
+async function medEnd(){const k=G.reg,m=medsDe(k).find(x=>x.id===G.med);gpsStop(true);if(!m)return;m.fin=new Date().toISOString();save();render(false);
+  if(m.pts.length<2){toast('Medición guardada, pero tiene menos de 2 puntos: repítela caminando de un extremo al otro');return}
+  const ok=navigator.onLine&&URL_OK(S.cfg.url)?await medSend(k,m,true):false;render(false);toast('Medición guardada: '+medTxt(m)+(ok?' · enviada a Drive':''))}
 function gpsStop(silent){
-  if(G.watch!=null)navigator.geolocation.clearWatch(G.watch);G.watch=null;try{G.wake&&G.wake.release()}catch(e){}G.wake=null;
+  if(G.watch!=null)navigator.geolocation.clearWatch(G.watch);G.watch=null;if(G.mode==='med'){const m=medsDe(G.reg).find(x=>x.id===G.med);if(m&&!m.fin)m.fin=new Date().toISOString()}const eraMed=G.mode==='med';G.mode=null;G.med=null;try{G.wake&&G.wake.release()}catch(e){}G.wake=null;
   const r=S.regs[G.reg];if(r&&r.tracks&&r.tracks.length&&!r.tracks[r.tracks.length-1].length)r.tracks.pop();G.reg=null;G.err='';save();
-  if(!silent){render(false);toast('Recorrido detenido y guardado')}
+  if(!silent){render(false);toast(eraMed?'Medición terminada':'Recorrido detenido y guardado')}
 }
 function gpsPos(p){
   const c=p.coords;G.fix={lat:+c.latitude.toFixed(6),lon:+c.longitude.toFixed(6),acc:Math.round(c.accuracy),t:new Date().toISOString()};G.err='';
+  if(G.mode==='med'){const m=medsDe(G.reg).find(x=>x.id===G.med);if(m&&G.fix.acc<=30){const l=m.pts[m.pts.length-1];if(!l||hav(l,G.fix)>=1||Date.now()-Date.parse(l.t)>=5000){m.pts.push(G.fix);save();if(MAP&&MAP._med){MAP._med.addLatLng([G.fix.lat,G.fix.lon]);MAP.panTo([G.fix.lat,G.fix.lon])}}}gpsUI();return}
   const r=S.regs[G.reg];if(!r||!r.tracks)return;const seg=r.tracks[r.tracks.length-1];const last=seg[seg.length-1];
   if(!last||hav(last,G.fix)>=3||Date.now()-Date.parse(last.t)>=15000){seg.push(G.fix);save();if(MAP&&MAP._seg&&G.reg===S.active){MAP._seg.addLatLng([G.fix.lat,G.fix.lon]);MAP.panTo([G.fix.lat,G.fix.lon])}}
   gpsUI();
 }
 function gpsUI(){
-  const on=G.watch!=null,pill=$('#gpsPill');pill.classList.toggle('hide',!on);if(on)pill.textContent='● Grabando · '+ptsDe(G.reg)+' puntos';
+  const on=G.watch!=null,pill=$('#gpsPill');pill.classList.toggle('hide',!on);if(on)pill.textContent=G.mode==='med'?'● Midiendo':'● Grabando · '+ptsDe(G.reg)+' puntos';
+  const ml=$('#medLive');if(ml&&G.mode==='med'){const m=medsDe(G.reg).find(x=>x.id===G.med);if(m)ml.innerHTML=`<div><b class="num">${m.pts.length}</b><span>Puntos</span></div><div><b class="num">${G.fix?'±'+G.fix.acc+' m':'—'}</b><span>Precisión actual</span></div><div><b class="num">${medCalc(m).n>1?r1(m.tipo==='Contorno de zona'?medCalc(m).rec:medCalc(m).recta)+' m':'—'}</b><span>${m.tipo==='Contorno de zona'?'Recorrido':'Distancia inicio–actual'}</span></div>`}
   const inf=$('#gpsInfo');if(inf){const k=S.active,r=REG();inf.innerHTML=k?`<div><b class="num">${ptsDe(k)}</b><span>Puntos grabados</span></div><div><b class="num">${(r.tracks||[]).filter(x=>x.length).length}</b><span>Tramos grabados</span></div><div><b class="num">${G.fix&&on?'±'+G.fix.acc+' m':'—'}</b><span>Precisión actual</span></div><div><b class="num">${FOT.filter(f=>f.reg===k&&f.lat!=null).length}</b><span>Fotos con coordenada</span></div>`:'';}
   const er=$('#gpsErr');if(er)er.textContent=on?G.err:'';
 }
@@ -750,34 +798,68 @@ function initMap(){
   const r=REG();MAP=L.map(el);L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap'}).addTo(MAP);
   const segs=(r&&r.tracks)||[];let all=[];
   segs.forEach((sg,i)=>{const ll=sg.map(q=>[q.lat,q.lon]);all=all.concat(ll);const pl=L.polyline(ll,{color:'#0b5d8a',weight:5,opacity:.9}).addTo(MAP);if(i===segs.length-1&&G.reg===S.active&&G.watch!=null)MAP._seg=pl});
+  medsDe(S.active).forEach(m=>{const ll=m.pts.map(q=>[q.lat,q.lon]);all=all.concat(ll);const pl=(m.tipo==='Contorno de zona'&&ll.length>2&&m.fin?L.polygon(ll,{color:'#e86f1f',weight:4,fillOpacity:.15}):L.polyline(ll,{color:'#e86f1f',weight:4})).addTo(MAP);if(ll.length)pl.bindPopup(esc(m.nom+' · '+medTxt(m)));if(m.id===G.med&&G.mode==='med')MAP._med=pl});
   FOT.filter(f=>f.reg===S.active&&f.lat!=null).forEach(f=>{L.circleMarker([f.lat,f.lon],{radius:7,color:'#0b5d8a',weight:2,fillColor:'#ffbe45',fillOpacity:1}).addTo(MAP).bindPopup(esc(f.nombre)+(f.coment?'<br>'+esc(f.coment):''));all.push([f.lat,f.lon])});
   if(all.length)MAP.fitBounds(all,{padding:[24,24],maxZoom:18});else if(G.fix)MAP.setView([G.fix.lat,G.fix.lon],17);else MAP.setView([16.85,-99.88],12);
 }
+const INSP=[['BOD','Bodegas'],['COC','Cocinas irregulares'],['EMB','Embarcaciones y muelles'],['OTR','Otro']];
+const insCarpeta=I=>'Inspección - '+I[1];
+function inspScr(){
+  const r=REG(),a=A();
+  return `<button class="back" type="button" data-act="menu">← Regresar al menú general</button>
+  <div class="card hcard"><span class="ico big">${ICON.caracol}</span><h1>Inspección</h1>
+  <p>Describe lo que encuentres en la playa y la necesidad que identificas. Cada tema tiene su propio bloc de notas y sus fotos. Las fotos se envían a Drive, a la carpeta de la playa › «Inspección - …».</p></div>
+  ${selHTML()}
+  ${r?INSP.map((I,i)=>{const k='INS_'+I[0],fl=fotosDe(S.active,insCarpeta(I));return `<div class="card insp"><h2>${i+1}. ${esc(I[1])}</h2>
+   ${I[0]==='OTR'?`<div class="fld"><div class="fhead"><span class="lab">¿Qué se inspecciona?</span></div><input type="text" data-f="${k}_Q" value="${esc(a[k+'_Q']||'')}" placeholder="Escribe el tema"></div>`:''}
+   <div class="fld"><div class="fhead"><span class="lab">Descripción</span></div><textarea data-f="${k}_D" placeholder="Qué hay, dónde está, cuántos, en qué estado">${esc(a[k+'_D']||'')}</textarea></div>
+   <div class="fld"><div class="fhead"><span class="lab">Necesidad</span></div><textarea data-f="${k}_N" placeholder="Qué se necesita atender o mejorar">${esc(a[k+'_N']||'')}</textarea></div>
+   <div class="fld"><div class="fhead"><span class="lab">Fotos</span></div>
+    ${!personaOK()?personaHTML():`<div class="tools"><label class="up">Tomar foto<input type="file" accept="image/*" capture="environment" data-insfoto="${I[0]}"></label><label class="up">Cargar de galería<input type="file" accept="image/*" multiple data-insfoto="${I[0]}"></label></div>
+    <div class="note" style="margin-top:6px">Se envían a Drive en: ${esc(a.A01||'')} › ${esc(insCarpeta(I))}</div>${fotoRows(fl,false)}`}</div></div>`}).join(''):''}`;
+}
 function gpsScr(){
-  const r=REG(),a=A(),on=G.watch!=null,aqui=on&&G.reg===S.active;
+  const r=REG(),a=A(),on=G.watch!=null,aqui=on&&G.reg===S.active&&G.mode==='ruta',mid=on&&G.reg===S.active&&G.mode==='med';
+  const mm=mid?medsDe(S.active).find(x=>x.id===G.med):null,meds=r?medsDe(S.active).filter(x=>x.id!==G.med):[];
   return `<button class="back" type="button" data-act="menu">← Regresar al menú general</button>
   <div class="card hcard v"><span class="ico big">${ICON.huellas}</span><h1>Recorrido GPS</h1>
-  <p>Graba el recorrido de la playa con el GPS del teléfono. Se guarda en el dispositivo aunque no haya internet y se exporta en KML junto con la ubicación de las fotos.</p>
-  <ul class="l"><li>Inicia la grabación al empezar a caminar la playa. Puedes pausar y reanudar; cada reanudación es un tramo nuevo.</li><li>Al acabar, pulsa «Terminar recorrido»: se guarda y, si hay internet, el KML se envía a Drive.</li><li>Mientras graba, la pantalla se mantiene encendida. Deja el cuestionario abierto: si cierras la app o apagas la pantalla, el teléfono puede suspender el GPS.</li><li>Puedes seguir llenando los apartados mientras graba.</li></ul></div>
+  <p>Mide la playa con el GPS del teléfono en dos fases. Todo se guarda en el teléfono aunque no haya internet y se envía a Drive en KML.</p>
+  <ul class="l"><li>Mientras graba, la pantalla se mantiene encendida. Deja la app abierta: si la cierras o apagas la pantalla, el teléfono puede suspender el GPS.</li><li>Solo se graba una cosa a la vez: al iniciar una medición se pausa el perímetro.</li></ul></div>
   ${selHTML()}
-  ${r?`<div class="card"><div class="phead"><div><h3>${esc(a.A01)}</h3><span class="note">${esc(a.A07)}</span></div><span class="pill ${aqui?'bad':r.gpsFin?'ok':''}">${aqui?'● Grabando':on?'Grabando en otra playa':r.gpsFin?'Terminado':ptsDe(S.active)?'En pausa':'Sin iniciar'}</span></div>
-   ${on&&!aqui?`<p class="note">Se está grabando el recorrido de ${esc(S.regs[G.reg]?.a.A01||'')}. Al iniciar aquí se detiene aquel.</p>`:''}
+  ${r?`<div class="card fase"><p class="kick">Fase 1</p><h2>Perímetro de la playa</h2><p>Mide el contorno de la playa.</p>
+   <div class="phead" style="margin-top:6px"><div><h3>${esc(a.A01)}</h3><span class="note">${esc(a.A07)}</span></div><span class="pill ${aqui?'bad':r.gpsFin?'ok':''}">${aqui?'● Grabando':on&&G.mode==='ruta'?'Grabando en otra playa':r.gpsFin?'Terminado':ptsDe(S.active)?'En pausa':'Sin iniciar'}</span></div>
+   <ul class="l"><li>Inicia la grabación al empezar a caminar el contorno. Puedes pausar y reanudar; cada reanudación es un tramo nuevo.</li><li>Al acabar, pulsa «Terminar recorrido»: se guarda y, si hay internet, el KML se envía a Drive.</li></ul>
+   ${on&&G.mode==='ruta'&&!aqui?`<p class="note">Se está grabando el recorrido de ${esc(S.regs[G.reg]?.a.A01||'')}. Al iniciar aquí se detiene aquel.</p>`:''}
    ${r.gpsFin?`<div class="okbox">Recorrido terminado a las ${esc(new Date(r.gpsFin).toLocaleTimeString('es-MX',{hour:'2-digit',minute:'2-digit',hour12:false}))}.</div>`:''}
    <div class="btns" style="justify-content:flex-start">${aqui?'<button class="btn sec" type="button" data-act="gpsstop">Pausar</button>':`<button class="btn ${r.gpsFin?'ghost':''}" type="button" data-act="gpsstart">${ptsDe(S.active)?'Reanudar grabación':'Iniciar grabación'}</button>`}${(aqui||ptsDe(S.active))&&!r.gpsFin?'<button class="btn" type="button" data-act="gpsend">Terminar recorrido</button>':''}</div>
    <p class="err" id="gpsErr"></p><div class="meta" id="gpsInfo"></div>
    <div id="map" style="height:340px;border-radius:10px;margin-top:14px;border:1px solid var(--line);z-index:0"></div>
-   <p class="note" style="margin-top:6px">Línea azul: recorrido. Puntos amarillos: fotos con coordenada. El fondo de mapa requiere internet.</p>
-   <div class="tools" style="margin-top:8px"><button class="btn sec" type="button" data-act="kml">Descargar KML</button><button class="btn sec" type="button" data-act="kmldrive">Enviar KML a Drive</button><button class="btn ghost" type="button" data-act="gpsdel">Borrar recorrido</button></div></div>`:''}`;
+   <p class="note" style="margin-top:6px">Línea azul: perímetro. Línea naranja: mediciones. Puntos amarillos: fotos con coordenada. El fondo de mapa requiere internet.</p>
+   <div class="tools" style="margin-top:8px"><button class="btn sec" type="button" data-act="kml">Descargar KML</button><button class="btn sec" type="button" data-act="kmldrive">Enviar KML a Drive</button><button class="btn ghost" type="button" data-act="gpsdel">Borrar recorrido</button></div></div>
+  <div class="card fase"><p class="kick">Fase 2</p><h2>Medición de mobiliario, infraestructura y zonas</h2><p>Mide el largo y ancho de los elementos y espacios de la playa, así como la distancia entre ellos.</p>
+   ${mid&&mm?`<div class="medrec"><div class="phead"><div><h3>${esc(mm.nom)}</h3><span class="note">${esc(mm.tipo)}</span></div><span class="pill bad">● Midiendo</span></div>
+    <p class="note">${mm.tipo==='Contorno de zona'?'Camina por el borde de la zona hasta volver al punto de inicio.':'Camina en línea recta hasta el otro extremo y detente ahí.'}</p>
+    <div class="meta" id="medLive"></div><p class="err" id="gpsErr"></p>
+    <div class="btns" style="justify-content:flex-start"><button class="btn" type="button" data-act="medend">Terminar medición</button></div></div>`
+   :`<div class="medform"><div class="fld"><div class="fhead"><span class="lab">¿Qué vas a medir?</span></div><input id="medNom" type="text" placeholder="Ej.: Palapa 3, zona de camastros, muelle norte"></div>
+    <div class="fld"><div class="fhead"><span class="lab">Tipo de medición</span></div><select id="medTipo">${MEDT.map(t=>`<option>${t}</option>`).join('')}</select></div>
+    <div class="btns" style="justify-content:flex-start"><button class="btn" type="button" data-act="medstart">Grabar medición</button></div>
+    <p class="note">Párate en el punto de inicio, pulsa «Grabar medición», espera a que la precisión baje y camina hasta el final. La precisión del GPS del celular es de unos 3 a 10 m: es útil para zonas y distancias grandes; para objetos de pocos metros usa cinta métrica.</p></div>`}
+   ${meds.length?`<h3 style="margin-top:14px">Mediciones de esta playa (${meds.length})</h3>${meds.map(m=>`<div class="medrow"><div><b>${esc(m.nom)}</b> <span class="note">· ${esc(m.tipo)}</span><div class="note">${esc(medTxt(m))}</div><div class="note">${m.estado==='enviada'?'<b style="color:var(--v)">Enviada a Drive ✓</b>':'Pendiente de envío'}</div></div>
+    <div class="btns" style="justify-content:flex-start;margin-top:6px">${m.estado!=='enviada'&&m.pts.length>1?`<button class="btn sm" type="button" data-medsend="${m.id}">Enviar a Drive</button>`:''}<button class="btn ghost sm" type="button" data-meddel="${m.id}">Borrar</button></div></div>`).join('')}
+    ${meds.some(m=>m.estado!=='enviada'&&m.pts.length>1)?'<div class="btns" style="justify-content:flex-start"><button class="btn sec" type="button" data-act="medsendall">Enviar todas las pendientes</button></div>':''}`:''}
+  </div>`:''}`;
 }
 function kml(keys){
   const x=v=>String(v??'').replace(/[<>&'"]/g,c=>({'<':'&lt;','>':'&gt;','&':'&amp;',"'":'&apos;','"':'&quot;'}[c]));
   const body=keys.map(k=>{const r=S.regs[k],a=r.a,segs=(r.tracks||[]).filter(t=>t.length);const fotos=FOT.filter(f=>f.reg===k&&f.lat!=null);
     return `<Folder><name>${x(a.A01+' · '+a.A07)}</name>
 ${segs.map((t,i)=>`<Placemark><name>Recorrido ${i+1}</name><styleUrl>#ruta</styleUrl><TimeSpan><begin>${t[0].t}</begin><end>${t[t.length-1].t}</end></TimeSpan><LineString><tessellate>1</tessellate><coordinates>${t.map(q=>q.lon+','+q.lat+',0').join(' ')}</coordinates></LineString></Placemark>`).join('\n')}
+${medsDe(k).filter(m=>m.pts.length>1).map(m=>medKml(k,m)).join('\n')}
 ${fotos.map(f=>`<Placemark><name>${x(f.nombre)}</name><styleUrl>#foto</styleUrl><description>${x((f.item?carpetaItem(f.item):'Otras')+(f.coment?' · '+f.coment:'')+' · ±'+f.acc+' m')}</description><TimeStamp><when>${f.fecha}</when></TimeStamp><Point><coordinates>${f.lon},${f.lat},0</coordinates></Point></Placemark>`).join('\n')}
 </Folder>`}).join('\n');
   return `<?xml version="1.0" encoding="UTF-8"?>\n<kml xmlns="http://www.opengis.net/kml/2.2"><Document><name>Recorridos · Caracterización de Playas</name>
-<Style id="ruta"><LineStyle><color>ff8a5d0b</color><width>4</width></LineStyle></Style><Style id="foto"><IconStyle><color>ff45beff</color><scale>0.9</scale></IconStyle></Style>
+<Style id="ruta"><LineStyle><color>ff8a5d0b</color><width>4</width></LineStyle></Style><Style id="foto"><IconStyle><color>ff45beff</color><scale>0.9</scale></IconStyle></Style><Style id="med"><LineStyle><color>ff1f6fe8</color><width>4</width></LineStyle><PolyStyle><color>551f6fe8</color></PolyStyle></Style>
 ${body}</Document></kml>`;
 }
 const kmlName=k=>'Recorrido_'+k.toUpperCase()+'_'+slug(S.cfg.persona)+'_'+S.dev+'_'+stamp()+'.kml';
@@ -834,6 +916,10 @@ function tablas(){
    ...FOT.slice().sort((x,y)=>(x.reg+x.nombre).localeCompare(y.reg+y.nombre)).map(f=>[f.playa,f.turno||(S.regs[f.reg]?.a.A07||''),f.item??'',f.carpeta,f.nombre,f.persona||'',f.lat??'',f.lon??'',f.acc??'',f.gsrc||'Sin coordenada',fdt(f.fecha),f.coment||'',f.estado==='subida'?'Enviada a Drive':'Pendiente',f.url||''])];
   T.Recorrido_GPS=[['Playa','Turno','Recorrido','Punto','Fecha y hora','Latitud','Longitud','Precisión (m)'],
    ...ks.flatMap(k=>{const a=S.regs[k].a;return ((S.regs[k].tracks)||[]).flatMap((t,i)=>t.map((q,j)=>[a.A01,a.A07,i+1,j+1,fdt(q.t),q.lat,q.lon,q.acc]))})];
+  T.Mediciones=[['Playa','Turno','Elemento medido','Tipo de medición','Medida (m)','Distancia recorrida (m)','Perímetro (m)','Área (m²)','Puntos','Precisión promedio (m)','Inicio','Fin','Latitud inicio','Longitud inicio','Latitud fin','Longitud fin','Medido por','Estado de envío'],
+   ...ks.flatMap(k=>{const a=S.regs[k].a;return medsDe(k).map(m=>{const c=medCalc(m),P=m.pts,f=P[0]||{},l=P[P.length-1]||{};return [a.A01,a.A07,m.nom,m.tipo,c.n>1?r1(c.principal):'',c.n>1?r1(c.rec):'',c.per!=null?r1(c.per):'',c.area!=null?Math.round(c.area):'',c.n,c.acc!=null?r1(c.acc):'',fdt(m.ini),m.fin?fdt(m.fin):'',f.lat??'',f.lon??'',l.lat??'',l.lon??'',m.persona||'',m.estado==='enviada'?'Enviada':'Pendiente']})})];
+  T.Inspeccion=[['Playa','Turno','Tema','Descripción','Necesidad','Fotos','Nombres de archivo'],
+   ...ks.flatMap(k=>{const a=S.regs[k].a;return INSP.map(I=>{const p='INS_'+I[0],fl=fotosDe(k,insCarpeta(I));return [a.A01,a.A07,I[0]==='OTR'&&a[p+'_Q']?'Otro: '+a[p+'_Q']:I[1],a[p+'_D']||'',a[p+'_N']||'',fl.length,fl.map(f=>f.nombre).join(', ')]}).filter(r=>r[3]||r[4]||r[5])})];
   return T;
 }
 const toCSV=rows=>rows.map(r=>r.map(csvC).join(',')).join('\n');
@@ -850,7 +936,7 @@ function exportar(f){
 }
 
 function libro(){const T=tablas(),wb=XLSX.utils.book_new();
-  [['Matriz_Turno','Matriz_Turno'],['BD_A','BD_A'],['Percepcion','Percepción'],['Fotos','Fotos'],['Recorrido_GPS','Recorrido GPS']].forEach(([k,n])=>{const ws=XLSX.utils.aoa_to_sheet(T[k]);ws['!cols']=T[k][0].map((h,i)=>({wch:Math.min(48,Math.max(10,String(h).length+2,...T[k].slice(1,60).map(r=>String(r[i]??'').length+1)))}));XLSX.utils.book_append_sheet(wb,ws,n)});
+  [['Matriz_Turno','Matriz_Turno'],['BD_A','BD_A'],['Percepcion','Percepción'],['Fotos','Fotos'],['Recorrido_GPS','Recorrido GPS'],['Mediciones','Mediciones'],['Inspeccion','Inspección']].forEach(([k,n])=>{const ws=XLSX.utils.aoa_to_sheet(T[k]);ws['!cols']=T[k][0].map((h,i)=>({wch:Math.min(48,Math.max(10,String(h).length+2,...T[k].slice(1,60).map(r=>String(r[i]??'').length+1)))}));XLSX.utils.book_append_sheet(wb,ws,n)});
   XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([['Persona que toma las fotos','Código del teléfono','Parte','Fecha de generación'],[S.cfg.persona||'',S.dev,S.parte||1,fdt(new Date().toISOString())]]),'Envío');return wb}
 const excelName=()=>'Datos_'+slug(S.cfg.persona)+'_'+S.dev+'_parte'+(S.parte||1)+'.xlsx';
 async function enviarExcel(quiet){
